@@ -1,5 +1,18 @@
 # @beauginbey/vanilla-components
 
+## 1.0.1
+
+### Patch Changes
+
+- Fix theme styling and add new cream theme
+
+  - Fixed CSS import path in package.json exports
+  - Added new 'cream' theme with Uber-inspired minimal aesthetics
+  - Renamed 'lightTheme' to 'light' for consistency
+  - Fixed theme application to use document root for proper CSS variable scoping
+  - Updated global styles to work within theme context
+  - Added theme switching functionality in documentation
+
 ## 1.0.0
 
 ### Major Changes

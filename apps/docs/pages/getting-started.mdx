@@ -24,22 +24,51 @@ Import the global styles in your app's entry point:
 
 ```tsx
 // _app.tsx or App.tsx
-import '@vanilla/components/styles.css';
+import '@beauginbey/vanilla-components/styles.css';
 ```
 
 ### 2. Apply Theme
 
-Wrap your application with the theme class:
+Apply a theme class to your application root. Vanilla includes two themes:
+- **light**: A clean, modern theme with neutral colors
+- **cream**: An Uber-inspired minimal theme with warm cream tones
+
+The theme class should be applied to the document root (`<html>`) or body element for proper CSS variable scoping:
 
 ```tsx
-import { lightTheme } from '@beauginbey/vanilla-components';
+import { light, cream } from '@beauginbey/vanilla-components';
+import { useEffect } from 'react';
 
 function App() {
+  // Choose your theme
+  const theme = light; // or cream
+  
+  useEffect(() => {
+    // Apply theme to document root
+    document.documentElement.className = theme;
+  }, [theme]);
+  
   return (
-    <div className={lightTheme}>
+    <div>
       {/* Your app content */}
     </div>
   );
+}
+```
+
+Alternatively, for Next.js apps, you can apply it in your `_app.tsx`:
+
+```tsx
+import { light, cream } from '@beauginbey/vanilla-components';
+
+export default function App({ Component, pageProps }: AppProps) {
+  const theme = light; // or cream
+  
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
+  
+  return <Component {...pageProps} />;
 }
 ```
 

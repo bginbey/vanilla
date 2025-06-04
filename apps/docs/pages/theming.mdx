@@ -1,0 +1,199 @@
+# Theming
+
+Vanilla Design System includes a powerful theming system that allows you to customize the look and feel of your application. We provide two built-in themes and support for creating custom themes.
+
+## Built-in Themes
+
+### Light Theme
+A clean, modern theme with neutral colors and excellent readability.
+
+```tsx
+import { light } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <div className={light}>
+      {/* Your app content */}
+    </div>
+  );
+}
+```
+
+### Cream Theme
+An Uber-inspired minimal theme with warm cream tones and high contrast.
+
+```tsx
+import { cream } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <div className={cream}>
+      {/* Your app content */}
+    </div>
+  );
+}
+```
+
+## Theme Switching
+
+You can implement theme switching in your application:
+
+```tsx
+import { light, cream } from '@beauginbey/vanilla-components';
+import { useState, useEffect } from 'react';
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    // Apply theme to document root for proper CSS variable scoping
+    const themeClass = theme === 'cream' ? cream : light;
+    document.documentElement.className = themeClass;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'cream' : 'light');
+  };
+
+  return (
+    <>
+      <button onClick={toggleTheme}>
+        Switch to {theme === 'light' ? 'Cream' : 'Light'} Theme
+      </button>
+      {/* Your app content */}
+    </>
+  );
+}
+```
+
+## Theme Structure
+
+Each theme defines values for all design tokens:
+
+```typescript
+{
+  color: {
+    background: {
+      primary: '#FCFBF4',
+      secondary: '#F7F3E9',
+      tertiary: '#EDE7D9',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#545454',
+      tertiary: '#8F8F8F',
+      inverse: '#FFFFFF',
+    },
+    border: {
+      primary: '#E8E3D3',
+      secondary: '#D4CCBB',
+    },
+    brand: {
+      primary: '#000000',
+      secondary: '#276EF1',
+    },
+    feedback: {
+      success: '#05944F',
+      warning: '#FBBF24',
+      error: '#E11900',
+      info: '#276EF1',
+    },
+  },
+  font: {
+    family: {
+      sans: 'system-ui, sans-serif',
+      mono: 'monospace',
+    },
+    // ... other font tokens
+  },
+  spacing: {
+    // ... spacing scale
+  },
+  radius: {
+    // ... border radius values
+  },
+  shadow: {
+    // ... shadow definitions
+  },
+}
+```
+
+## Creating Custom Themes
+
+You can create your own themes using vanilla-extract:
+
+```tsx
+import { createTheme } from '@vanilla-extract/css';
+import { vars } from '@beauginbey/vanilla-components';
+
+export const myTheme = createTheme(vars, {
+  color: {
+    background: {
+      primary: '#1a1a1a',
+      secondary: '#2d2d2d',
+      tertiary: '#404040',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#e0e0e0',
+      tertiary: '#b0b0b0',
+      inverse: '#000000',
+    },
+    // ... rest of color tokens
+  },
+  // ... other token categories
+});
+```
+
+## Theme Requirements
+
+When creating a custom theme, you must provide values for ALL tokens defined in the theme contract. This ensures consistency across all components.
+
+### Required Token Categories:
+1. **Colors**: All background, text, border, brand, and feedback colors
+2. **Typography**: Font families, sizes, weights, line heights, and letter spacing
+3. **Spacing**: Complete spacing scale (0-24)
+4. **Border Radius**: All radius values
+5. **Shadows**: All shadow definitions
+
+## Best Practices
+
+1. **Apply themes at the root level** - Use `document.documentElement` for proper CSS variable cascading
+2. **Test all components** - Ensure your custom theme works with all components
+3. **Maintain contrast ratios** - Follow WCAG guidelines for text contrast
+4. **Consider context** - Different themes may be appropriate for different parts of your app
+5. **Persist user preference** - Save theme selection to localStorage
+
+## CSS Variables
+
+Themes work by setting CSS custom properties. You can inspect these in your browser's DevTools:
+
+```css
+:root {
+  --color-background-primary: #fcfbf4;
+  --color-text-primary: #000000;
+  --spacing-4: 1rem;
+  /* ... and many more */
+}
+```
+
+## Server-Side Rendering
+
+For SSR applications, prevent flash of unstyled content:
+
+```tsx
+// In your _document.tsx or equivalent
+<Html>
+  <Head>
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          const theme = localStorage.getItem('theme') || 'light';
+          document.documentElement.className = theme;
+        `,
+      }}
+    />
+  </Head>
+  <body>{/* ... */}</body>
+</Html>
+```

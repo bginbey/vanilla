@@ -1,6 +1,6 @@
 {
   "name": "@beauginbey/vanilla-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component library for Vanilla Design System",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -11,7 +11,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/index.css"
   },
   "files": [
     "dist"

@@ -1,0 +1,374 @@
+import { LiveExample } from '../components/LiveExample';
+
+# Examples
+
+Explore practical examples of using Vanilla Design System components in real-world scenarios.
+
+## Form Example
+
+A complete form with various input states and validation feedback:
+
+<LiveExample
+  code={`import { Box, Button, Text } from '@beauginbey/vanilla-components';
+
+export default function ContactForm() {
+  return (
+    <Box 
+      as="form" 
+      p={6} 
+      backgroundColor="secondary" 
+      borderRadius="lg"
+      maxWidth="400px"
+      mx="auto"
+    >
+      <Text as="h2" size="2xl" weight="bold" mb={4}>
+        Contact Us
+      </Text>
+      
+      <Box mb={4}>
+        <Text as="label" display="block" mb={1} weight="medium">
+          Name
+        </Text>
+        <Box
+          as="input"
+          type="text"
+          p={2}
+          width="100%"
+          borderRadius="base"
+          style={{
+            border: '1px solid var(--color-border-primary)',
+            fontSize: 'var(--font-size-base)',
+          }}
+        />
+      </Box>
+      
+      <Box mb={4}>
+        <Text as="label" display="block" mb={1} weight="medium">
+          Email
+        </Text>
+        <Box
+          as="input"
+          type="email"
+          p={2}
+          width="100%"
+          borderRadius="base"
+          style={{
+            border: '1px solid var(--color-border-primary)',
+            fontSize: 'var(--font-size-base)',
+          }}
+        />
+      </Box>
+      
+      <Box mb={4}>
+        <Text as="label" display="block" mb={1} weight="medium">
+          Message
+        </Text>
+        <Box
+          as="textarea"
+          p={2}
+          width="100%"
+          borderRadius="base"
+          style={{
+            border: '1px solid var(--color-border-primary)',
+            fontSize: 'var(--font-size-base)',
+            minHeight: '100px',
+            resize: 'vertical',
+          }}
+        />
+      </Box>
+      
+      <Button variant="solid" fullWidth size="lg">
+        Send Message
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## Card Layout
+
+A responsive card layout showcasing different component compositions:
+
+<LiveExample
+  code={`import { Box, Button, Text } from '@beauginbey/vanilla-components';
+
+export default function CardGrid() {
+  const cards = [
+    { title: 'Design', desc: 'Create beautiful interfaces', color: 'info' },
+    { title: 'Develop', desc: 'Build with modern tools', color: 'success' },
+    { title: 'Deploy', desc: 'Ship with confidence', color: 'brand' },
+  ];
+
+  return (
+    <Box 
+      display="grid" 
+      style={{ 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: 'var(--spacing-4)'
+      }}
+    >
+      {cards.map((card) => (
+        <Box
+          key={card.title}
+          p={5}
+          backgroundColor="primary"
+          borderRadius="lg"
+          boxShadow="base"
+          style={{
+            transition: 'transform 0.2s, box-shadow 0.2s',
+            cursor: 'pointer',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = 'var(--shadow-base)';
+          }}
+        >
+          <Text 
+            as="h3" 
+            size="xl" 
+            weight="bold" 
+            mb={2}
+            color={card.color as any}
+          >
+            {card.title}
+          </Text>
+          <Text color="secondary" mb={3}>
+            {card.desc}
+          </Text>
+          <Button variant="outline" size="sm">
+            Learn more →
+          </Button>
+        </Box>
+      ))}
+    </Box>
+  );
+}`}
+/>
+
+## Navigation Bar
+
+A responsive navigation component:
+
+<LiveExample
+  code={`import { Box, Button, Text } from '@beauginbey/vanilla-components';
+
+export default function NavBar() {
+  const links = ['Home', 'Products', 'About', 'Contact'];
+
+  return (
+    <Box
+      as="nav"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      p={4}
+      backgroundColor="primary"
+      borderRadius="lg"
+      boxShadow="sm"
+    >
+      <Text as="h1" size="xl" weight="bold">
+        🍦 Vanilla
+      </Text>
+      
+      <Box display="flex" gap={2} alignItems="center">
+        <Box display="flex" gap={3}>
+          {links.map((link) => (
+            <Button
+              key={link}
+              as="a"
+              href="#"
+              variant="ghost"
+              size="sm"
+            >
+              {link}
+            </Button>
+          ))}
+        </Box>
+        
+        <Box ml={3}>
+          <Button variant="solid" size="sm">
+            Sign Up
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Feature Section
+
+A feature showcase with icons and descriptions:
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function Features() {
+  const features = [
+    { icon: '🎨', title: 'Beautiful Design', desc: 'Carefully crafted components' },
+    { icon: '⚡', title: 'Lightning Fast', desc: 'Zero-runtime CSS performance' },
+    { icon: '♿', title: 'Accessible', desc: 'WCAG compliant components' },
+    { icon: '📱', title: 'Responsive', desc: 'Mobile-first approach' },
+  ];
+
+  return (
+    <Box p={6}>
+      <Text as="h2" size="3xl" weight="bold" align="center" mb={6}>
+        Why Choose Vanilla?
+      </Text>
+      
+      <Box
+        display="grid"
+        style={{
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: 'var(--spacing-6)',
+        }}
+      >
+        {features.map((feature) => (
+          <Box key={feature.title} textAlign="center">
+            <Text as="div" size="4xl" mb={3}>
+              {feature.icon}
+            </Text>
+            <Text as="h3" size="lg" weight="semibold" mb={2}>
+              {feature.title}
+            </Text>
+            <Text color="secondary" size="sm">
+              {feature.desc}
+            </Text>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Alert Messages
+
+Different types of alert components:
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function Alerts() {
+  const alerts = [
+    { type: 'success', message: 'Your changes have been saved successfully!' },
+    { type: 'warning', message: 'Please review your input before submitting.' },
+    { type: 'error', message: 'An error occurred. Please try again.' },
+    { type: 'info', message: 'New features are now available in your account.' },
+  ];
+
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      {alerts.map((alert) => (
+        <Box
+          key={alert.type}
+          p={3}
+          borderRadius="md"
+          display="flex"
+          alignItems="center"
+          gap={2}
+          style={{
+            backgroundColor: \`var(--color-feedback-\${alert.type})\`,
+            color: 'white',
+            opacity: 0.9,
+          }}
+        >
+          <Text weight="semibold">
+            {alert.type.charAt(0).toUpperCase() + alert.type.slice(1)}:
+          </Text>
+          <Text>{alert.message}</Text>
+        </Box>
+      ))}
+    </Box>
+  );
+}`}
+/>
+
+## Pricing Cards
+
+A pricing table example:
+
+<LiveExample
+  code={`import { Box, Button, Text } from '@beauginbey/vanilla-components';
+
+export default function PricingCards() {
+  const plans = [
+    { name: 'Starter', price: '$9', features: ['1 User', '10 Projects', 'Basic Support'] },
+    { name: 'Pro', price: '$29', features: ['5 Users', 'Unlimited Projects', 'Priority Support'], popular: true },
+    { name: 'Enterprise', price: 'Custom', features: ['Unlimited Users', 'Custom Features', '24/7 Support'] },
+  ];
+
+  return (
+    <Box
+      display="grid"
+      style={{
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: 'var(--spacing-4)',
+      }}
+    >
+      {plans.map((plan) => (
+        <Box
+          key={plan.name}
+          p={6}
+          backgroundColor={plan.popular ? 'brand' : 'secondary'}
+          color={plan.popular ? 'inverse' : 'primary'}
+          borderRadius="xl"
+          textAlign="center"
+          position="relative"
+          style={{
+            transform: plan.popular ? 'scale(1.05)' : 'scale(1)',
+          }}
+        >
+          {plan.popular && (
+            <Box
+              position="absolute"
+              top={-12}
+              left="50%"
+              style={{ transform: 'translateX(-50%)' }}
+              backgroundColor="warning"
+              color="primary"
+              px={3}
+              py={1}
+              borderRadius="full"
+            >
+              <Text size="xs" weight="bold">MOST POPULAR</Text>
+            </Box>
+          )}
+          
+          <Text as="h3" size="xl" weight="bold" mb={2}>
+            {plan.name}
+          </Text>
+          <Text as="div" size="3xl" weight="bold" mb={4}>
+            {plan.price}
+            {plan.price !== 'Custom' && <Text as="span" size="base" weight="normal">/mo</Text>}
+          </Text>
+          
+          <Box mb={4}>
+            {plan.features.map((feature) => (
+              <Text key={feature} display="block" mb={2}>
+                ✓ {feature}
+              </Text>
+            ))}
+          </Box>
+          
+          <Button
+            variant={plan.popular ? 'solid' : 'outline'}
+            fullWidth
+            style={{
+              backgroundColor: plan.popular ? 'white' : undefined,
+              color: plan.popular ? 'var(--color-brand-primary)' : undefined,
+            }}
+          >
+            Get Started
+          </Button>
+        </Box>
+      ))}
+    </Box>
+  );
+}`}
+/>

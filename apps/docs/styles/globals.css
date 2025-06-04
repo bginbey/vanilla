@@ -18,3 +18,110 @@
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
+
+/* Nextra documentation styles */
+
+/* Ensure Nextra uses sidebar layout by default */
+[data-nextra-container] {
+  display: flex !important;
+}
+
+/* Style the sidebar */
+nav[aria-label="Navigation"] {
+  width: 260px;
+  padding: 1rem 0;
+  background: var(--color-background-primary);
+  border-right: 1px solid var(--color-border-primary);
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+}
+
+/* Sidebar links */
+nav[aria-label="Navigation"] a {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+}
+
+nav[aria-label="Navigation"] a:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Active page */
+nav[aria-label="Navigation"] li.active > a,
+nav[aria-label="Navigation"] a[data-active="true"] {
+  background-color: rgba(37, 99, 235, 0.1);
+  font-weight: 600;
+}
+
+/* Main content area */
+main {
+  flex: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Table of contents */
+aside[aria-label="Table of contents"] {
+  width: 220px;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  height: fit-content;
+}
+
+/* Hide dark mode toggle */
+button[title*="theme"] {
+  display: none !important;
+}
+
+/* Code blocks */
+.nextra-code-block,
+pre {
+  margin: 1.5rem 0;
+}
+
+/* Typography improvements */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  nav[aria-label="Navigation"] {
+    position: fixed;
+    left: -260px;
+    transition: left 0.3s;
+    z-index: 40;
+  }
+  
+  nav[aria-label="Navigation"].open {
+    left: 0;
+  }
+  
+  main {
+    padding: 1.5rem 1rem;
+  }
+  
+  aside[aria-label="Table of contents"] {
+    display: none;
+  }
+}

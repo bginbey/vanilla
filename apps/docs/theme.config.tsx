@@ -2,7 +2,7 @@ import React from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
 
 const config: DocsThemeConfig = {
-  logo: <span>Vanilla Design System</span>,
+  logo: <span style={{ fontWeight: 700 }}>🍦 Vanilla Design System</span>,
   project: {
     link: 'https://github.com/your-org/vanilla-design-system',
   },
@@ -11,13 +11,13 @@ const config: DocsThemeConfig = {
     text: 'Vanilla Design System © 2024',
   },
   primaryHue: 213,
-  navigation: true,
   sidebar: {
-    toggleButton: true,
     defaultMenuCollapseLevel: 1,
+    toggleButton: true,
   },
   toc: {
     float: true,
+    title: 'On This Page',
   },
   editLink: {
     text: 'Edit this page on GitHub',
@@ -26,6 +26,7 @@ const config: DocsThemeConfig = {
     content: 'Question? Give us feedback →',
     labels: 'feedback',
   },
+  darkMode: false,
   useNextSeoProps() {
     return {
       titleTemplate: '%s – Vanilla Design System',

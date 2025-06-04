@@ -4,7 +4,7 @@ export * from './components/Button';
 export * from './components/Text';
 
 // Styles
-export { vars, lightTheme } from './styles/theme.css';
+export { vars, light, cream } from './styles/theme.css';
 export { sprinkles } from './styles/sprinkles.css';
 export type { Sprinkles } from './styles/sprinkles.css';
 

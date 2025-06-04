@@ -1,0 +1,161 @@
+# Design Tokens
+
+Design tokens are the foundational elements of the Vanilla Design System. They represent the smallest pieces of our design language - colors, typography, spacing, and more.
+
+## Token Structure
+
+Our tokens are organized into two main categories:
+
+### 1. Primitive Tokens
+Raw values that form the foundation of our design system:
+- Colors (e.g., `blue-500`, `gray-100`)
+- Font families
+- Base spacing units
+- Raw shadow values
+
+### 2. Semantic Tokens
+Purpose-driven tokens that reference primitive tokens:
+- `color.background.primary`
+- `color.text.secondary`
+- `spacing.component.padding`
+- `shadow.card.default`
+
+## Available Tokens
+
+### Colors
+
+```typescript
+import { tokens } from '@beauginbey/vanilla-tokens';
+
+// Primitive colors
+tokens.color.blue[500]
+tokens.color.gray[100]
+
+// Semantic colors
+tokens.color.background.primary
+tokens.color.text.primary
+tokens.color.brand.primary
+```
+
+### Typography
+
+```typescript
+// Font families
+tokens.font.family.sans
+tokens.font.family.mono
+
+// Font sizes
+tokens.font.size.xs  // 0.75rem
+tokens.font.size.sm  // 0.875rem
+tokens.font.size.base // 1rem
+tokens.font.size.lg  // 1.125rem
+
+// Font weights
+tokens.font.weight.normal // 400
+tokens.font.weight.medium // 500
+tokens.font.weight.bold   // 700
+```
+
+### Spacing
+
+```typescript
+tokens.spacing[0]  // 0
+tokens.spacing[1]  // 0.25rem
+tokens.spacing[2]  // 0.5rem
+tokens.spacing[4]  // 1rem
+tokens.spacing[8]  // 2rem
+tokens.spacing[16] // 4rem
+```
+
+### Border Radius
+
+```typescript
+tokens.radius.none // 0
+tokens.radius.sm   // 0.125rem
+tokens.radius.base // 0.25rem
+tokens.radius.lg   // 0.5rem
+tokens.radius.full // 9999px
+```
+
+## Using Tokens
+
+### In Components
+
+```tsx
+import { vars } from '@beauginbey/vanilla-components';
+
+const styles = {
+  backgroundColor: vars.color.background.primary,
+  color: vars.color.text.primary,
+  padding: vars.spacing[4],
+  borderRadius: vars.radius.lg,
+};
+```
+
+### In CSS
+
+```css
+.my-component {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+}
+```
+
+## Customizing Tokens
+
+While our tokens provide a solid foundation, you may need to customize them for your brand. You can override tokens at the theme level:
+
+```tsx
+import { createTheme } from '@vanilla-extract/css';
+import { vars } from '@beauginbey/vanilla-components';
+
+export const customTheme = createTheme(vars, {
+  color: {
+    brand: {
+      primary: '#your-brand-color',
+      secondary: '#your-secondary-color',
+    },
+  },
+  font: {
+    family: {
+      sans: '"Your Font", system-ui, sans-serif',
+    },
+  },
+});
+```
+
+## Token Categories
+
+### Color Tokens
+- Background colors
+- Text colors  
+- Border colors
+- Brand colors
+- Feedback colors (success, warning, error, info)
+
+### Typography Tokens
+- Font families
+- Font sizes
+- Font weights
+- Line heights
+- Letter spacing
+
+### Spacing Tokens
+- Consistent spacing scale from 0 to 24
+- Used for padding, margin, and gap
+
+### Visual Tokens
+- Border radius values
+- Shadow definitions
+- Transition durations
+- Z-index values
+
+## Best Practices
+
+1. **Always use semantic tokens** when available instead of primitive tokens
+2. **Maintain consistency** by using the spacing scale for all spacing needs
+3. **Respect the type scale** for hierarchy and readability
+4. **Use feedback colors** for their intended purpose
+5. **Test with both themes** to ensure your designs work in all contexts
