@@ -1,0 +1,118 @@
+# Getting Started
+
+This guide will help you get up and running with the Vanilla Design System.
+
+## Prerequisites
+
+- Node.js 18.0 or later
+- React 18.0 or later
+- A package manager (pnpm, npm, or yarn)
+
+## Installation
+
+Install the required packages:
+
+```bash
+pnpm add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+```
+
+## Setup
+
+### 1. Import Global Styles
+
+Import the global styles in your app's entry point:
+
+```tsx
+// _app.tsx or App.tsx
+import '@vanilla/components/styles.css';
+```
+
+### 2. Apply Theme
+
+Wrap your application with the theme class:
+
+```tsx
+import { lightTheme } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <div className={lightTheme}>
+      {/* Your app content */}
+    </div>
+  );
+}
+```
+
+### 3. Use Components
+
+Start using the components in your application:
+
+```tsx
+import { Button, Box, Text } from '@beauginbey/vanilla-components';
+
+function MyComponent() {
+  return (
+    <Box p={4}>
+      <Text as="h1" size="2xl" weight="bold">
+        Hello Vanilla!
+      </Text>
+      <Button variant="solid" onClick={() => alert('Clicked!')}>
+        Click me
+      </Button>
+    </Box>
+  );
+}
+```
+
+## TypeScript Configuration
+
+The design system is built with TypeScript. For the best experience, ensure your `tsconfig.json` includes:
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
+```
+
+## Next.js Setup
+
+If you're using Next.js, you'll need to configure vanilla-extract:
+
+1. Install the Next.js plugin:
+```bash
+pnpm add -D @vanilla-extract/next-plugin
+```
+
+2. Update your `next.config.js`:
+```js
+const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin');
+const withVanillaExtract = createVanillaExtractPlugin();
+
+module.exports = withVanillaExtract({
+  // Your Next.js config
+});
+```
+
+## Vite Setup
+
+For Vite projects:
+
+1. Install the Vite plugin:
+```bash
+pnpm add -D @vanilla-extract/vite-plugin
+```
+
+2. Update your `vite.config.ts`:
+```ts
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+
+export default {
+  plugins: [vanillaExtractPlugin()]
+};
+```

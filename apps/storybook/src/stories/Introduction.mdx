@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Vanilla Design System
+
+Welcome to the Vanilla Design System documentation. This design system provides a comprehensive set of components, design tokens, and patterns for building consistent user interfaces.
+
+## Features
+
+- **Modern Stack**: Built with React, TypeScript, and vanilla-extract
+- **Design Tokens**: Powered by Style Dictionary for consistent theming
+- **Accessibility**: All components follow WCAG guidelines
+- **Type Safety**: Full TypeScript support with polymorphic components
+- **Performance**: Zero-runtime CSS-in-JS with vanilla-extract
+
+## Getting Started
+
+Install the design system packages:
+
+```bash
+pnpm add @vanilla/components @vanilla/tokens
+```
+
+Import and use components:
+
+```tsx
+import { Button, Box, Text } from '@vanilla/components';
+
+function App() {
+  return (
+    <Box p={4}>
+      <Text as="h1" size="2xl" weight="bold" mb={4}>
+        Hello Vanilla!
+      </Text>
+      <Button variant="solid">Get Started</Button>
+    </Box>
+  );
+}
+```
+
+## Design Principles
+
+1. **Simplicity**: Keep the API surface minimal and intuitive
+2. **Flexibility**: Components should be composable and extensible
+3. **Performance**: Optimize for runtime performance and bundle size
+4. **Accessibility**: Ensure all users can interact with our components
+5. **Consistency**: Maintain visual and behavioral consistency

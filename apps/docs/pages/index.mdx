@@ -1,0 +1,75 @@
+# Vanilla Design System
+
+Welcome to the Vanilla Design System documentation. Build beautiful, accessible, and consistent user interfaces with our comprehensive component library.
+
+## Quick Start
+
+Get started with Vanilla Design System in just a few steps:
+
+### Installation
+
+```bash
+# Install the design system packages
+pnpm add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+
+# Or using npm
+npm install @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+
+# Or using yarn
+yarn add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+```
+
+### Basic Usage
+
+```tsx
+import { Button, Box, Text } from '@beauginbey/vanilla-components';
+import { lightTheme } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <div className={lightTheme}>
+      <Box p={6} backgroundColor="secondary" borderRadius="lg">
+        <Text as="h1" size="3xl" weight="bold" mb={4}>
+          Welcome to Vanilla
+        </Text>
+        <Text color="secondary" mb={4}>
+          A modern design system built with React and TypeScript
+        </Text>
+        <Button variant="solid">Get Started</Button>
+      </Box>
+    </div>
+  );
+}
+```
+
+## Features
+
+- **🎨 Design Tokens**: Consistent design language powered by Style Dictionary
+- **🚀 Performance**: Zero-runtime CSS with vanilla-extract
+- **♿ Accessibility**: WCAG compliant components with proper ARIA attributes
+- **📦 Tree-shakeable**: Import only what you need
+- **🔧 Customizable**: Extend and theme components to match your brand
+- **📝 TypeScript**: Full type safety and IntelliSense support
+- **🎯 Polymorphic**: Components can render as any HTML element
+- **📱 Responsive**: Mobile-first responsive design utilities
+
+## Core Principles
+
+### 1. Simplicity First
+Keep the API surface minimal and intuitive. Components should be easy to use and understand.
+
+### 2. Accessibility by Default
+All components follow WCAG guidelines and include proper keyboard navigation and screen reader support.
+
+### 3. Performance Matters
+Built with vanilla-extract for zero-runtime CSS and optimal bundle sizes.
+
+### 4. Type Safety
+Full TypeScript support ensures you catch errors early and get great IDE support.
+
+## Next Steps
+
+- [Browse Components](/components) - Explore our component library
+- [Design Tokens](/tokens) - Learn about our design token system
+- [Theming Guide](/theming) - Customize the design system for your brand
+- [Contributing](/contributing) - Help us improve the design system

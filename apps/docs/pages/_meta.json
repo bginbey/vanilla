@@ -1,0 +1,26 @@
+{
+  "index": {
+    "title": "Introduction",
+    "type": "page"
+  },
+  "getting-started": {
+    "title": "Getting Started",
+    "type": "page"
+  },
+  "components": {
+    "title": "Components",
+    "type": "page"
+  },
+  "tokens": {
+    "title": "Design Tokens",
+    "type": "page"
+  },
+  "theming": {
+    "title": "Theming",
+    "type": "page"
+  },
+  "examples": {
+    "title": "Examples",
+    "type": "page"
+  }
+}

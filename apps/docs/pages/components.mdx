@@ -1,0 +1,162 @@
+import { LiveExample } from '../components/LiveExample';
+
+# Components
+
+Vanilla Design System provides a set of flexible, accessible components built with React and TypeScript.
+
+## Box
+
+The Box component is the foundation of our layout system. It provides access to design tokens through the styling props.
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box 
+      p={4} 
+      backgroundColor="secondary" 
+      borderRadius="lg"
+      display="flex"
+      flexDirection="column"
+      gap={3}
+    >
+      <Box p={3} backgroundColor="primary" borderRadius="md">
+        <Text>I'm inside a Box!</Text>
+      </Box>
+      <Box p={3} backgroundColor="tertiary" borderRadius="md">
+        <Text>Boxes can be nested and styled</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+### Props
+
+- `as` - Render as a different HTML element (default: `div`)
+- `p`, `pt`, `pb`, `pl`, `pr`, `px`, `py` - Padding utilities
+- `m`, `mt`, `mb`, `ml`, `mr`, `mx`, `my` - Margin utilities
+- `display` - CSS display property
+- `flexDirection`, `justifyContent`, `alignItems`, `gap` - Flexbox utilities
+- `backgroundColor`, `color`, `borderColor` - Color utilities
+- `borderRadius`, `boxShadow` - Visual utilities
+
+## Button
+
+A flexible button component with multiple variants and sizes.
+
+<LiveExample
+  code={`import { Button, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Box display="flex" gap={2}>
+        <Button variant="solid">Solid</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
+      </Box>
+      
+      <Box display="flex" gap={2} alignItems="center">
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+      </Box>
+      
+      <Button fullWidth variant="outline">
+        Full Width Button
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+### Props
+
+- `variant` - Visual style: `solid`, `outline`, or `ghost`
+- `size` - Button size: `sm`, `md`, or `lg`
+- `fullWidth` - Make button full width
+- `disabled` - Disable the button
+- `as` - Render as a different element (e.g., `a` for links)
+
+## Text
+
+A polymorphic text component for rendering typography with consistent styles.
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Text as="h1" size="4xl" weight="bold">
+        Heading Text
+      </Text>
+      
+      <Text size="lg" color="secondary">
+        Large secondary text for subtitles
+      </Text>
+      
+      <Text>
+        Default body text with <Text as="span" weight="semibold">inline emphasis</Text> and
+        <Text as="span" color="brand"> brand color</Text>.
+      </Text>
+      
+      <Box backgroundColor="primary" p={3} borderRadius="md">
+        <Text color="inverse">
+          Inverse text on dark background
+        </Text>
+      </Box>
+      
+      <Box display="flex" gap={2}>
+        <Text color="success">Success</Text>
+        <Text color="warning">Warning</Text>
+        <Text color="error">Error</Text>
+        <Text color="info">Info</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+### Props
+
+- `as` - HTML element to render (default: `span`)
+- `size` - Text size from `xs` to `5xl`
+- `weight` - Font weight: `normal`, `medium`, `semibold`, or `bold`
+- `color` - Text color from theme
+- `align` - Text alignment: `left`, `center`, or `right`
+- `truncate` - Truncate text with ellipsis
+
+## Polymorphic Components
+
+All components support the `as` prop for rendering different HTML elements:
+
+<LiveExample
+  code={`import { Button, Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Button as="a" href="https://example.com" variant="outline">
+        I'm a link that looks like a button
+      </Button>
+      
+      <Text as="label" display="flex" alignItems="center" gap={2}>
+        <input type="checkbox" />
+        I'm a label element
+      </Text>
+      
+      <Box as="section" p={4} backgroundColor="secondary" borderRadius="lg">
+        <Text as="h2" size="2xl" weight="bold" mb={2}>
+          Semantic HTML
+        </Text>
+        <Text as="p">
+          This Box is rendered as a section element for better semantics.
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>

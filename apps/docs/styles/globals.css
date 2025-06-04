@@ -1,0 +1,20 @@
+/* Additional global styles for the documentation site */
+.nextra-content {
+  min-height: calc(100vh - 64px);
+}
+
+.nextra-code-block {
+  margin: 1.5rem 0;
+}
+
+.nextra-callout {
+  margin: 1.5rem 0;
+}
+
+/* Custom styles for live code examples */
+.sandpack-wrapper {
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
