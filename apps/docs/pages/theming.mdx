@@ -1,33 +1,80 @@
 # Theming
 
-Vanilla Design System includes a powerful theming system that allows you to customize the look and feel of your application. We provide two built-in themes and support for creating custom themes.
+Vanilla Design System includes a powerful theming system with smooth animations, CSS custom properties, and built-in dark mode support. We provide three built-in themes and a ThemeProvider component for easy theme management.
 
 ## Built-in Themes
 
 ### Light Theme
 A clean, modern theme with neutral colors and excellent readability.
 
+### Cream Theme
+An Uber-inspired minimal theme with warm cream tones and high contrast.
+
+### Dark Theme
+A sophisticated dark theme with carefully selected colors for reduced eye strain.
+
+## Using ThemeProvider
+
+The easiest way to implement theming is with our `ThemeProvider` component:
+
 ```tsx
-import { light } from '@beauginbey/vanilla-components';
+import { ThemeProvider, Button, Box, Text } from '@beauginbey/vanilla-components';
 
 function App() {
   return (
-    <div className={light}>
-      {/* Your app content */}
-    </div>
+    <ThemeProvider defaultTheme="light">
+      <Box backgroundColor="primary" minHeight="100vh">
+        <Text>Your app content with automatic theming</Text>
+        <Button>Themed button</Button>
+      </Box>
+    </ThemeProvider>
   );
 }
 ```
 
-### Cream Theme
-An Uber-inspired minimal theme with warm cream tones and high contrast.
+## Theme Switching with useTheme Hook
 
 ```tsx
-import { cream } from '@beauginbey/vanilla-components';
+import { ThemeProvider, useTheme, Button } from '@beauginbey/vanilla-components';
+
+function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme();
+  
+  return (
+    <div>
+      <Button onClick={() => setTheme('light')} variant={theme === 'light' ? 'solid' : 'outline'}>
+        Light
+      </Button>
+      <Button onClick={() => setTheme('cream')} variant={theme === 'cream' ? 'solid' : 'outline'}>
+        Cream
+      </Button>
+      <Button onClick={() => setTheme('dark')} variant={theme === 'dark' ? 'solid' : 'outline'}>
+        Dark
+      </Button>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className={cream}>
+    <ThemeProvider defaultTheme="light" storageKey="my-app-theme">
+      <ThemeSwitcher />
+      {/* Your app content */}
+    </ThemeProvider>
+  );
+}
+```
+
+## Manual Theme Application
+
+If you prefer not to use ThemeProvider, you can apply themes manually:
+
+```tsx
+import { light, cream, dark } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <div className={dark}>
       {/* Your app content */}
     </div>
   );
@@ -68,53 +115,83 @@ function App() {
 
 ## Theme Structure
 
-Each theme defines values for all design tokens:
+Each theme defines values for all design tokens, including our new animation system:
 
 ```typescript
 {
   color: {
-    background: {
-      primary: '#FCFBF4',
-      secondary: '#F7F3E9',
-      tertiary: '#EDE7D9',
-    },
-    text: {
-      primary: '#000000',
-      secondary: '#545454',
-      tertiary: '#8F8F8F',
-      inverse: '#FFFFFF',
-    },
-    border: {
-      primary: '#E8E3D3',
-      secondary: '#D4CCBB',
-    },
-    brand: {
-      primary: '#000000',
-      secondary: '#276EF1',
-    },
-    feedback: {
-      success: '#05944F',
-      warning: '#FBBF24',
-      error: '#E11900',
-      info: '#276EF1',
-    },
+    background: { primary, secondary, tertiary },
+    text: { primary, secondary, tertiary, inverse },
+    border: { primary, secondary },
+    brand: { primary, secondary },
+    feedback: { success, warning, error, info },
   },
   font: {
-    family: {
-      sans: 'system-ui, sans-serif',
-      mono: 'monospace',
+    family: { sans, mono },
+    size: { xs, sm, base, lg, xl, '2xl', '3xl', '4xl', '5xl' },
+    weight: { normal, medium, semibold, bold },
+    lineHeight: { tight, normal, relaxed },
+    letterSpacing: { tight, normal, wide },
+  },
+  spacing: { 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24 },
+  radius: { none, sm, base, md, lg, xl, '2xl', full },
+  shadow: { xs, sm, base, md, lg, xl, none },
+  // New animation tokens
+  duration: {
+    instant: '0ms',
+    fast: '150ms',
+    normal: '250ms',
+    slow: '400ms',
+    slowest: '600ms',
+  },
+  easing: {
+    linear: 'linear',
+    easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
+    easeOut: 'cubic-bezier(0, 0, 0.2, 1)',
+    easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    smooth: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+  },
+  transition: {
+    property: {
+      none: 'none',
+      all: 'all',
+      colors: 'color, background-color, border-color, ...',
+      opacity: 'opacity',
+      shadow: 'box-shadow',
+      transform: 'transform',
+      common: 'color, background-color, border-color, box-shadow, transform, opacity',
     },
-    // ... other font tokens
   },
-  spacing: {
-    // ... spacing scale
+}
+```
+
+## Animation System
+
+All components now use consistent animation tokens for smooth transitions:
+
+```tsx
+// Using animation tokens in your styles
+import { vars } from '@beauginbey/vanilla-components';
+
+const myStyles = {
+  transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
+  ':hover': {
+    transform: 'scale(1.05)',
   },
-  radius: {
-    // ... border radius values
-  },
-  shadow: {
-    // ... shadow definitions
-  },
+};
+```
+
+### Motion Preferences
+
+The system automatically respects user motion preferences:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 ```
 

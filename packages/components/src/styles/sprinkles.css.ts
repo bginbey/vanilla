@@ -69,13 +69,25 @@ const layoutProperties = defineProperties({
     zIndex: [0, 10, 20, 30, 40, 50],
     overflow: ['hidden', 'auto', 'visible', 'scroll'],
     opacity: [0, 0.5, 1],
+    cursor: ['pointer', 'default', 'not-allowed', 'wait', 'text', 'move', 'grab', 'grabbing'],
+    userSelect: ['none', 'text', 'all', 'auto'],
+    border: ['none', `1px solid ${vars.color.border.primary}`],
+  },
+});
+
+const transitionProperties = defineProperties({
+  properties: {
+    transitionProperty: vars.transition.property,
+    transitionDuration: vars.duration,
+    transitionTimingFunction: vars.easing,
   },
 });
 
 export const sprinkles = createSprinkles(
   responsiveProperties,
   colorProperties,
-  layoutProperties
+  layoutProperties,
+  transitionProperties
 );
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];

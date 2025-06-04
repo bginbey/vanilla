@@ -1,0 +1,82 @@
+{
+  "duration": {
+    "instant": {
+      "value": "0ms",
+      "description": "Instant transitions, no animation"
+    },
+    "fast": {
+      "value": "150ms",
+      "description": "Fast animations for micro-interactions"
+    },
+    "normal": {
+      "value": "250ms",
+      "description": "Default animation duration"
+    },
+    "slow": {
+      "value": "400ms",
+      "description": "Slow animations for larger UI changes"
+    },
+    "slowest": {
+      "value": "600ms",
+      "description": "Very slow animations for complex transitions"
+    }
+  },
+  "easing": {
+    "linear": {
+      "value": "linear",
+      "description": "Linear easing, constant speed"
+    },
+    "ease-in": {
+      "value": "cubic-bezier(0.4, 0, 1, 1)",
+      "description": "Accelerating from zero velocity"
+    },
+    "ease-out": {
+      "value": "cubic-bezier(0, 0, 0.2, 1)",
+      "description": "Decelerating to zero velocity"
+    },
+    "ease-in-out": {
+      "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "description": "Standard easing for most animations"
+    },
+    "bounce": {
+      "value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      "description": "Playful bounce effect"
+    },
+    "smooth": {
+      "value": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      "description": "Smooth, natural easing"
+    }
+  },
+  "transition": {
+    "property": {
+      "none": {
+        "value": "none",
+        "description": "No transition"
+      },
+      "all": {
+        "value": "all",
+        "description": "Transition all properties"
+      },
+      "colors": {
+        "value": "color, background-color, border-color, text-decoration-color, fill, stroke",
+        "description": "Color-related properties"
+      },
+      "opacity": {
+        "value": "opacity",
+        "description": "Opacity transitions"
+      },
+      "shadow": {
+        "value": "box-shadow",
+        "description": "Shadow transitions"
+      },
+      "transform": {
+        "value": "transform",
+        "description": "Transform transitions"
+      },
+      "common": {
+        "value": "color, background-color, border-color, box-shadow, transform, opacity",
+        "description": "Common transition properties"
+      }
+    }
+  }
+}

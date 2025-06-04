@@ -5,18 +5,51 @@ export const text = recipe({
   base: {
     fontFamily: vars.font.family.sans,
     margin: 0,
+    transition: `color ${vars.duration.fast} ${vars.easing.easeInOut}`,
+    letterSpacing: vars.font.letterSpacing.normal,
   },
   variants: {
     size: {
-      xs: { fontSize: vars.font.size.xs },
-      sm: { fontSize: vars.font.size.sm },
-      base: { fontSize: vars.font.size.base },
-      lg: { fontSize: vars.font.size.lg },
-      xl: { fontSize: vars.font.size.xl },
-      '2xl': { fontSize: vars.font.size['2xl'] },
-      '3xl': { fontSize: vars.font.size['3xl'] },
-      '4xl': { fontSize: vars.font.size['4xl'] },
-      '5xl': { fontSize: vars.font.size['5xl'] },
+      xs: { 
+        fontSize: vars.font.size.xs,
+        lineHeight: vars.font.lineHeight.normal,
+      },
+      sm: { 
+        fontSize: vars.font.size.sm,
+        lineHeight: vars.font.lineHeight.normal,
+      },
+      base: { 
+        fontSize: vars.font.size.base,
+        lineHeight: vars.font.lineHeight.normal,
+      },
+      lg: { 
+        fontSize: vars.font.size.lg,
+        lineHeight: vars.font.lineHeight.normal,
+      },
+      xl: { 
+        fontSize: vars.font.size.xl,
+        lineHeight: vars.font.lineHeight.tight,
+      },
+      '2xl': { 
+        fontSize: vars.font.size['2xl'],
+        lineHeight: vars.font.lineHeight.tight,
+        letterSpacing: vars.font.letterSpacing.tight,
+      },
+      '3xl': { 
+        fontSize: vars.font.size['3xl'],
+        lineHeight: vars.font.lineHeight.tight,
+        letterSpacing: vars.font.letterSpacing.tight,
+      },
+      '4xl': { 
+        fontSize: vars.font.size['4xl'],
+        lineHeight: vars.font.lineHeight.tight,
+        letterSpacing: vars.font.letterSpacing.tight,
+      },
+      '5xl': { 
+        fontSize: vars.font.size['5xl'],
+        lineHeight: vars.font.lineHeight.tight,
+        letterSpacing: vars.font.letterSpacing.tight,
+      },
     },
     weight: {
       normal: { fontWeight: vars.font.weight.normal },
@@ -45,6 +78,28 @@ export const text = recipe({
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+      },
+    },
+    variant: {
+      body: {
+        lineHeight: vars.font.lineHeight.relaxed,
+      },
+      heading: {
+        fontWeight: vars.font.weight.bold,
+        letterSpacing: vars.font.letterSpacing.tight,
+      },
+      label: {
+        fontWeight: vars.font.weight.medium,
+        letterSpacing: vars.font.letterSpacing.wide,
+        textTransform: 'uppercase',
+        fontSize: vars.font.size.xs,
+      },
+      code: {
+        fontFamily: vars.font.family.mono,
+        backgroundColor: vars.color.background.secondary,
+        padding: `${vars.spacing[1]} ${vars.spacing[2]}`,
+        borderRadius: vars.radius.sm,
+        fontSize: '0.9em',
       },
     },
   },

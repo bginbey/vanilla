@@ -5,6 +5,17 @@ globalStyle('*, *::before, *::after', {
   boxSizing: 'border-box',
 });
 
+// Respect motion preferences
+globalStyle('*, *::before, *::after', {
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      animationDuration: '0.01ms !important',
+      animationIterationCount: '1 !important',
+      transitionDuration: '0.01ms !important',
+    },
+  },
+});
+
 globalStyle('html', {
   fontSize: '16px',
   lineHeight: vars.font.lineHeight.normal,
@@ -39,6 +50,7 @@ globalStyle('p', {
 
 globalStyle('a', {
   textDecoration: 'none',
+  transition: `${vars.transition.property.colors} ${vars.duration.fast} ${vars.easing.easeInOut}`,
 });
 
 globalStyle('[class*="theme_"] a', {
@@ -49,12 +61,37 @@ globalStyle('a:hover', {
   textDecoration: 'underline',
 });
 
+// Enhanced focus styles
+globalStyle(':focus-visible', {
+  outline: `2px solid ${vars.color.brand.primary}`,
+  outlineOffset: '2px',
+});
+
+globalStyle(':focus:not(:focus-visible)', {
+  outline: 'none',
+});
+
 globalStyle('button', {
   cursor: 'pointer',
   border: 'none',
   background: 'none',
   padding: 0,
   font: 'inherit',
+});
+
+// Smooth scrolling with motion preference support
+globalStyle('html', {
+  '@media': {
+    '(prefers-reduced-motion: no-preference)': {
+      scrollBehavior: 'smooth',
+    },
+  },
+});
+
+// Selection styles
+globalStyle('[class*="theme_"] ::selection', {
+  backgroundColor: vars.color.brand.primary,
+  color: vars.color.text.inverse,
 });
 
 globalStyle('img, video', {

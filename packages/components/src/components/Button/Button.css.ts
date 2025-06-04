@@ -10,7 +10,10 @@ export const button = recipe({
     fontWeight: vars.font.weight.medium,
     lineHeight: vars.font.lineHeight.normal,
     borderRadius: vars.radius.md,
-    transition: 'all 0.2s ease',
+    transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
+    boxShadow: vars.shadow.none,
+    position: 'relative',
+    overflow: 'hidden',
     cursor: 'pointer',
     userSelect: 'none',
     textDecoration: 'none',
@@ -18,6 +21,10 @@ export const button = recipe({
     outline: 'none',
     ':focus-visible': {
       boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
+      outline: 'none',
+    },
+    ':active:not(:disabled)': {
+      transform: 'scale(0.98)',
     },
     ':disabled': {
       opacity: 0.5,
@@ -29,17 +36,30 @@ export const button = recipe({
       solid: {
         backgroundColor: vars.color.brand.primary,
         color: vars.color.text.inverse,
+        boxShadow: vars.shadow.sm,
         ':hover:not(:disabled)': {
           backgroundColor: vars.color.brand.secondary,
+          boxShadow: vars.shadow.md,
+          transform: 'translateY(-1px)',
+        },
+        ':active:not(:disabled)': {
+          boxShadow: vars.shadow.xs,
+          transform: 'translateY(0)',
         },
       },
       outline: {
         backgroundColor: 'transparent',
         color: vars.color.brand.primary,
         borderColor: vars.color.brand.primary,
+        boxShadow: 'none',
         ':hover:not(:disabled)': {
           backgroundColor: vars.color.brand.primary,
           color: vars.color.text.inverse,
+          boxShadow: vars.shadow.sm,
+        },
+        ':active:not(:disabled)': {
+          boxShadow: 'none',
+          transform: 'scale(0.98)',
         },
       },
       ghost: {
@@ -47,6 +67,11 @@ export const button = recipe({
         color: vars.color.text.primary,
         ':hover:not(:disabled)': {
           backgroundColor: vars.color.background.secondary,
+          boxShadow: vars.shadow.xs,
+        },
+        ':active:not(:disabled)': {
+          backgroundColor: vars.color.background.tertiary,
+          boxShadow: 'none',
         },
       },
     },

@@ -41,7 +41,8 @@ function extractSprinkleProps(props: Record<string, any>) {
     'color', 'backgroundColor', 'borderColor', 'borderRadius', 'boxShadow',
     'fontFamily', 'position', 'top', 'right', 'bottom', 'left', 'zIndex',
     'overflow', 'opacity', 'p', 'pt', 'pb', 'pl', 'pr', 'px', 'py',
-    'm', 'mt', 'mb', 'ml', 'mr', 'mx', 'my'
+    'm', 'mt', 'mb', 'ml', 'mr', 'mx', 'my', 'cursor', 'userSelect', 'border',
+    'transitionProperty', 'transitionDuration', 'transitionTimingFunction'
   ];
 
   Object.keys(props).forEach(key => {
