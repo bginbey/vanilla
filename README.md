@@ -163,22 +163,22 @@ The following packages are published to npm:
 
 ## Roadmap
 
-### 🎯 Phase 1: Enhanced Styling & Theming
+### ✅ Phase 1: Enhanced Styling & Theming
 **Goal:** Add minimal, elegant default styles while maintaining flexibility
 
-- [ ] **Refined Default Styles**
+- [x] **Refined Default Styles**
   - Subtle borders and shadows for depth
   - Smooth hover and focus states
   - Improved button pressed states
   - Consistent focus-visible outlines
   
-- [ ] **Dark Theme**
+- [x] **Dark Theme**
   - Create dark theme tokens
   - Add theme switcher component
   - Support system preference detection
   - Smooth theme transitions
 
-- [ ] **Animation System**
+- [x] **Animation System**
   - Motion tokens (duration, easing)
   - Micro-interactions for components
   - Respect prefers-reduced-motion
