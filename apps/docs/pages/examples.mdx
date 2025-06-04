@@ -1,12 +1,718 @@
+import { LiveExample } from '../components/LiveExample';
+
 # Examples
 
-## Coming Soon
+Real-world examples demonstrating how to use Vanilla Design System components.
 
-We're working on creating practical, easy-to-understand examples for the Vanilla Design System. Check back soon for:
+## Form Examples
 
-- Simple component usage examples
-- Common UI patterns
-- Best practices and tips
-- Integration guides
+### Login Form
 
-In the meantime, check out our [Components](/components) page to see individual component documentation and the [Getting Started](/getting-started) guide to begin using Vanilla in your project.
+A complete login form with validation and error handling.
+
+<LiveExample
+  code={`import { Box, Text, Button, Input, FormField, Checkbox } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {};
+    
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!email.includes('@')) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+    }
+    
+    setErrors(newErrors);
+    
+    if (Object.keys(newErrors).length === 0) {
+      setLoading(true);
+      // Simulate API call
+      setTimeout(() => {
+        alert(\`Logged in as \${email}\`);
+        setLoading(false);
+      }, 1000);
+    }
+  };
+  
+  return (
+    <Box maxWidth="400px" p={6} backgroundColor="secondary" borderRadius="lg">
+      <Text as="h2" size="2xl" weight="bold" mb={6}>
+        Sign In
+      </Text>
+      
+      <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
+        <FormField
+          label="Email"
+          error={errors.email}
+          required
+        >
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            error={!!errors.email}
+          />
+        </FormField>
+        
+        <FormField
+          label="Password"
+          error={errors.password}
+          required
+        >
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            error={!!errors.password}
+          />
+        </FormField>
+        
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Box display="flex" alignItems="center" gap={2}>
+            <Checkbox
+              id="remember"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+            />
+            <Text as="label" htmlFor="remember" size="sm">
+              Remember me
+            </Text>
+          </Box>
+          
+          <Button as="a" href="#" variant="ghost" size="sm">
+            Forgot password?
+          </Button>
+        </Box>
+        
+        <Button
+          type="submit"
+          fullWidth
+          disabled={loading}
+        >
+          {loading ? 'Signing in...' : 'Sign In'}
+        </Button>
+      </Box>
+      
+      <Box mt={6} textAlign="center">
+        <Text size="sm" color="tertiary">
+          Don't have an account?{' '}
+          <Button as="a" href="#" variant="ghost" size="sm">
+            Sign up
+          </Button>
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+### User Settings Form
+
+A comprehensive settings form demonstrating various form controls.
+
+<LiveExample
+  code={`import { Box, Text, Button, Input, Select, Switch, Radio, FormField } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [settings, setSettings] = useState({
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'developer',
+    notifications: {
+      email: true,
+      push: false,
+      sms: true
+    },
+    theme: 'light'
+  });
+  
+  const handleSave = () => {
+    alert('Settings saved!');
+  };
+  
+  return (
+    <Box maxWidth="600px" p={6}>
+      <Text as="h2" size="3xl" weight="bold" mb={6}>
+        Account Settings
+      </Text>
+      
+      <Box display="flex" flexDirection="column" gap={6}>
+        {/* Profile Section */}
+        <Box>
+          <Text size="lg" weight="semibold" mb={4}>
+            Profile Information
+          </Text>
+          
+          <Box display="flex" flexDirection="column" gap={4}>
+            <FormField label="Full Name">
+              <Input
+                value={settings.name}
+                onChange={(e) => setSettings({...settings, name: e.target.value})}
+              />
+            </FormField>
+            
+            <FormField label="Email Address">
+              <Input
+                type="email"
+                value={settings.email}
+                onChange={(e) => setSettings({...settings, email: e.target.value})}
+              />
+            </FormField>
+            
+            <FormField label="Role">
+              <Select
+                value={settings.role}
+                onChange={(e) => setSettings({...settings, role: e.target.value})}
+              >
+                <option value="developer">Developer</option>
+                <option value="designer">Designer</option>
+                <option value="manager">Manager</option>
+                <option value="other">Other</option>
+              </Select>
+            </FormField>
+          </Box>
+        </Box>
+        
+        {/* Notifications Section */}
+        <Box>
+          <Text size="lg" weight="semibold" mb={4}>
+            Notification Preferences
+          </Text>
+          
+          <Box display="flex" flexDirection="column" gap={3}>
+            <Box display="flex" alignItems="center" justifyContent="space-between">
+              <Box>
+                <Text weight="medium">Email Notifications</Text>
+                <Text size="sm" color="tertiary">
+                  Receive updates via email
+                </Text>
+              </Box>
+              <Switch
+                checked={settings.notifications.email}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  notifications: {...settings.notifications, email: e.target.checked}
+                })}
+              />
+            </Box>
+            
+            <Box display="flex" alignItems="center" justifyContent="space-between">
+              <Box>
+                <Text weight="medium">Push Notifications</Text>
+                <Text size="sm" color="tertiary">
+                  Receive push notifications
+                </Text>
+              </Box>
+              <Switch
+                checked={settings.notifications.push}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  notifications: {...settings.notifications, push: e.target.checked}
+                })}
+              />
+            </Box>
+            
+            <Box display="flex" alignItems="center" justifyContent="space-between">
+              <Box>
+                <Text weight="medium">SMS Notifications</Text>
+                <Text size="sm" color="tertiary">
+                  Receive SMS messages
+                </Text>
+              </Box>
+              <Switch
+                checked={settings.notifications.sms}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  notifications: {...settings.notifications, sms: e.target.checked}
+                })}
+              />
+            </Box>
+          </Box>
+        </Box>
+        
+        {/* Theme Section */}
+        <Box>
+          <Text size="lg" weight="semibold" mb={4}>
+            Appearance
+          </Text>
+          
+          <Box display="flex" flexDirection="column" gap={2}>
+            {['light', 'cream', 'dark'].map((theme) => (
+              <Box key={theme} display="flex" alignItems="center" gap={2}>
+                <Radio
+                  id={theme}
+                  name="theme"
+                  value={theme}
+                  checked={settings.theme === theme}
+                  onChange={(e) => setSettings({...settings, theme: e.target.value})}
+                />
+                <Text as="label" htmlFor={theme}>
+                  {theme.charAt(0).toUpperCase() + theme.slice(1)} Theme
+                </Text>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+        
+        {/* Actions */}
+        <Box display="flex" gap={2} pt={4}>
+          <Button onClick={handleSave}>
+            Save Changes
+          </Button>
+          <Button variant="outline">
+            Cancel
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Layout Examples
+
+### Dashboard Layout
+
+A responsive dashboard layout using Box components.
+
+<LiveExample
+  code={`import { Box, Text, Button } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const stats = [
+    { label: 'Total Users', value: '2,543', change: '+12%' },
+    { label: 'Revenue', value: '$45,234', change: '+23%' },
+    { label: 'Orders', value: '1,234', change: '-5%' },
+    { label: 'Conversion', value: '3.2%', change: '+2%' }
+  ];
+  
+  return (
+    <Box p={6}>
+      {/* Header */}
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={6}>
+        <Text as="h1" size="3xl" weight="bold">
+          Dashboard
+        </Text>
+        <Box display="flex" gap={2}>
+          <Button variant="outline" size="sm">
+            Export
+          </Button>
+          <Button size="sm">
+            Add Widget
+          </Button>
+        </Box>
+      </Box>
+      
+      {/* Stats Grid */}
+      <Box 
+        display="grid" 
+        gap={4} 
+        style={{ 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' 
+        }}
+        mb={6}
+      >
+        {stats.map((stat) => (
+          <Box
+            key={stat.label}
+            p={4}
+            backgroundColor="secondary"
+            borderRadius="lg"
+            boxShadow="base"
+          >
+            <Text size="sm" color="tertiary" mb={2}>
+              {stat.label}
+            </Text>
+            <Box display="flex" alignItems="baseline" justifyContent="space-between">
+              <Text size="2xl" weight="bold">
+                {stat.value}
+              </Text>
+              <Text 
+                size="sm" 
+                color={stat.change.startsWith('+') ? 'success' : 'error'}
+              >
+                {stat.change}
+              </Text>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+      
+      {/* Content Area */}
+      <Box display="flex" gap={6} flexDirection={{ mobile: 'column', tablet: 'row' }}>
+        {/* Main Content */}
+        <Box flex="1" backgroundColor="tertiary" borderRadius="lg" p={6}>
+          <Text size="xl" weight="semibold" mb={4}>
+            Recent Activity
+          </Text>
+          <Box display="flex" flexDirection="column" gap={3}>
+            {[1, 2, 3, 4].map((i) => (
+              <Box
+                key={i}
+                p={3}
+                backgroundColor="secondary"
+                borderRadius="md"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Box>
+                  <Text weight="medium">User activity #{i}</Text>
+                  <Text size="sm" color="tertiary">
+                    2 hours ago
+                  </Text>
+                </Box>
+                <Button variant="ghost" size="sm">
+                  View
+                </Button>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+        
+        {/* Sidebar */}
+        <Box width={{ mobile: '100%', tablet: '300px' }}>
+          <Box backgroundColor="tertiary" borderRadius="lg" p={6} mb={4}>
+            <Text size="lg" weight="semibold" mb={3}>
+              Quick Actions
+            </Text>
+            <Box display="flex" flexDirection="column" gap={2}>
+              <Button fullWidth variant="outline" size="sm">
+                Create Report
+              </Button>
+              <Button fullWidth variant="outline" size="sm">
+                Invite Team Member
+              </Button>
+              <Button fullWidth variant="outline" size="sm">
+                Download Data
+              </Button>
+            </Box>
+          </Box>
+          
+          <Box backgroundColor="primary" borderRadius="lg" p={6}>
+            <Text size="lg" weight="semibold" mb={2} color="inverse">
+              Pro Tip
+            </Text>
+            <Text size="sm" color="inverse">
+              You can customize your dashboard by clicking the "Add Widget" button above.
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+### Card Grid
+
+A responsive card grid layout.
+
+<LiveExample
+  code={`import { Box, Text, Button } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const products = [
+    { id: 1, name: 'Product 1', price: '$29.99', category: 'Electronics' },
+    { id: 2, name: 'Product 2', price: '$49.99', category: 'Clothing' },
+    { id: 3, name: 'Product 3', price: '$19.99', category: 'Books' },
+    { id: 4, name: 'Product 4', price: '$99.99', category: 'Electronics' },
+    { id: 5, name: 'Product 5', price: '$39.99', category: 'Home' },
+    { id: 6, name: 'Product 6', price: '$59.99', category: 'Sports' }
+  ];
+  
+  return (
+    <Box p={6}>
+      <Text as="h2" size="3xl" weight="bold" mb={6}>
+        Featured Products
+      </Text>
+      
+      <Box
+        display="grid"
+        gap={4}
+        style={{
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
+        }}
+      >
+        {products.map((product) => (
+          <Box
+            key={product.id}
+            backgroundColor="secondary"
+            borderRadius="lg"
+            overflow="hidden"
+            boxShadow="base"
+            display="flex"
+            flexDirection="column"
+          >
+            {/* Product Image Placeholder */}
+            <Box
+              height="200px"
+              backgroundColor="tertiary"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text color="secondary">Product Image</Text>
+            </Box>
+            
+            {/* Product Details */}
+            <Box p={4} display="flex" flexDirection="column" gap={2} flex="1">
+              <Box flex="1">
+                <Text size="lg" weight="semibold">
+                  {product.name}
+                </Text>
+                <Text size="sm" color="tertiary">
+                  {product.category}
+                </Text>
+              </Box>
+              
+              <Box display="flex" alignItems="center" justifyContent="space-between" mt={2}>
+                <Text size="xl" weight="bold" color="brand">
+                  {product.price}
+                </Text>
+                <Button size="sm">
+                  Add to Cart
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Component Composition
+
+### Modal Dialog
+
+Creating a modal dialog by composing basic components.
+
+<LiveExample
+  code={`import { Box, Text, Button, Input, FormField } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(\`Subscribed with email: \${email}\`);
+    setIsOpen(false);
+    setEmail('');
+  };
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>
+        Open Modal
+      </Button>
+      
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <Box
+            position="fixed"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            backgroundColor="primary"
+            opacity={0.5}
+            onClick={() => setIsOpen(false)}
+            style={{ zIndex: 1000 }}
+          />
+          
+          {/* Modal */}
+          <Box
+            position="fixed"
+            style={{
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 1001,
+              width: '90%',
+              maxWidth: '500px'
+            }}
+          >
+            <Box
+              backgroundColor="primary"
+              borderRadius="lg"
+              boxShadow="lg"
+              p={6}
+            >
+              <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+                <Text as="h3" size="xl" weight="bold">
+                  Subscribe to Newsletter
+                </Text>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsOpen(false)}
+                >
+                  ✕
+                </Button>
+              </Box>
+              
+              <Text color="secondary" mb={4}>
+                Get the latest updates and news delivered to your inbox.
+              </Text>
+              
+              <Box as="form" onSubmit={handleSubmit}>
+                <FormField label="Email Address" required>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    required
+                  />
+                </FormField>
+                
+                <Box display="flex" gap={2} mt={6}>
+                  <Button type="submit" fullWidth>
+                    Subscribe
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    fullWidth
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </>
+      )}
+    </>
+  );
+}`}
+/>
+
+### Notification Banner
+
+A dismissible notification banner component.
+
+<LiveExample
+  code={`import { Box, Text, Button } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [notifications, setNotifications] = useState([
+    { id: 1, type: 'success', message: 'Your changes have been saved successfully!' },
+    { id: 2, type: 'warning', message: 'Your session will expire in 5 minutes.' },
+    { id: 3, type: 'error', message: 'Failed to load data. Please try again.' },
+    { id: 4, type: 'info', message: 'New features are now available in your account.' }
+  ]);
+  
+  const removeNotification = (id) => {
+    setNotifications(notifications.filter(n => n.id !== id));
+  };
+  
+  const getNotificationStyle = (type) => {
+    switch(type) {
+      case 'success':
+        return { borderColor: 'var(--vanilla-color-feedback-success)', textColor: 'success' };
+      case 'warning':
+        return { borderColor: 'var(--vanilla-color-feedback-warning)', textColor: 'warning' };
+      case 'error':
+        return { borderColor: 'var(--vanilla-color-feedback-error)', textColor: 'error' };
+      case 'info':
+        return { borderColor: 'var(--vanilla-color-feedback-info)', textColor: 'info' };
+      default:
+        return { borderColor: 'var(--vanilla-color-border-primary)', textColor: 'primary' };
+    }
+  };
+  
+  const getIcon = (type) => {
+    switch(type) {
+      case 'success': return '✓';
+      case 'warning': return '⚠';
+      case 'error': return '✕';
+      case 'info': return 'ℹ';
+      default: return '';
+    }
+  };
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      {notifications.map((notification) => {
+        const style = getNotificationStyle(notification.type);
+        return (
+          <Box
+            key={notification.id}
+            p={4}
+            backgroundColor="tertiary"
+            borderRadius="md"
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            style={{
+              border: '2px solid ' + style.borderColor
+            }}
+          >
+            <Box display="flex" alignItems="center" gap={3}>
+              <Text size="lg" color={style.textColor}>
+                {getIcon(notification.type)}
+              </Text>
+              <Text>{notification.message}</Text>
+            </Box>
+            
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => removeNotification(notification.id)}
+            >
+              Dismiss
+            </Button>
+          </Box>
+        );
+      })}
+      
+      {notifications.length === 0 && (
+        <Box p={8} textAlign="center">
+          <Text color="tertiary">No notifications</Text>
+          <Box mt={4}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setNotifications([
+                { id: Date.now(), type: 'success', message: 'Here is a new notification!' }
+              ])}
+            >
+              Add Notification
+            </Button>
+          </Box>
+        </Box>
+      )}
+    </Box>
+  );
+}`}
+/>
+
+## Theme Integration
+
+See the [Theming](/theming) page for examples of how components adapt to different themes.

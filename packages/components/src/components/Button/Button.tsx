@@ -1,22 +1,30 @@
-import { ElementType } from 'react';
+import React, { forwardRef, ElementType, ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react';
 import { clsx } from 'clsx';
 import { button } from './Button.css';
-import { PolymorphicComponentPropWithRef, PolymorphicRef } from '../../utils/polymorphic';
-import { polymorphicForwardRef } from '../../utils/forwardRef';
 
-type ButtonVariants = {
+// Define the button-specific props
+export interface ButtonOwnProps {
   variant?: 'solid' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
-};
+  as?: ElementType;
+}
 
-export type ButtonProps<C extends ElementType = 'button'> = PolymorphicComponentPropWithRef<
-  C,
-  ButtonVariants
->;
+// Create a type that combines button props with element props
+export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps &
+  Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps>;
 
-export const Button = polymorphicForwardRef<'button', ButtonVariants>(
+// Type for the Button component itself
+export interface ButtonComponent {
   <C extends ElementType = 'button'>(
+    props: ButtonProps<C> & { ref?: ComponentPropsWithRef<C>['ref'] }
+  ): React.ReactElement | null;
+  displayName?: string;
+}
+
+// Implementation with explicit typing
+export const Button: ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
     {
       as,
       className,
@@ -24,9 +32,9 @@ export const Button = polymorphicForwardRef<'button', ButtonVariants>(
       size = 'md',
       fullWidth = false,
       ...props
-    }: ButtonProps<C>,
-    ref: PolymorphicRef<C>
-  ) => {
+    },
+    ref
+  ) {
     const Component = as || 'button';
 
     return (
@@ -37,6 +45,6 @@ export const Button = polymorphicForwardRef<'button', ButtonVariants>(
       />
     );
   }
-);
+) as ButtonComponent;
 
 Button.displayName = 'Button';

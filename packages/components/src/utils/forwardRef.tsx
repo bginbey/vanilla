@@ -14,13 +14,13 @@ export interface ForwardRefComponent<DefaultElement extends React.ElementType> {
 // Custom forwardRef that preserves generic types
 export function polymorphicForwardRef<
   Component extends React.ElementType,
-  Props extends Record<string, any> = {}
+  Props extends Record<string, unknown> = Record<string, unknown>
 >(
   render: <Element extends React.ElementType = Component>(
     props: PolymorphicComponentPropWithRef<Element, Props>,
     ref: PolymorphicRef<Element>
   ) => React.ReactElement | null
 ): ForwardRefComponent<Component> {
-  const Component = React.forwardRef(render as any) as any;
+  const Component = React.forwardRef(render as React.ForwardRefRenderFunction<unknown, unknown>) as unknown as ForwardRefComponent<Component>;
   return Component;
 }

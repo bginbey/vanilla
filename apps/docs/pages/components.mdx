@@ -2,9 +2,11 @@ import { LiveExample } from '../components/LiveExample';
 
 # Components
 
-Vanilla Design System provides a set of flexible, accessible components built with React and TypeScript.
+Vanilla Design System provides a comprehensive set of flexible, accessible components built with React and TypeScript.
 
-## Box
+## Layout Components
+
+### Box
 
 The Box component is the foundation of our layout system. It provides access to design tokens through the styling props.
 
@@ -32,7 +34,7 @@ export default function App() {
 }`}
 />
 
-### Props
+#### Box Props
 
 - `as` - Render as a different HTML element (default: `div`)
 - `p`, `pt`, `pb`, `pl`, `pr`, `px`, `py` - Padding utilities
@@ -41,46 +43,12 @@ export default function App() {
 - `flexDirection`, `justifyContent`, `alignItems`, `gap` - Flexbox utilities
 - `backgroundColor`, `color`, `borderColor` - Color utilities
 - `borderRadius`, `boxShadow` - Visual utilities
+- `style` - Additional CSS styles
+- `minHeight`, `minWidth`, `maxHeight`, `maxWidth`, `height`, `width` - Dimension utilities
 
-## Button
+## Typography
 
-A flexible button component with multiple variants and sizes.
-
-<LiveExample
-  code={`import { Button, Box } from '@beauginbey/vanilla-components';
-
-export default function App() {
-  return (
-    <Box display="flex" gap={3} flexDirection="column">
-      <Box display="flex" gap={2}>
-        <Button variant="solid">Solid</Button>
-        <Button variant="outline">Outline</Button>
-        <Button variant="ghost">Ghost</Button>
-      </Box>
-      
-      <Box display="flex" gap={2} alignItems="center">
-        <Button size="sm">Small</Button>
-        <Button size="md">Medium</Button>
-        <Button size="lg">Large</Button>
-      </Box>
-      
-      <Button fullWidth variant="outline">
-        Full Width Button
-      </Button>
-    </Box>
-  );
-}`}
-/>
-
-### Props
-
-- `variant` - Visual style: `solid`, `outline`, or `ghost`
-- `size` - Button size: `sm`, `md`, or `lg`
-- `fullWidth` - Make button full width
-- `disabled` - Disable the button
-- `as` - Render as a different element (e.g., `a` for links)
-
-## Text
+### Text
 
 A polymorphic text component for rendering typography with consistent styles.
 
@@ -120,7 +88,7 @@ export default function App() {
 }`}
 />
 
-### Props
+#### Text Props
 
 - `as` - HTML element to render (default: `span`)
 - `size` - Text size from `xs` to `5xl`
@@ -128,6 +96,386 @@ export default function App() {
 - `color` - Text color from theme
 - `align` - Text alignment: `left`, `center`, or `right`
 - `truncate` - Truncate text with ellipsis
+
+## Interactive Components
+
+### Button
+
+A flexible button component with multiple variants and sizes.
+
+<LiveExample
+  code={`import { Button, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Box display="flex" gap={2}>
+        <Button variant="solid">Solid</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
+      </Box>
+      
+      <Box display="flex" gap={2} alignItems="center">
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+      </Box>
+      
+      <Button fullWidth variant="outline">
+        Full Width Button
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+#### Button Props
+
+- `variant` - Visual style: `solid`, `outline`, or `ghost`
+- `size` - Button size: `sm`, `md`, or `lg`
+- `fullWidth` - Make button full width
+- `disabled` - Disable the button
+- `as` - Render as a different element (e.g., `a` for links)
+
+## Form Components
+
+### Input
+
+A flexible input component supporting different types and styles.
+
+<LiveExample
+  code={`import { Input, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Input placeholder="Default input" />
+      
+      <Input variant="filled" placeholder="Filled variant" />
+      
+      <Input variant="unstyled" placeholder="Unstyled variant" />
+      
+      <Box display="flex" gap={2}>
+        <Input size="sm" placeholder="Small" />
+        <Input size="md" placeholder="Medium" />
+        <Input size="lg" placeholder="Large" />
+      </Box>
+      
+      <Input type="email" placeholder="Email address" />
+      <Input type="password" placeholder="Password" />
+      <Input disabled placeholder="Disabled input" />
+      <Input error placeholder="Input with error" />
+    </Box>
+  );
+}`}
+/>
+
+#### Input Props
+
+- `variant` - Visual style: `outline`, `filled`, or `unstyled`
+- `size` - Input size: `sm`, `md`, or `lg`
+- `error` - Show error state
+- `disabled` - Disable the input
+- All standard HTML input attributes
+
+### Select
+
+A styled select dropdown component.
+
+<LiveExample
+  code={`import { Select, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Select>
+        <option value="">Choose an option</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </Select>
+      
+      <Select variant="filled">
+        <option value="">Filled variant</option>
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+      </Select>
+      
+      <Box display="flex" gap={2}>
+        <Select size="sm">
+          <option>Small</option>
+        </Select>
+        <Select size="md">
+          <option>Medium</option>
+        </Select>
+        <Select size="lg">
+          <option>Large</option>
+        </Select>
+      </Box>
+      
+      <Select disabled>
+        <option>Disabled select</option>
+      </Select>
+      
+      <Select error>
+        <option>Select with error</option>
+      </Select>
+    </Box>
+  );
+}`}
+/>
+
+#### Select Props
+
+- `variant` - Visual style: `outline`, `filled`, or `unstyled`
+- `size` - Select size: `sm`, `md`, or `lg`
+- `error` - Show error state
+- `disabled` - Disable the select
+- All standard HTML select attributes
+
+### Checkbox
+
+A styled checkbox component with support for indeterminate state.
+
+<LiveExample
+  code={`import { Checkbox, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [checked, setChecked] = useState(false);
+  const [indeterminate, setIndeterminate] = useState(false);
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb1" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+        <Text as="label" htmlFor="cb1">Controlled checkbox</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb2" defaultChecked />
+        <Text as="label" htmlFor="cb2">Default checked</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb3" indeterminate />
+        <Text as="label" htmlFor="cb3">Indeterminate state</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb4" disabled />
+        <Text as="label" htmlFor="cb4" color="tertiary">Disabled checkbox</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb5" disabled checked />
+        <Text as="label" htmlFor="cb5" color="tertiary">Disabled checked</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+#### Checkbox Props
+
+- `indeterminate` - Set indeterminate state
+- `disabled` - Disable the checkbox
+- All standard HTML input checkbox attributes
+
+### Radio
+
+A styled radio button component.
+
+<LiveExample
+  code={`import { Radio, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [selected, setSelected] = useState('option1');
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box display="flex" flexDirection="column" gap={2}>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Radio 
+            id="r1" 
+            name="options" 
+            value="option1"
+            checked={selected === 'option1'}
+            onChange={(e) => setSelected(e.target.value)}
+          />
+          <Text as="label" htmlFor="r1">Option 1</Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Radio 
+            id="r2" 
+            name="options" 
+            value="option2"
+            checked={selected === 'option2'}
+            onChange={(e) => setSelected(e.target.value)}
+          />
+          <Text as="label" htmlFor="r2">Option 2</Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Radio 
+            id="r3" 
+            name="options" 
+            value="option3"
+            checked={selected === 'option3'}
+            onChange={(e) => setSelected(e.target.value)}
+          />
+          <Text as="label" htmlFor="r3">Option 3</Text>
+        </Box>
+      </Box>
+      
+      <Box display="flex" gap={4}>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Radio id="r4" name="disabled" disabled />
+          <Text as="label" htmlFor="r4" color="tertiary">Disabled</Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Radio id="r5" name="disabled" disabled checked />
+          <Text as="label" htmlFor="r5" color="tertiary">Disabled checked</Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+#### Radio Props
+
+- `disabled` - Disable the radio button
+- All standard HTML input radio attributes
+
+### Switch
+
+A toggle switch component for binary choices.
+
+<LiveExample
+  code={`import { Switch, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [enabled, setEnabled] = useState(false);
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box display="flex" alignItems="center" gap={3}>
+        <Switch 
+          id="s1" 
+          checked={enabled} 
+          onChange={(e) => setEnabled(e.target.checked)} 
+        />
+        <Text as="label" htmlFor="s1">
+          Notifications {enabled ? 'enabled' : 'disabled'}
+        </Text>
+      </Box>
+      
+      <Box display="flex" gap={4}>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Switch id="s2" size="sm" defaultChecked />
+          <Text as="label" htmlFor="s2" size="sm">Small</Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Switch id="s3" size="md" defaultChecked />
+          <Text as="label" htmlFor="s3">Medium</Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Switch id="s4" size="lg" defaultChecked />
+          <Text as="label" htmlFor="s4" size="lg">Large</Text>
+        </Box>
+      </Box>
+      
+      <Box display="flex" gap={4}>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Switch id="s5" disabled />
+          <Text as="label" htmlFor="s5" color="tertiary">Disabled</Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Switch id="s6" disabled checked />
+          <Text as="label" htmlFor="s6" color="tertiary">Disabled on</Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+#### Switch Props
+
+- `size` - Switch size: `sm`, `md`, or `lg`
+- `disabled` - Disable the switch
+- All standard HTML input checkbox attributes
+
+### FormField
+
+A wrapper component for form inputs with labels, helper text, and error messages.
+
+<LiveExample
+  code={`import { FormField, Input, Select, Box } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [email, setEmail] = useState('');
+  const [hasError, setHasError] = useState(false);
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <FormField
+        label="Email Address"
+        helper="We'll never share your email"
+        required
+      >
+        <Input 
+          type="email" 
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setHasError(!e.target.value.includes('@'));
+          }}
+          error={hasError}
+        />
+      </FormField>
+      
+      <FormField
+        label="Country"
+        error={hasError ? "Please enter a valid email first" : undefined}
+      >
+        <Select disabled={hasError}>
+          <option value="">Select a country</option>
+          <option value="us">United States</option>
+          <option value="uk">United Kingdom</option>
+          <option value="ca">Canada</option>
+        </Select>
+      </FormField>
+      
+      <FormField
+        label="Password"
+        helper="Must be at least 8 characters"
+        required
+      >
+        <Input type="password" placeholder="Enter password" />
+      </FormField>
+    </Box>
+  );
+}`}
+/>
+
+#### FormField Props
+
+- `label` - Field label text
+- `helper` - Helper text shown below the input
+- `error` - Error message (replaces helper text when present)
+- `required` - Show required indicator
+- `children` - The form control (Input, Select, etc.)
 
 ## Polymorphic Components
 
@@ -160,3 +508,35 @@ export default function App() {
   );
 }`}
 />
+
+## Accessibility
+
+All components in the Vanilla Design System are built with accessibility in mind:
+
+- **Keyboard Navigation**: All interactive components support keyboard navigation
+- **ARIA Labels**: Proper ARIA attributes are included where needed
+- **Focus Management**: Clear focus indicators that respect `prefers-reduced-motion`
+- **Semantic HTML**: Components render appropriate HTML elements
+- **Screen Reader Support**: Components work well with assistive technologies
+
+## TypeScript Support
+
+All components are fully typed with TypeScript, providing excellent IDE support and type safety:
+
+```typescript
+import { Button, ButtonProps } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const MyButton = (props: ButtonProps<'button'>) => {
+  return <Button {...props} />;
+};
+
+// Polymorphic typing
+const LinkButton = () => {
+  return (
+    <Button as="a" href="/path">
+      This is type-safe as an anchor
+    </Button>
+  );
+};
+```

@@ -1,5 +1,26 @@
 # @beauginbey/vanilla-components
 
+## 1.1.0
+
+### Minor Changes
+
+- Added new form components and utilities:
+
+  - **Input**: Text input component with variants (outline, filled, unstyled), error states, and full width option
+  - **Select**: Dropdown select component with custom styling and icon
+  - **Checkbox**: Checkbox with label support, indeterminate state, and two variants (default, rounded)
+  - **Radio**: Radio button component with label support and error states
+  - **Switch**: Toggle switch component with three sizes (sm, md, lg) and smooth animations
+  - **FormField**: Form field wrapper providing labels, helper text, error messages, and accessibility features
+
+  All components include:
+
+  - Full TypeScript support
+  - Comprehensive test coverage
+  - Accessibility features (ARIA attributes, keyboard navigation)
+  - Theme support with proper token usage
+  - Storybook documentation
+
 ## 1.0.1
 
 ### Patch Changes

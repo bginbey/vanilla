@@ -1,0 +1,22 @@
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Testing
+coverage/
+
+# Misc
+*.log
+.DS_Store
+.env*
+
+# Generated files
+*.d.ts
+*.d.mts
+!src/**/*.d.ts
+!src/**/*.d.mts

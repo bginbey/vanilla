@@ -1,24 +1,32 @@
-import { ElementType } from 'react';
+import React, { forwardRef, ElementType, ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react';
 import { clsx } from 'clsx';
 import { text } from './Text.css';
-import { PolymorphicComponentPropWithRef, PolymorphicRef } from '../../utils/polymorphic';
-import { polymorphicForwardRef } from '../../utils/forwardRef';
 
-type TextVariants = {
+// Define the text-specific props
+export interface TextOwnProps {
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
   weight?: 'normal' | 'medium' | 'semibold' | 'bold';
   color?: 'primary' | 'secondary' | 'tertiary' | 'inverse' | 'brand' | 'success' | 'warning' | 'error' | 'info';
   align?: 'left' | 'center' | 'right';
   truncate?: boolean;
-};
+  as?: ElementType;
+}
 
-export type TextProps<C extends ElementType = 'span'> = PolymorphicComponentPropWithRef<
-  C,
-  TextVariants
->;
+// Create a type that combines text props with element props
+export type TextProps<C extends ElementType = 'span'> = TextOwnProps &
+  Omit<ComponentPropsWithoutRef<C>, keyof TextOwnProps>;
 
-export const Text = polymorphicForwardRef<'span', TextVariants>(
+// Type for the Text component itself
+export interface TextComponent {
   <C extends ElementType = 'span'>(
+    props: TextProps<C> & { ref?: ComponentPropsWithRef<C>['ref'] }
+  ): React.ReactElement | null;
+  displayName?: string;
+}
+
+// Implementation with explicit typing
+export const Text: TextComponent = forwardRef<HTMLSpanElement, TextProps>(
+  function Text(
     {
       as,
       className,
@@ -28,9 +36,9 @@ export const Text = polymorphicForwardRef<'span', TextVariants>(
       align,
       truncate,
       ...props
-    }: TextProps<C>,
-    ref: PolymorphicRef<C>
-  ) => {
+    },
+    ref
+  ) {
     const Component = as || 'span';
 
     return (
@@ -41,6 +49,6 @@ export const Text = polymorphicForwardRef<'span', TextVariants>(
       />
     );
   }
-);
+) as TextComponent;
 
 Text.displayName = 'Text';

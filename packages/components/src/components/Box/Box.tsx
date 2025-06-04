@@ -1,37 +1,55 @@
-import { ElementType } from 'react';
+import React from 'react';
 import { clsx } from 'clsx';
 import { sprinkles, Sprinkles } from '../../styles/sprinkles.css';
-import { PolymorphicComponentPropWithRef, PolymorphicRef } from '../../utils/polymorphic';
-import { polymorphicForwardRef } from '../../utils/forwardRef';
 
-export type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentPropWithRef<
-  C,
-  Sprinkles
->;
+// Define all props that Box accepts
+export interface BoxOwnProps extends Sprinkles {
+  as?: React.ElementType;
+  className?: string;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  minHeight?: React.CSSProperties['minHeight'];
+  minWidth?: React.CSSProperties['minWidth'];
+  maxHeight?: React.CSSProperties['maxHeight'];
+  maxWidth?: React.CSSProperties['maxWidth'];
+  height?: React.CSSProperties['height'];
+  width?: React.CSSProperties['width'];
+}
 
-export const Box = polymorphicForwardRef<'div', Sprinkles>(
-  <C extends ElementType = 'div'>(
-    { as, className, ...props }: BoxProps<C>,
-    ref: PolymorphicRef<C>
-  ) => {
-    const Component = as || 'div';
-    const { otherProps, sprinkleProps } = extractSprinkleProps(props);
+// Combined props type for Box
+export type BoxProps<C extends React.ElementType = 'div'> = BoxOwnProps &
+  Omit<React.ComponentPropsWithRef<C>, keyof BoxOwnProps>;
 
-    return (
-      <Component
-        ref={ref}
-        className={clsx(sprinkles(sprinkleProps), className)}
-        {...otherProps}
-      />
-    );
+// Box component with simpler typing
+export const Box = React.forwardRef<HTMLElement, BoxOwnProps>(
+  ({ as: Component = 'div', className, style, minHeight, minWidth, maxHeight, maxWidth, height, width, ...restProps }, ref) => {
+    const { otherProps, sprinkleProps } = extractSprinkleProps(restProps);
+
+    // Combine style props
+    const combinedStyle: React.CSSProperties = {
+      ...style,
+      ...(minHeight && { minHeight }),
+      ...(minWidth && { minWidth }),
+      ...(maxHeight && { maxHeight }),
+      ...(maxWidth && { maxWidth }),
+      ...(height && { height }),
+      ...(width && { width }),
+    };
+
+    return React.createElement(Component, {
+      ref,
+      className: clsx(sprinkles(sprinkleProps), className),
+      style: Object.keys(combinedStyle).length > 0 ? combinedStyle : undefined,
+      ...otherProps,
+    });
   }
 );
 
 Box.displayName = 'Box';
 
-function extractSprinkleProps(props: Record<string, any>) {
-  const sprinkleProps: Record<string, any> = {};
-  const otherProps: Record<string, any> = {};
+function extractSprinkleProps(props: Record<string, unknown>) {
+  const sprinkleProps: Record<string, unknown> = {};
+  const otherProps: Record<string, unknown> = {};
 
   const sprinkleKeys = [
     'display', 'flexDirection', 'justifyContent', 'alignItems', 'gap',

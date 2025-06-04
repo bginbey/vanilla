@@ -9,7 +9,7 @@ interface LiveExampleProps {
 }
 
 const defaultDependencies = {
-  '@beauginbey/vanilla-components': '1.0.1',
+  '@beauginbey/vanilla-components': '1.1.0',
   '@beauginbey/vanilla-tokens': '1.0.0',
   'react': '18.2.0',
   'react-dom': '18.2.0',
@@ -59,7 +59,7 @@ root.render(
             showConsoleButton: true,
             editorHeight: 400,
             externalResources: [
-              'https://unpkg.com/@beauginbey/vanilla-components@1.0.1/dist/index.css'
+              'https://unpkg.com/@beauginbey/vanilla-components@1.1.0/dist/index.css'
             ],
           }}
           customSetup={{
@@ -74,9 +74,10 @@ root.render(
     );
   } catch (error) {
     console.error('Sandpack error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return (
       <div style={{ padding: '20px', border: '1px solid red', borderRadius: '4px' }}>
-        <p>Error loading code example: {error?.message || 'Unknown error'}</p>
+        <p>Error loading code example: {errorMessage}</p>
         <details>
           <summary>Error details</summary>
           <pre>{JSON.stringify(error, null, 2)}</pre>
