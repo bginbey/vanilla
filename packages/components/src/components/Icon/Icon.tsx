@@ -22,10 +22,13 @@ export interface IconProps {
    * @example <Icon icon={IconHome} />
    */
   icon: React.ComponentType<{ 
+    width?: number | string;
+    height?: number | string;
     size?: number | string;
     color?: string;
     stroke?: number;
     className?: string;
+    [key: string]: any;
   }>;
   
   /**
@@ -100,7 +103,8 @@ export const Icon = forwardRef<HTMLSpanElement, IconProps>(
 
     const iconElement = (
       <IconComponent 
-        size={iconPixelSize}
+        width={iconPixelSize}
+        height={iconPixelSize}
         color="currentColor"
         stroke={finalStroke}
         className="icon-svg"

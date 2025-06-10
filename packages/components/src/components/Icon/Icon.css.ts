@@ -1,4 +1,4 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants, globalStyle } from '@vanilla-extract/css';
 import { vars } from '../../styles/theme.css';
 
 export const iconBase = style({
@@ -9,6 +9,12 @@ export const iconBase = style({
   userSelect: 'none',
   verticalAlign: 'middle',
   transition: `color ${vars.duration.fast} ${vars.easing.easeInOut}`,
+});
+
+// Style the SVG children
+globalStyle(`${iconBase} > svg`, {
+  width: '100%',
+  height: '100%',
 });
 
 export const iconSizes = styleVariants({
