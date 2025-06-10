@@ -13,6 +13,8 @@ const defaultDependencies = {
   '@beauginbey/vanilla-tokens': '1.0.0',
   'react': '18.2.0',
   'react-dom': '18.2.0',
+  '@types/react': '18.2.48',
+  '@types/react-dom': '18.2.18',
 };
 
 export function LiveExample({ 
@@ -29,8 +31,8 @@ export function LiveExample({
   
   const files = {
     '/App.tsx': code.trim(),
-    '/index.tsx': `import React from 'react';
-import ReactDOM from 'react-dom/client';
+    '/index.tsx': `import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { light, cream } from '@beauginbey/vanilla-components';
 import App from './App';
 
@@ -38,12 +40,35 @@ import App from './App';
 const themeClass = ${theme === 'cream' ? 'cream' : 'light'};
 document.documentElement.className = themeClass;
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);`,
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+}`,
+    '/tsconfig.json': `{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}`,
   };
 
   try {
@@ -66,6 +91,11 @@ root.render(
             dependencies: {
               ...defaultDependencies,
               ...dependencies,
+            },
+            compilerOptions: {
+              jsx: "react-jsx",
+              esModuleInterop: true,
+              allowSyntheticDefaultImports: true,
             },
           }}
           theme={sandpackDark}
