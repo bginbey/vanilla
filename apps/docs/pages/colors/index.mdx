@@ -1,0 +1,60 @@
+# Colors
+
+Vanilla's color system is built on a foundation of carefully crafted color scales, inspired by [Radix UI Colors](https://www.radix-ui.com/colors). Each scale consists of 12 steps with specific use cases, ensuring consistency and accessibility across your application.
+
+## Features
+
+- **12-step scales** - Each color has 12 carefully chosen steps
+- **Automatic dark mode** - All colors adapt seamlessly with the `.dark` class
+- **Accessible by design** - APCA contrast calculations ensure readability
+- **Alpha variants** - Transparent versions for overlays and subtle effects
+- **CSS variables** - Use colors anywhere with `var(--color-step)`
+
+## Color Families
+
+### Neutrals
+- **Gray** - The default neutral scale for UI elements
+
+### Colors  
+- **Blue** - Primary brand color for interactive elements
+- **Green** - Success states and positive actions
+- **Red** - Error states and destructive actions
+- **Yellow** - Warning states (with dark text support)
+- **Orange** - Alternative accent color (with dark text support)
+- **Purple** - Secondary accent for special elements
+
+### Overlays
+- **Black Alpha** - For dark overlays and shadows
+- **White Alpha** - For light overlays and highlights
+
+## Quick Start
+
+```tsx
+// Import the CSS
+import '@beauginbey/vanilla-colors/css';
+
+// Use in your styles
+.button {
+  background: var(--blue-9);
+  color: white;
+}
+
+.button:hover {
+  background: var(--blue-10);
+}
+
+// Enable dark mode
+document.documentElement.classList.add('dark');
+```
+
+## The 12-Step System
+
+Each step in our color scales has a specific purpose:
+
+1. **Steps 1-2**: App and subtle backgrounds
+2. **Steps 3-5**: Component backgrounds (normal, hover, active)
+3. **Steps 6-8**: Borders (subtle, UI, strong)
+4. **Steps 9-10**: Solid colors (primary, hover)
+5. **Steps 11-12**: Text (low-contrast, high-contrast)
+
+Explore the [Color Scales](/colors/scales) to see all available colors, or learn more about [Understanding the Scale](/colors/usage) to use colors effectively in your designs.

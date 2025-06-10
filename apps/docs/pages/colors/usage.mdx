@@ -1,0 +1,97 @@
+import { ColorUsageExample } from '../../components/colors';
+
+# Understanding the Scale
+
+Each step in our 12-step color scale has been carefully designed for specific use cases. This systematic approach ensures consistency across your application and makes it easy to create harmonious, accessible interfaces.
+
+## Interactive Examples
+
+Below are interactive examples showing how each step should be used in your UI. These examples demonstrate real-world applications to help you choose the right color for each element.
+
+<ColorUsageExample />
+
+## Quick Reference
+
+### Background Colors (Steps 1-5)
+- **Step 1**: Main app background
+- **Step 2**: Subtle backgrounds (cards, code blocks)
+- **Step 3**: UI element background
+- **Step 4**: Hovered UI element background  
+- **Step 5**: Active or selected UI element background
+
+### Border Colors (Steps 6-8)
+- **Step 6**: Subtle borders and separators
+- **Step 7**: UI element borders
+- **Step 8**: Strong borders, focus rings
+
+### Solid Colors (Steps 9-10)
+- **Step 9**: Primary solid backgrounds (buttons, badges)
+- **Step 10**: Hovered solid backgrounds
+
+### Text Colors (Steps 11-12)
+- **Step 11**: Low-contrast text (secondary content)
+- **Step 12**: High-contrast text (primary content)
+
+## Best Practices
+
+### Consistency
+Always use the same steps for the same purposes across your application. This creates a predictable and harmonious interface.
+
+### Accessibility
+- Use Step 12 for primary text to ensure maximum readability
+- Step 11 should only be used for truly secondary content
+- Solid colors (Step 9) are designed to work with white text
+
+### State Changes
+The scale is designed to show clear state progressions:
+- Normal → Hover → Active: Steps 3 → 4 → 5
+- Normal → Hover for solids: Steps 9 → 10
+
+### Dark Mode
+All colors automatically adapt in dark mode. You don't need to manually specify dark variants - just use the same CSS variables.
+
+## Code Examples
+
+### Component with States
+```tsx
+// Using steps 3, 4, 5 for interactive states
+.button {
+  background: var(--gray-3);
+}
+
+.button:hover {
+  background: var(--gray-4);
+}
+
+.button:active {
+  background: var(--gray-5);
+}
+```
+
+### Text Hierarchy
+```tsx
+// Using steps 11 and 12 for text
+.heading {
+  color: var(--gray-12); /* High contrast */
+}
+
+.description {
+  color: var(--gray-11); /* Low contrast */
+}
+```
+
+### Borders and Separators
+```tsx
+// Using steps 6, 7, 8 for borders
+.card {
+  border: 1px solid var(--gray-6); /* Subtle */
+}
+
+.input {
+  border: 1px solid var(--gray-7); /* UI element */
+}
+
+.input:focus {
+  border: 2px solid var(--gray-8); /* Focus state */
+}
+```

@@ -10,32 +10,30 @@ Get started with Vanilla Design System in just a few steps:
 
 ```bash
 # Install the design system packages
-pnpm add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+pnpm add @beauginbey/vanilla-components @beauginbey/vanilla-tokens @beauginbey/vanilla-colors
 
 # Or using npm
-npm install @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+npm install @beauginbey/vanilla-components @beauginbey/vanilla-tokens @beauginbey/vanilla-colors
 
 # Or using yarn
-yarn add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+yarn add @beauginbey/vanilla-components @beauginbey/vanilla-tokens @beauginbey/vanilla-colors
 ```
 
 ### Basic Usage
 
 ```tsx
-import { Button, Box, Text } from '@beauginbey/vanilla-components';
-import { light, cream } from '@beauginbey/vanilla-components';
+import { Button, Box, Text, theme } from '@beauginbey/vanilla-components';
+import '@beauginbey/vanilla-components/styles.css';
+import '@beauginbey/vanilla-colors/css';
 
 function App() {
-  // Choose your theme: light or cream
-  const theme = light; // or cream for Uber-inspired minimal aesthetics
-  
   return (
     <div className={theme}>
-      <Box p={6} backgroundColor="secondary" borderRadius="lg">
+      <Box p={6} backgroundColor={2} borderRadius="lg">
         <Text as="h1" size="3xl" weight="bold" mb={4}>
           Welcome to Vanilla
         </Text>
-        <Text color="secondary" mb={4}>
+        <Text color={11} mb={4}>
           A modern design system built with React and TypeScript
         </Text>
         <Button variant="solid">Get Started</Button>
