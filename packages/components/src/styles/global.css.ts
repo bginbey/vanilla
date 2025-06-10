@@ -25,21 +25,14 @@ globalStyle('html', {
 
 globalStyle('body', {
   margin: 0,
-});
-
-// Apply theme-aware styles to elements within a theme class
-globalStyle('[class*="theme_"] body, [class*="theme_"]', {
   fontFamily: vars.font.family.sans,
   fontSize: vars.font.size.base,
-  color: vars.color.text.primary,
-  backgroundColor: vars.color.background.primary,
+  color: vars.color.gray[12], // High-contrast text
+  backgroundColor: vars.color.gray[1], // App background
 });
 
 globalStyle('h1, h2, h3, h4, h5, h6', {
   margin: 0,
-});
-
-globalStyle('[class*="theme_"] h1, [class*="theme_"] h2, [class*="theme_"] h3, [class*="theme_"] h4, [class*="theme_"] h5, [class*="theme_"] h6', {
   fontWeight: vars.font.weight.bold,
   lineHeight: vars.font.lineHeight.tight,
 });
@@ -49,12 +42,9 @@ globalStyle('p', {
 });
 
 globalStyle('a', {
+  color: vars.color.blue[11], // Low-contrast colored text
   textDecoration: 'none',
   transition: `${vars.transition.property.colors} ${vars.duration.fast} ${vars.easing.easeInOut}`,
-});
-
-globalStyle('[class*="theme_"] a', {
-  color: vars.color.brand.primary,
 });
 
 globalStyle('a:hover', {
@@ -63,7 +53,7 @@ globalStyle('a:hover', {
 
 // Enhanced focus styles
 globalStyle(':focus-visible', {
-  outline: `2px solid ${vars.color.brand.primary}`,
+  outline: `2px solid ${vars.color.blue[8]}`, // Focus ring color
   outlineOffset: '2px',
 });
 
@@ -89,9 +79,9 @@ globalStyle('html', {
 });
 
 // Selection styles
-globalStyle('[class*="theme_"] ::selection', {
-  backgroundColor: vars.color.brand.primary,
-  color: vars.color.text.inverse,
+globalStyle('::selection', {
+  backgroundColor: vars.color.blue[9], // Solid color
+  color: 'white',
 });
 
 globalStyle('img, video', {
@@ -99,6 +89,11 @@ globalStyle('img, video', {
   height: 'auto',
 });
 
-globalStyle('[class*="theme_"] code', {
+globalStyle('code', {
   fontFamily: vars.font.family.mono,
+  fontSize: '0.9em',
+  backgroundColor: vars.color.gray[3], // UI element background
+  color: vars.color.gray[12],
+  padding: '0.2em 0.4em',
+  borderRadius: vars.radius.sm,
 });

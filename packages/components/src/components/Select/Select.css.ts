@@ -38,48 +38,48 @@ export const selectStyles = {
       },
       
       ':focus-visible': {
-        boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
+        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`,
       },
       
       ':disabled': {
         opacity: 0.5,
         cursor: 'not-allowed',
-        backgroundColor: vars.color.background.secondary,
+        backgroundColor: vars.color.gray[3],
       },
     },
     
     variants: {
       variant: {
         outline: {
-          backgroundColor: vars.color.background.primary,
-          border: `1px solid ${vars.color.border.primary}`,
+          backgroundColor: vars.color.gray[1],
+          border: `1px solid ${vars.color.gray[7]}`,
           padding: `${vars.spacing[2]} ${vars.spacing[3]}`,
           paddingRight: vars.spacing[10],
-          color: vars.color.text.primary,
+          color: vars.color.gray[12],
           
           ':hover:not(:disabled):not(:focus)': {
-            borderColor: vars.color.border.secondary,
+            borderColor: vars.color.gray[8],
           },
           
           ':focus-visible': {
-            borderColor: vars.color.brand.primary,
+            borderColor: vars.color.blue[8],
           },
         },
         
         filled: {
-          backgroundColor: vars.color.background.secondary,
+          backgroundColor: vars.color.gray[3],
           border: `1px solid transparent`,
           padding: `${vars.spacing[2]} ${vars.spacing[3]}`,
           paddingRight: vars.spacing[10],
-          color: vars.color.text.primary,
+          color: vars.color.gray[12],
           
           ':hover:not(:disabled):not(:focus)': {
-            backgroundColor: vars.color.background.tertiary,
+            backgroundColor: vars.color.gray[4],
           },
           
           ':focus-visible': {
-            backgroundColor: vars.color.background.primary,
-            borderColor: vars.color.brand.primary,
+            backgroundColor: vars.color.gray[1],
+            borderColor: vars.color.blue[8],
           },
         },
         
@@ -88,7 +88,7 @@ export const selectStyles = {
           border: 'none',
           padding: 0,
           paddingRight: vars.spacing[6],
-          color: vars.color.text.primary,
+          color: vars.color.gray[12],
           
           ':focus-visible': {
             boxShadow: 'none',
@@ -98,15 +98,15 @@ export const selectStyles = {
       
       error: {
         true: {
-          borderColor: vars.color.feedback.error,
+          borderColor: vars.color.red[8],
           
           ':hover:not(:disabled)': {
-            borderColor: vars.color.feedback.error,
+            borderColor: vars.color.red[8],
           },
           
           ':focus-visible': {
-            borderColor: vars.color.feedback.error,
-            boxShadow: `0 0 0 2px ${vars.color.feedback.error}`,
+            borderColor: vars.color.red[8],
+            boxShadow: `0 0 0 2px ${vars.color.red[8]}`,
           },
         },
         false: {},
@@ -141,7 +141,7 @@ export const iconStyles = recipe({
     top: '50%',
     transform: 'translateY(-50%)',
     pointerEvents: 'none',
-    color: vars.color.text.secondary,
+    color: vars.color.gray[11],
     transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
   },
   variants: {

@@ -1,8 +1,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { clsx } from 'clsx';
-import { light, cream, dark } from '../../styles/theme.css';
+import { theme } from '../../styles/theme.css';
 
-export type Theme = 'light' | 'cream' | 'dark';
+export type Theme = 'light' | 'dark';
 
 interface ThemeContextValue {
   theme: Theme;
@@ -10,12 +9,6 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
-
-const themes = {
-  light,
-  cream,
-  dark,
-} as const;
 
 export interface ThemeProviderProps {
   children: ReactNode;
@@ -28,7 +21,7 @@ export function ThemeProvider({
   defaultTheme = 'light',
   storageKey = 'vanilla-theme'
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(() => {
+  const [currentTheme, setThemeState] = useState<Theme>(() => {
     if (typeof window === 'undefined') {
       return defaultTheme;
     }
@@ -38,16 +31,25 @@ export function ThemeProvider({
   });
 
   useEffect(() => {
-    localStorage.setItem(storageKey, theme);
-  }, [theme, storageKey]);
+    // Update document class for dark mode
+    const root = document.documentElement;
+    if (currentTheme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    
+    // Store theme preference
+    localStorage.setItem(storageKey, currentTheme);
+  }, [currentTheme, storageKey]);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={clsx(themes[theme])}>
+    <ThemeContext.Provider value={{ theme: currentTheme, setTheme }}>
+      <div className={theme}>
         {children}
       </div>
     </ThemeContext.Provider>

@@ -11,6 +11,7 @@
   "dependencies": {
     "@beauginbey/vanilla-components": "workspace:*",
     "@beauginbey/vanilla-tokens": "workspace:*",
+    "@beauginbey/vanilla-colors": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

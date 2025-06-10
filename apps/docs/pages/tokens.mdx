@@ -4,38 +4,34 @@ Design tokens are the foundational elements of the Vanilla Design System. They r
 
 ## Token Structure
 
-Our tokens are organized into two main categories:
+Our tokens include:
+- **Color scales** - 12-step scales for consistent color usage
+- **Typography** - Font families, sizes, weights, and line heights
+- **Spacing** - Consistent spacing scale
+- **Shadows** - Elevation system
+- **Animation** - Duration and easing tokens
 
-### 1. Primitive Tokens
-Raw values that form the foundation of our design system:
-- Colors (e.g., `blue-500`, `gray-100`)
-- Font families
-- Base spacing units
-- Raw shadow values
+## Color System
 
-### 2. Semantic Tokens
-Purpose-driven tokens that reference primitive tokens:
-- `color.background.primary`
-- `color.text.secondary`
-- `spacing.component.padding`
-- `shadow.card.default`
-
-## Available Tokens
-
-### Colors
+Our color system uses 12-step scales from the @beauginbey/vanilla-colors package:
 
 ```typescript
-import { tokens } from '@beauginbey/vanilla-tokens';
+// Colors are available as CSS variables
+var(--gray-1)  // App background
+var(--gray-7)  // UI element border
+var(--gray-12) // High-contrast text
 
-// Primitive colors
-tokens.color.blue[500]
-tokens.color.gray[100]
-
-// Semantic colors
-tokens.color.background.primary
-tokens.color.text.primary
-tokens.color.brand.primary
+var(--blue-9)  // Solid button background
+var(--blue-10) // Hovered solid background
 ```
+
+Each color step has a specific purpose:
+- Steps 1-5: Backgrounds
+- Steps 6-8: Borders
+- Steps 9-10: Solid colors
+- Steps 11-12: Text
+
+See the [Theming](/theming) page for more details on the color system.
 
 ### Typography
 

@@ -20,6 +20,9 @@
     "dev": "npm run build",
     "clean": "rm -rf build"
   },
+  "dependencies": {
+    "@beauginbey/vanilla-colors": "workspace:*"
+  },
   "devDependencies": {
     "style-dictionary": "^3.9.2"
   },

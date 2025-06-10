@@ -25,22 +25,36 @@ vanilla/
 
 ### 2. Design Tokens (@vanilla/tokens)
 - **Tool**: Style Dictionary
-- **Tokens**: Colors (primitive + semantic), typography, spacing, radii, shadows
+- **Tokens**: Colors (primitive + semantic), typography, spacing, radii, shadows, animations (durations + easings)
 - **Outputs**: CSS variables, JS/TS constants, SCSS variables
 - **Build**: `pnpm build` generates token artifacts
+- **Features**:
+  - Light and dark theme tokens
+  - Animation duration tokens (fast: 150ms, normal: 250ms, slow: 500ms)
+  - Easing function tokens (ease-in-out, ease-out, spring)
+  - Enhanced shadow tokens for depth
+  - Theme-specific semantic colors
 
 ### 3. Component Library (@vanilla/components)
 - **Framework**: React 18 with TypeScript
 - **Styling**: vanilla-extract (zero-runtime CSS-in-JS)
 - **Components**:
   - `Box`: Polymorphic layout component with Sprinkles system
-  - `Button`: 3 variants (solid, outline, ghost), 3 sizes, full accessibility
+  - `Button`: 3 variants (solid, outline, ghost), 3 sizes, full accessibility, hover state fixes
   - `Text`: Typography component with semantic styles
+  - `Input`: Text input with variants (outline, filled, unstyled), error states
+  - `Select`: Dropdown with custom styling and icon
+  - `Checkbox`: Accessible checkbox with custom styling
+  - `Radio`: Radio button with group support
+  - `Switch`: Toggle switch component
+  - `FormField`: Wrapper with label and error handling
 - **Features**: 
   - Polymorphic components (as prop)
   - Full TypeScript support
   - Responsive props
   - WCAG compliant
+  - Dark mode support
+  - Animation tokens integration
 
 ### 4. Documentation
 
@@ -52,9 +66,11 @@ vanilla/
 
 #### Nextra Docs (@vanilla/docs)
 - Full documentation site
-- Live code examples with Sandpack
+- Live code examples with Sandpack (with React 18 JSX runtime fixes)
 - Search functionality
 - Responsive design
+- Dark mode support with theme switcher
+- Interactive component examples
 
 ### 5. Testing & Quality
 - **Unit Tests**: Jest + Testing Library
@@ -111,6 +127,8 @@ pnpm release         # Build and publish packages
 - Storybook: ^7.6.10
 - Nextra: ^2.13.2
 - Jest: ^29.7.0
+- @beauginbey/vanilla-components: 1.1.1 (latest npm)
+- @beauginbey/vanilla-tokens: 1.1.0 (latest npm)
 
 ## Key Design Decisions
 
@@ -164,6 +182,19 @@ pnpm release         # Build and publish packages
   - https://www.npmjs.com/package/@beauginbey/vanilla-components
   - https://www.npmjs.com/package/@beauginbey/vanilla-tokens
 
+## Recent Updates & Fixes
+
+### January 2025
+- **Fixed Sandpack errors** in documentation site by:
+  - Adding TypeScript type definitions to dependencies
+  - Updating React imports for proper JSX runtime support
+  - Including tsconfig.json in Sandpack files
+  - Removing unsupported compilerOptions from customSetup
+- **Published npm updates**:
+  - @beauginbey/vanilla-components@1.1.1: Fixed Button svg background hover state
+  - @beauginbey/vanilla-tokens@1.1.0: Added animation tokens and enhanced shadows
+- **Resolved git sync issues** between local and GitHub repositories
+
 ## Roadmap & Suggested Next Steps
 
 ### Phase 1: Enhanced Styling & Theming (Priority: High)
@@ -185,12 +216,12 @@ pnpm release         # Build and publish packages
 
 ### Phase 2: Component Expansion (Priority: High)
 1. **Form Components**
-   - Input (text, number, email, etc.)
-   - Select
-   - Checkbox
-   - Radio
-   - Switch/Toggle
-   - Form field wrapper with labels and error states
+   - ✓ Input (text, number, email, etc.)
+   - ✓ Select
+   - ✓ Checkbox
+   - ✓ Radio
+   - ✓ Switch/Toggle
+   - ✓ Form field wrapper with labels and error states
 
 2. **Layout Components**
    - Stack (vertical spacing)
@@ -282,3 +313,38 @@ const themes = {
   })
 };
 ```
+
+## Contributing Guidelines Summary (from CONTRIBUTING.md)
+
+### Key Workflow Requirements:
+1. **Before Making Changes**:
+   - Fork from `main` branch
+   - Run `pnpm install` and `pnpm build`
+   - Use Node.js >= 18.0.0 and pnpm >= 8.0.0
+
+2. **When Developing**:
+   - Add tests for new code
+   - Update documentation for API changes
+   - Run `pnpm lint` and `pnpm format`
+   - Run `pnpm type-check` for TypeScript
+   - Create changesets with `pnpm changeset`
+
+3. **Code Standards**:
+   - Follow accessibility guidelines (WCAG compliant)
+   - Use semantic HTML and proper ARIA attributes
+   - Use design tokens for all styling values
+   - Maintain strict TypeScript typing (no `any`)
+   - Write unit tests for all logic
+   - Follow Conventional Commits for messages
+
+4. **Publishing Process**:
+   - Create changeset: `pnpm changeset`
+   - Version packages: `pnpm changeset version`
+   - Build all packages: `pnpm build`
+   - Publish to npm: `npm publish` in each package directory
+
+# important-instruction-reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.

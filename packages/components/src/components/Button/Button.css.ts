@@ -20,7 +20,7 @@ export const button = recipe({
     border: '1px solid transparent',
     outline: 'none',
     ':focus-visible': {
-      boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
+      boxShadow: `0 0 0 2px ${vars.color.blue[8]}`, // Focus ring
       outline: 'none',
     },
     ':active': {
@@ -35,10 +35,11 @@ export const button = recipe({
   variants: {
     variant: {
       solid: {
-        backgroundColor: vars.color.brand.primary,
-        color: vars.color.text.inverse,
+        backgroundColor: vars.color.blue[9], // Solid background
+        color: 'white', // White text on solid colors
         boxShadow: vars.shadow.sm,
         ':hover': {
+          backgroundColor: vars.color.blue[10], // Hover solid
           boxShadow: vars.shadow.md,
           transform: 'translateY(-1px)',
         },
@@ -49,25 +50,29 @@ export const button = recipe({
       },
       outline: {
         backgroundColor: 'transparent',
-        color: vars.color.brand.primary,
-        borderColor: vars.color.brand.primary,
+        color: vars.color.blue[11], // Low-contrast text
+        borderColor: vars.color.blue[7], // UI element border
         boxShadow: 'none',
         ':hover': {
-          borderColor: vars.color.brand.secondary,
+          borderColor: vars.color.blue[8], // Hover border
+          backgroundColor: vars.color.blue[3], // Subtle background on hover
           boxShadow: vars.shadow.sm,
         },
         ':active': {
+          backgroundColor: vars.color.blue[4], // Active background
           boxShadow: 'none',
           transform: 'scale(0.98)',
         },
       },
       ghost: {
         backgroundColor: 'transparent',
-        color: vars.color.text.primary,
+        color: vars.color.gray[12], // High-contrast text
         ':hover': {
+          backgroundColor: vars.color.gray[3], // UI element background
           boxShadow: vars.shadow.xs,
         },
         ':active': {
+          backgroundColor: vars.color.gray[4], // Hover background
           boxShadow: 'none',
         },
       },
