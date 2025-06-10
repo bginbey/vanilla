@@ -13,66 +13,52 @@ This guide will help you get up and running with the Vanilla Design System.
 Install the required packages:
 
 ```bash
-pnpm add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
+pnpm add @beauginbey/vanilla-components @beauginbey/vanilla-tokens @beauginbey/vanilla-colors
 ```
 
 ## Setup
 
 ### 1. Import Global Styles
 
-Import the global styles in your app's entry point:
+Import the global styles and colors in your app's entry point:
 
 ```tsx
 // _app.tsx or App.tsx
 import '@beauginbey/vanilla-components/styles.css';
+import '@beauginbey/vanilla-colors/css';
 ```
 
 ### 2. Apply Theme
 
-Apply a theme class to your application root. Vanilla includes two themes:
-- **light**: A clean, modern theme with neutral colors
-- **cream**: An Uber-inspired minimal theme with warm cream tones
-
-The theme class should be applied to the document root (`<html>`) or body element for proper CSS variable scoping:
+Apply the theme class to your application root:
 
 ```tsx
-import { light, cream } from '@beauginbey/vanilla-components';
-import { useEffect } from 'react';
+import { theme } from '@beauginbey/vanilla-components';
 
 function App() {
-  // Choose your theme
-  const theme = light; // or cream
-  
-  useEffect(() => {
-    // Apply theme to document root
-    document.documentElement.className = theme;
-  }, [theme]);
-  
   return (
-    <div>
+    <div className={theme}>
       {/* Your app content */}
     </div>
   );
 }
 ```
 
-Alternatively, for Next.js apps, you can apply it in your `_app.tsx`:
+### 3. Dark Mode (Optional)
+
+To enable dark mode, add the `.dark` class to your document:
 
 ```tsx
-import { light, cream } from '@beauginbey/vanilla-components';
+// Enable dark mode
+document.documentElement.classList.add('dark');
 
-export default function App({ Component, pageProps }: AppProps) {
-  const theme = light; // or cream
-  
-  useEffect(() => {
-    document.documentElement.className = theme;
-  }, [theme]);
-  
-  return <Component {...pageProps} />;
+// Or toggle based on user preference
+function toggleDarkMode() {
+  document.documentElement.classList.toggle('dark');
 }
 ```
 
-### 3. Use Components
+### 4. Use Components
 
 Start using the components in your application:
 

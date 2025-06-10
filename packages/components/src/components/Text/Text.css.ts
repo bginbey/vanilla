@@ -58,15 +58,15 @@ export const text = recipe({
       bold: { fontWeight: vars.font.weight.bold },
     },
     color: {
-      primary: { color: vars.color.text.primary },
-      secondary: { color: vars.color.text.secondary },
-      tertiary: { color: vars.color.text.tertiary },
-      inverse: { color: vars.color.text.inverse },
-      brand: { color: vars.color.brand.primary },
-      success: { color: vars.color.feedback.success },
-      warning: { color: vars.color.feedback.warning },
-      error: { color: vars.color.feedback.error },
-      info: { color: vars.color.feedback.info },
+      primary: { color: vars.color.gray[12] }, // High-contrast text
+      secondary: { color: vars.color.gray[11] }, // Low-contrast text
+      tertiary: { color: vars.color.gray[10] }, // Lower contrast
+      inverse: { color: 'white' }, // For dark backgrounds
+      brand: { color: vars.color.blue[11] }, // Low-contrast brand
+      success: { color: vars.color.green[11] }, // Low-contrast success
+      warning: { color: vars.color.yellow[11] }, // Low-contrast warning
+      error: { color: vars.color.red[11] }, // Low-contrast error
+      info: { color: vars.color.blue[11] }, // Low-contrast info
     },
     align: {
       left: { textAlign: 'left' },
@@ -96,7 +96,7 @@ export const text = recipe({
       },
       code: {
         fontFamily: vars.font.family.mono,
-        backgroundColor: vars.color.background.secondary,
+        backgroundColor: vars.color.gray[3], // UI element background
         padding: `${vars.spacing[1]} ${vars.spacing[2]}`,
         borderRadius: vars.radius.sm,
         fontSize: '0.9em',

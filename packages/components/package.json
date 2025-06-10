@@ -1,6 +1,6 @@
 {
   "name": "@beauginbey/vanilla-components",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React component library for Vanilla Design System",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -40,6 +40,7 @@
     "@vanilla-extract/esbuild-plugin": "^2.3.16",
     "@vanilla-extract/vite-plugin": "^3.9.5",
     "@beauginbey/vanilla-tokens": "workspace:*",
+    "@beauginbey/vanilla-colors": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsup": "^8.0.1",

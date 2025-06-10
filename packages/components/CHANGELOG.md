@@ -1,5 +1,11 @@
 # @beauginbey/vanilla-components
 
+## 1.1.1
+
+### Patch Changes
+
+- Fix Button component svg background on hover state
+
 ## 1.1.0
 
 ### Minor Changes

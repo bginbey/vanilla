@@ -1,276 +1,160 @@
 # Theming
 
-Vanilla Design System includes a powerful theming system with smooth animations, CSS custom properties, and built-in dark mode support. We provide three built-in themes and a ThemeProvider component for easy theme management.
+Vanilla Design System includes a powerful theming system with CSS custom properties and built-in dark mode support. The theme automatically adapts between light and dark modes using the Radix UI Colors approach.
 
-## Built-in Themes
+## Color System
 
-### Light Theme
-A clean, modern theme with neutral colors and excellent readability.
+Our color system is based on 12-step scales inspired by Radix UI Colors. Each color has a specific purpose:
 
-### Cream Theme
-An Uber-inspired minimal theme with warm cream tones and high contrast.
+### Background Colors (Steps 1-5)
+- **Step 1**: App background
+- **Step 2**: Subtle background
+- **Step 3**: UI element background
+- **Step 4**: Hovered UI element background
+- **Step 5**: Active/selected UI element background
 
-### Dark Theme
-A sophisticated dark theme with carefully selected colors for reduced eye strain.
+### Border Colors (Steps 6-8)
+- **Step 6**: Subtle borders and separators
+- **Step 7**: UI element border and focus rings
+- **Step 8**: Hovered UI element border
 
-## Using ThemeProvider
+### Solid Colors (Steps 9-10)
+- **Step 9**: Solid backgrounds (buttons, badges)
+- **Step 10**: Hovered solid backgrounds
 
-The easiest way to implement theming is with our `ThemeProvider` component:
+### Text Colors (Steps 11-12)
+- **Step 11**: Low-contrast text
+- **Step 12**: High-contrast text
+
+## Dark Mode
+
+Dark mode is automatically enabled when the `.dark` class is applied to the document:
 
 ```tsx
-import { ThemeProvider, Button, Box, Text } from '@beauginbey/vanilla-components';
+// Enable dark mode
+document.documentElement.classList.add('dark');
 
-function App() {
-  return (
-    <ThemeProvider defaultTheme="light">
-      <Box backgroundColor="primary" minHeight="100vh">
-        <Text>Your app content with automatic theming</Text>
-        <Button>Themed button</Button>
-      </Box>
-    </ThemeProvider>
-  );
-}
+// Disable dark mode
+document.documentElement.classList.remove('dark');
 ```
 
-## Theme Switching with useTheme Hook
+## Implementing Theme Switching
+
+Here's a simple theme switcher implementation:
 
 ```tsx
-import { ThemeProvider, useTheme, Button } from '@beauginbey/vanilla-components';
-
-function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
-  
-  return (
-    <div>
-      <Button onClick={() => setTheme('light')} variant={theme === 'light' ? 'solid' : 'outline'}>
-        Light
-      </Button>
-      <Button onClick={() => setTheme('cream')} variant={theme === 'cream' ? 'solid' : 'outline'}>
-        Cream
-      </Button>
-      <Button onClick={() => setTheme('dark')} variant={theme === 'dark' ? 'solid' : 'outline'}>
-        Dark
-      </Button>
-    </div>
-  );
-}
-
-function App() {
-  return (
-    <ThemeProvider defaultTheme="light" storageKey="my-app-theme">
-      <ThemeSwitcher />
-      {/* Your app content */}
-    </ThemeProvider>
-  );
-}
-```
-
-## Manual Theme Application
-
-If you prefer not to use ThemeProvider, you can apply themes manually:
-
-```tsx
-import { light, cream, dark } from '@beauginbey/vanilla-components';
-
-function App() {
-  return (
-    <div className={dark}>
-      {/* Your app content */}
-    </div>
-  );
-}
-```
-
-## Theme Switching
-
-You can implement theme switching in your application:
-
-```tsx
-import { light, cream } from '@beauginbey/vanilla-components';
+import { Button, Box, Text } from '@beauginbey/vanilla-components';
 import { useState, useEffect } from 'react';
 
-function App() {
-  const [theme, setTheme] = useState('light');
-
+function ThemeSwitcher() {
+  const [isDark, setIsDark] = useState(false);
+  
   useEffect(() => {
-    // Apply theme to document root for proper CSS variable scoping
-    const themeClass = theme === 'cream' ? cream : light;
-    document.documentElement.className = themeClass;
-  }, [theme]);
-
+    // Check if dark mode is currently active
+    setIsDark(document.documentElement.classList.contains('dark'));
+  }, []);
+  
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'cream' : 'light');
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    
+    if (newIsDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
   };
-
+  
   return (
-    <>
-      <button onClick={toggleTheme}>
-        Switch to {theme === 'light' ? 'Cream' : 'Light'} Theme
-      </button>
-      {/* Your app content */}
-    </>
+    <Button onClick={toggleTheme}>
+      {isDark ? 'Light' : 'Dark'} Mode
+    </Button>
   );
 }
 ```
 
-## Theme Structure
+## Setup in Your App
 
-Each theme defines values for all design tokens, including our new animation system:
+1. Import the CSS files:
 
-```typescript
-{
-  color: {
-    background: { primary, secondary, tertiary },
-    text: { primary, secondary, tertiary, inverse },
-    border: { primary, secondary },
-    brand: { primary, secondary },
-    feedback: { success, warning, error, info },
-  },
-  font: {
-    family: { sans, mono },
-    size: { xs, sm, base, lg, xl, '2xl', '3xl', '4xl', '5xl' },
-    weight: { normal, medium, semibold, bold },
-    lineHeight: { tight, normal, relaxed },
-    letterSpacing: { tight, normal, wide },
-  },
-  spacing: { 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24 },
-  radius: { none, sm, base, md, lg, xl, '2xl', full },
-  shadow: { xs, sm, base, md, lg, xl, none },
-  // New animation tokens
-  duration: {
-    instant: '0ms',
-    fast: '150ms',
-    normal: '250ms',
-    slow: '400ms',
-    slowest: '600ms',
-  },
-  easing: {
-    linear: 'linear',
-    easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
-    easeOut: 'cubic-bezier(0, 0, 0.2, 1)',
-    easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-    smooth: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
-  },
-  transition: {
-    property: {
-      none: 'none',
-      all: 'all',
-      colors: 'color, background-color, border-color, ...',
-      opacity: 'opacity',
-      shadow: 'box-shadow',
-      transform: 'transform',
-      common: 'color, background-color, border-color, box-shadow, transform, opacity',
-    },
-  },
+```tsx
+import '@beauginbey/vanilla-components/styles.css';
+import '@beauginbey/vanilla-colors/css';
+```
+
+2. Apply the theme class:
+
+```tsx
+import { theme } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <div className={theme}>
+      {/* Your app content */}
+    </div>
+  );
 }
 ```
 
-## Animation System
+## Available Color Scales
 
-All components now use consistent animation tokens for smooth transitions:
+The system includes several pre-defined color scales:
 
-```tsx
-// Using animation tokens in your styles
-import { vars } from '@beauginbey/vanilla-components';
+### Neutrals
+- `gray` - Default neutral scale
 
-const myStyles = {
-  transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
-  ':hover': {
-    transform: 'scale(1.05)',
-  },
-};
-```
+### Colors
+- `blue` - Primary brand color
+- `green` - Success states
+- `red` - Error/danger states
+- `yellow` - Warning states
+- `orange` - Alternative accent
+- `purple` - Secondary accent
 
-### Motion Preferences
-
-The system automatically respects user motion preferences:
+### Using Colors in CSS
 
 ```css
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+.component {
+  background: var(--gray-1);
+  color: var(--gray-12);
+  border: 1px solid var(--gray-7);
+}
+
+.button-primary {
+  background: var(--blue-9);
+  color: white;
+}
+
+.button-primary:hover {
+  background: var(--blue-10);
 }
 ```
 
-## Creating Custom Themes
+## Animation Tokens
 
-You can create your own themes using vanilla-extract:
-
-```tsx
-import { createTheme } from '@vanilla-extract/css';
-import { vars } from '@beauginbey/vanilla-components';
-
-export const myTheme = createTheme(vars, {
-  color: {
-    background: {
-      primary: '#1a1a1a',
-      secondary: '#2d2d2d',
-      tertiary: '#404040',
-    },
-    text: {
-      primary: '#ffffff',
-      secondary: '#e0e0e0',
-      tertiary: '#b0b0b0',
-      inverse: '#000000',
-    },
-    // ... rest of color tokens
-  },
-  // ... other token categories
-});
-```
-
-## Theme Requirements
-
-When creating a custom theme, you must provide values for ALL tokens defined in the theme contract. This ensures consistency across all components.
-
-### Required Token Categories:
-1. **Colors**: All background, text, border, brand, and feedback colors
-2. **Typography**: Font families, sizes, weights, line heights, and letter spacing
-3. **Spacing**: Complete spacing scale (0-24)
-4. **Border Radius**: All radius values
-5. **Shadows**: All shadow definitions
-
-## Best Practices
-
-1. **Apply themes at the root level** - Use `document.documentElement` for proper CSS variable cascading
-2. **Test all components** - Ensure your custom theme works with all components
-3. **Maintain contrast ratios** - Follow WCAG guidelines for text contrast
-4. **Consider context** - Different themes may be appropriate for different parts of your app
-5. **Persist user preference** - Save theme selection to localStorage
-
-## CSS Variables
-
-Themes work by setting CSS custom properties. You can inspect these in your browser's DevTools:
+The theme also includes animation tokens for consistent motion:
 
 ```css
-:root {
-  --color-background-primary: #fcfbf4;
-  --color-text-primary: #000000;
-  --spacing-4: 1rem;
-  /* ... and many more */
+.component {
+  transition: all var(--animation-duration-normal) var(--animation-easing-standard);
 }
+
+/* Available durations */
+--animation-duration-fast: 150ms;
+--animation-duration-normal: 300ms;
+--animation-duration-slow: 500ms;
+
+/* Available easings */
+--animation-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+--animation-easing-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+--animation-easing-smooth: cubic-bezier(0.4, 0, 0.1, 1);
 ```
 
-## Server-Side Rendering
+## Accessibility
 
-For SSR applications, prevent flash of unstyled content:
-
-```tsx
-// In your _document.tsx or equivalent
-<Html>
-  <Head>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-          const theme = localStorage.getItem('theme') || 'light';
-          document.documentElement.className = theme;
-        `,
-      }}
-    />
-  </Head>
-  <body>{/* ... */}</body>
-</Html>
-```
+All color combinations are designed to meet WCAG accessibility standards:
+- Text colors have sufficient contrast against their intended backgrounds
+- Interactive elements have clear hover and focus states
+- The system respects `prefers-reduced-motion` for animations

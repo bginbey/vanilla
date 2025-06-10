@@ -14,7 +14,7 @@ export const labelStyles = recipe({
     fontSize: vars.font.size.sm,
     fontWeight: vars.font.weight.medium,
     lineHeight: vars.font.lineHeight.normal,
-    color: vars.color.text.primary,
+    color: vars.color.gray[12],
     cursor: 'default',
     
     selectors: {
@@ -43,7 +43,7 @@ export const helperTextStyles = recipe({
   base: {
     fontSize: vars.font.size.sm,
     lineHeight: vars.font.lineHeight.relaxed,
-    color: vars.color.text.secondary,
+    color: vars.color.gray[11],
     margin: 0,
     marginTop: vars.spacing[1],
   },
@@ -65,7 +65,7 @@ export const helperTextStyles = recipe({
 export const errorTextStyles = style({
   fontSize: vars.font.size.sm,
   lineHeight: vars.font.lineHeight.relaxed,
-  color: vars.color.feedback.error,
+  color: vars.color.red[11],
   margin: 0,
   marginTop: vars.spacing[1],
   display: 'flex',

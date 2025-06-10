@@ -71,29 +71,29 @@ export const trackStyles = recipe({
   base: {
     position: 'absolute',
     inset: 0,
-    backgroundColor: vars.color.background.tertiary,
+    backgroundColor: vars.color.gray[4],
     borderRadius: vars.radius.full,
-    border: `2px solid ${vars.color.border.primary}`,
+    border: `2px solid ${vars.color.gray[7]}`,
     transition: `${vars.transition.property.common} ${vars.duration.normal} ${vars.easing.easeInOut}`,
     overflow: 'hidden',
     
     selectors: {
       [`${inputStyles}:hover:not(:disabled) + &`]: {
-        borderColor: vars.color.border.secondary,
+        borderColor: vars.color.gray[8],
       },
       
       [`${inputStyles}:focus-visible + &`]: {
-        boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
+        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`,
       },
       
       [`${inputStyles}:checked + &`]: {
-        backgroundColor: vars.color.brand.primary,
-        borderColor: vars.color.brand.primary,
+        backgroundColor: vars.color.blue[9],
+        borderColor: vars.color.blue[9],
       },
       
       [`${inputStyles}:checked:hover:not(:disabled) + &`]: {
-        backgroundColor: vars.color.brand.secondary,
-        borderColor: vars.color.brand.secondary,
+        backgroundColor: vars.color.blue[10],
+        borderColor: vars.color.blue[10],
       },
     },
   },
@@ -107,20 +107,20 @@ export const trackStyles = recipe({
     
     error: {
       true: {
-        borderColor: vars.color.feedback.error,
+        borderColor: vars.color.red[8],
         
         selectors: {
           [`${inputStyles}:hover:not(:disabled) + &`]: {
-            borderColor: vars.color.feedback.error,
+            borderColor: vars.color.red[8],
           },
           
           [`${inputStyles}:focus-visible + &`]: {
-            boxShadow: `0 0 0 2px ${vars.color.feedback.error}`,
+            boxShadow: `0 0 0 2px ${vars.color.red[8]}`,
           },
           
           [`${inputStyles}:checked + &`]: {
-            backgroundColor: vars.color.feedback.error,
-            borderColor: vars.color.feedback.error,
+            backgroundColor: vars.color.red[9],
+            borderColor: vars.color.red[9],
           },
         },
       },
@@ -134,7 +134,7 @@ export const trackStyles = recipe({
         
         selectors: {
           [`${inputStyles}:disabled + &`]: {
-            backgroundColor: vars.color.background.secondary,
+            backgroundColor: vars.color.gray[3],
           },
         },
       },
@@ -152,7 +152,7 @@ export const trackStyles = recipe({
 export const thumbStyles = recipe({
   base: {
     position: 'absolute',
-    backgroundColor: vars.color.background.primary,
+    backgroundColor: vars.color.gray[1],
     borderRadius: vars.radius.full,
     boxShadow: vars.shadow.sm,
     transition: `transform ${vars.duration.normal} ${vars.easing.easeInOut}`,
@@ -161,7 +161,7 @@ export const thumbStyles = recipe({
     
     selectors: {
       [`${inputStyles}:checked ~ ${trackStyles.classNames.base} &`]: {
-        backgroundColor: vars.color.text.inverse,
+        backgroundColor: 'white',
       },
     },
   },
@@ -218,7 +218,7 @@ export const labelStyles = recipe({
     userSelect: 'none',
     fontSize: vars.font.size.md,
     lineHeight: vars.font.lineHeight.normal,
-    color: vars.color.text.primary,
+    color: vars.color.gray[12],
   },
   
   variants: {

@@ -1,5 +1,11 @@
 # @beauginbey/vanilla-tokens
 
+## 1.1.0
+
+### Minor Changes
+
+- Add animation tokens (durations and easings), enhance shadow tokens, and add theme-specific token variations
+
 ## 1.0.0
 
 ### Major Changes

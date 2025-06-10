@@ -1,6 +1,6 @@
 {
   "name": "@beauginbey/vanilla-storybook",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "Storybook documentation for Vanilla Design System",
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "@beauginbey/vanilla-components": "workspace:*",
     "@beauginbey/vanilla-tokens": "workspace:*",
+    "@beauginbey/vanilla-colors": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

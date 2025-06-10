@@ -1,6 +1,6 @@
 {
   "name": "@beauginbey/vanilla-tokens",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Design tokens for Vanilla Design System",
   "main": "./build/js/tokens.js",
   "types": "./build/js/tokens.d.ts",
@@ -19,6 +19,9 @@
     "build": "style-dictionary build",
     "dev": "npm run build",
     "clean": "rm -rf build"
+  },
+  "dependencies": {
+    "@beauginbey/vanilla-colors": "workspace:*"
   },
   "devDependencies": {
     "style-dictionary": "^3.9.2"

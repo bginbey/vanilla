@@ -48,11 +48,74 @@ const responsiveProperties = defineProperties({
   },
 });
 
+// Create color objects from scales
+const createColorObject = (scale: typeof vars.color.gray) => ({
+  1: scale[1],
+  2: scale[2],
+  3: scale[3],
+  4: scale[4],
+  5: scale[5],
+  6: scale[6],
+  7: scale[7],
+  8: scale[8],
+  9: scale[9],
+  10: scale[10],
+  11: scale[11],
+  12: scale[12],
+});
+
 const colorProperties = defineProperties({
   properties: {
-    color: vars.color.text,
-    backgroundColor: vars.color.background,
-    borderColor: vars.color.border,
+    color: {
+      ...createColorObject(vars.color.gray),
+      white: 'white',
+      black: 'black',
+      transparent: 'transparent',
+      // Add other color scales for text
+      blue11: vars.color.blue[11],
+      blue12: vars.color.blue[12],
+      green11: vars.color.green[11],
+      green12: vars.color.green[12],
+      red11: vars.color.red[11],
+      red12: vars.color.red[12],
+      yellow11: vars.color.yellow[11],
+      yellow12: vars.color.yellow[12],
+    },
+    backgroundColor: {
+      ...createColorObject(vars.color.gray),
+      transparent: 'transparent',
+      // Add solid colors for backgrounds
+      blue9: vars.color.blue[9],
+      blue10: vars.color.blue[10],
+      green9: vars.color.green[9],
+      green10: vars.color.green[10],
+      red9: vars.color.red[9],
+      red10: vars.color.red[10],
+      yellow9: vars.color.yellow[9],
+      yellow10: vars.color.yellow[10],
+      orange9: vars.color.orange[9],
+      orange10: vars.color.orange[10],
+      purple9: vars.color.purple[9],
+      purple10: vars.color.purple[10],
+      // Add alpha variants for overlays
+      grayA3: vars.color.grayA[3],
+      grayA6: vars.color.grayA[6],
+      blackA3: vars.color.blackA[3],
+      blackA6: vars.color.blackA[6],
+      whiteA3: vars.color.whiteA[3],
+      whiteA6: vars.color.whiteA[6],
+    },
+    borderColor: {
+      ...createColorObject(vars.color.gray),
+      transparent: 'transparent',
+      // Add other border colors
+      blue7: vars.color.blue[7],
+      blue8: vars.color.blue[8],
+      green7: vars.color.green[7],
+      green8: vars.color.green[8],
+      red7: vars.color.red[7],
+      red8: vars.color.red[8],
+    },
   },
 });
 
@@ -71,7 +134,7 @@ const layoutProperties = defineProperties({
     opacity: [0, 0.5, 1],
     cursor: ['pointer', 'default', 'not-allowed', 'wait', 'text', 'move', 'grab', 'grabbing'],
     userSelect: ['none', 'text', 'all', 'auto'],
-    border: ['none', `1px solid ${vars.color.border.primary}`],
+    border: ['none', `1px solid ${vars.color.gray[7]}`],
   },
 });
 

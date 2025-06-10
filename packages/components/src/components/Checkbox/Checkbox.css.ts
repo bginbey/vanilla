@@ -43,36 +43,36 @@ export const iconStyles = recipe({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: vars.color.background.primary,
-    border: `2px solid ${vars.color.border.primary}`,
+    backgroundColor: vars.color.gray[1], // App background
+    border: `2px solid ${vars.color.gray[7]}`, // UI element border
     transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
     color: 'transparent',
     pointerEvents: 'none',
     
     selectors: {
       [`${inputStyles}:hover:not(:disabled) + &`]: {
-        borderColor: vars.color.brand.primary,
+        borderColor: vars.color.blue[8], // Hover border
       },
       
       [`${inputStyles}:focus-visible + &`]: {
-        boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
+        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`, // Focus ring
       },
       
       [`${inputStyles}:checked + &`]: {
-        backgroundColor: vars.color.brand.primary,
-        borderColor: vars.color.brand.primary,
-        color: vars.color.text.inverse,
+        backgroundColor: vars.color.blue[9], // Solid color
+        borderColor: vars.color.blue[9],
+        color: 'white', // White on solid
       },
       
       [`${inputStyles}:checked:hover:not(:disabled) + &`]: {
-        backgroundColor: vars.color.brand.secondary,
-        borderColor: vars.color.brand.secondary,
+        backgroundColor: vars.color.blue[10], // Hover solid
+        borderColor: vars.color.blue[10],
       },
       
       [`${inputStyles}:indeterminate + &`]: {
-        backgroundColor: vars.color.brand.primary,
-        borderColor: vars.color.brand.primary,
-        color: vars.color.text.inverse,
+        backgroundColor: vars.color.blue[9], // Solid color
+        borderColor: vars.color.blue[9],
+        color: 'white',
       },
     },
   },
@@ -89,20 +89,20 @@ export const iconStyles = recipe({
     
     error: {
       true: {
-        borderColor: vars.color.feedback.error,
+        borderColor: vars.color.red[7], // Error border
         
         selectors: {
           [`${inputStyles}:hover:not(:disabled) + &`]: {
-            borderColor: vars.color.feedback.error,
+            borderColor: vars.color.red[8], // Error hover
           },
           
           [`${inputStyles}:focus-visible + &`]: {
-            boxShadow: `0 0 0 2px ${vars.color.feedback.error}`,
+            boxShadow: `0 0 0 2px ${vars.color.red[8]}`, // Error focus
           },
           
           [`${inputStyles}:checked + &`]: {
-            backgroundColor: vars.color.feedback.error,
-            borderColor: vars.color.feedback.error,
+            backgroundColor: vars.color.red[9], // Error solid
+            borderColor: vars.color.red[9],
           },
         },
       },
@@ -116,7 +116,7 @@ export const iconStyles = recipe({
         
         selectors: {
           [`${inputStyles}:disabled + &`]: {
-            backgroundColor: vars.color.background.secondary,
+            backgroundColor: vars.color.gray[2], // Subtle background
           },
         },
       },
@@ -140,7 +140,7 @@ export const labelStyles = recipe({
     userSelect: 'none',
     fontSize: vars.font.size.md,
     lineHeight: vars.font.lineHeight.normal,
-    color: vars.color.text.primary,
+    color: vars.color.gray[12], // High-contrast text
   },
   
   variants: {

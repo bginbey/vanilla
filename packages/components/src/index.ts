@@ -11,7 +11,7 @@ export * from './components/Switch';
 export * from './components/FormField';
 
 // Styles
-export { vars, light, cream, dark } from './styles/theme.css';
+export { vars, theme } from './styles/theme.css';
 export { sprinkles } from './styles/sprinkles.css';
 export type { Sprinkles } from './styles/sprinkles.css';
 

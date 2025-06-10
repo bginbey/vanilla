@@ -32,8 +32,8 @@ export const indicatorStyles = recipe({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: vars.color.background.primary,
-    border: `2px solid ${vars.color.border.primary}`,
+    backgroundColor: vars.color.gray[1],
+    border: `2px solid ${vars.color.gray[7]}`,
     borderRadius: vars.radius.full,
     transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
     
@@ -43,23 +43,23 @@ export const indicatorStyles = recipe({
       width: '8px',
       height: '8px',
       borderRadius: vars.radius.full,
-      backgroundColor: vars.color.text.inverse,
+      backgroundColor: 'white',
       transform: 'scale(0)',
       transition: `transform ${vars.duration.fast} ${vars.easing.easeInOut}`,
     },
     
     selectors: {
       [`${inputStyles}:hover:not(:disabled) + &`]: {
-        borderColor: vars.color.brand.primary,
+        borderColor: vars.color.blue[8],
       },
       
       [`${inputStyles}:focus-visible + &`]: {
-        boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
+        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`,
       },
       
       [`${inputStyles}:checked + &`]: {
-        backgroundColor: vars.color.brand.primary,
-        borderColor: vars.color.brand.primary,
+        backgroundColor: vars.color.blue[9],
+        borderColor: vars.color.blue[8],
       },
       
       [`${inputStyles}:checked + &::after`]: {
@@ -67,8 +67,8 @@ export const indicatorStyles = recipe({
       },
       
       [`${inputStyles}:checked:hover:not(:disabled) + &`]: {
-        backgroundColor: vars.color.brand.secondary,
-        borderColor: vars.color.brand.secondary,
+        backgroundColor: vars.color.blue[10],
+        borderColor: vars.color.blue[10],
       },
     },
   },
@@ -76,20 +76,20 @@ export const indicatorStyles = recipe({
   variants: {
     error: {
       true: {
-        borderColor: vars.color.feedback.error,
+        borderColor: vars.color.red[8],
         
         selectors: {
           [`${inputStyles}:hover:not(:disabled) + &`]: {
-            borderColor: vars.color.feedback.error,
+            borderColor: vars.color.red[8],
           },
           
           [`${inputStyles}:focus-visible + &`]: {
-            boxShadow: `0 0 0 2px ${vars.color.feedback.error}`,
+            boxShadow: `0 0 0 2px ${vars.color.red[8]}`,
           },
           
           [`${inputStyles}:checked + &`]: {
-            backgroundColor: vars.color.feedback.error,
-            borderColor: vars.color.feedback.error,
+            backgroundColor: vars.color.red[9],
+            borderColor: vars.color.red[9],
           },
         },
       },
@@ -103,7 +103,7 @@ export const indicatorStyles = recipe({
         
         selectors: {
           [`${inputStyles}:disabled + &`]: {
-            backgroundColor: vars.color.background.secondary,
+            backgroundColor: vars.color.gray[3],
           },
         },
       },
@@ -126,7 +126,7 @@ export const labelStyles = recipe({
     userSelect: 'none',
     fontSize: vars.font.size.md,
     lineHeight: vars.font.lineHeight.normal,
-    color: vars.color.text.primary,
+    color: vars.color.gray[12],
   },
   
   variants: {

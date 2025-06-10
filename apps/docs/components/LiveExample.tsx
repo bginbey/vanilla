@@ -92,11 +92,6 @@ if (container) {
               ...defaultDependencies,
               ...dependencies,
             },
-            compilerOptions: {
-              jsx: "react-jsx",
-              esModuleInterop: true,
-              allowSyntheticDefaultImports: true,
-            },
           }}
           theme={sandpackDark}
         />
