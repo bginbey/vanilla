@@ -1,0 +1,279 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Input
+
+A flexible input component supporting different types and styles.
+
+<LiveExample
+  code={`import { Input, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Input placeholder="Default input" />
+      
+      <Input variant="filled" placeholder="Filled variant" />
+      
+      <Input variant="unstyled" placeholder="Unstyled variant" />
+      
+      <Box display="flex" gap={2}>
+        <Input size="sm" placeholder="Small" />
+        <Input size="md" placeholder="Medium" />
+        <Input size="lg" placeholder="Large" />
+      </Box>
+      
+      <Input type="email" placeholder="Email address" />
+      <Input type="password" placeholder="Password" />
+      <Input disabled placeholder="Disabled input" />
+      <Input error placeholder="Input with error" />
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `variant` - Visual style: `outline`, `filled`, or `unstyled`
+- `size` - Input size: `sm`, `md`, or `lg`
+- `error` - Show error state
+- `disabled` - Disable the input
+- All standard HTML input attributes
+
+## Variants
+
+<LiveExample
+  code={`import { Input, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Outline (Default)</Text>
+        <Input variant="outline" placeholder="Enter text..." />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Filled</Text>
+        <Input variant="filled" placeholder="Enter text..." />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Unstyled</Text>
+        <Input variant="unstyled" placeholder="Enter text..." />
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Input Types
+
+<LiveExample
+  code={`import { Input, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={1}>Text</Text>
+        <Input type="text" placeholder="Enter text" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={1}>Email</Text>
+        <Input type="email" placeholder="user@example.com" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={1}>Password</Text>
+        <Input type="password" placeholder="Enter password" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={1}>Number</Text>
+        <Input type="number" placeholder="123" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={1}>Date</Text>
+        <Input type="date" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={1}>Search</Text>
+        <Input type="search" placeholder="Search..." />
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## States
+
+<LiveExample
+  code={`import { Input, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [value, setValue] = useState('');
+  const hasError = value.length > 0 && value.length < 3;
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Interactive State</Text>
+        <Input 
+          placeholder="Type at least 3 characters"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          error={hasError}
+        />
+        {hasError && (
+          <Text size="sm" color="error" mt={1}>
+            Input must be at least 3 characters
+          </Text>
+        )}
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Error State</Text>
+        <Input error placeholder="This field has an error" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <Input disabled placeholder="Disabled input" value="Cannot edit" />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Read Only</Text>
+        <Input readOnly value="Read only value" />
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## With Form Field
+
+Inputs work great with the FormField component for labels and helper text:
+
+<LiveExample
+  code={`import { Input, FormField, Box } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <FormField
+        label="Email Address"
+        helper="We'll never share your email"
+        required
+      >
+        <Input 
+          type="email" 
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </FormField>
+      
+      <FormField
+        label="Password"
+        helper="Must be at least 8 characters"
+        required
+      >
+        <Input 
+          type="password" 
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </FormField>
+      
+      <FormField
+        label="Website"
+        helper="Optional field"
+      >
+        <Input 
+          type="url" 
+          placeholder="https://example.com"
+        />
+      </FormField>
+    </Box>
+  );
+}`}
+/>
+
+## Controlled vs Uncontrolled
+
+<LiveExample
+  code={`import { Input, Box, Text, Button } from '@beauginbey/vanilla-components';
+import { useState, useRef } from 'react';
+
+export default function App() {
+  // Controlled
+  const [controlledValue, setControlledValue] = useState('');
+  
+  // Uncontrolled
+  const uncontrolledRef = useRef(null);
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Controlled Input</Text>
+        <Input 
+          value={controlledValue}
+          onChange={(e) => setControlledValue(e.target.value)}
+          placeholder="Controlled input"
+        />
+        <Text size="sm" color="secondary" mt={1}>
+          Value: {controlledValue}
+        </Text>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Uncontrolled Input</Text>
+        <Input 
+          ref={uncontrolledRef}
+          defaultValue="Default value"
+          placeholder="Uncontrolled input"
+        />
+        <Button 
+          size="sm" 
+          variant="outline" 
+          mt={2}
+          onClick={() => {
+            if (uncontrolledRef.current) {
+              alert(uncontrolledRef.current.value);
+            }
+          }}
+        >
+          Get Value
+        </Button>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Input component is fully typed:
+
+```typescript
+import { Input, InputProps } from '@beauginbey/vanilla-components';
+
+// Custom input component
+const EmailInput = (props: InputProps) => {
+  return <Input type="email" {...props} />;
+};
+
+// With specific constraints
+const PasswordInput = (props: Omit<InputProps, 'type'>) => {
+  return <Input type="password" {...props} />;
+};
+```

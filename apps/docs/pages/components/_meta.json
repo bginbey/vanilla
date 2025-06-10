@@ -1,0 +1,13 @@
+{
+  "box": "Box",
+  "button": "Button",
+  "checkbox": "Checkbox",
+  "form-field": "FormField",
+  "icon": "Icon",
+  "icon-button": "IconButton",
+  "input": "Input",
+  "radio": "Radio",
+  "select": "Select",
+  "switch": "Switch",
+  "text": "Text"
+}

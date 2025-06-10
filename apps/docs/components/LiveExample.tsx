@@ -1,16 +1,16 @@
 import { Sandpack } from '@codesandbox/sandpack-react';
-import { sandpackDark } from '@codesandbox/sandpack-themes';
+import { sandpackDark, githubLight } from '@codesandbox/sandpack-themes';
+import { useTheme } from 'nextra-theme-docs';
 
 interface LiveExampleProps {
   code: string;
   showCode?: boolean;
   dependencies?: Record<string, string>;
-  theme?: 'light' | 'cream';
 }
 
 const defaultDependencies = {
-  '@beauginbey/vanilla-components': '1.1.0',
-  '@beauginbey/vanilla-tokens': '1.0.0',
+  '@beauginbey/vanilla-components': '1.3.0',
+  '@beauginbey/vanilla-tokens': '1.1.1',
   'react': '18.2.0',
   'react-dom': '18.2.0',
   '@types/react': '18.2.48',
@@ -20,9 +20,12 @@ const defaultDependencies = {
 export function LiveExample({ 
   code, 
   showCode = true,
-  dependencies = {},
-  theme = 'light' 
+  dependencies = {}
 }: LiveExampleProps) {
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const isDark = currentTheme === 'dark';
+  
   // Ensure code is a string and not undefined
   if (!code || typeof code !== 'string') {
     console.error('LiveExample: Invalid code prop', code);
@@ -33,19 +36,28 @@ export function LiveExample({
     '/App.tsx': code.trim(),
     '/index.tsx': `import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { light, cream } from '@beauginbey/vanilla-components';
+import { theme, Box } from '@beauginbey/vanilla-components';
 import App from './App';
 
 // Apply theme class to root element
-const themeClass = ${theme === 'cream' ? 'cream' : 'light'};
-document.documentElement.className = themeClass;
+document.documentElement.className = theme;
+${isDark ? `document.documentElement.classList.add('dark');` : ''}
+
+// Add wrapper with padding
+function AppWrapper() {
+  return (
+    <Box p={4}>
+      <App />
+    </Box>
+  );
+}
 
 const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
   root.render(
     <StrictMode>
-      <App />
+      <AppWrapper />
     </StrictMode>
   );
 }`,
@@ -84,8 +96,12 @@ if (container) {
             showConsoleButton: true,
             editorHeight: 400,
             externalResources: [
-              'https://unpkg.com/@beauginbey/vanilla-components@1.1.0/dist/index.css'
+              'https://unpkg.com/@beauginbey/vanilla-colors@0.1.0/dist/index.css',
+              'https://unpkg.com/@beauginbey/vanilla-components@1.3.0/dist/index.css'
             ],
+          }}
+          style={{
+            '--sp-preview-padding': '16px',
           }}
           customSetup={{
             dependencies: {
@@ -93,7 +109,7 @@ if (container) {
               ...dependencies,
             },
           }}
-          theme={sandpackDark}
+          theme={isDark ? sandpackDark : githubLight}
         />
       </div>
     );

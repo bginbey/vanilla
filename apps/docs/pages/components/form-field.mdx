@@ -1,0 +1,552 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# FormField
+
+A wrapper component that enhances form controls with labels, helper text, and error messages.
+
+<LiveExample
+  code={`import { FormField, Input, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={4} flexDirection="column">
+      <FormField 
+        label="Email Address" 
+        helperText="We'll never share your email"
+      >
+        <Input type="email" placeholder="name@example.com" />
+      </FormField>
+      
+      <FormField 
+        label="Password" 
+        required
+        helperText="Must be at least 8 characters"
+      >
+        <Input type="password" placeholder="Enter password" />
+      </FormField>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `label` - Field label text
+- `helperText` - Helper text displayed below the field
+- `error` - Show error state
+- `errorMessage` - Error message to display (replaces helper text)
+- `required` - Mark field as required
+- `disabled` - Disable the field and all its children
+- `children` - Form control element (Input, Select, etc.)
+
+## Basic Usage
+
+<LiveExample
+  code={`import { FormField, Input, Select, Checkbox, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Text size="lg" weight="semibold">Contact Information</Text>
+      
+      <FormField label="Full Name" required>
+        <Input placeholder="John Doe" />
+      </FormField>
+      
+      <FormField 
+        label="Email" 
+        helperText="We'll use this to contact you"
+        required
+      >
+        <Input type="email" placeholder="john@example.com" />
+      </FormField>
+      
+      <FormField label="Country">
+        <Select>
+          <option value="">Select a country</option>
+          <option value="us">United States</option>
+          <option value="uk">United Kingdom</option>
+          <option value="ca">Canada</option>
+        </Select>
+      </FormField>
+      
+      <FormField>
+        <Checkbox label="Subscribe to newsletter" />
+      </FormField>
+    </Box>
+  );
+}`}
+/>
+
+## With Validation
+
+<LiveExample
+  code={`import { FormField, Input, Button, Box } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+  
+  const [errors, setErrors] = useState({});
+  
+  const handleChange = (field) => (e) => {
+    setValues({ ...values, [field]: e.target.value });
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: '' });
+    }
+  };
+  
+  const validate = () => {
+    const newErrors = {};
+    
+    if (!values.username) {
+      newErrors.username = 'Username is required';
+    } else if (values.username.length < 3) {
+      newErrors.username = 'Username must be at least 3 characters';
+    }
+    
+    if (!values.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    
+    if (!values.password) {
+      newErrors.password = 'Password is required';
+    } else if (values.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      alert('Form submitted successfully!');
+    }
+  };
+  
+  return (
+    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={3}>
+      <FormField 
+        label="Username" 
+        required
+        error={!!errors.username}
+        errorMessage={errors.username}
+      >
+        <Input 
+          value={values.username}
+          onChange={handleChange('username')}
+          placeholder="Choose a username"
+        />
+      </FormField>
+      
+      <FormField 
+        label="Email" 
+        required
+        error={!!errors.email}
+        errorMessage={errors.email}
+        helperText="We'll send a verification email"
+      >
+        <Input 
+          type="email"
+          value={values.email}
+          onChange={handleChange('email')}
+          placeholder="your@email.com"
+        />
+      </FormField>
+      
+      <FormField 
+        label="Password" 
+        required
+        error={!!errors.password}
+        errorMessage={errors.password}
+        helperText="Minimum 8 characters"
+      >
+        <Input 
+          type="password"
+          value={values.password}
+          onChange={handleChange('password')}
+          placeholder="Create a strong password"
+        />
+      </FormField>
+      
+      <Button type="submit" fullWidth>
+        Create Account
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## With Different Controls
+
+<LiveExample
+  code={`import { FormField, Input, Select, Radio, Switch, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    name: '',
+    role: '',
+    department: 'engineering',
+    notifications: true
+  });
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Text size="lg" weight="semibold">Employee Information</Text>
+      
+      <FormField label="Full Name" required>
+        <Input 
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          placeholder="Enter your full name"
+        />
+      </FormField>
+      
+      <FormField 
+        label="Job Role" 
+        helperText="Select your primary role"
+        required
+      >
+        <Select 
+          value={formData.role}
+          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+        >
+          <option value="">Choose a role</option>
+          <option value="developer">Developer</option>
+          <option value="designer">Designer</option>
+          <option value="manager">Manager</option>
+          <option value="analyst">Analyst</option>
+        </Select>
+      </FormField>
+      
+      <FormField label="Department">
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Radio 
+            name="dept" 
+            label="Engineering" 
+            value="engineering"
+            checked={formData.department === 'engineering'}
+            onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+          />
+          <Radio 
+            name="dept" 
+            label="Design" 
+            value="design"
+            checked={formData.department === 'design'}
+            onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+          />
+          <Radio 
+            name="dept" 
+            label="Marketing" 
+            value="marketing"
+            checked={formData.department === 'marketing'}
+            onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+          />
+        </Box>
+      </FormField>
+      
+      <FormField>
+        <Switch 
+          label="Email notifications" 
+          checked={formData.notifications}
+          onChange={(e) => setFormData({ ...formData, notifications: e.target.checked })}
+        />
+      </FormField>
+    </Box>
+  );
+}`}
+/>
+
+## States
+
+<LiveExample
+  code={`import { FormField, Input, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Normal State</Text>
+        <FormField 
+          label="Field Label" 
+          helperText="This is helper text"
+        >
+          <Input placeholder="Normal input" />
+        </FormField>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Required Field</Text>
+        <FormField 
+          label="Required Field" 
+          required
+          helperText="This field is required"
+        >
+          <Input placeholder="Required input" />
+        </FormField>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Error State</Text>
+        <FormField 
+          label="Field with Error" 
+          error
+          errorMessage="This field has an error"
+        >
+          <Input placeholder="Error input" />
+        </FormField>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <FormField 
+          label="Disabled Field" 
+          disabled
+          helperText="This field is disabled"
+        >
+          <Input placeholder="Disabled input" />
+        </FormField>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Complex Form Example
+
+<LiveExample
+  code={`import { FormField, Input, Select, Checkbox, Button, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    jobTitle: '',
+    country: '',
+    acceptTerms: false
+  });
+  
+  const [errors, setErrors] = useState({});
+  
+  const handleChange = (field) => (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [field]: value });
+    
+    // Clear error on change
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: '' });
+    }
+  };
+  
+  const validate = () => {
+    const newErrors = {};
+    
+    if (!formData.firstName) newErrors.firstName = 'First name is required';
+    if (!formData.lastName) newErrors.lastName = 'Last name is required';
+    if (!formData.email) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
+    if (!formData.country) newErrors.country = 'Please select a country';
+    if (!formData.acceptTerms) newErrors.acceptTerms = 'You must accept the terms';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      alert('Registration successful!\\n\\n' + JSON.stringify(formData, null, 2));
+    }
+  };
+  
+  return (
+    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
+      <Text size="xl" weight="semibold">Registration Form</Text>
+      
+      <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3}>
+        <FormField 
+          label="First Name" 
+          required
+          error={!!errors.firstName}
+          errorMessage={errors.firstName}
+        >
+          <Input 
+            value={formData.firstName}
+            onChange={handleChange('firstName')}
+            placeholder="John"
+          />
+        </FormField>
+        
+        <FormField 
+          label="Last Name" 
+          required
+          error={!!errors.lastName}
+          errorMessage={errors.lastName}
+        >
+          <Input 
+            value={formData.lastName}
+            onChange={handleChange('lastName')}
+            placeholder="Doe"
+          />
+        </FormField>
+      </Box>
+      
+      <FormField 
+        label="Email Address" 
+        required
+        error={!!errors.email}
+        errorMessage={errors.email}
+        helperText="We'll never share your email"
+      >
+        <Input 
+          type="email"
+          value={formData.email}
+          onChange={handleChange('email')}
+          placeholder="john.doe@example.com"
+        />
+      </FormField>
+      
+      <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3}>
+        <FormField 
+          label="Phone Number"
+          helperText="Optional"
+        >
+          <Input 
+            type="tel"
+            value={formData.phone}
+            onChange={handleChange('phone')}
+            placeholder="+1 (555) 123-4567"
+          />
+        </FormField>
+        
+        <FormField 
+          label="Country" 
+          required
+          error={!!errors.country}
+          errorMessage={errors.country}
+        >
+          <Select 
+            value={formData.country}
+            onChange={handleChange('country')}
+          >
+            <option value="">Select country</option>
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+            <option value="uk">United Kingdom</option>
+            <option value="au">Australia</option>
+          </Select>
+        </FormField>
+      </Box>
+      
+      <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3}>
+        <FormField label="Company">
+          <Input 
+            value={formData.company}
+            onChange={handleChange('company')}
+            placeholder="Acme Corp"
+          />
+        </FormField>
+        
+        <FormField label="Job Title">
+          <Input 
+            value={formData.jobTitle}
+            onChange={handleChange('jobTitle')}
+            placeholder="Software Engineer"
+          />
+        </FormField>
+      </Box>
+      
+      <FormField error={!!errors.acceptTerms} errorMessage={errors.acceptTerms}>
+        <Checkbox 
+          label="I accept the terms and conditions" 
+          checked={formData.acceptTerms}
+          onChange={handleChange('acceptTerms')}
+        />
+      </FormField>
+      
+      <Button type="submit" fullWidth size="lg">
+        Complete Registration
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+FormField is fully typed with TypeScript:
+
+```typescript
+import { FormField, FormFieldProps, Input } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const MyFormField = (props: FormFieldProps) => {
+  return <FormField {...props} />;
+};
+
+// Custom form field wrapper
+interface CustomFieldProps extends FormFieldProps {
+  name: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const CustomField = ({ name, value, onChange, ...fieldProps }: CustomFieldProps) => {
+  return (
+    <FormField {...fieldProps}>
+      <Input
+        name={name}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </FormField>
+  );
+};
+
+// Form with validation
+interface FormData {
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
+const LoginForm = () => {
+  const [data, setData] = useState<FormData>({ email: '', password: '' });
+  const [errors, setErrors] = useState<FormErrors>({});
+  
+  return (
+    <form>
+      <FormField
+        label="Email"
+        required
+        error={!!errors.email}
+        errorMessage={errors.email}
+      >
+        <Input
+          type="email"
+          value={data.email}
+          onChange={(e) => setData({ ...data, email: e.target.value })}
+        />
+      </FormField>
+    </form>
+  );
+};
+```

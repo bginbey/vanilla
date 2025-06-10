@@ -1,7 +1,7 @@
 import { Icon, IconProvider, Button, Box, Text } from '@beauginbey/vanilla-components';
 
 // Mock icons for demonstration
-const IconHome = (props: any) => {
+const IconHome = (props: React.SVGProps<SVGSVGElement>) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -11,7 +11,7 @@ const IconHome = (props: any) => {
   );
 };
 
-const IconSearch = (props: any) => {
+const IconSearch = (props: React.SVGProps<SVGSVGElement>) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -21,7 +21,7 @@ const IconSearch = (props: any) => {
   );
 };
 
-const IconHeart = (props: any) => {
+const IconHeart = (props: React.SVGProps<SVGSVGElement>) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -30,7 +30,7 @@ const IconHeart = (props: any) => {
   );
 };
 
-const IconSettings = (props: any) => {
+const IconSettings = (props: React.SVGProps<SVGSVGElement>) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>

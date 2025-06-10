@@ -75,10 +75,11 @@ aside[aria-label="Table of contents"] {
   height: fit-content;
 }
 
-/* Hide dark mode toggle */
+/* Hide dark mode toggle (we're using our custom one) */
 button[title*="theme"] {
   display: none !important;
 }
+
 
 /* Code blocks */
 .nextra-code-block,

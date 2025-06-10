@@ -1,0 +1,300 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Select
+
+A customizable select component with multiple variants and full accessibility support.
+
+<LiveExample
+  code={`import { Select, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Select defaultValue="option1">
+        <option value="">Choose an option</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </Select>
+      
+      <Select variant="filled" defaultValue="option2">
+        <option value="">Choose an option</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </Select>
+      
+      <Select fullWidth variant="outline">
+        <option value="">Full width select</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </Select>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `variant` - Visual style: `outline`, `filled`, or `unstyled`
+- `error` - Show error state
+- `fullWidth` - Make select full width
+- `disabled` - Disable the select
+
+## Variants
+
+<LiveExample
+  code={`import { Select, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Outline Variant (Default)</Text>
+        <Box display="flex" gap={2}>
+          <Select variant="outline">
+            <option value="">Choose an option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </Select>
+          <Select variant="outline" disabled>
+            <option value="">Disabled</option>
+          </Select>
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Filled Variant</Text>
+        <Box display="flex" gap={2}>
+          <Select variant="filled">
+            <option value="">Choose an option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </Select>
+          <Select variant="filled" disabled>
+            <option value="">Disabled</option>
+          </Select>
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Unstyled Variant</Text>
+        <Box display="flex" gap={2}>
+          <Select variant="unstyled">
+            <option value="">Choose an option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </Select>
+          <Select variant="unstyled" disabled>
+            <option value="">Disabled</option>
+          </Select>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## States
+
+<LiveExample
+  code={`import { Select, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [value, setValue] = useState('');
+  const [errorValue, setErrorValue] = useState('');
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Controlled Select</Text>
+        <Select value={value} onChange={(e) => setValue(e.target.value)}>
+          <option value="">Choose a fruit</option>
+          <option value="apple">Apple</option>
+          <option value="banana">Banana</option>
+          <option value="orange">Orange</option>
+        </Select>
+        <Text size="sm" mt={1} color="secondary">
+          Selected: {value || 'None'}
+        </Text>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Error State</Text>
+        <Select 
+          error={!errorValue}
+          value={errorValue}
+          onChange={(e) => setErrorValue(e.target.value)}
+        >
+          <option value="">Required field</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+        </Select>
+        {!errorValue && (
+          <Text size="sm" mt={1} style={{ color: 'var(--color-feedback-error)' }}>
+            Please select an option
+          </Text>
+        )}
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <Select disabled defaultValue="disabled">
+          <option value="disabled">Cannot change this</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+        </Select>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## With Option Groups
+
+<LiveExample
+  code={`import { Select, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Select fullWidth>
+        <option value="">Choose a country</option>
+        <optgroup label="North America">
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="mx">Mexico</option>
+        </optgroup>
+        <optgroup label="Europe">
+          <option value="uk">United Kingdom</option>
+          <option value="fr">France</option>
+          <option value="de">Germany</option>
+          <option value="it">Italy</option>
+        </optgroup>
+        <optgroup label="Asia">
+          <option value="jp">Japan</option>
+          <option value="cn">China</option>
+          <option value="kr">South Korea</option>
+        </optgroup>
+      </Select>
+    </Box>
+  );
+}`}
+/>
+
+## With Forms
+
+<LiveExample
+  code={`import { Select, Button, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    size: '',
+    color: '',
+    quantity: '1'
+  });
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(JSON.stringify(formData, null, 2));
+  };
+  
+  const handleChange = (field) => (e) => {
+    setFormData({ ...formData, [field]: e.target.value });
+  };
+  
+  return (
+    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={3}>
+      <Box>
+        <Text as="label" size="sm" weight="medium" display="block" mb={1}>
+          Size
+        </Text>
+        <Select 
+          value={formData.size} 
+          onChange={handleChange('size')}
+          required
+          fullWidth
+        >
+          <option value="">Select size</option>
+          <option value="xs">Extra Small</option>
+          <option value="s">Small</option>
+          <option value="m">Medium</option>
+          <option value="l">Large</option>
+          <option value="xl">Extra Large</option>
+        </Select>
+      </Box>
+      
+      <Box>
+        <Text as="label" size="sm" weight="medium" display="block" mb={1}>
+          Color
+        </Text>
+        <Select 
+          value={formData.color} 
+          onChange={handleChange('color')}
+          required
+          fullWidth
+        >
+          <option value="">Select color</option>
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="black">Black</option>
+          <option value="white">White</option>
+        </Select>
+      </Box>
+      
+      <Box>
+        <Text as="label" size="sm" weight="medium" display="block" mb={1}>
+          Quantity
+        </Text>
+        <Select 
+          value={formData.quantity} 
+          onChange={handleChange('quantity')}
+          fullWidth
+        >
+          {[1, 2, 3, 4, 5].map(num => (
+            <option key={num} value={num}>{num}</option>
+          ))}
+        </Select>
+      </Box>
+      
+      <Button type="submit" fullWidth>
+        Add to Cart
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Select is fully typed with TypeScript:
+
+```typescript
+import { Select, SelectProps } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const MySelect = (props: SelectProps) => {
+  return <Select {...props} />;
+};
+
+// With change handler
+const ControlledSelect = () => {
+  const [value, setValue] = useState<string>('');
+  
+  return (
+    <Select
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      variant="filled"
+      error={!value}
+    >
+      <option value="">Choose...</option>
+      <option value="1">Option 1</option>
+    </Select>
+  );
+};
+```

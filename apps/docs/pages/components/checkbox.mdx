@@ -1,0 +1,249 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Checkbox
+
+A styled checkbox component with support for indeterminate state.
+
+<LiveExample
+  code={`import { Checkbox, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [checked, setChecked] = useState(false);
+  const [indeterminate, setIndeterminate] = useState(false);
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb1" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+        <Text as="label" htmlFor="cb1">Controlled checkbox</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb2" defaultChecked />
+        <Text as="label" htmlFor="cb2">Default checked</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb3" indeterminate />
+        <Text as="label" htmlFor="cb3">Indeterminate state</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb4" disabled />
+        <Text as="label" htmlFor="cb4" color="tertiary">Disabled checkbox</Text>
+      </Box>
+      
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox id="cb5" disabled checked />
+        <Text as="label" htmlFor="cb5" color="tertiary">Disabled checked</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `indeterminate` - Set indeterminate state
+- `disabled` - Disable the checkbox
+- All standard HTML input checkbox attributes
+
+## Indeterminate State
+
+The indeterminate state is useful for parent checkboxes that control multiple child checkboxes:
+
+<LiveExample
+  code={`import { Checkbox, Box, Text } from '@beauginbey/vanilla-components';
+import { useState, useEffect, useRef } from 'react';
+
+export default function App() {
+  const [items, setItems] = useState([
+    { id: 1, label: 'Option 1', checked: false },
+    { id: 2, label: 'Option 2', checked: true },
+    { id: 3, label: 'Option 3', checked: false },
+  ]);
+  
+  const parentRef = useRef(null);
+  
+  const checkedCount = items.filter(item => item.checked).length;
+  const isAllChecked = checkedCount === items.length;
+  const isIndeterminate = checkedCount > 0 && checkedCount < items.length;
+  
+  useEffect(() => {
+    if (parentRef.current) {
+      parentRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
+  
+  const handleParentChange = (e) => {
+    setItems(items.map(item => ({ ...item, checked: e.target.checked })));
+  };
+  
+  const handleItemChange = (id, checked) => {
+    setItems(items.map(item => 
+      item.id === id ? { ...item, checked } : item
+    ));
+  };
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box display="flex" alignItems="center" gap={2}>
+        <Checkbox
+          ref={parentRef}
+          id="parent"
+          checked={isAllChecked}
+          onChange={handleParentChange}
+        />
+        <Text as="label" htmlFor="parent" weight="semibold">
+          Select All ({checkedCount}/{items.length})
+        </Text>
+      </Box>
+      
+      <Box pl={6} display="flex" flexDirection="column" gap={2}>
+        {items.map(item => (
+          <Box key={item.id} display="flex" alignItems="center" gap={2}>
+            <Checkbox
+              id={item.id}
+              checked={item.checked}
+              onChange={(e) => handleItemChange(item.id, e.target.checked)}
+            />
+            <Text as="label" htmlFor={item.id}>{item.label}</Text>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Form Integration
+
+<LiveExample
+  code={`import { Checkbox, Box, Text, Button } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    terms: false,
+    newsletter: false,
+    notifications: true,
+  });
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(JSON.stringify(formData, null, 2));
+  };
+  
+  const handleChange = (field) => (e) => {
+    setFormData({ ...formData, [field]: e.target.checked });
+  };
+  
+  return (
+    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
+      <Box display="flex" flexDirection="column" gap={3}>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Checkbox 
+            id="terms"
+            checked={formData.terms}
+            onChange={handleChange('terms')}
+            required
+          />
+          <Text as="label" htmlFor="terms">
+            I agree to the terms and conditions <Text as="span" color="error">*</Text>
+          </Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Checkbox 
+            id="newsletter"
+            checked={formData.newsletter}
+            onChange={handleChange('newsletter')}
+          />
+          <Text as="label" htmlFor="newsletter">
+            Subscribe to newsletter
+          </Text>
+        </Box>
+        
+        <Box display="flex" alignItems="center" gap={2}>
+          <Checkbox 
+            id="notifications"
+            checked={formData.notifications}
+            onChange={handleChange('notifications')}
+          />
+          <Text as="label" htmlFor="notifications">
+            Enable email notifications
+          </Text>
+        </Box>
+      </Box>
+      
+      <Button type="submit" disabled={!formData.terms}>
+        Submit
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## Accessibility
+
+Always provide labels for checkboxes:
+
+<LiveExample
+  code={`import { Checkbox, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With visible label</Text>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Checkbox id="visible" />
+          <Text as="label" htmlFor="visible">
+            This is a visible label
+          </Text>
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With aria-label</Text>
+        <Checkbox aria-label="Hidden label for screen readers" />
+        <Text size="sm" color="secondary" mt={1}>
+          Uses aria-label for accessibility
+        </Text>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With description</Text>
+        <Box display="flex" alignItems="start" gap={2}>
+          <Checkbox id="described" aria-describedby="desc" mt={1} />
+          <Box>
+            <Text as="label" htmlFor="described" display="block">
+              Enable feature
+            </Text>
+            <Text id="desc" size="sm" color="secondary">
+              This will enable the advanced feature with additional options
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+```typescript
+import { Checkbox, CheckboxProps } from '@beauginbey/vanilla-components';
+
+// Custom checkbox component
+const RequiredCheckbox = (props: CheckboxProps) => {
+  return <Checkbox required {...props} />;
+};
+
+// With specific handler
+const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  console.log('Checked:', e.target.checked);
+};
+```

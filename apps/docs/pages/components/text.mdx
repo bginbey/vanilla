@@ -1,0 +1,221 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Text
+
+A polymorphic text component for rendering typography with consistent styles.
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Text as="h1" size="4xl" weight="bold">
+        Heading Text
+      </Text>
+      
+      <Text size="lg" color="secondary">
+        Large secondary text for subtitles
+      </Text>
+      
+      <Text>
+        Default body text with <Text as="span" weight="semibold">inline emphasis</Text> and
+        <Text as="span" color="brand"> brand color</Text>.
+      </Text>
+      
+      <Box backgroundColor={12} p={3} borderRadius="md">
+        <Text color="inverse">
+          Inverse text on dark background
+        </Text>
+      </Box>
+      
+      <Box display="flex" gap={2}>
+        <Text color="success">Success</Text>
+        <Text color="warning">Warning</Text>
+        <Text color="error">Error</Text>
+        <Text color="info">Info</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `as` - HTML element to render (default: `span`)
+- `size` - Text size from `xs` to `5xl`
+- `weight` - Font weight: `normal`, `medium`, `semibold`, or `bold`
+- `color` - Text color from theme
+- `align` - Text alignment: `left`, `center`, or `right`
+- `truncate` - Truncate text with ellipsis
+
+## Sizes
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={2}>
+      <Text size="5xl">5xl - Display heading</Text>
+      <Text size="4xl">4xl - Page heading</Text>
+      <Text size="3xl">3xl - Section heading</Text>
+      <Text size="2xl">2xl - Subsection heading</Text>
+      <Text size="xl">xl - Large text</Text>
+      <Text size="lg">lg - Emphasized body</Text>
+      <Text size="md">md - Default body text</Text>
+      <Text size="sm">sm - Small text</Text>
+      <Text size="xs">xs - Extra small text</Text>
+    </Box>
+  );
+}`}
+/>
+
+## Font Weights
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={2}>
+      <Text weight="normal">Normal weight text (400)</Text>
+      <Text weight="medium">Medium weight text (500)</Text>
+      <Text weight="semibold">Semibold weight text (600)</Text>
+      <Text weight="bold">Bold weight text (700)</Text>
+    </Box>
+  );
+}`}
+/>
+
+## Colors
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Semantic Colors</Text>
+        <Box display="flex" flexDirection="column" gap={1}>
+          <Text color="primary">Primary text color</Text>
+          <Text color="secondary">Secondary text color</Text>
+          <Text color="tertiary">Tertiary text color</Text>
+          <Text color="brand">Brand color text</Text>
+          <Text color="success">Success message</Text>
+          <Text color="warning">Warning message</Text>
+          <Text color="error">Error message</Text>
+          <Text color="info">Info message</Text>
+        </Box>
+      </Box>
+      
+      <Box backgroundColor="primary" p={3} borderRadius="md">
+        <Text color="inverse">Inverse text for dark backgrounds</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Text Alignment
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box p={3} backgroundColor="secondary" borderRadius="md">
+        <Text align="left">Left aligned text (default)</Text>
+      </Box>
+      
+      <Box p={3} backgroundColor="secondary" borderRadius="md">
+        <Text align="center">Center aligned text</Text>
+      </Box>
+      
+      <Box p={3} backgroundColor="secondary" borderRadius="md">
+        <Text align="right">Right aligned text</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Truncation
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3} maxWidth="400px">
+      <Text truncate>
+        This is a very long text that will be truncated with an ellipsis when it exceeds the container width. The full text is hidden but can be revealed with a tooltip if needed.
+      </Text>
+      
+      <Box p={3} backgroundColor="secondary" borderRadius="md">
+        <Text truncate weight="semibold">
+          Another example of truncated text in a constrained container that demonstrates the ellipsis behavior
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Semantic HTML
+
+Use the `as` prop to render the appropriate HTML element:
+
+<LiveExample
+  code={`import { Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Text as="h1" size="3xl" weight="bold">
+        H1 Heading Element
+      </Text>
+      
+      <Text as="h2" size="2xl" weight="semibold">
+        H2 Subheading Element
+      </Text>
+      
+      <Text as="p">
+        This is a paragraph element with multiple sentences. It provides semantic meaning for body text content and improves accessibility.
+      </Text>
+      
+      <Text as="blockquote" style={{ borderLeft: '4px solid var(--gray-6)', paddingLeft: '1rem' }}>
+        "This is a blockquote element for quotations"
+      </Text>
+      
+      <Text as="code" size="sm" style={{ backgroundColor: 'var(--gray-3)', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+        const example = 'inline code';
+      </Text>
+      
+      <Text>
+        Regular text with <Text as="strong" weight="bold">strong emphasis</Text> and <Text as="em" style={{ fontStyle: 'italic' }}>italic emphasis</Text>.
+      </Text>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Text component is fully typed with polymorphic support:
+
+```typescript
+import { Text, TextProps } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const Heading = (props: TextProps<'h1'>) => {
+  return <Text as="h1" size="3xl" weight="bold" {...props} />;
+};
+
+// Custom paragraph component
+const Paragraph = (props: TextProps<'p'>) => {
+  return <Text as="p" {...props} />;
+};
+```

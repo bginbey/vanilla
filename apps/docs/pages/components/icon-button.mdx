@@ -1,0 +1,335 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# IconButton
+
+A square button component designed specifically for icons, with solid, outline, and ghost variants.
+
+<LiveExample
+  code={`import { IconButton, Box, Text } from '@beauginbey/vanilla-components';
+
+// Mock icons
+const IconSearch = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  );
+};
+
+const IconSettings = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m20.22-6.22l-4.24 4.24m-9.96 0L2.78 7.78m17.44 12.44l-4.24-4.24m-9.96 0L2.78 16.22" />
+    </svg>
+  );
+};
+
+const IconHeart = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  );
+};
+
+export default function App() {
+  return (
+    <Box display="flex" gap={4} flexDirection="column">
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">Variants</Text>
+        </Box>
+        <Box display="flex" gap={2}>
+          <IconButton icon={IconSearch} variant="solid" aria-label="Search" />
+          <IconButton icon={IconSettings} variant="outline" aria-label="Settings" />
+          <IconButton icon={IconHeart} variant="ghost" aria-label="Favorite" />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">Sizes</Text>
+        </Box>
+        <Box display="flex" gap={2} alignItems="center">
+          <IconButton icon={IconSearch} size="sm" aria-label="Search" />
+          <IconButton icon={IconSearch} size="md" aria-label="Search" />
+          <IconButton icon={IconSearch} size="lg" aria-label="Search" />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">States</Text>
+        </Box>
+        <Box display="flex" gap={2}>
+          <IconButton icon={IconSettings} aria-label="Settings" />
+          <IconButton icon={IconSettings} disabled aria-label="Settings" />
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `icon` - The icon component to display (required)
+- `variant` - Visual style: `solid`, `outline`, or `ghost`
+- `size` - Button size: `sm`, `md`, or `lg`
+- `aria-label` - Accessible label (required)
+- `disabled` - Disable the button
+- All standard HTML button attributes
+
+## Accessibility
+
+IconButton requires an `aria-label` prop to ensure screen readers can announce the button's purpose:
+
+<LiveExample
+  code={`import { IconButton, Box, Text } from '@beauginbey/vanilla-components';
+
+const IconMenu = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  );
+};
+
+const IconClose = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+};
+
+const IconBell = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+    </svg>
+  );
+};
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">Navigation Actions</Text>
+        </Box>
+        <Box display="flex" gap={2}>
+          <IconButton 
+            icon={IconMenu} 
+            variant="ghost" 
+            aria-label="Open navigation menu"
+            onClick={() => alert('Menu clicked')}
+          />
+          <IconButton 
+            icon={IconClose} 
+            variant="ghost" 
+            aria-label="Close dialog"
+            onClick={() => alert('Close clicked')}
+          />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">Notification Button</Text>
+        </Box>
+        <IconButton 
+          icon={IconBell} 
+          variant="outline" 
+          aria-label="View notifications"
+          onClick={() => alert('Notifications clicked')}
+        />
+        <Box mt={2}>
+          <Text size="sm" color={11}>
+            Screen readers will announce: "View notifications, button"
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Theme Toggle Example
+
+IconButton is perfect for theme toggles and other UI controls:
+
+<LiveExample
+  code={`import { IconButton, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+const IconSun = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  );
+};
+
+const IconMoon = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+};
+
+export default function App() {
+  const [isDark, setIsDark] = useState(false);
+  
+  return (
+    <Box 
+      p={6} 
+      backgroundColor={isDark ? 2 : 3} 
+      borderRadius="lg"
+      style={{ transition: 'background-color 0.2s' }}
+    >
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Text color={isDark ? 12 : 11} weight="semibold">
+          {isDark ? 'Dark Mode' : 'Light Mode'}
+        </Text>
+        
+        <IconButton
+          icon={isDark ? IconSun : IconMoon}
+          variant="ghost"
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          onClick={() => setIsDark(!isDark)}
+        />
+      </Box>
+      
+      <Box mt={3}>
+        <Text size="sm" color={isDark ? 11 : 10}>
+          Click the icon to toggle theme
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Use Cases
+
+<LiveExample
+  code={`import { IconButton, Box, Text } from '@beauginbey/vanilla-components';
+
+// Icon components
+const IconEdit = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </svg>
+  );
+};
+
+const IconTrash = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    </svg>
+  );
+};
+
+const IconShare = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+    </svg>
+  );
+};
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">Table Actions</Text>
+        </Box>
+        <Box display="flex" gap={1}>
+          <IconButton icon={IconEdit} variant="ghost" size="sm" aria-label="Edit item" />
+          <IconButton icon={IconTrash} variant="ghost" size="sm" aria-label="Delete item" />
+          <IconButton icon={IconShare} variant="ghost" size="sm" aria-label="Share item" />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Box mb={2}>
+          <Text size="sm" weight="semibold">Card Actions</Text>
+        </Box>
+        <Box p={4} backgroundColor={3} borderRadius="md">
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Text weight="semibold">Card Title</Text>
+            <Box display="flex" gap={1}>
+              <IconButton icon={IconEdit} variant="outline" size="sm" aria-label="Edit card" />
+              <IconButton icon={IconTrash} variant="outline" size="sm" aria-label="Delete card" />
+            </Box>
+          </Box>
+          <Box mt={2}>
+            <Text size="sm" color={11}>
+              Card content goes here
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+```typescript
+import { IconButton, IconButtonProps } from '@beauginbey/vanilla-components';
+import { IconHome } from '@tabler/icons-react';
+
+// Custom icon button
+const HomeButton = (props: Omit<IconButtonProps, 'icon' | 'aria-label'>) => {
+  return <IconButton icon={IconHome} aria-label="Go to home" {...props} />;
+};
+
+// With event handler
+const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  console.log('IconButton clicked');
+};
+
+<IconButton 
+  icon={IconHome} 
+  aria-label="Home"
+  onClick={handleClick}
+/>
+```

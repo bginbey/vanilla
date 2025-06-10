@@ -10,6 +10,7 @@ export * from './components/Radio';
 export * from './components/Switch';
 export * from './components/FormField';
 export * from './components/Icon';
+export * from './components/IconButton';
 
 // Styles
 export { vars, theme } from './styles/theme.css';

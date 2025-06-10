@@ -1,0 +1,224 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Button
+
+A flexible button component with multiple variants and sizes.
+
+<LiveExample
+  code={`import { Button, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Box display="flex" gap={2}>
+        <Button variant="solid">Solid</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
+      </Box>
+      
+      <Box display="flex" gap={2} alignItems="center">
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+      </Box>
+      
+      <Button fullWidth variant="outline">
+        Full Width Button
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `variant` - Visual style: `solid`, `outline`, or `ghost`
+- `size` - Button size: `sm`, `md`, or `lg`
+- `fullWidth` - Make button full width
+- `disabled` - Disable the button
+- `as` - Render as a different element (e.g., `a` for links)
+- `leftIcon` - Icon component to display on the left
+- `rightIcon` - Icon component to display on the right
+
+## Variants
+
+<LiveExample
+  code={`import { Button, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Solid Variant</Text>
+        <Box display="flex" gap={2}>
+          <Button variant="solid">Default</Button>
+          <Button variant="solid" disabled>Disabled</Button>
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Outline Variant</Text>
+        <Box display="flex" gap={2}>
+          <Button variant="outline">Default</Button>
+          <Button variant="outline" disabled>Disabled</Button>
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Ghost Variant</Text>
+        <Box display="flex" gap={2}>
+          <Button variant="ghost">Default</Button>
+          <Button variant="ghost" disabled>Disabled</Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## With Icons
+
+Buttons can display icons on either side using the `leftIcon` and `rightIcon` props:
+
+<LiveExample
+  code={`import { Button, Box } from '@beauginbey/vanilla-components';
+
+// Mock icons
+const IconSearch = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  );
+};
+
+const IconArrowRight = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  );
+};
+
+const IconDownload = (props) => {
+  const { stroke = 2, ...rest } = props;
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  );
+};
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexWrap="wrap">
+      <Button leftIcon={IconSearch}>
+        Search
+      </Button>
+      
+      <Button rightIcon={IconArrowRight} variant="outline">
+        Continue
+      </Button>
+      
+      <Button leftIcon={IconDownload} variant="ghost">
+        Download
+      </Button>
+      
+      <Button leftIcon={IconSearch} rightIcon={IconArrowRight}>
+        Search & Continue
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## Button as Link
+
+Use the `as` prop to render a button that looks like a button but behaves like a link:
+
+<LiveExample
+  code={`import { Button, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={2} flexWrap="wrap">
+      <Button as="a" href="https://example.com" variant="solid">
+        External Link
+      </Button>
+      
+      <Button as="a" href="#section" variant="outline">
+        Anchor Link
+      </Button>
+      
+      <Button as="a" href="/page" variant="ghost">
+        Internal Link
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## States
+
+<LiveExample
+  code={`import { Button, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [loading, setLoading] = useState(false);
+  
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Interactive States</Text>
+        <Box display="flex" gap={2}>
+          <Button onClick={handleClick}>
+            {loading ? 'Loading...' : 'Click Me'}
+          </Button>
+          <Button disabled={loading} variant="outline">
+            {loading ? 'Please Wait' : 'Another Action'}
+          </Button>
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <Box display="flex" gap={2}>
+          <Button disabled>Disabled Solid</Button>
+          <Button disabled variant="outline">Disabled Outline</Button>
+          <Button disabled variant="ghost">Disabled Ghost</Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Button is fully typed with TypeScript, including polymorphic support:
+
+```typescript
+import { Button, ButtonProps } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const MyButton = (props: ButtonProps<'button'>) => {
+  return <Button {...props} />;
+};
+
+// With custom element
+const LinkButton = (props: ButtonProps<'a'>) => {
+  return <Button as="a" {...props} />;
+};
+```

@@ -1,5 +1,32 @@
 # @beauginbey/vanilla-docs
 
+## 0.0.5
+
+### Patch Changes
+
+- Add IconButton component and documentation improvements
+
+  - Add new IconButton component with solid, outline, and ghost variants
+  - Fix icon rendering issues in components
+  - Reorganize documentation with individual component pages
+  - Add theme toggle functionality to docs
+  - Improve LiveExample component with padding
+  - Style improvements for docs navigation
+
+- a020ccf: feat: Add flexible Icon component system
+
+  - New Icon component with support for any icon library
+  - Size presets (xs, sm, md, lg, xl) and custom sizes
+  - Color integration with new color system (semantic colors and scale values)
+  - IconProvider for global icon configuration
+  - Button integration with leftIcon and rightIcon props
+  - Full accessibility support with ARIA labels
+  - Storybook stories and documentation
+
+- Updated dependencies
+- Updated dependencies [a020ccf]
+  - @beauginbey/vanilla-components@1.3.0
+
 ## 0.0.4
 
 ### Patch Changes

@@ -178,7 +178,7 @@ export function ColorUsageExample() {
             Step 12: High-contrast text for headings and primary content
           </Text>
           <Text color={11}>
-            Step 11: Low-contrast text for secondary content, descriptions, and subtle UI text that doesn't need to grab attention.
+            Step 11: Low-contrast text for secondary content, descriptions, and subtle UI text that doesn&apos;t need to grab attention.
           </Text>
         </Box>
       </Example>

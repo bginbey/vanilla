@@ -50,10 +50,12 @@ export default function App() {
   };
   
   return (
-    <Box maxWidth="400px" p={6} backgroundColor="secondary" borderRadius="lg">
-      <Text as="h2" size="2xl" weight="bold" mb={6}>
-        Sign In
-      </Text>
+    <Box maxWidth="400px" p={6} backgroundColor={3} borderRadius="lg">
+      <Box mb={6}>
+        <Text as="h2" size="2xl" weight="bold">
+          Sign In
+        </Text>
+      </Box>
       
       <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
         <FormField

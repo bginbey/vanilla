@@ -1,0 +1,357 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Switch
+
+A toggle switch component for binary choices with multiple sizes and label support.
+
+<LiveExample
+  code={`import { Switch, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Switch label="Enable notifications" defaultChecked />
+      <Switch label="Dark mode" />
+      <Switch label="Auto-save" defaultChecked />
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `size` - Switch size: `sm`, `md`, or `lg`
+- `label` - Text label for the switch
+- `error` - Show error state
+- `disabled` - Disable the switch
+- All standard HTML input attributes (except `type` and `size`)
+
+## Sizes
+
+<LiveExample
+  code={`import { Switch, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Small</Text>
+        <Box display="flex" gap={3}>
+          <Switch size="sm" />
+          <Switch size="sm" defaultChecked />
+          <Switch size="sm" label="With label" />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Medium (Default)</Text>
+        <Box display="flex" gap={3}>
+          <Switch size="md" />
+          <Switch size="md" defaultChecked />
+          <Switch size="md" label="With label" />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Large</Text>
+        <Box display="flex" gap={3}>
+          <Switch size="lg" />
+          <Switch size="lg" defaultChecked />
+          <Switch size="lg" label="With label" />
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## States
+
+<LiveExample
+  code={`import { Switch, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Normal State</Text>
+        <Box display="flex" gap={3}>
+          <Switch label="Unchecked" />
+          <Switch label="Checked" defaultChecked />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Error State</Text>
+        <Box display="flex" gap={3}>
+          <Switch label="Error unchecked" error />
+          <Switch label="Error checked" error defaultChecked />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <Box display="flex" gap={3}>
+          <Switch label="Disabled unchecked" disabled />
+          <Switch label="Disabled checked" disabled defaultChecked />
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Controlled Usage
+
+<LiveExample
+  code={`import { Switch, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [settings, setSettings] = useState({
+    notifications: true,
+    darkMode: false,
+    autoSave: true,
+    publicProfile: false
+  });
+  
+  const handleToggle = (setting) => (e) => {
+    setSettings({ ...settings, [setting]: e.target.checked });
+  };
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="lg" weight="semibold" mb={3}>Settings</Text>
+        <Box display="flex" flexDirection="column" gap={3}>
+          <Switch 
+            label="Push notifications" 
+            checked={settings.notifications}
+            onChange={handleToggle('notifications')}
+          />
+          <Switch 
+            label="Dark mode" 
+            checked={settings.darkMode}
+            onChange={handleToggle('darkMode')}
+          />
+          <Switch 
+            label="Auto-save drafts" 
+            checked={settings.autoSave}
+            onChange={handleToggle('autoSave')}
+          />
+          <Switch 
+            label="Public profile" 
+            checked={settings.publicProfile}
+            onChange={handleToggle('publicProfile')}
+          />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Current Settings</Text>
+        <Box
+          style={{
+            padding: 'var(--space-3)',
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: 'var(--color-background-secondary)',
+            fontFamily: 'monospace',
+            fontSize: 'var(--text-sm)'
+          }}
+        >
+          <pre>{JSON.stringify(settings, null, 2)}</pre>
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Feature Toggles
+
+<LiveExample
+  code={`import { Switch, Box, Text, Button } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [features, setFeatures] = useState({
+    betaFeatures: false,
+    analytics: true,
+    experiments: false
+  });
+  
+  const [saved, setSaved] = useState(false);
+  
+  const handleToggle = (feature) => (e) => {
+    setFeatures({ ...features, [feature]: e.target.checked });
+    setSaved(false);
+  };
+  
+  const handleSave = () => {
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Text size="lg" weight="semibold">Feature Management</Text>
+      
+      <Box display="flex" flexDirection="column" gap={3}>
+        <Box>
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Box>
+              <Text weight="medium">Beta Features</Text>
+              <Text size="sm" color="secondary">
+                Try out new features before they're released
+              </Text>
+            </Box>
+            <Switch 
+              checked={features.betaFeatures}
+              onChange={handleToggle('betaFeatures')}
+              aria-describedby="beta-desc"
+            />
+          </Box>
+        </Box>
+        
+        <Box>
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Box>
+              <Text weight="medium">Analytics</Text>
+              <Text size="sm" color="secondary">
+                Help us improve by sharing usage data
+              </Text>
+            </Box>
+            <Switch 
+              checked={features.analytics}
+              onChange={handleToggle('analytics')}
+              aria-describedby="analytics-desc"
+            />
+          </Box>
+        </Box>
+        
+        <Box>
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Box>
+              <Text weight="medium">Experiments</Text>
+              <Text size="sm" color="secondary">
+                Participate in A/B testing experiments
+              </Text>
+            </Box>
+            <Switch 
+              checked={features.experiments}
+              onChange={handleToggle('experiments')}
+              aria-describedby="experiments-desc"
+            />
+          </Box>
+        </Box>
+      </Box>
+      
+      <Box display="flex" gap={2} alignItems="center">
+        <Button onClick={handleSave} variant={saved ? 'solid' : 'outline'}>
+          {saved ? 'Saved!' : 'Save Changes'}
+        </Button>
+        {saved && (
+          <Text size="sm" color="success">
+            Your preferences have been saved
+          </Text>
+        )}
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Accessibility
+
+The Switch component includes ARIA attributes for proper screen reader support:
+
+<LiveExample
+  code={`import { Switch, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With aria-describedby</Text>
+        <Switch 
+          label="Enable auto-updates" 
+          aria-describedby="auto-update-help"
+        />
+        <Text id="auto-update-help" size="sm" color="secondary" mt={1}>
+          Automatically download and install updates when available
+        </Text>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Required Field</Text>
+        <Switch 
+          label="I accept the terms and conditions" 
+          aria-required="true"
+          required
+        />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With Error</Text>
+        <Switch 
+          label="Enable two-factor authentication" 
+          error
+          aria-invalid="true"
+          aria-describedby="2fa-error"
+        />
+        <Text id="2fa-error" size="sm" style={{ color: 'var(--color-feedback-error)' }} mt={1}>
+          Two-factor authentication is required for admin accounts
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Switch is fully typed with TypeScript:
+
+```typescript
+import { Switch, SwitchProps } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const MySwitch = (props: SwitchProps) => {
+  return <Switch {...props} />;
+};
+
+// Controlled switch
+const ControlledSwitch = () => {
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  
+  return (
+    <Switch
+      label="Enable feature"
+      size="md"
+      checked={isEnabled}
+      onChange={(e) => setIsEnabled(e.target.checked)}
+    />
+  );
+};
+
+// Custom switch component
+interface FeatureToggleProps {
+  feature: string;
+  description?: string;
+  onChange: (enabled: boolean) => void;
+}
+
+const FeatureToggle = ({ feature, description, onChange }: FeatureToggleProps) => {
+  return (
+    <div>
+      <Switch
+        label={feature}
+        onChange={(e) => onChange(e.target.checked)}
+        aria-describedby={description ? `${feature}-desc` : undefined}
+      />
+      {description && (
+        <span id={`${feature}-desc`}>{description}</span>
+      )}
+    </div>
+  );
+};
+```

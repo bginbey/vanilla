@@ -1,0 +1,340 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Radio
+
+An accessible radio button component with custom styling and label support.
+
+<LiveExample
+  code={`import { Radio, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={3} flexDirection="column">
+      <Radio name="example1" label="Option 1" defaultChecked />
+      <Radio name="example1" label="Option 2" />
+      <Radio name="example1" label="Option 3" />
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `label` - Text label for the radio button
+- `error` - Show error state
+- `disabled` - Disable the radio button
+- All standard HTML input attributes (except `type`)
+
+## Basic Usage
+
+<LiveExample
+  code={`import { Radio, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Without Label</Text>
+        <Box display="flex" gap={2}>
+          <Radio name="basic1" defaultChecked />
+          <Radio name="basic1" />
+          <Radio name="basic1" />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With Label</Text>
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Radio name="basic2" label="First option" defaultChecked />
+          <Radio name="basic2" label="Second option" />
+          <Radio name="basic2" label="Third option" />
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Radio Groups
+
+<LiveExample
+  code={`import { Radio, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [selectedSize, setSelectedSize] = useState('medium');
+  const [selectedPlan, setSelectedPlan] = useState('pro');
+  
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Size Selection</Text>
+        <Box display="flex" gap={3}>
+          <Radio 
+            name="size" 
+            label="Small" 
+            value="small"
+            checked={selectedSize === 'small'}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          />
+          <Radio 
+            name="size" 
+            label="Medium" 
+            value="medium"
+            checked={selectedSize === 'medium'}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          />
+          <Radio 
+            name="size" 
+            label="Large" 
+            value="large"
+            checked={selectedSize === 'large'}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          />
+        </Box>
+        <Text size="sm" mt={2} color="secondary">
+          Selected: {selectedSize}
+        </Text>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Plan Selection</Text>
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Radio 
+            name="plan" 
+            label="Basic - $9/month" 
+            value="basic"
+            checked={selectedPlan === 'basic'}
+            onChange={(e) => setSelectedPlan(e.target.value)}
+          />
+          <Radio 
+            name="plan" 
+            label="Pro - $19/month" 
+            value="pro"
+            checked={selectedPlan === 'pro'}
+            onChange={(e) => setSelectedPlan(e.target.value)}
+          />
+          <Radio 
+            name="plan" 
+            label="Enterprise - $49/month" 
+            value="enterprise"
+            checked={selectedPlan === 'enterprise'}
+            onChange={(e) => setSelectedPlan(e.target.value)}
+          />
+        </Box>
+        <Text size="sm" mt={2} color="secondary">
+          Selected: {selectedPlan}
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## States
+
+<LiveExample
+  code={`import { Radio, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Normal State</Text>
+        <Box display="flex" gap={3}>
+          <Radio name="normal" label="Unchecked" />
+          <Radio name="normal" label="Checked" defaultChecked />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Error State</Text>
+        <Box display="flex" gap={3}>
+          <Radio name="error" label="Error unchecked" error />
+          <Radio name="error" label="Error checked" error defaultChecked />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <Box display="flex" gap={3}>
+          <Radio name="disabled" label="Disabled unchecked" disabled />
+          <Radio name="disabled" label="Disabled checked" disabled defaultChecked />
+        </Box>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Form Integration
+
+<LiveExample
+  code={`import { Radio, Button, Box, Text } from '@beauginbey/vanilla-components';
+import { useState } from 'react';
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    delivery: 'standard',
+    payment: 'card'
+  });
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(JSON.stringify(formData, null, 2));
+  };
+  
+  const handleChange = (field) => (e) => {
+    setFormData({ ...formData, [field]: e.target.value });
+  };
+  
+  return (
+    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="md" weight="semibold" mb={2}>Delivery Method</Text>
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Radio 
+            name="delivery" 
+            label="Standard (5-7 days) - Free" 
+            value="standard"
+            checked={formData.delivery === 'standard'}
+            onChange={handleChange('delivery')}
+          />
+          <Radio 
+            name="delivery" 
+            label="Express (2-3 days) - $10" 
+            value="express"
+            checked={formData.delivery === 'express'}
+            onChange={handleChange('delivery')}
+          />
+          <Radio 
+            name="delivery" 
+            label="Overnight - $25" 
+            value="overnight"
+            checked={formData.delivery === 'overnight'}
+            onChange={handleChange('delivery')}
+          />
+        </Box>
+      </Box>
+      
+      <Box>
+        <Text size="md" weight="semibold" mb={2}>Payment Method</Text>
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Radio 
+            name="payment" 
+            label="Credit/Debit Card" 
+            value="card"
+            checked={formData.payment === 'card'}
+            onChange={handleChange('payment')}
+          />
+          <Radio 
+            name="payment" 
+            label="PayPal" 
+            value="paypal"
+            checked={formData.payment === 'paypal'}
+            onChange={handleChange('payment')}
+          />
+          <Radio 
+            name="payment" 
+            label="Bank Transfer" 
+            value="bank"
+            checked={formData.payment === 'bank'}
+            onChange={handleChange('payment')}
+          />
+        </Box>
+      </Box>
+      
+      <Button type="submit" fullWidth>
+        Continue to Checkout
+      </Button>
+    </Box>
+  );
+}`}
+/>
+
+## Accessibility Features
+
+The Radio component includes built-in accessibility features:
+
+<LiveExample
+  code={`import { Radio, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With aria-describedby</Text>
+        <Radio 
+          name="a11y1" 
+          label="Subscribe to newsletter" 
+          aria-describedby="newsletter-help"
+        />
+        <Text id="newsletter-help" size="sm" color="secondary" mt={1}>
+          We'll send you weekly updates about new features
+        </Text>
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>Required Field</Text>
+        <Radio 
+          name="a11y2" 
+          label="I agree to the terms and conditions" 
+          aria-required="true"
+          required
+        />
+      </Box>
+      
+      <Box>
+        <Text size="sm" weight="semibold" mb={2}>With Error</Text>
+        <Radio 
+          name="a11y3" 
+          label="Option with error" 
+          error
+          aria-invalid="true"
+          aria-describedby="error-message"
+        />
+        <Text id="error-message" size="sm" style={{ color: 'var(--color-feedback-error)' }} mt={1}>
+          Please select a valid option
+        </Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Radio is fully typed with TypeScript:
+
+```typescript
+import { Radio, RadioProps } from '@beauginbey/vanilla-components';
+
+// Type-safe props
+const MyRadio = (props: RadioProps) => {
+  return <Radio {...props} />;
+};
+
+// Controlled radio group
+const RadioGroup = () => {
+  const [value, setValue] = useState<string>('option1');
+  
+  return (
+    <>
+      <Radio
+        name="group"
+        value="option1"
+        label="Option 1"
+        checked={value === 'option1'}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Radio
+        name="group"
+        value="option2"
+        label="Option 2"
+        checked={value === 'option2'}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </>
+  );
+};
+```

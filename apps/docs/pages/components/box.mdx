@@ -1,0 +1,150 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Box
+
+The Box component is the foundation of our layout system. It provides access to design tokens through the styling props.
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box 
+      p={4} 
+      backgroundColor={3} 
+      borderRadius="lg"
+      display="flex"
+      flexDirection="column"
+      gap={3}
+    >
+      <Box p={3} backgroundColor={2} borderRadius="md">
+        <Text>I'm inside a Box!</Text>
+      </Box>
+      <Box p={3} backgroundColor={4} borderRadius="md">
+        <Text>Boxes can be nested and styled</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+- `as` - Render as a different HTML element (default: `div`)
+- `p`, `pt`, `pb`, `pl`, `pr`, `px`, `py` - Padding utilities
+- `m`, `mt`, `mb`, `ml`, `mr`, `mx`, `my` - Margin utilities
+- `display` - CSS display property
+- `flexDirection`, `justifyContent`, `alignItems`, `gap` - Flexbox utilities
+- `backgroundColor`, `color`, `borderColor` - Color utilities
+- `borderRadius`, `boxShadow` - Visual utilities
+- `style` - Additional CSS styles
+- `minHeight`, `minWidth`, `maxHeight`, `maxWidth`, `height`, `width` - Dimension utilities
+
+## Spacing
+
+The Box component uses our spacing scale for padding and margin props:
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={4} flexDirection="column">
+      <Box p={2} backgroundColor={3} borderRadius="md">
+        <Text>p={2} - Small padding</Text>
+      </Box>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>p={4} - Medium padding</Text>
+      </Box>
+      <Box p={6} backgroundColor={3} borderRadius="md">
+        <Text>p={6} - Large padding</Text>
+      </Box>
+      <Box px={6} py={3} backgroundColor={3} borderRadius="md">
+        <Text>px={6} py={3} - Different horizontal/vertical padding</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Layout
+
+Use Box for creating flexible layouts with flexbox:
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" gap={4} flexDirection="column">
+      <Box display="flex" gap={2} justifyContent="space-between">
+        <Box p={3} backgroundColor={3} borderRadius="md" flex={1}>
+          <Text>Left</Text>
+        </Box>
+        <Box p={3} backgroundColor={3} borderRadius="md" flex={1}>
+          <Text>Right</Text>
+        </Box>
+      </Box>
+      
+      <Box display="flex" gap={2} alignItems="center" justifyContent="center" minHeight="100px" backgroundColor={4} borderRadius="md">
+        <Text>Centered content</Text>
+      </Box>
+      
+      <Box display="flex" gap={2} flexWrap="wrap">
+        {[1, 2, 3, 4, 5, 6].map(i => (
+          <Box key={i} p={3} backgroundColor={3} borderRadius="md" width="calc(33.333% - 8px)">
+            <Text>Item {i}</Text>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Polymorphic Component
+
+Box can render as any HTML element using the `as` prop:
+
+<LiveExample
+  code={`import { Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={3}>
+      <Box as="section" p={4} backgroundColor={3} borderRadius="md">
+        <Text>This is a section element</Text>
+      </Box>
+      
+      <Box as="article" p={4} backgroundColor={3} borderRadius="md">
+        <Text>This is an article element</Text>
+      </Box>
+      
+      <Box as="nav" p={4} backgroundColor={3} borderRadius="md">
+        <Text>This is a nav element</Text>
+      </Box>
+      
+      <Box as="a" href="#" p={4} backgroundColor={3} borderRadius="md" style={{ textDecoration: 'none' }}>
+        <Text>This is an anchor element</Text>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## TypeScript
+
+Box is fully typed with TypeScript, including support for the `as` prop:
+
+```typescript
+import { Box } from '@beauginbey/vanilla-components';
+
+// Type-safe as prop
+<Box as="button" onClick={() => {}} />
+<Box as="a" href="/path" />
+
+// Custom component
+const CustomBox = (props: BoxProps<'div'>) => {
+  return <Box {...props} />;
+};
+```
