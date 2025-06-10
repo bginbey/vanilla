@@ -9,6 +9,7 @@ export * from './components/Checkbox';
 export * from './components/Radio';
 export * from './components/Switch';
 export * from './components/FormField';
+export * from './components/Icon';
 
 // Styles
 export { vars, theme } from './styles/theme.css';

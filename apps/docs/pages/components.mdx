@@ -519,6 +519,82 @@ All components in the Vanilla Design System are built with accessibility in mind
 - **Semantic HTML**: Components render appropriate HTML elements
 - **Screen Reader Support**: Components work well with assistive technologies
 
+## Icon
+
+A flexible icon component that works with any icon library. The Icon component provides consistent sizing, coloring, and styling for SVG icons.
+
+<LiveExample
+  code={`import { Icon, IconProvider, Button, Box, Text } from '@beauginbey/vanilla-components';
+
+// Mock icons for demonstration
+const IconHome = (props) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
+  </svg>
+);
+
+const IconSearch = (props) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.35-4.35" />
+  </svg>
+);
+
+const IconHeart = (props) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+  </svg>
+);
+
+export default function App() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      {/* Basic icons */}
+      <Box display="flex" gap={3} alignItems="center">
+        <Icon icon={IconHome} />
+        <Icon icon={IconSearch} size="lg" />
+        <Icon icon={IconHeart} color="error" />
+      </Box>
+      
+      {/* Icon sizes */}
+      <Box display="flex" gap={2} alignItems="center">
+        <Icon icon={IconHeart} size="xs" color="error" />
+        <Icon icon={IconHeart} size="sm" color="error" />
+        <Icon icon={IconHeart} size="md" color="error" />
+        <Icon icon={IconHeart} size="lg" color="error" />
+        <Icon icon={IconHeart} size="xl" color="error" />
+      </Box>
+      
+      {/* Icons in buttons */}
+      <Box display="flex" gap={2}>
+        <Button leftIcon={IconSearch}>Search</Button>
+        <Button rightIcon={IconHeart} variant="outline">Favorite</Button>
+      </Box>
+      
+      {/* Icon provider for consistent styling */}
+      <IconProvider size="lg" color="info" stroke={1.5}>
+        <Box display="flex" gap={3}>
+          <Icon icon={IconHome} />
+          <Icon icon={IconSearch} />
+          <Icon icon={IconHeart} />
+        </Box>
+      </IconProvider>
+    </Box>
+  );
+}`}
+/>
+
+### Icon Props
+
+- `icon` - The icon component to render (required)
+- `size` - Icon size: `xs`, `sm`, `md`, `lg`, `xl`, or custom value
+- `color` - Icon color: semantic colors or scale values (1-12)
+- `stroke` - Stroke width (if supported by icon library)
+- `label` - Accessible label for the icon
+- `className` - Additional CSS classes
+- `style` - Inline styles
+
 ## TypeScript Support
 
 All components are fully typed with TypeScript, providing excellent IDE support and type safety:

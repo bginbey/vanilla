@@ -1,0 +1,206 @@
+# Icon
+
+A flexible icon component that works with any icon library. The Icon component provides consistent sizing, coloring, and styling for SVG icons while maintaining accessibility.
+
+## Installation
+
+First, install your preferred icon library. We recommend Tabler Icons:
+
+```bash
+npm install @tabler/icons-react
+```
+
+Other popular options include:
+- `react-icons` - Multiple icon sets in one package
+- `@heroicons/react` - Beautiful hand-crafted SVG icons
+- `lucide-react` - Beautiful & consistent icon toolkit
+
+## Basic Usage
+
+```tsx
+import { Icon } from '@beauginbey/vanilla-components';
+import { IconHome, IconUser, IconSearch } from '@tabler/icons-react';
+
+function App() {
+  return (
+    <>
+      <Icon icon={IconHome} />
+      <Icon icon={IconUser} size="lg" />
+      <Icon icon={IconSearch} color="info" />
+    </>
+  );
+}
+```
+
+## Sizes
+
+The Icon component supports both preset sizes and custom dimensions:
+
+```tsx
+// Preset sizes
+<Icon icon={IconHome} size="xs" />  // 12px
+<Icon icon={IconHome} size="sm" />  // 16px
+<Icon icon={IconHome} size="md" />  // 20px (default)
+<Icon icon={IconHome} size="lg" />  // 24px
+<Icon icon={IconHome} size="xl" />  // 32px
+
+// Custom sizes
+<Icon icon={IconHome} size={48} />     // 48px
+<Icon icon={IconHome} size="2.5rem" /> // 2.5rem
+```
+
+## Colors
+
+Icons can use semantic colors, color scale values, or inherit from parent:
+
+```tsx
+// Semantic colors
+<Icon icon={IconHeart} color="error" />
+<Icon icon={IconCheck} color="success" />
+<Icon icon={IconInfo} color="info" />
+
+// Color scale values (1-12)
+<Icon icon={IconStar} color={9} />    // Primary color
+<Icon icon={IconStar} color={11} />   // Secondary text
+
+// Special values
+<Icon icon={IconHome} color="current" />  // currentColor (default)
+<Icon icon={IconHome} color="inherit" />  // inherit from parent
+```
+
+## With Buttons
+
+Icons integrate seamlessly with buttons:
+
+```tsx
+<Button leftIcon={IconSearch}>
+  Search
+</Button>
+
+<Button rightIcon={IconArrowRight} variant="outline">
+  Next
+</Button>
+
+<Button leftIcon={IconDownload} rightIcon={IconExternalLink}>
+  Download
+</Button>
+
+// Icon-only button
+<Button aria-label="Settings">
+  <Icon icon={IconSettings} />
+</Button>
+```
+
+## Icon Provider
+
+Use IconProvider to set default props for all icons:
+
+```tsx
+import { IconProvider } from '@beauginbey/vanilla-components';
+
+function App() {
+  return (
+    <IconProvider size="lg" color="secondary" stroke={1.5}>
+      {/* All icons will inherit these defaults */}
+      <Icon icon={IconHome} />
+      <Icon icon={IconUser} />
+      
+      {/* Override defaults as needed */}
+      <Icon icon={IconHeart} color="error" size="xl" />
+    </IconProvider>
+  );
+}
+```
+
+## Accessibility
+
+Always provide accessible labels for icons:
+
+```tsx
+// Decorative icons (automatically hidden from screen readers)
+<Icon icon={IconStar} />
+
+// Meaningful icons
+<Icon icon={IconWarning} label="Warning message" />
+
+// Icon buttons
+<Button aria-label="Open settings">
+  <Icon icon={IconSettings} />
+</Button>
+```
+
+## Custom Styling
+
+Icons support custom styling through className and style props:
+
+```tsx
+<Icon 
+  icon={IconHome}
+  size="xl"
+  style={{
+    backgroundColor: 'var(--blue-3)',
+    padding: '8px',
+    borderRadius: '8px',
+  }}
+/>
+
+<Icon 
+  icon={IconHeart}
+  className="animate-pulse"
+  color="error"
+/>
+```
+
+## Using Different Icon Libraries
+
+The Icon component works with any React icon library that exports SVG components:
+
+### React Icons
+```tsx
+import { FaHome, FaUser } from 'react-icons/fa';
+
+<Icon icon={FaHome} />
+<Icon icon={FaUser} size="lg" />
+```
+
+### Heroicons
+```tsx
+import { HomeIcon, UserIcon } from '@heroicons/react/24/outline';
+
+<Icon icon={HomeIcon} />
+<Icon icon={UserIcon} size="lg" />
+```
+
+### Custom SVG Components
+```tsx
+const CustomIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+    <path d="..." />
+  </svg>
+);
+
+<Icon icon={CustomIcon} />
+```
+
+## API Reference
+
+### Icon Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| icon | `React.ComponentType` | - | The icon component to render |
+| size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| number \| string` | `'md'` | Size of the icon |
+| color | `IconColor \| number` | `'current'` | Color of the icon |
+| stroke | `number` | - | Stroke width (if supported by icon) |
+| label | `string` | - | Accessible label for the icon |
+| className | `string` | - | Additional CSS classes |
+| style | `CSSProperties` | - | Inline styles |
+
+### IconProvider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| size | `IconSize \| number \| string` | - | Default size for all icons |
+| color | `IconColor` | - | Default color for all icons |
+| stroke | `number` | - | Default stroke width |
+| className | `string` | - | Class name for all icons |

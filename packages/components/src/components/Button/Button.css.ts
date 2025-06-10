@@ -1,4 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { styleVariants } from '@vanilla-extract/css';
 import { vars } from '../../styles/theme.css';
 
 export const button = recipe({
@@ -110,5 +111,16 @@ export const button = recipe({
     variant: 'solid',
     size: 'md',
     fullWidth: false,
+  },
+});
+
+export const buttonIcon = styleVariants({
+  left: {
+    marginRight: '-0.125rem',
+    marginLeft: '-0.25rem',
+  },
+  right: {
+    marginLeft: '-0.125rem',
+    marginRight: '-0.25rem',
   },
 });

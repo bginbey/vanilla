@@ -1,6 +1,8 @@
 import React, { forwardRef, ElementType, ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react';
 import { clsx } from 'clsx';
-import { button } from './Button.css';
+import { button, buttonIcon } from './Button.css';
+import { Icon } from '../Icon';
+import type { IconProps } from '../Icon';
 
 // Define the button-specific props
 export interface ButtonOwnProps {
@@ -8,6 +10,9 @@ export interface ButtonOwnProps {
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   as?: ElementType;
+  leftIcon?: IconProps['icon'];
+  rightIcon?: IconProps['icon'];
+  iconProps?: Omit<IconProps, 'icon'>;
 }
 
 // Create a type that combines button props with element props
@@ -31,18 +36,47 @@ export const Button: ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps
       variant = 'solid',
       size = 'md',
       fullWidth = false,
+      leftIcon,
+      rightIcon,
+      iconProps,
+      children,
       ...props
     },
     ref
   ) {
     const Component = as || 'button';
+    
+    // Icon size mapping based on button size
+    const iconSize = {
+      sm: 'sm',
+      md: 'md',
+      lg: 'lg',
+    }[size] as IconProps['size'];
 
     return (
       <Component
         ref={ref}
         className={clsx(button({ variant, size, fullWidth }), className)}
         {...props}
-      />
+      >
+        {leftIcon && (
+          <Icon
+            icon={leftIcon}
+            size={iconSize}
+            className={buttonIcon.left}
+            {...iconProps}
+          />
+        )}
+        {children}
+        {rightIcon && (
+          <Icon
+            icon={rightIcon}
+            size={iconSize}
+            className={buttonIcon.right}
+            {...iconProps}
+          />
+        )}
+      </Component>
     );
   }
 ) as ButtonComponent;

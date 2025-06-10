@@ -27,6 +27,17 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
+  "peerDependenciesMeta": {
+    "@tabler/icons-react": {
+      "optional": true
+    },
+    "react-icons": {
+      "optional": true
+    },
+    "@heroicons/react": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@vanilla-extract/css": "^1.14.0",
     "@vanilla-extract/dynamic": "^2.1.0",
