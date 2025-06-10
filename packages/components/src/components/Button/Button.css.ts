@@ -10,7 +10,7 @@ export const button = recipe({
     fontWeight: vars.font.weight.medium,
     lineHeight: vars.font.lineHeight.normal,
     borderRadius: vars.radius.md,
-    transition: `${vars.transition.property.common} ${vars.duration.fast} ${vars.easing.easeInOut}`,
+    transition: `background-color ${vars.duration.fast} ${vars.easing.easeInOut}, border-color ${vars.duration.fast} ${vars.easing.easeInOut}, box-shadow ${vars.duration.fast} ${vars.easing.easeInOut}, transform ${vars.duration.fast} ${vars.easing.easeInOut}, opacity ${vars.duration.fast} ${vars.easing.easeInOut}`,
     boxShadow: vars.shadow.none,
     position: 'relative',
     overflow: 'hidden',
@@ -23,12 +23,13 @@ export const button = recipe({
       boxShadow: `0 0 0 2px ${vars.color.brand.primary}`,
       outline: 'none',
     },
-    ':active:not(:disabled)': {
+    ':active': {
       transform: 'scale(0.98)',
     },
     ':disabled': {
       opacity: 0.5,
       cursor: 'not-allowed',
+      pointerEvents: 'none',
     },
   },
   variants: {
@@ -37,12 +38,11 @@ export const button = recipe({
         backgroundColor: vars.color.brand.primary,
         color: vars.color.text.inverse,
         boxShadow: vars.shadow.sm,
-        ':hover:not(:disabled)': {
-          backgroundColor: vars.color.brand.secondary,
+        ':hover': {
           boxShadow: vars.shadow.md,
           transform: 'translateY(-1px)',
         },
-        ':active:not(:disabled)': {
+        ':active': {
           boxShadow: vars.shadow.xs,
           transform: 'translateY(0)',
         },
@@ -52,12 +52,11 @@ export const button = recipe({
         color: vars.color.brand.primary,
         borderColor: vars.color.brand.primary,
         boxShadow: 'none',
-        ':hover:not(:disabled)': {
-          backgroundColor: vars.color.brand.primary,
-          color: vars.color.text.inverse,
+        ':hover': {
+          borderColor: vars.color.brand.secondary,
           boxShadow: vars.shadow.sm,
         },
-        ':active:not(:disabled)': {
+        ':active': {
           boxShadow: 'none',
           transform: 'scale(0.98)',
         },
@@ -65,12 +64,10 @@ export const button = recipe({
       ghost: {
         backgroundColor: 'transparent',
         color: vars.color.text.primary,
-        ':hover:not(:disabled)': {
-          backgroundColor: vars.color.background.secondary,
+        ':hover': {
           boxShadow: vars.shadow.xs,
         },
-        ':active:not(:disabled)': {
-          backgroundColor: vars.color.background.tertiary,
+        ':active': {
           boxShadow: 'none',
         },
       },
