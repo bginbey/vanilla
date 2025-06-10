@@ -1,6 +1,6 @@
 {
   "name": "@beauginbey/vanilla-colors",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Accessible color system for Vanilla Design System",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

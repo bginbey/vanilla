@@ -1,8 +1,8 @@
-# @beauginbey/vanilla-docs
+# @beauginbey/vanilla-colors
 
-## 0.0.4
+## 0.1.0
 
-### Patch Changes
+### Minor Changes
 
 - 2b01cec: Introduce new color system package and migrate to Radix UI Colors approach
 
@@ -26,31 +26,3 @@
   - Updated to use new color system
   - Removed references to old themes
   - Documentation updated to reflect new approach
-
-- Updated dependencies [2b01cec]
-  - @beauginbey/vanilla-colors@0.1.0
-  - @beauginbey/vanilla-components@1.2.0
-  - @beauginbey/vanilla-tokens@1.1.1
-
-## 0.0.3
-
-### Patch Changes
-
-- Updated dependencies
-- Updated dependencies
-  - @beauginbey/vanilla-tokens@1.1.0
-  - @beauginbey/vanilla-components@1.1.1
-
-## 0.0.2
-
-### Patch Changes
-
-- Updated dependencies
-  - @beauginbey/vanilla-components@1.1.0
-
-## 0.0.1
-
-### Patch Changes
-
-- Updated dependencies
-  - @beauginbey/vanilla-components@1.0.1
