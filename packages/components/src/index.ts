@@ -12,6 +12,12 @@ export * from './components/FormField';
 export * from './components/Icon';
 export * from './components/IconButton';
 
+// Layout components
+export * from './components/Flex';
+export * from './components/Grid';
+export * from './components/Container';
+export * from './components/Section';
+
 // Styles
 export { vars, theme } from './styles/theme.css';
 export { sprinkles } from './styles/sprinkles.css';

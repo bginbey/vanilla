@@ -10,10 +10,6 @@ export interface BoxOwnProps extends Sprinkles {
   style?: React.CSSProperties;
   minHeight?: React.CSSProperties['minHeight'];
   minWidth?: React.CSSProperties['minWidth'];
-  maxHeight?: React.CSSProperties['maxHeight'];
-  maxWidth?: React.CSSProperties['maxWidth'];
-  height?: React.CSSProperties['height'];
-  width?: React.CSSProperties['width'];
 }
 
 // Combined props type for Box
@@ -22,7 +18,7 @@ export type BoxProps<C extends React.ElementType = 'div'> = BoxOwnProps &
 
 // Box component with simpler typing
 export const Box = React.forwardRef<HTMLElement, BoxOwnProps>(
-  ({ as: Component = 'div', className, style, minHeight, minWidth, maxHeight, maxWidth, height, width, ...restProps }, ref) => {
+  ({ as: Component = 'div', className, style, minHeight, minWidth, ...restProps }, ref) => {
     const { otherProps, sprinkleProps } = extractSprinkleProps(restProps);
 
     // Combine style props
@@ -30,10 +26,6 @@ export const Box = React.forwardRef<HTMLElement, BoxOwnProps>(
       ...style,
       ...(minHeight && { minHeight }),
       ...(minWidth && { minWidth }),
-      ...(maxHeight && { maxHeight }),
-      ...(maxWidth && { maxWidth }),
-      ...(height && { height }),
-      ...(width && { width }),
     };
 
     return React.createElement(Component, {
@@ -52,7 +44,11 @@ function extractSprinkleProps(props: Record<string, unknown>) {
   const otherProps: Record<string, unknown> = {};
 
   const sprinkleKeys = [
-    'display', 'flexDirection', 'justifyContent', 'alignItems', 'gap',
+    'display', 'flexDirection', 'flexWrap', 'justifyContent', 'alignItems', 
+    'alignContent', 'justifyItems', 'alignSelf', 'justifySelf',
+    'gap', 'columnGap', 'rowGap',
+    'gridTemplateColumns', 'gridTemplateRows', 'gridAutoFlow', 
+    'gridAutoColumns', 'gridAutoRows',
     'padding', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight',
     'margin', 'marginTop', 'marginBottom', 'marginLeft', 'marginRight',
     'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'textAlign',
@@ -60,7 +56,8 @@ function extractSprinkleProps(props: Record<string, unknown>) {
     'fontFamily', 'position', 'top', 'right', 'bottom', 'left', 'zIndex',
     'overflow', 'opacity', 'p', 'pt', 'pb', 'pl', 'pr', 'px', 'py',
     'm', 'mt', 'mb', 'ml', 'mr', 'mx', 'my', 'cursor', 'userSelect', 'border',
-    'transitionProperty', 'transitionDuration', 'transitionTimingFunction'
+    'transitionProperty', 'transitionDuration', 'transitionTimingFunction',
+    'width', 'height', 'maxWidth'
   ];
 
   Object.keys(props).forEach(key => {
