@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, Button } from '@beauginbey/vanilla-components';
+import { Box, Text } from '@beauginbey/vanilla-components';
 import { ColorScale } from './ColorScale';
 import * as colors from '@beauginbey/vanilla-colors';
 
@@ -9,20 +9,19 @@ export function ColorGrid() {
   useEffect(() => {
     // Check current theme on mount
     setIsDark(document.documentElement.classList.contains('dark'));
-  }, []);
-
-  const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
     
-    if (newIsDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
+    // Listen for theme changes
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    return () => observer.disconnect();
+  }, []);
 
   // Group colors by type
   const grayScales = [
@@ -47,19 +46,6 @@ export function ColorGrid() {
 
   return (
     <Box>
-      {/* Theme Toggle */}
-      <Box mb={6} display="flex" justifyContent="space-between" alignItems="center">
-        <Text size="lg" weight="semibold">
-          Color Scales
-        </Text>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={toggleTheme}
-        >
-          {isDark ? '🌞' : '🌙'} {isDark ? 'Light' : 'Dark'} Mode
-        </Button>
-      </Box>
 
       {/* Gray Scales */}
       <Box mb={8}>
