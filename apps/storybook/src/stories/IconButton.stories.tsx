@@ -129,7 +129,7 @@ export const ThemeToggle: Story = {
     return (
       <Box 
         p={6} 
-        backgroundColor={isDark ? 'primary' : 'tertiary'} 
+        backgroundColor={isDark ? 10 : 2} 
         borderRadius="lg"
         minWidth="200px"
       >

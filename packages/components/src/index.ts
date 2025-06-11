@@ -2,6 +2,7 @@
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Text';
+export * from './components/Theme';
 export * from './components/ThemeProvider';
 export * from './components/Input';
 export * from './components/Select';
@@ -24,6 +25,9 @@ export type {
   PolymorphicComponentPropWithRef, 
   PolymorphicRef 
 } from './utils/polymorphic';
+
+// Import colors CSS for CSS variables
+import '@beauginbey/vanilla-colors/css';
 
 // Global styles are bundled automatically
 import './styles/global.css';

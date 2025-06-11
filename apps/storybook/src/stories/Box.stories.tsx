@@ -23,7 +23,7 @@ const meta = {
     },
     backgroundColor: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary'],
+      options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'transparent'],
     },
   },
 } satisfies Meta<typeof Box>;
@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     p: 4,
-    backgroundColor: 'secondary',
+    backgroundColor: 2,
     borderRadius: 'md',
     children: 'This is a Box component',
   },
@@ -45,18 +45,18 @@ export const FlexLayout: Story = {
     display: 'flex',
     gap: 4,
     p: 4,
-    backgroundColor: 'secondary',
+    backgroundColor: 2,
     borderRadius: 'lg',
   },
   render: (args) => (
     <Box {...args}>
-      <Box p={3} backgroundColor="primary" borderRadius="md">
+      <Box p={3} backgroundColor={3} borderRadius="md">
         <Text>Item 1</Text>
       </Box>
-      <Box p={3} backgroundColor="primary" borderRadius="md">
+      <Box p={3} backgroundColor={3} borderRadius="md">
         <Text>Item 2</Text>
       </Box>
-      <Box p={3} backgroundColor="primary" borderRadius="md">
+      <Box p={3} backgroundColor={3} borderRadius="md">
         <Text>Item 3</Text>
       </Box>
     </Box>
@@ -67,7 +67,7 @@ export const AsSection: Story = {
   args: {
     as: 'section',
     p: 6,
-    backgroundColor: 'tertiary',
+    backgroundColor: 3,
     borderRadius: 'xl',
   },
   render: (args) => (
@@ -87,15 +87,15 @@ export const Responsive: Story = {
     p: { mobile: 2, tablet: 4, desktop: 6 },
     display: { mobile: 'block', tablet: 'flex' },
     gap: { tablet: 4 },
-    backgroundColor: 'secondary',
+    backgroundColor: 2,
     borderRadius: 'lg',
   },
   render: (args) => (
     <Box {...args}>
-      <Box p={3} backgroundColor="primary" borderRadius="md">
+      <Box p={3} backgroundColor={3} borderRadius="md">
         <Text>Responsive Item 1</Text>
       </Box>
-      <Box p={3} backgroundColor="primary" borderRadius="md">
+      <Box p={3} backgroundColor={3} borderRadius="md">
         <Text>Responsive Item 2</Text>
       </Box>
     </Box>

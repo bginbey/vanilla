@@ -182,6 +182,14 @@ pnpm release         # Build and publish packages
   - https://www.npmjs.com/package/@beauginbey/vanilla-components
   - https://www.npmjs.com/package/@beauginbey/vanilla-tokens
 
+## Import Guidelines
+Always use package imports for components and styles:
+```typescript
+import { Button, RadixTheme } from '@beauginbey/vanilla-components';
+import '@beauginbey/vanilla-components/styles.css';
+```
+See `packages/components/IMPORTS.md` for detailed import guidelines.
+
 ## Recent Updates & Fixes
 
 ### January 2025
