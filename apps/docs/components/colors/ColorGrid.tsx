@@ -68,9 +68,11 @@ export function ColorGrid() {
 
       {/* Color Scales */}
       <Box mb={8}>
-        <Text size="xl" weight="bold" mb={4}>
-          Colors
-        </Text>
+        <Box mb={4}>
+          <Text size="xl" weight="bold">
+            Colors
+          </Text>
+        </Box>
         <Box display="flex" flexDirection="column" gap={4}>
           {colorScales.map((colorData, index) => (
             <ColorScale
