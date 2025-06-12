@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Button } from '@beauginbey/vanilla-components';
+import { Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
 
 interface ExampleProps {
   step: number | number[];
@@ -14,11 +14,8 @@ function Example({ step, title, description, children }: ExampleProps) {
   return (
     <Box mb={8}>
       <Box mb={3}>
-        <Box display="flex" alignItems="center" gap={2} mb={2}>
-          <Box
-            display="flex"
-            gap={1}
-          >
+        <Flex alignItems="center" gap={2} mb={2}>
+          <Flex gap={1}>
             {steps.map(s => (
               <Box
                 key={s}
@@ -35,12 +32,12 @@ function Example({ step, title, description, children }: ExampleProps) {
                 </Text>
               </Box>
             ))}
-          </Box>
+          </Flex>
           <Text size="lg" weight="semibold">
             {title}
           </Text>
-        </Box>
-        <Text color={11}>
+        </Flex>
+        <Text color="secondary">
           {description}
         </Text>
       </Box>
@@ -67,14 +64,14 @@ export function ColorUsageExample() {
         title="App & Subtle Backgrounds"
         description="Steps 1 and 2 are designed for app backgrounds and subtle component backgrounds. Step 1 is typically used for the main app background, while Step 2 provides subtle contrast."
       >
-        <Box display="flex" gap={4}>
-          <Box flex={1} p={4} backgroundColor={1} borderRadius="md">
-            <Text size="sm" mb={2}>Step 1: App Background</Text>
+        <Flex gap={4}>
+          <Box style={{ flex: 1 }} p={4} backgroundColor={1} borderRadius="md">
+            <Box mb={2}><Text size="sm">Step 1: App Background</Text></Box>
             <Box p={3} backgroundColor={2} borderRadius="sm">
               <Text size="xs">Step 2: Subtle Background</Text>
             </Box>
           </Box>
-        </Box>
+        </Flex>
       </Example>
 
       {/* Steps 3-5: Component Backgrounds */}
@@ -83,7 +80,7 @@ export function ColorUsageExample() {
         title="Component Backgrounds"
         description="Steps 3, 4, and 5 are for UI component backgrounds. They're designed to provide clear state changes for interactive elements."
       >
-        <Box display="flex" gap={3} flexWrap="wrap">
+        <Flex gap={3} flexWrap="wrap">
           <Box p={3} backgroundColor={3} borderRadius="md" style={{ minWidth: '150px' }}>
             <Text size="sm">Step 3: Normal</Text>
           </Box>
@@ -93,7 +90,7 @@ export function ColorUsageExample() {
           <Box p={3} backgroundColor={5} borderRadius="md" style={{ minWidth: '150px' }}>
             <Text size="sm">Step 5: Active/Selected</Text>
           </Box>
-        </Box>
+        </Flex>
       </Example>
 
       {/* Steps 6-8: Borders */}
@@ -102,7 +99,7 @@ export function ColorUsageExample() {
         title="Borders & Separators"
         description="Steps 6, 7, and 8 are for borders. Step 6 for subtle borders, Step 7 for UI element borders, and Step 8 for strong borders and focus rings."
       >
-        <Box display="flex" gap={3} flexWrap="wrap">
+        <Flex gap={3} flexWrap="wrap">
           <Box
             p={3}
             backgroundColor={1}
@@ -136,7 +133,7 @@ export function ColorUsageExample() {
           >
             <Text size="sm">Step 8: Strong/Focus</Text>
           </Box>
-        </Box>
+        </Flex>
       </Example>
 
       {/* Steps 9-10: Solid Colors */}
@@ -145,7 +142,7 @@ export function ColorUsageExample() {
         title="Solid Colors"
         description="Steps 9 and 10 are designed for solid backgrounds. Step 9 is the purest, highest chroma color, while Step 10 is for hover states."
       >
-        <Box display="flex" gap={3} flexWrap="wrap">
+        <Flex gap={3} flexWrap="wrap">
           <Button variant="solid">
             Step 9: Primary Action
           </Button>
@@ -164,7 +161,7 @@ export function ColorUsageExample() {
           >
             Step 10: Hover State
           </Box>
-        </Box>
+        </Flex>
       </Example>
 
       {/* Steps 11-12: Text */}
@@ -174,10 +171,10 @@ export function ColorUsageExample() {
         description="Steps 11 and 12 are for text. Step 11 provides low-contrast text for secondary content, while Step 12 provides high-contrast text for primary content."
       >
         <Box>
-          <Text size="lg" color={12} mb={2}>
+          <Box mb={2}><Text size="lg" color="primary">
             Step 12: High-contrast text for headings and primary content
-          </Text>
-          <Text color={11}>
+          </Text></Box>
+          <Text color="secondary">
             Step 11: Low-contrast text for secondary content, descriptions, and subtle UI text that doesn&apos;t need to grab attention.
           </Text>
         </Box>
@@ -185,9 +182,9 @@ export function ColorUsageExample() {
 
       {/* Practical Example */}
       <Box mt={12}>
-        <Text size="2xl" weight="bold" mb={6}>
+        <Box mb={6}><Text size="2xl" weight="bold">
           Practical Example: Card Component
-        </Text>
+        </Text></Box>
         <Box
           p={6}
           backgroundColor={2}
@@ -196,29 +193,29 @@ export function ColorUsageExample() {
             border: '1px solid var(--gray-6)',
           }}
         >
-          <Box display="flex" gap={4} flexWrap="wrap">
+          <Flex gap={4} flexWrap="wrap">
             <Box
-              flex={1}
               p={5}
               backgroundColor={1}
               borderRadius="md"
               style={{
+                flex: 1,
                 border: '1px solid var(--gray-7)',
                 minWidth: '280px',
               }}
             >
               <Box mb={3}>
-                <Text size="lg" weight="semibold" color={12}>
+                <Text size="lg" weight="semibold" color="primary">
                   Card Title
                 </Text>
-                <Text size="sm" color={11}>
+                <Text size="sm" color="secondary">
                   Secondary text using Step 11
                 </Text>
               </Box>
               <Box mb={4}>
-                <Text color={12} mb={2}>
+                <Box mb={2}><Text color="primary">
                   This card demonstrates proper color usage across different UI elements.
-                </Text>
+                </Text></Box>
                 <Box
                   p={2}
                   backgroundColor={3}
@@ -227,21 +224,21 @@ export function ColorUsageExample() {
                     border: '1px solid var(--gray-6)',
                   }}
                 >
-                  <Text size="sm" color={11}>
+                  <Text size="sm" color="secondary">
                     Nested content with subtle background
                   </Text>
                 </Box>
               </Box>
-              <Box display="flex" gap={2}>
+              <Flex gap={2}>
                 <Button variant="solid" size="sm">
                   Primary Action
                 </Button>
                 <Button variant="outline" size="sm">
                   Secondary
                 </Button>
-              </Box>
+              </Flex>
             </Box>
-          </Box>
+          </Flex>
         </Box>
       </Box>
     </Box>

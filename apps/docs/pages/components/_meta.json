@@ -1,13 +1,34 @@
 {
+  "theme": "Theme",
+  "-- Layout": {
+    "type": "separator",
+    "title": "Layout"
+  },
   "box": "Box",
+  "container": "Container",
+  "section": "Section",
+  "flex": "Flex",
+  "grid": "Grid",
+  "-- Typography": {
+    "type": "separator",
+    "title": "Typography"
+  },
+  "text": "Text",
+  "-- Forms": {
+    "type": "separator",
+    "title": "Forms"
+  },
   "button": "Button",
   "checkbox": "Checkbox",
   "form-field": "FormField",
-  "icon": "Icon",
-  "icon-button": "IconButton",
   "input": "Input",
   "radio": "Radio",
   "select": "Select",
   "switch": "Switch",
-  "text": "Text"
+  "-- Display": {
+    "type": "separator",
+    "title": "Display"
+  },
+  "icon": "Icon",
+  "icon-button": "IconButton"
 }

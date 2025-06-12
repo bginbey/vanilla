@@ -1,0 +1,243 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Section
+
+A semantic layout component for organizing page content into distinct sections with consistent spacing.
+
+## Import
+
+```js
+import { Section } from '@beauginbey/vanilla-components';
+```
+
+## Basic Usage
+
+The `Section` component provides semantic HTML5 `<section>` elements with built-in spacing.
+
+<LiveExample
+  code={`import { Section, Container, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <div>
+      <Section>
+        <Container>
+          <Text as="h2" size="2xl" weight="bold" mb={3}>
+            About Us
+          </Text>
+          <Text color="secondary">
+            This is a section with default padding. Sections help organize 
+            content into meaningful groups while maintaining consistent spacing.
+          </Text>
+        </Container>
+      </Section>
+
+      <Section backgroundColor={2}>
+        <Container>
+          <Text as="h2" size="2xl" weight="bold" mb={3}>
+            Our Services
+          </Text>
+          <Text color="secondary">
+            Sections can have different background colors to create visual separation.
+          </Text>
+        </Container>
+      </Section>
+    </div>
+  );
+}`}
+/>
+
+## Size Variants
+
+Sections come with different padding sizes: `sm`, `md`, `lg`, and `xl`.
+
+<LiveExample
+  code={`import { Section, Container, Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const sizes = ['sm', 'md', 'lg', 'xl'];
+
+  return (
+    <Box>
+      {sizes.map((size, index) => (
+        <Section 
+          key={size} 
+          size={size}
+          backgroundColor={index % 2 === 0 ? 1 : 2}
+        >
+          <Container>
+            <Text weight="semibold">
+              {size} Section
+            </Text>
+            <Text size="sm" color="secondary">
+              This section has {size} padding
+            </Text>
+          </Container>
+        </Section>
+      ))}
+    </Box>
+  );
+}`}
+/>
+
+## Full Page Layout
+
+Combine sections to create complete page layouts.
+
+<LiveExample
+  code={`import { Section, Container, Text, Flex, Button, Box, Grid } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <div>
+      {/* Hero Section */}
+      <Section size="xl" backgroundColor={2}>
+        <Container>
+          <Box textAlign="center">
+            <Text as="h1" size="4xl" weight="bold" mb={4}>
+              Build Better Products
+            </Text>
+            <Text size="lg" color="secondary" mb={6}>
+              Create amazing user experiences with our comprehensive design system
+            </Text>
+            <Flex gap={3} justifyContent="center">
+              <Button variant="solid" size="lg">Get Started</Button>
+              <Button variant="outline" size="lg">View Examples</Button>
+            </Flex>
+          </Box>
+        </Container>
+      </Section>
+
+      {/* Features Section */}
+      <Section>
+        <Container>
+          <Text as="h2" size="3xl" weight="bold" mb={6} textAlign="center">
+            Key Features
+          </Text>
+          <Grid columns={{ mobile: 1, tablet: 3 }} gap={4}>
+            <Box p={6} backgroundColor={2} borderRadius="lg" textAlign="center">
+              <Text size="lg" weight="semibold" mb={2}>Fast</Text>
+              <Text size="sm" color="secondary">
+                Lightning-fast performance with zero runtime CSS
+              </Text>
+            </Box>
+            <Box p={6} backgroundColor={2} borderRadius="lg" textAlign="center">
+              <Text size="lg" weight="semibold" mb={2}>Accessible</Text>
+              <Text size="sm" color="secondary">
+                Built with accessibility in mind from the ground up
+              </Text>
+            </Box>
+            <Box p={6} backgroundColor={2} borderRadius="lg" textAlign="center">
+              <Text size="lg" weight="semibold" mb={2}>Responsive</Text>
+              <Text size="sm" color="secondary">
+                Mobile-first design that works on any device
+              </Text>
+            </Box>
+          </Grid>
+        </Container>
+      </Section>
+
+      {/* CTA Section */}
+      <Section size="lg" backgroundColor={9} style={{ color: 'white' }}>
+        <Container>
+          <Box textAlign="center">
+            <Text as="h2" size="3xl" weight="bold" mb={4}>
+              Ready to Get Started?
+            </Text>
+            <Text size="lg" mb={6} style={{ opacity: 0.9 }}>
+              Join thousands of developers building with our design system
+            </Text>
+            <Button variant="solid" size="lg" style={{ backgroundColor: 'white', color: 'var(--gray-12)' }}>
+              Start Building
+            </Button>
+          </Box>
+        </Container>
+      </Section>
+    </div>
+  );
+}`}
+/>
+
+## Alternating Backgrounds
+
+Create visual rhythm with alternating section backgrounds.
+
+<LiveExample
+  code={`import { Section, Container, Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const sections = [
+    { title: 'Introduction', content: 'Start with a brief overview of your topic.' },
+    { title: 'Main Points', content: 'Discuss the key points in detail.' },
+    { title: 'Examples', content: 'Provide concrete examples to illustrate your points.' },
+    { title: 'Conclusion', content: 'Summarize and provide next steps.' },
+  ];
+
+  return (
+    <Box>
+      {sections.map((section, index) => (
+        <Section 
+          key={section.title}
+          backgroundColor={index % 2 === 0 ? 1 : 2}
+        >
+          <Container size="md">
+            <Text as="h2" size="2xl" weight="bold" mb={3}>
+              {section.title}
+            </Text>
+            <Text color="secondary">
+              {section.content}
+            </Text>
+          </Container>
+        </Section>
+      ))}
+    </Box>
+  );
+}`}
+/>
+
+## Custom Spacing
+
+Override default spacing with custom padding values.
+
+<LiveExample
+  code={`import { Section, Container, Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box>
+      <Section py={12} backgroundColor={2}>
+        <Container>
+          <Text as="h2" size="3xl" weight="bold" mb={3} textAlign="center">
+            Custom Vertical Padding
+          </Text>
+          <Text color="secondary" textAlign="center">
+            This section has extra vertical padding (py={12})
+          </Text>
+        </Container>
+      </Section>
+
+      <Section px={8} py={6}>
+        <Container>
+          <Text as="h2" size="2xl" weight="bold" mb={3}>
+            Custom Horizontal Padding
+          </Text>
+          <Text color="secondary">
+            This section has custom horizontal and vertical padding
+          </Text>
+        </Container>
+      </Section>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+`Section` accepts all `Box` props plus the following:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Predefined padding size |
+| `as` | `React.ElementType` | `'section'` | HTML element to render |
+
+The component renders as a semantic HTML5 `<section>` element by default, which helps with document structure and accessibility.

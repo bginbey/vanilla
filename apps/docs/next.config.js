@@ -13,5 +13,5 @@ const withNextra = require('nextra')({
 
 module.exports = withVanillaExtract(withNextra({
   reactStrictMode: true,
-  transpilePackages: ['@vanilla/components', '@vanilla/tokens'],
+  transpilePackages: ['@beauginbey/vanilla-components', '@beauginbey/vanilla-tokens', '@beauginbey/vanilla-colors'],
 }));

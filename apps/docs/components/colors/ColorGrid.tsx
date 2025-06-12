@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text } from '@beauginbey/vanilla-components';
+import { Box, Text, Flex } from '@beauginbey/vanilla-components';
 import { ColorScale } from './ColorScale';
 import * as colors from '@beauginbey/vanilla-colors';
 
@@ -54,7 +54,7 @@ export function ColorGrid() {
             Neutrals
           </Text>
         </Box>
-        <Box display="flex" flexDirection="column" gap={4}>
+        <Flex flexDirection="column" gap={4}>
           {grayScales.map((colorData, index) => (
             <ColorScale
               key={`gray-${index}`}
@@ -63,7 +63,7 @@ export function ColorGrid() {
               isAlpha={colorData.isAlpha}
             />
           ))}
-        </Box>
+        </Flex>
       </Box>
 
       {/* Color Scales */}
@@ -73,7 +73,7 @@ export function ColorGrid() {
             Colors
           </Text>
         </Box>
-        <Box display="flex" flexDirection="column" gap={4}>
+        <Flex flexDirection="column" gap={4}>
           {colorScales.map((colorData, index) => (
             <ColorScale
               key={`${colorData.name}-${index}`}
@@ -82,7 +82,7 @@ export function ColorGrid() {
               isAlpha={colorData.isAlpha}
             />
           ))}
-        </Box>
+        </Flex>
       </Box>
 
       {/* Overlay Scales */}
@@ -92,7 +92,7 @@ export function ColorGrid() {
             Overlays
           </Text>
         </Box>
-        <Box display="flex" flexDirection="column" gap={4}>
+        <Flex flexDirection="column" gap={4}>
           <ColorScale
             name="Black"
             scale={{

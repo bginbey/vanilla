@@ -1,7 +1,7 @@
-import { Icon, IconProvider, Button, Box, Text } from '@beauginbey/vanilla-components';
+import { Icon, IconProvider, Button, Box, Text, Flex } from '@beauginbey/vanilla-components';
 
 // Mock icons for demonstration
-const IconHome = (props: React.SVGProps<SVGSVGElement>) => {
+const IconHome = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -11,7 +11,7 @@ const IconHome = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-const IconSearch = (props: React.SVGProps<SVGSVGElement>) => {
+const IconSearch = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -21,7 +21,7 @@ const IconSearch = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-const IconHeart = (props: React.SVGProps<SVGSVGElement>) => {
+const IconHeart = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -30,7 +30,7 @@ const IconHeart = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-const IconSettings = (props: React.SVGProps<SVGSVGElement>) => {
+const IconSettings = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -43,44 +43,52 @@ const IconSettings = (props: React.SVGProps<SVGSVGElement>) => {
 export default function IconExample() {
   return (
     <Box p={8}>
-      <Text as="h1" size="3xl" weight="bold" mb={6}>
-        Icon System Demo
-      </Text>
+      <Box mb={6}>
+        <Text as="h1" size="3xl" weight="bold">
+          Icon System Demo
+        </Text>
+      </Box>
 
       {/* Basic Usage */}
       <Box mb={8}>
-        <Text as="h2" size="2xl" weight="semibold" mb={4}>
-          Basic Icons
-        </Text>
-        <Box display="flex" gap={4} alignItems="center">
+        <Box mb={4}>
+          <Text as="h2" size="2xl" weight="semibold">
+            Basic Icons
+          </Text>
+        </Box>
+        <Flex gap={4} alignItems="center">
           <Icon icon={IconHome} />
           <Icon icon={IconSearch} size="lg" />
           <Icon icon={IconHeart} color="error" />
           <Icon icon={IconSettings} size="xl" color={9} />
-        </Box>
+        </Flex>
       </Box>
 
       {/* Size Variations */}
       <Box mb={8}>
-        <Text as="h2" size="2xl" weight="semibold" mb={4}>
-          Size Variations
-        </Text>
-        <Box display="flex" gap={4} alignItems="center">
+        <Box mb={4}>
+          <Text as="h2" size="2xl" weight="semibold">
+            Size Variations
+          </Text>
+        </Box>
+        <Flex gap={4} alignItems="center">
           <Icon icon={IconHeart} size="xs" color="error" />
           <Icon icon={IconHeart} size="sm" color="error" />
           <Icon icon={IconHeart} size="md" color="error" />
           <Icon icon={IconHeart} size="lg" color="error" />
           <Icon icon={IconHeart} size="xl" color="error" />
           <Icon icon={IconHeart} size={48} color="error" />
-        </Box>
+        </Flex>
       </Box>
 
       {/* Buttons with Icons */}
       <Box mb={8}>
-        <Text as="h2" size="2xl" weight="semibold" mb={4}>
-          Icons in Buttons
-        </Text>
-        <Box display="flex" gap={3} flexWrap="wrap">
+        <Box mb={4}>
+          <Text as="h2" size="2xl" weight="semibold">
+            Icons in Buttons
+          </Text>
+        </Box>
+        <Flex gap={3} flexWrap="wrap">
           <Button leftIcon={IconSearch} variant="solid">
             Search
           </Button>
@@ -90,15 +98,17 @@ export default function IconExample() {
           <Button leftIcon={IconHome} rightIcon={IconSettings} variant="ghost">
             Dashboard
           </Button>
-        </Box>
+        </Flex>
       </Box>
 
       {/* Icon-only Buttons */}
       <Box mb={8}>
-        <Text as="h2" size="2xl" weight="semibold" mb={4}>
-          Icon-only Buttons
-        </Text>
-        <Box display="flex" gap={3}>
+        <Box mb={4}>
+          <Text as="h2" size="2xl" weight="semibold">
+            Icon-only Buttons
+          </Text>
+        </Box>
+        <Flex gap={3}>
           <Button variant="solid" size="sm" aria-label="Search">
             <Icon icon={IconSearch} />
           </Button>
@@ -108,30 +118,34 @@ export default function IconExample() {
           <Button variant="ghost" aria-label="Settings">
             <Icon icon={IconSettings} />
           </Button>
-        </Box>
+        </Flex>
       </Box>
 
       {/* Icon Provider */}
       <Box mb={8}>
-        <Text as="h2" size="2xl" weight="semibold" mb={4}>
-          Icon Provider
-        </Text>
+        <Box mb={4}>
+          <Text as="h2" size="2xl" weight="semibold">
+            Icon Provider
+          </Text>
+        </Box>
         <IconProvider size="lg" color="info" stroke={1.5}>
-          <Box display="flex" gap={4} alignItems="center">
+          <Flex gap={4} alignItems="center">
             <Icon icon={IconHome} />
             <Icon icon={IconSearch} />
             <Icon icon={IconHeart} />
             <Icon icon={IconSettings} />
-          </Box>
+          </Flex>
         </IconProvider>
       </Box>
 
       {/* Custom Styling */}
       <Box>
-        <Text as="h2" size="2xl" weight="semibold" mb={4}>
-          Custom Styling
-        </Text>
-        <Box display="flex" gap={4} alignItems="center">
+        <Box mb={4}>
+          <Text as="h2" size="2xl" weight="semibold">
+            Custom Styling
+          </Text>
+        </Box>
+        <Flex gap={4} alignItems="center">
           <Icon
             icon={IconHome}
             size="xl"
@@ -157,7 +171,7 @@ export default function IconExample() {
               color: 'var(--purple-9)',
             }}
           />
-        </Box>
+        </Flex>
       </Box>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@beauginbey/vanilla-components';
+import { Box, Text, Flex, Grid } from '@beauginbey/vanilla-components';
 import { ColorSwatch } from './ColorSwatch';
 import type { ColorScale as ColorScaleType } from '@beauginbey/vanilla-colors';
 
@@ -15,18 +15,17 @@ export function ColorScale({ name, scale, isAlpha = false }: ColorScaleProps) {
 
   return (
     <Box>
-      <Box mb={3} display="flex" alignItems="center" gap={2}>
+      <Flex mb={3} alignItems="center" gap={2}>
         <Text size="sm" weight="semibold" style={{ fontFamily: 'monospace' }}>
           {name}
         </Text>
         {isAlpha && (
-          <Text size="xs" color={11} style={{ opacity: 0.7 }}>
+          <Text size="xs" color="secondary" style={{ opacity: 0.7 }}>
             Alpha
           </Text>
         )}
-      </Box>
-      <Box
-        display="grid"
+      </Flex>
+      <Grid
         style={{
           gridTemplateColumns: 'repeat(12, 1fr)',
           gap: '2px',
@@ -37,11 +36,11 @@ export function ColorScale({ name, scale, isAlpha = false }: ColorScaleProps) {
             key={step}
             colorName={colorName}
             step={step}
-            value={scale[step]}
+            value={scale[step as keyof ColorScaleType]}
             cssVar={`${cssVarPrefix}-${step}`}
           />
         ))}
-      </Box>
+      </Grid>
     </Box>
   );
 }

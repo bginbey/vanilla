@@ -100,9 +100,6 @@ if (container) {
               'https://unpkg.com/@beauginbey/vanilla-components@1.3.0/dist/index.css'
             ],
           }}
-          style={{
-            '--sp-preview-padding': '16px',
-          }}
           customSetup={{
             dependencies: {
               ...defaultDependencies,

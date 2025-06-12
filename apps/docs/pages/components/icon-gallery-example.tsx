@@ -1,8 +1,8 @@
-import { Icon, Box, Text } from '@beauginbey/vanilla-components';
+import { Icon, Box, Text, Flex } from '@beauginbey/vanilla-components';
 
 // Example icons
 
-const IconCopy = (props: React.SVGProps<SVGSVGElement>) => {
+const IconCopy = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -12,7 +12,7 @@ const IconCopy = (props: React.SVGProps<SVGSVGElement>) => {
   );
 };
 
-const IconCheck = (props: React.SVGProps<SVGSVGElement>) => {
+const IconCheck = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -24,39 +24,41 @@ const IconCheck = (props: React.SVGProps<SVGSVGElement>) => {
 export default function IconGalleryExample() {
   return (
     <Box p={6}>
-      <Text as="h2" size="2xl" weight="bold" mb={4}>
-        Icon Gallery Features
-      </Text>
+      <Box mb={4}>
+        <Text as="h2" size="2xl" weight="bold">
+          Icon Gallery Features
+        </Text>
+      </Box>
       
-      <Box display="flex" gap={4} flexWrap="wrap" mb={6}>
-        <Box 
+      <Flex gap={4} flexWrap="wrap" mb={6}>
+        <Flex 
           p={4} 
           borderRadius="lg" 
           backgroundColor={3}
-          display="flex"
           alignItems="center"
           gap={3}
         >
           <Icon icon={IconCopy} size="lg" color="info" />
           <Text>Click any icon to copy SVG</Text>
-        </Box>
+        </Flex>
         
-        <Box 
+        <Flex 
           p={4} 
           borderRadius="lg" 
-          backgroundColor="secondary"
-          display="flex"
+          backgroundColor={2}
           alignItems="center"
           gap={3}
         >
           <Icon icon={IconCheck} size="lg" color="success" />
           <Text>Toast notification on copy</Text>
-        </Box>
-      </Box>
+        </Flex>
+      </Flex>
       
-      <Text size="lg" color="secondary" mb={2}>
-        Features:
-      </Text>
+      <Box mb={2}>
+        <Text size="lg" color="secondary">
+          Features:
+        </Text>
+      </Box>
       <Box as="ul" pl={5}>
         <li>Search icons by name</li>
         <li>Filter by category</li>

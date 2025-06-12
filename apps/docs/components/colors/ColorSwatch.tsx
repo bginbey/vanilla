@@ -24,13 +24,12 @@ export function ColorSwatch({ colorName, step, value, cssVar, showLabel = true }
   };
 
   return (
-    <Box
-      position="relative"
+    <div
+      style={{ position: 'relative' }}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      <Box
-        as="button"
+      <button
         onClick={handleClick}
         style={{
           width: '100%',
@@ -92,6 +91,6 @@ export function ColorSwatch({ colorName, step, value, cssVar, showLabel = true }
           {copied && <div style={{ color: '#4ade80' }}>Copied!</div>}
         </Box>
       )}
-    </Box>
+    </div>
   );
 }

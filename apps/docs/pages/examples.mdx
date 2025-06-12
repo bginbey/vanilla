@@ -199,7 +199,7 @@ export default function App() {
             Notification Preferences
           </Text>
           
-          <Box display="flex" flexDirection="column" gap={3}>
+          <Flex flexDirection="column" gap={3}>
             <Box display="flex" alignItems="center" justifyContent="space-between">
               <Box>
                 <Text weight="medium">Email Notifications</Text>
@@ -293,10 +293,10 @@ export default function App() {
 
 ### Dashboard Layout
 
-A responsive dashboard layout using Box components.
+A responsive dashboard layout using Flex, Grid, Container, and Section components.
 
 <LiveExample
-  code={`import { Box, Text, Button } from '@beauginbey/vanilla-components';
+  code={`import { Container, Section, Flex, Grid, Box, Text, Button } from '@beauginbey/vanilla-components';
 
 export default function App() {
   const stats = [
@@ -307,31 +307,31 @@ export default function App() {
   ];
   
   return (
-    <Box p={6}>
-      {/* Header */}
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={6}>
-        <Text as="h1" size="3xl" weight="bold">
-          Dashboard
-        </Text>
-        <Box display="flex" gap={2}>
+    <Section>
+      <Container>
+        {/* Header */}
+        <Flex justifyContent="space-between" alignItems="center" mb={6}>
+          <Text as="h1" size="3xl" weight="bold">
+            Dashboard
+          </Text>
+          <Flex gap={2}>
           <Button variant="outline" size="sm">
             Export
           </Button>
           <Button size="sm">
             Add Widget
           </Button>
-        </Box>
-      </Box>
-      
-      {/* Stats Grid */}
-      <Box 
-        display="grid" 
-        gap={4} 
-        style={{ 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' 
-        }}
-        mb={6}
-      >
+          </Flex>
+        </Flex>
+        
+        {/* Stats Grid */}
+        <Grid 
+          gap={4} 
+          style={{ 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' 
+          }}
+          mb={6}
+        >
         {stats.map((stat) => (
           <Box
             key={stat.label}
@@ -343,7 +343,7 @@ export default function App() {
             <Text size="sm" color="tertiary" mb={2}>
               {stat.label}
             </Text>
-            <Box display="flex" alignItems="baseline" justifyContent="space-between">
+            <Flex alignItems="baseline" justifyContent="space-between">
               <Text size="2xl" weight="bold">
                 {stat.value}
               </Text>
@@ -353,26 +353,25 @@ export default function App() {
               >
                 {stat.change}
               </Text>
-            </Box>
+            </Flex>
           </Box>
         ))}
-      </Box>
+      </Grid>
       
-      {/* Content Area */}
-      <Box display="flex" gap={6} flexDirection={{ mobile: 'column', tablet: 'row' }}>
+        {/* Content Area */}
+        <Flex gap={6} flexDirection={{ mobile: 'column', tablet: 'row' }}>
         {/* Main Content */}
         <Box flex="1" backgroundColor="tertiary" borderRadius="lg" p={6}>
           <Text size="xl" weight="semibold" mb={4}>
             Recent Activity
           </Text>
-          <Box display="flex" flexDirection="column" gap={3}>
+          <Flex flexDirection="column" gap={3}>
             {[1, 2, 3, 4].map((i) => (
-              <Box
+              <Flex
                 key={i}
                 p={3}
-                backgroundColor="secondary"
+                backgroundColor={2}
                 borderRadius="md"
-                display="flex"
                 alignItems="center"
                 justifyContent="space-between"
               >
@@ -385,9 +384,9 @@ export default function App() {
                 <Button variant="ghost" size="sm">
                   View
                 </Button>
-              </Box>
+              </Flex>
             ))}
-          </Box>
+          </Flex>
         </Box>
         
         {/* Sidebar */}
@@ -418,8 +417,9 @@ export default function App() {
             </Text>
           </Box>
         </Box>
-      </Box>
-    </Box>
+      </Flex>
+    </Container>
+  </Section>
   );
 }`}
 />

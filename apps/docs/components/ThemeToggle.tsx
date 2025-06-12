@@ -1,11 +1,9 @@
 import React from 'react';
-import { useTheme } from 'nextra-theme-docs';
-
-// We'll create a simple button for now since we can't import from vanilla-components in this context
-// This is because the docs app doesn't have vanilla-components as a dependency
+import { useTheme, IconButton } from '@beauginbey/vanilla-components';
+import { useTheme as useNextraTheme } from 'nextra-theme-docs';
 
 // Sun icon
-const IconSun = (props: React.SVGProps<SVGSVGElement>) => {
+const IconSun = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -23,7 +21,7 @@ const IconSun = (props: React.SVGProps<SVGSVGElement>) => {
 };
 
 // Moon icon
-const IconMoon = (props: React.SVGProps<SVGSVGElement>) => {
+const IconMoon = (props: { width?: number | string; height?: number | string; size?: number | string; color?: string; stroke?: number; className?: string; [key: string]: any }) => {
   const { stroke = 2, ...rest } = props;
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
@@ -34,6 +32,7 @@ const IconMoon = (props: React.SVGProps<SVGSVGElement>) => {
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const { setTheme: setNextraTheme } = useNextraTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -49,32 +48,19 @@ export function ThemeToggle() {
 
   const isDark = theme === 'dark';
 
+  const handleThemeToggle = () => {
+    const newTheme = isDark ? 'light' : 'dark';
+    setTheme(newTheme);
+    setNextraTheme(newTheme); // Also update Nextra theme for docs consistency
+  };
+
   return (
-    <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+    <IconButton
+      icon={isDark ? IconMoon : IconSun}
+      onClick={handleThemeToggle}
+      variant="ghost"
+      size="sm"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '32px',
-        height: '32px',
-        padding: 0,
-        border: 'none',
-        borderRadius: '6px',
-        backgroundColor: 'transparent',
-        color: 'currentColor',
-        cursor: 'pointer',
-        transition: 'background-color 0.2s',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = 'rgba(128, 128, 128, 0.1)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = 'transparent';
-      }}
-    >
-      {isDark ? <IconMoon /> : <IconSun />}
-    </button>
+    />
   );
 }

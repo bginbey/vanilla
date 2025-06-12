@@ -1,0 +1,372 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Theme
+
+Advanced theming components that provide comprehensive visual customization for your application. The theme system includes `RadixTheme` for advanced styling options and `ThemeProvider` for managing light/dark modes.
+
+## Import
+
+```js
+import { RadixTheme, ThemeProvider, useTheme } from '@beauginbey/vanilla-components';
+```
+
+## Basic Usage
+
+Wrap your application with `ThemeProvider` and `RadixTheme` to enable theming.
+
+<LiveExample
+  code={`import { RadixTheme, ThemeProvider, Box, Text, Button } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <ThemeProvider defaultTheme="light">
+      <RadixTheme>
+        <Box p={6}>
+          <Text as="h1" size="3xl" weight="bold" mb={4}>
+            Themed Application
+          </Text>
+          <Text color="secondary" mb={4}>
+            This content is wrapped with theme providers for consistent styling.
+          </Text>
+          <Button variant="solid">
+            Themed Button
+          </Button>
+        </Box>
+      </RadixTheme>
+    </ThemeProvider>
+  );
+}`}
+/>
+
+## Theme Toggle
+
+Use the `useTheme` hook to create theme toggles and access theme state.
+
+<LiveExample
+  code={`import { ThemeProvider, RadixTheme, useTheme, Box, Text, Button, IconButton } from '@beauginbey/vanilla-components';
+
+// Theme toggle component
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  
+  return (
+    <Button
+      variant="outline"
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+    >
+      {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+    </Button>
+  );
+}
+
+// Main app component
+function ThemedApp() {
+  return (
+    <Box p={6}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={6}>
+        <Text as="h2" size="2xl" weight="bold">
+          Theme Example
+        </Text>
+        <ThemeToggle />
+      </Box>
+      
+      <Box p={4} backgroundColor={2} borderRadius="lg">
+        <Text mb={2}>
+          The theme automatically switches between light and dark modes.
+        </Text>
+        <Text size="sm" color="secondary">
+          All components respect the current theme setting.
+        </Text>
+      </Box>
+    </Box>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider defaultTheme="light" storageKey="theme-demo">
+      <RadixTheme>
+        <ThemedApp />
+      </RadixTheme>
+    </ThemeProvider>
+  );
+}`}
+/>
+
+## Accent Colors
+
+RadixTheme supports various accent colors to customize the primary color scheme.
+
+<LiveExample
+  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const accentColors = ['blue', 'green', 'red', 'purple', 'orange', 'pink'];
+  const [accent, setAccent] = React.useState('blue');
+
+  return (
+    <ThemeProvider>
+      <RadixTheme accentColor={accent}>
+        <Box p={6}>
+          <Text as="h2" size="2xl" weight="bold" mb={4}>
+            Accent Colors
+          </Text>
+          
+          <Flex gap={2} mb={6} flexWrap="wrap">
+            {accentColors.map(color => (
+              <Button
+                key={color}
+                variant={accent === color ? 'solid' : 'outline'}
+                size="sm"
+                onClick={() => setAccent(color)}
+              >
+                {color}
+              </Button>
+            ))}
+          </Flex>
+          
+          <Box p={4} backgroundColor={2} borderRadius="lg">
+            <Text mb={3}>
+              Current accent: <strong>{accent}</strong>
+            </Text>
+            <Flex gap={3}>
+              <Button variant="solid">Primary</Button>
+              <Button variant="outline">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+            </Flex>
+          </Box>
+        </Box>
+      </RadixTheme>
+    </ThemeProvider>
+  );
+}`}
+/>
+
+## Gray Colors
+
+Customize the gray color palette used throughout your application.
+
+<LiveExample
+  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const grayColors = ['gray', 'mauve', 'slate', 'sage', 'olive', 'sand'];
+  const [gray, setGray] = React.useState('gray');
+
+  return (
+    <ThemeProvider>
+      <RadixTheme grayColor={gray}>
+        <Box p={6}>
+          <Text as="h2" size="2xl" weight="bold" mb={4}>
+            Gray Palettes
+          </Text>
+          
+          <Flex gap={2} mb={6} flexWrap="wrap">
+            {grayColors.map(color => (
+              <Button
+                key={color}
+                variant={gray === color ? 'solid' : 'outline'}
+                size="sm"
+                onClick={() => setGray(color)}
+              >
+                {color}
+              </Button>
+            ))}
+          </Flex>
+          
+          <Flex gap={3} flexDirection="column">
+            <Box p={3} backgroundColor={1} borderRadius="md">
+              <Text>Background 1</Text>
+            </Box>
+            <Box p={3} backgroundColor={2} borderRadius="md">
+              <Text>Background 2</Text>
+            </Box>
+            <Box p={3} backgroundColor={3} borderRadius="md">
+              <Text>Background 3</Text>
+            </Box>
+          </Flex>
+        </Box>
+      </RadixTheme>
+    </ThemeProvider>
+  );
+}`}
+/>
+
+## Appearance
+
+Control the overall theme appearance (light/dark) at the RadixTheme level.
+
+<LiveExample
+  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const [appearance, setAppearance] = React.useState('light');
+
+  return (
+    <ThemeProvider>
+      <RadixTheme appearance={appearance}>
+        <Box p={6}>
+          <Text as="h2" size="2xl" weight="bold" mb={4}>
+            Appearance Control
+          </Text>
+          
+          <Flex gap={3} mb={6}>
+            <Button
+              variant={appearance === 'light' ? 'solid' : 'outline'}
+              onClick={() => setAppearance('light')}
+            >
+              Light
+            </Button>
+            <Button
+              variant={appearance === 'dark' ? 'solid' : 'outline'}
+              onClick={() => setAppearance('dark')}
+            >
+              Dark
+            </Button>
+            <Button
+              variant={appearance === 'inherit' ? 'solid' : 'outline'}
+              onClick={() => setAppearance('inherit')}
+            >
+              System
+            </Button>
+          </Flex>
+          
+          <Box p={4} backgroundColor={2} borderRadius="lg">
+            <Text mb={2}>
+              Current appearance: <strong>{appearance}</strong>
+            </Text>
+            <Text size="sm" color="secondary">
+              The appearance can be controlled independently from the theme provider.
+            </Text>
+          </Box>
+        </Box>
+      </RadixTheme>
+    </ThemeProvider>
+  );
+}`}
+/>
+
+## Complete Theme Configuration
+
+Combine all theme options for full customization.
+
+<LiveExample
+  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex, Container, Section } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const [config, setConfig] = React.useState({
+    accentColor: 'blue',
+    grayColor: 'gray',
+    panelBackground: 'translucent',
+    radius: 'medium',
+    scaling: '100%',
+  });
+
+  const updateConfig = (key, value) => {
+    setConfig(prev => ({ ...prev, [key]: value }));
+  };
+
+  return (
+    <ThemeProvider>
+      <RadixTheme {...config}>
+        <Section>
+          <Container size="md">
+            <Text as="h2" size="3xl" weight="bold" mb={6}>
+              Theme Configuration
+            </Text>
+            
+            <Flex flexDirection="column" gap={4} mb={6}>
+              <Box>
+                <Text weight="semibold" mb={2}>Accent Color</Text>
+                <Flex gap={2} flexWrap="wrap">
+                  {['blue', 'green', 'red', 'purple', 'orange'].map(color => (
+                    <Button
+                      key={color}
+                      size="sm"
+                      variant={config.accentColor === color ? 'solid' : 'outline'}
+                      onClick={() => updateConfig('accentColor', color)}
+                    >
+                      {color}
+                    </Button>
+                  ))}
+                </Flex>
+              </Box>
+              
+              <Box>
+                <Text weight="semibold" mb={2}>Border Radius</Text>
+                <Flex gap={2}>
+                  {['none', 'small', 'medium', 'large', 'full'].map(radius => (
+                    <Button
+                      key={radius}
+                      size="sm"
+                      variant={config.radius === radius ? 'solid' : 'outline'}
+                      onClick={() => updateConfig('radius', radius)}
+                    >
+                      {radius}
+                    </Button>
+                  ))}
+                </Flex>
+              </Box>
+              
+              <Box>
+                <Text weight="semibold" mb={2}>Scaling</Text>
+                <Flex gap={2}>
+                  {['90%', '95%', '100%', '105%', '110%'].map(scale => (
+                    <Button
+                      key={scale}
+                      size="sm"
+                      variant={config.scaling === scale ? 'solid' : 'outline'}
+                      onClick={() => updateConfig('scaling', scale)}
+                    >
+                      {scale}
+                    </Button>
+                  ))}
+                </Flex>
+              </Box>
+            </Flex>
+            
+            <Box p={6} backgroundColor={2} borderRadius="lg">
+              <Text size="lg" weight="semibold" mb={3}>
+                Preview
+              </Text>
+              <Flex gap={3} flexWrap="wrap">
+                <Button variant="solid">Primary</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+              </Flex>
+            </Box>
+          </Container>
+        </Section>
+      </RadixTheme>
+    </ThemeProvider>
+  );
+}`}
+/>
+
+## Props
+
+### ThemeProvider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultTheme` | `'light' \| 'dark'` | `'light'` | Default theme mode |
+| `storageKey` | `string` | `'theme'` | LocalStorage key for persisting theme |
+| `children` | `ReactNode` | - | Child components |
+
+### RadixTheme Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `accentColor` | `AccentColor` | `'blue'` | Primary accent color |
+| `grayColor` | `GrayColor` | `'gray'` | Gray color palette |
+| `appearance` | `'light' \| 'dark' \| 'inherit'` | `'inherit'` | Theme appearance |
+| `panelBackground` | `'solid' \| 'translucent'` | `'translucent'` | Panel background style |
+| `radius` | `'none' \| 'small' \| 'medium' \| 'large' \| 'full'` | `'medium'` | Border radius scale |
+| `scaling` | `'90%' \| '95%' \| '100%' \| '105%' \| '110%'` | `'100%'` | UI scaling factor |
+
+### useTheme Hook
+
+Returns an object with:
+- `theme`: Current theme (`'light'` or `'dark'`)
+- `setTheme`: Function to update theme
+- `toggleTheme`: Function to toggle between light and dark

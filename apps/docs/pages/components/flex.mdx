@@ -1,0 +1,161 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Flex
+
+A powerful layout component built on top of `Box` that provides flexbox functionality with an intuitive API. `Flex` makes it easy to create flexible layouts with proper alignment and spacing.
+
+## Import
+
+```js
+import { Flex } from '@beauginbey/vanilla-components';
+```
+
+## Basic Usage
+
+The `Flex` component defaults to `display: flex` and accepts all flexbox-related props.
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex gap={4}>
+      <Box p={3} backgroundColor={3} borderRadius="md">
+        <Text>Item 1</Text>
+      </Box>
+      <Box p={3} backgroundColor={3} borderRadius="md">
+        <Text>Item 2</Text>
+      </Box>
+      <Box p={3} backgroundColor={3} borderRadius="md">
+        <Text>Item 3</Text>
+      </Box>
+    </Flex>
+  );
+}`}
+/>
+
+## Direction
+
+Control the flex direction with the `flexDirection` prop.
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex flexDirection="column" gap={3}>
+      <Box p={3} backgroundColor={3} borderRadius="md">
+        <Text>Item 1</Text>
+      </Box>
+      <Box p={3} backgroundColor={3} borderRadius="md">
+        <Text>Item 2</Text>
+      </Box>
+      <Box p={3} backgroundColor={3} borderRadius="md">
+        <Text>Item 3</Text>
+      </Box>
+    </Flex>
+  );
+}`}
+/>
+
+## Alignment
+
+Use `alignItems` and `justifyContent` to control alignment.
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex 
+      alignItems="center" 
+      justifyContent="space-between"
+      p={4}
+      backgroundColor={2}
+      borderRadius="lg"
+      style={{ height: '120px' }}
+    >
+      <Box p={3} backgroundColor={4} borderRadius="md">
+        <Text>Start</Text>
+      </Box>
+      <Box p={3} backgroundColor={4} borderRadius="md">
+        <Text>Center</Text>
+      </Box>
+      <Box p={3} backgroundColor={4} borderRadius="md">
+        <Text>End</Text>
+      </Box>
+    </Flex>
+  );
+}`}
+/>
+
+## Wrapping
+
+Control flex wrapping with the `flexWrap` prop.
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex flexWrap="wrap" gap={3}>
+      {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+        <Box 
+          key={i}
+          p={3} 
+          backgroundColor={3} 
+          borderRadius="md"
+          style={{ minWidth: '100px' }}
+        >
+          <Text>Item {i}</Text>
+        </Box>
+      ))}
+    </Flex>
+  );
+}`}
+/>
+
+## Responsive
+
+All flex properties support responsive values.
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex 
+      flexDirection={{ mobile: 'column', tablet: 'row' }}
+      gap={{ mobile: 2, tablet: 4 }}
+      alignItems={{ mobile: 'stretch', tablet: 'center' }}
+    >
+      <Box p={3} backgroundColor={3} borderRadius="md" style={{ flex: 1 }}>
+        <Text>Responsive Item 1</Text>
+      </Box>
+      <Box p={3} backgroundColor={3} borderRadius="md" style={{ flex: 1 }}>
+        <Text>Responsive Item 2</Text>
+      </Box>
+      <Box p={3} backgroundColor={3} borderRadius="md" style={{ flex: 1 }}>
+        <Text>Responsive Item 3</Text>
+      </Box>
+    </Flex>
+  );
+}`}
+/>
+
+## Props
+
+`Flex` accepts all `Box` props plus the following flex-specific props:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `flexDirection` | `'row' \| 'column' \| 'row-reverse' \| 'column-reverse'` | Sets the flex direction |
+| `flexWrap` | `'nowrap' \| 'wrap' \| 'wrap-reverse'` | Controls flex wrapping |
+| `justifyContent` | `'flex-start' \| 'flex-end' \| 'center' \| 'space-between' \| 'space-around' \| 'space-evenly'` | Aligns items along the main axis |
+| `alignItems` | `'flex-start' \| 'flex-end' \| 'center' \| 'baseline' \| 'stretch'` | Aligns items along the cross axis |
+| `alignContent` | `'flex-start' \| 'flex-end' \| 'center' \| 'space-between' \| 'space-around' \| 'space-evenly' \| 'stretch'` | Aligns flex lines |
+| `gap` | `number` | Sets gap between items |
+| `columnGap` | `number` | Sets horizontal gap |
+| `rowGap` | `number` | Sets vertical gap |
+
+All props support responsive values.

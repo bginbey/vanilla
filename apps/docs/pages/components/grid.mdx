@@ -1,0 +1,214 @@
+import { LiveExample } from '../../components/LiveExample';
+
+# Grid
+
+A powerful CSS Grid layout component that makes it easy to create complex grid layouts with minimal code.
+
+## Import
+
+```js
+import { Grid } from '@beauginbey/vanilla-components';
+```
+
+## Basic Usage
+
+The `Grid` component provides a simple API for CSS Grid layouts.
+
+<LiveExample
+  code={`import { Grid, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Grid columns={3} gap={4}>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>Item 1</Text>
+      </Box>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>Item 2</Text>
+      </Box>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>Item 3</Text>
+      </Box>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>Item 4</Text>
+      </Box>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>Item 5</Text>
+      </Box>
+      <Box p={4} backgroundColor={3} borderRadius="md">
+        <Text>Item 6</Text>
+      </Box>
+    </Grid>
+  );
+}`}
+/>
+
+## Responsive Columns
+
+Create responsive grid layouts with different column counts at different breakpoints.
+
+<LiveExample
+  code={`import { Grid, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Grid 
+      columns={{ mobile: 1, tablet: 2, desktop: 4 }} 
+      gap={4}
+    >
+      {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+        <Box 
+          key={i}
+          p={4} 
+          backgroundColor={3} 
+          borderRadius="md"
+        >
+          <Text weight="semibold">Card {i}</Text>
+          <Text size="sm" color="secondary">
+            Responsive grid item
+          </Text>
+        </Box>
+      ))}
+    </Grid>
+  );
+}`}
+/>
+
+## Grid Template
+
+For more complex layouts, use `gridTemplateColumns` and `gridTemplateRows`.
+
+<LiveExample
+  code={`import { Grid, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Grid 
+      style={{
+        gridTemplateColumns: '1fr 2fr 1fr',
+        gridTemplateRows: 'auto 1fr auto',
+        gap: '16px',
+        height: '300px'
+      }}
+    >
+      <Box 
+        p={3} 
+        backgroundColor={3} 
+        borderRadius="md"
+        style={{ gridColumn: '1 / -1' }}
+      >
+        <Text weight="semibold">Header</Text>
+      </Box>
+      
+      <Box p={3} backgroundColor={4} borderRadius="md">
+        <Text>Sidebar</Text>
+      </Box>
+      
+      <Box p={3} backgroundColor={2} borderRadius="md">
+        <Text>Main Content</Text>
+      </Box>
+      
+      <Box p={3} backgroundColor={4} borderRadius="md">
+        <Text>Aside</Text>
+      </Box>
+      
+      <Box 
+        p={3} 
+        backgroundColor={3} 
+        borderRadius="md"
+        style={{ gridColumn: '1 / -1' }}
+      >
+        <Text weight="semibold">Footer</Text>
+      </Box>
+    </Grid>
+  );
+}`}
+/>
+
+## Auto Flow
+
+Control how items are placed in the grid with `gridAutoFlow`.
+
+<LiveExample
+  code={`import { Grid, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Grid 
+      columns={3}
+      gridAutoFlow="column"
+      gap={3}
+      style={{ gridAutoColumns: '1fr' }}
+    >
+      {['A', 'B', 'C', 'D', 'E', 'F'].map(letter => (
+        <Box 
+          key={letter}
+          p={3} 
+          backgroundColor={3} 
+          borderRadius="md"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text weight="bold">{letter}</Text>
+        </Box>
+      ))}
+    </Grid>
+  );
+}`}
+/>
+
+## Gap Control
+
+Control spacing between grid items with `gap`, `columnGap`, and `rowGap`.
+
+<LiveExample
+  code={`import { Grid, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box>
+      <Box mb={4}>
+        <Text size="lg" weight="semibold" mb={2}>Uniform Gap</Text>
+        <Grid columns={3} gap={4}>
+          {[1, 2, 3].map(i => (
+            <Box key={i} p={3} backgroundColor={3} borderRadius="md">
+              <Text>Item {i}</Text>
+            </Box>
+          ))}
+        </Grid>
+      </Box>
+      
+      <Box>
+        <Text size="lg" weight="semibold" mb={2}>Different Row and Column Gaps</Text>
+        <Grid columns={3} columnGap={6} rowGap={2}>
+          {[1, 2, 3, 4, 5, 6].map(i => (
+            <Box key={i} p={3} backgroundColor={3} borderRadius="md">
+              <Text>Item {i}</Text>
+            </Box>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
+  );
+}`}
+/>
+
+## Props
+
+`Grid` accepts all `Box` props plus the following grid-specific props:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `columns` | `number \| { mobile?: number, tablet?: number, desktop?: number }` | Number of columns |
+| `rows` | `number \| { mobile?: number, tablet?: number, desktop?: number }` | Number of rows |
+| `gridTemplateColumns` | `string` | CSS grid-template-columns value |
+| `gridTemplateRows` | `string` | CSS grid-template-rows value |
+| `gridAutoFlow` | `'row' \| 'column' \| 'dense' \| 'row dense' \| 'column dense'` | How items are placed |
+| `gridAutoColumns` | `string` | Size of implicitly-created columns |
+| `gridAutoRows` | `string` | Size of implicitly-created rows |
+| `gap` | `number` | Gap between items |
+| `columnGap` | `number` | Horizontal gap |
+| `rowGap` | `number` | Vertical gap |
+
+All props support responsive values.
