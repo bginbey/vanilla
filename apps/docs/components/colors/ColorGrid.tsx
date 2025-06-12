@@ -87,9 +87,11 @@ export function ColorGrid() {
 
       {/* Overlay Scales */}
       <Box>
-        <Text size="xl" weight="bold" mb={4}>
-          Overlays
-        </Text>
+        <Box mb={4}>
+          <Text size="xl" weight="bold">
+            Overlays
+          </Text>
+        </Box>
         <Box display="flex" flexDirection="column" gap={4}>
           <ColorScale
             name="Black"
