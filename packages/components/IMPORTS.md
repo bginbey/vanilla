@@ -10,7 +10,10 @@ Always use package imports, never relative paths to the source or dist directori
 
 ```typescript
 // ✅ Correct - Import components from the main package
-import { Button, Box, Text, RadixTheme } from '@beauginbey/vanilla-components';
+import { Button, Box, Text, Theme } from '@beauginbey/vanilla-components';
+
+// Note: RadixTheme is deprecated, use Theme instead
+import { RadixTheme } from '@beauginbey/vanilla-components'; // ⚠️ Deprecated
 
 // ❌ Wrong - Don't import from source files
 import { Button } from '../packages/components/src/components/Button';
@@ -39,15 +42,15 @@ import '../packages/components/src/components/Button/Button.css';
 ```typescript
 // In your app's root file (e.g., _app.tsx, main.tsx, or App.tsx)
 import React from 'react';
-import { RadixTheme } from '@beauginbey/vanilla-components';
+import { Theme } from '@beauginbey/vanilla-components';
 import '@beauginbey/vanilla-components/styles.css';
 import '@beauginbey/vanilla-colors/css'; // For color system CSS variables
 
 function App() {
   return (
-    <RadixTheme>
+    <Theme>
       {/* Your app content */}
-    </RadixTheme>
+    </Theme>
   );
 }
 ```

@@ -185,7 +185,7 @@ pnpm release         # Build and publish packages
 ## Import Guidelines
 Always use package imports for components and styles:
 ```typescript
-import { Button, RadixTheme } from '@beauginbey/vanilla-components';
+import { Button, Theme } from '@beauginbey/vanilla-components';
 import '@beauginbey/vanilla-components/styles.css';
 ```
 See `packages/components/IMPORTS.md` for detailed import guidelines.

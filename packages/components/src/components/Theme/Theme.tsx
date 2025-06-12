@@ -74,7 +74,7 @@ const radiusFactors: Record<Radius, number> = {
   full: 9999,
 };
 
-export function RadixTheme({
+export function Theme({
   children,
   accentColor = 'blue',
   grayColor = 'gray',
@@ -126,3 +126,9 @@ export function RadixTheme({
     </Component>
   );
 }
+
+/**
+ * @deprecated Use `Theme` instead. `RadixTheme` will be removed in the next major version.
+ */
+export const RadixTheme = Theme;
+

@@ -2,25 +2,25 @@ import { LiveExample } from '../../components/LiveExample';
 
 # Theme
 
-Advanced theming components that provide comprehensive visual customization for your application. The theme system includes `RadixTheme` for advanced styling options and `ThemeProvider` for managing light/dark modes.
+Advanced theming components that provide comprehensive visual customization for your application. The theme system includes `Theme` for advanced styling options and `ThemeProvider` for managing light/dark modes.
 
 ## Import
 
 ```js
-import { RadixTheme, ThemeProvider, useTheme } from '@beauginbey/vanilla-components';
+import { Theme, ThemeProvider, useTheme } from '@beauginbey/vanilla-components';
 ```
 
 ## Basic Usage
 
-Wrap your application with `ThemeProvider` and `RadixTheme` to enable theming.
+Wrap your application with `ThemeProvider` and `Theme` to enable theming.
 
 <LiveExample
-  code={`import { RadixTheme, ThemeProvider, Box, Text, Button } from '@beauginbey/vanilla-components';
+  code={`import { Theme, ThemeProvider, Box, Text, Button } from '@beauginbey/vanilla-components';
 
 export default function App() {
   return (
     <ThemeProvider defaultTheme="light">
-      <RadixTheme>
+      <Theme>
         <Box p={6}>
           <Text as="h1" size="3xl" weight="bold" marginBottom={4}>
             Themed Application
@@ -32,7 +32,7 @@ export default function App() {
             Themed Button
           </Button>
         </Box>
-      </RadixTheme>
+      </Theme>
     </ThemeProvider>
   );
 }`}
@@ -43,7 +43,7 @@ export default function App() {
 Use the `useTheme` hook to create theme toggles and access theme state.
 
 <LiveExample
-  code={`import { ThemeProvider, RadixTheme, useTheme, Box, Text, Button, IconButton } from '@beauginbey/vanilla-components';
+  code={`import { ThemeProvider, Theme, useTheme, Box, Text, Button, IconButton } from '@beauginbey/vanilla-components';
 
 // Theme toggle component
 function ThemeToggle() {
@@ -85,9 +85,9 @@ function ThemedApp() {
 export default function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="theme-demo">
-      <RadixTheme>
+      <Theme>
         <ThemedApp />
-      </RadixTheme>
+      </Theme>
     </ThemeProvider>
   );
 }`}
@@ -95,10 +95,10 @@ export default function App() {
 
 ## Accent Colors
 
-RadixTheme supports various accent colors to customize the primary color scheme.
+Theme supports various accent colors to customize the primary color scheme.
 
 <LiveExample
-  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
+  code={`import { Theme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
 import React from 'react';
 
 export default function App() {
@@ -107,7 +107,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <RadixTheme accentColor={accent}>
+      <Theme accentColor={accent}>
         <Box p={6}>
           <Text as="h2" size="2xl" weight="bold" marginBottom={4}>
             Accent Colors
@@ -137,7 +137,7 @@ export default function App() {
             </Flex>
           </Box>
         </Box>
-      </RadixTheme>
+      </Theme>
     </ThemeProvider>
   );
 }`}
@@ -148,7 +148,7 @@ export default function App() {
 Customize the gray color palette used throughout your application.
 
 <LiveExample
-  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
+  code={`import { Theme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
 import React from 'react';
 
 export default function App() {
@@ -157,7 +157,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <RadixTheme grayColor={gray}>
+      <Theme grayColor={gray}>
         <Box p={6}>
           <Text as="h2" size="2xl" weight="bold" marginBottom={4}>
             Gray Palettes
@@ -188,7 +188,7 @@ export default function App() {
             </Box>
           </Flex>
         </Box>
-      </RadixTheme>
+      </Theme>
     </ThemeProvider>
   );
 }`}
@@ -196,10 +196,10 @@ export default function App() {
 
 ## Appearance
 
-Control the overall theme appearance (light/dark) at the RadixTheme level.
+Control the overall theme appearance (light/dark) at the Theme level.
 
 <LiveExample
-  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
+  code={`import { Theme, ThemeProvider, Box, Text, Button, Flex } from '@beauginbey/vanilla-components';
 import React from 'react';
 
 export default function App() {
@@ -207,7 +207,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <RadixTheme appearance={appearance}>
+      <Theme appearance={appearance}>
         <Box p={6}>
           <Text as="h2" size="2xl" weight="bold" marginBottom={4}>
             Appearance Control
@@ -243,7 +243,7 @@ export default function App() {
             </Text>
           </Box>
         </Box>
-      </RadixTheme>
+      </Theme>
     </ThemeProvider>
   );
 }`}
@@ -254,7 +254,7 @@ export default function App() {
 Combine all theme options for full customization.
 
 <LiveExample
-  code={`import { RadixTheme, ThemeProvider, Box, Text, Button, Flex, Container, Section } from '@beauginbey/vanilla-components';
+  code={`import { Theme, ThemeProvider, Box, Text, Button, Flex, Container, Section } from '@beauginbey/vanilla-components';
 import React from 'react';
 
 export default function App() {
@@ -272,7 +272,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <RadixTheme {...config}>
+      <Theme {...config}>
         <Section>
           <Container size="2">
             <Text as="h2" size="3xl" weight="bold" marginBottom={6}>
@@ -341,7 +341,7 @@ export default function App() {
             </Box>
           </Container>
         </Section>
-      </RadixTheme>
+      </Theme>
     </ThemeProvider>
   );
 }`}
@@ -357,7 +357,7 @@ export default function App() {
 | `storageKey` | `string` | `'theme'` | LocalStorage key for persisting theme |
 | `children` | `ReactNode` | - | Child components |
 
-### RadixTheme Props
+### Theme Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

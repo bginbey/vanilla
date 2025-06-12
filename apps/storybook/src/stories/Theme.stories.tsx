@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { RadixTheme, Button, Box, Text, Input, Select, Checkbox, Radio, Switch } from '@beauginbey/vanilla-components';
+import { Theme, Button, Box, Text, Input, Select, Checkbox, Radio, Switch } from '@beauginbey/vanilla-components';
 
 const meta = {
   title: 'Components/Theme',
-  component: RadixTheme,
+  component: Theme,
   parameters: {
     layout: 'fullscreen',
   },
@@ -36,7 +36,7 @@ const meta = {
       control: 'boolean',
     },
   },
-} satisfies Meta<typeof RadixTheme>;
+} satisfies Meta<typeof Theme>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -157,7 +157,7 @@ export const AccentColors: Story = {
   render: () => (
     <Box display="flex" flexDirection="column">
       {(['blue', 'green', 'red', 'yellow', 'orange', 'purple'] as const).map((color) => (
-        <RadixTheme key={color} accentColor={color} asChild>
+        <Theme key={color} accentColor={color} asChild>
           <Box p={6} borderBottom="1px solid" borderColor={6}>
             <Box mb={3}>
               <Text size="lg" weight="semibold">
@@ -170,7 +170,7 @@ export const AccentColors: Story = {
               <Button variant="ghost" size="sm">Ghost</Button>
             </Box>
           </Box>
-        </RadixTheme>
+        </Theme>
       ))}
     </Box>
   ),
@@ -180,7 +180,7 @@ export const ScalingOptions: Story = {
   render: () => (
     <Box display="flex" flexDirection="column">
       {(['90%', '95%', '100%', '105%', '110%'] as const).map((scale) => (
-        <RadixTheme key={scale} scaling={scale} asChild>
+        <Theme key={scale} scaling={scale} asChild>
           <Box p={6} borderBottom="1px solid" borderColor={6}>
             <Box mb={3}>
               <Text size="lg" weight="semibold">
@@ -195,7 +195,7 @@ export const ScalingOptions: Story = {
               <Text>Sample text</Text>
             </Box>
           </Box>
-        </RadixTheme>
+        </Theme>
       ))}
     </Box>
   ),
@@ -205,7 +205,7 @@ export const RadiusOptions: Story = {
   render: () => (
     <Box display="flex" flexDirection="column">
       {(['none', 'small', 'medium', 'large', 'full'] as const).map((radius) => (
-        <RadixTheme key={radius} radius={radius} asChild>
+        <Theme key={radius} radius={radius} asChild>
           <Box p={6} borderBottom="1px solid" borderColor={6}>
             <Box mb={3}>
               <Text size="lg" weight="semibold">
@@ -226,7 +226,7 @@ export const RadiusOptions: Story = {
               </Box>
             </Box>
           </Box>
-        </RadixTheme>
+        </Theme>
       ))}
     </Box>
   ),

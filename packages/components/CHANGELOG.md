@@ -1,5 +1,44 @@
 # @beauginbey/vanilla-components
 
+## 1.4.0
+
+### Minor Changes
+
+- Renamed `RadixTheme` component to `Theme` for better clarity and consistency.
+
+  ### Breaking Changes
+
+  - The `RadixTheme` component has been renamed to `Theme`
+  - `RadixTheme` is still available as a deprecated alias and will be removed in the next major version
+
+  ### Migration Guide
+
+  Update your imports from:
+
+  ```typescript
+  import { RadixTheme } from '@beauginbey/vanilla-components';
+  ```
+
+  To:
+
+  ```typescript
+  import { Theme } from '@beauginbey/vanilla-components';
+  ```
+
+  And update component usage from:
+
+  ```jsx
+  <RadixTheme>{/* Your content */}</RadixTheme>
+  ```
+
+  To:
+
+  ```jsx
+  <Theme>{/* Your content */}</Theme>
+  ```
+
+  The deprecated `RadixTheme` export will continue to work but will show deprecation warnings in your IDE.
+
 ## 1.3.1
 
 ### Patch Changes
