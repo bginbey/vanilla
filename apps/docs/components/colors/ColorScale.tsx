@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Text } from '@beauginbey/vanilla-components';
 import { ColorSwatch } from './ColorSwatch';
+import type { ColorScale as ColorScaleType } from '@beauginbey/vanilla-colors';
 
 interface ColorScaleProps {
   name: string;
-  scale: Record<number, string>;
+  scale: ColorScaleType;
   isAlpha?: boolean;
 }
 

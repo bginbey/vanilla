@@ -10,6 +10,7 @@ export interface BoxOwnProps extends Sprinkles {
   style?: React.CSSProperties;
   minHeight?: React.CSSProperties['minHeight'];
   minWidth?: React.CSSProperties['minWidth'];
+  maxHeight?: React.CSSProperties['maxHeight'];
 }
 
 // Combined props type for Box
@@ -18,7 +19,7 @@ export type BoxProps<C extends React.ElementType = 'div'> = BoxOwnProps &
 
 // Box component with simpler typing
 export const Box = React.forwardRef<HTMLElement, BoxOwnProps>(
-  ({ as: Component = 'div', className, style, minHeight, minWidth, ...restProps }, ref) => {
+  ({ as: Component = 'div', className, style, minHeight, minWidth, maxHeight, ...restProps }, ref) => {
     const { otherProps, sprinkleProps } = extractSprinkleProps(restProps);
 
     // Combine style props
@@ -26,6 +27,7 @@ export const Box = React.forwardRef<HTMLElement, BoxOwnProps>(
       ...style,
       ...(minHeight && { minHeight }),
       ...(minWidth && { minWidth }),
+      ...(maxHeight && { maxHeight }),
     };
 
     return React.createElement(Component, {

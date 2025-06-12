@@ -66,6 +66,28 @@ const responsiveProperties = defineProperties({
     lineHeight: vars.font.lineHeight,
     letterSpacing: vars.font.letterSpacing,
     textAlign: ['left', 'center', 'right', 'justify'],
+    width: {
+      auto: 'auto',
+      '100%': '100%',
+      '40px': '40px',
+      '200px': '200px',
+      '400px': '400px',
+      '600px': '600px',
+    },
+    height: {
+      auto: 'auto',
+      '100%': '100%',
+      '40px': '40px',
+      '32px': '32px',
+      '48px': '48px',
+    },
+    maxWidth: {
+      '100%': '100%',
+      '400px': '400px',
+      '600px': '600px',
+      '800px': '800px',
+      '1200px': '1200px',
+    },
   },
   shorthands: {
     p: ['padding'],

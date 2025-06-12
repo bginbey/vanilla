@@ -10,7 +10,7 @@ export const button = recipe({
     fontFamily: vars.font.family.sans,
     fontWeight: vars.font.weight.medium,
     lineHeight: vars.font.lineHeight.normal,
-    borderRadius: vars.radius.md,
+    borderRadius: 'var(--radius-3, 0.375rem)',
     transition: `background-color ${vars.duration.fast} ${vars.easing.easeInOut}, border-color ${vars.duration.fast} ${vars.easing.easeInOut}, box-shadow ${vars.duration.fast} ${vars.easing.easeInOut}, transform ${vars.duration.fast} ${vars.easing.easeInOut}, opacity ${vars.duration.fast} ${vars.easing.easeInOut}`,
     boxShadow: vars.shadow.none,
     position: 'relative',
@@ -21,7 +21,7 @@ export const button = recipe({
     border: '1px solid transparent',
     outline: 'none',
     ':focus-visible': {
-      boxShadow: `0 0 0 2px ${vars.color.blue[8]}`, // Focus ring
+      boxShadow: '0 0 0 2px var(--color-focus-ring)', // Focus ring
       outline: 'none',
     },
     ':active': {
@@ -36,11 +36,11 @@ export const button = recipe({
   variants: {
     variant: {
       solid: {
-        backgroundColor: vars.color.blue[9], // Solid background
-        color: 'white', // White text on solid colors
+        backgroundColor: 'var(--color-accent-base)', // Solid background
+        color: 'var(--color-accent-text)', // White text on solid colors
         boxShadow: vars.shadow.sm,
         ':hover': {
-          backgroundColor: vars.color.blue[10], // Hover solid
+          backgroundColor: 'var(--color-accent-hover)', // Hover solid
           boxShadow: vars.shadow.md,
           transform: 'translateY(-1px)',
         },
@@ -51,29 +51,29 @@ export const button = recipe({
       },
       outline: {
         backgroundColor: 'transparent',
-        color: vars.color.blue[11], // Low-contrast text
-        borderColor: vars.color.blue[7], // UI element border
+        color: 'var(--accent-11)', // Low-contrast text
+        borderColor: 'var(--accent-7)', // UI element border
         boxShadow: 'none',
         ':hover': {
-          borderColor: vars.color.blue[8], // Hover border
-          backgroundColor: vars.color.blue[3], // Subtle background on hover
+          borderColor: 'var(--accent-8)', // Hover border
+          backgroundColor: 'var(--color-accent-surface)', // Subtle background on hover
           boxShadow: vars.shadow.sm,
         },
         ':active': {
-          backgroundColor: vars.color.blue[4], // Active background
+          backgroundColor: 'var(--color-accent-surface-hover)', // Active background
           boxShadow: 'none',
           transform: 'scale(0.98)',
         },
       },
       ghost: {
         backgroundColor: 'transparent',
-        color: vars.color.gray[12], // High-contrast text
+        color: 'var(--color-text)', // High-contrast text
         ':hover': {
-          backgroundColor: vars.color.gray[3], // UI element background
+          backgroundColor: 'var(--color-surface)', // UI element background
           boxShadow: vars.shadow.xs,
         },
         ':active': {
-          backgroundColor: vars.color.gray[4], // Hover background
+          backgroundColor: 'var(--color-surface-hover)', // Hover background
           boxShadow: 'none',
         },
       },
@@ -81,24 +81,24 @@ export const button = recipe({
     size: {
       sm: {
         height: '32px',
-        paddingLeft: vars.spacing[3],
-        paddingRight: vars.spacing[3],
-        fontSize: vars.font.size.sm,
-        gap: vars.spacing[1],
+        paddingLeft: 'var(--space-3)',
+        paddingRight: 'var(--space-3)',
+        fontSize: 'var(--font-size-sm)',
+        gap: 'var(--space-1)',
       },
       md: {
         height: '40px',
-        paddingLeft: vars.spacing[4],
-        paddingRight: vars.spacing[4],
-        fontSize: vars.font.size.base,
-        gap: vars.spacing[2],
+        paddingLeft: 'var(--space-4)',
+        paddingRight: 'var(--space-4)',
+        fontSize: 'var(--font-size-base)',
+        gap: 'var(--space-2)',
       },
       lg: {
         height: '48px',
-        paddingLeft: vars.spacing[5],
-        paddingRight: vars.spacing[5],
-        fontSize: vars.font.size.lg,
-        gap: vars.spacing[2],
+        paddingLeft: 'var(--space-5)',
+        paddingRight: 'var(--space-5)',
+        fontSize: 'var(--font-size-lg)',
+        gap: 'var(--space-2)',
       },
     },
     fullWidth: {

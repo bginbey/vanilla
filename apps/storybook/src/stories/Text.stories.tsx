@@ -77,7 +77,7 @@ export const Colors: Story = {
       <Text color="primary">Primary color text</Text>
       <Text color="secondary">Secondary color text</Text>
       <Text color="tertiary">Tertiary color text</Text>
-      <Box backgroundColor="primary" p={2}>
+      <Box backgroundColor={9} p={2}>
         <Text color="inverse">Inverse color text</Text>
       </Box>
       <Text color="brand">Brand color text</Text>
@@ -131,13 +131,13 @@ export const Truncation: Story = {
 export const Alignment: Story = {
   render: () => (
     <Box display="flex" flexDirection="column" gap={3}>
-      <Box backgroundColor="secondary" p={3} borderRadius="md">
+      <Box backgroundColor={2} p={3} borderRadius="md">
         <Text align="left">Left aligned text</Text>
       </Box>
-      <Box backgroundColor="secondary" p={3} borderRadius="md">
+      <Box backgroundColor={2} p={3} borderRadius="md">
         <Text align="center">Center aligned text</Text>
       </Box>
-      <Box backgroundColor="secondary" p={3} borderRadius="md">
+      <Box backgroundColor={2} p={3} borderRadius="md">
         <Text align="right">Right aligned text</Text>
       </Box>
     </Box>

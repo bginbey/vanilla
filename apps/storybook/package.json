@@ -4,8 +4,9 @@
   "private": true,
   "description": "Storybook documentation for Vanilla Design System",
   "scripts": {
-    "dev": "storybook dev -p 6006",
-    "build": "storybook build",
+    "copy-css": "node scripts/copy-css.js",
+    "dev": "pnpm copy-css && storybook dev -p 6006",
+    "build": "pnpm copy-css && storybook build",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx"
   },
   "dependencies": {
