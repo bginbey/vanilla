@@ -19,12 +19,13 @@ The `Container` component centers its content and provides responsive padding.
 
 export default function App() {
   return (
-    <Box backgroundColor={2} p={4}>
+    <Box backgroundColor="2" p={4}>
       <Container>
-        <Box p={4} backgroundColor={1} borderRadius="lg">
-          <Text size="xl" weight="bold" mb={2}>
+        <Box p={4} backgroundColor="1" borderRadius="lg">
+          <Text as="h2" size="xl" weight="bold">
             Centered Content
           </Text>
+          <Box marginBottom={2} />
           <Text color="secondary">
             This content is wrapped in a Container component, which centers it 
             and constrains its maximum width. The container also provides 
@@ -39,32 +40,70 @@ export default function App() {
 
 ## Size Variants
 
-Containers come in different max-width sizes: `sm`, `md`, `lg`, and `xl`.
+Containers come in different max-width sizes: `1` (640px), `2` (768px), `3` (1024px), and `4` (1280px).
 
 <LiveExample
   code={`import { Container, Box, Text, Flex } from '@beauginbey/vanilla-components';
 
 export default function App() {
   const sizes = [
-    { size: 'sm', maxWidth: '640px' },
-    { size: 'md', maxWidth: '768px' },
-    { size: 'lg', maxWidth: '1024px' },
-    { size: 'xl', maxWidth: '1280px' },
+    { size: '1', label: 'Size 1', maxWidth: '640px' },
+    { size: '2', label: 'Size 2', maxWidth: '768px' },
+    { size: '3', label: 'Size 3', maxWidth: '1024px' },
+    { size: '4', label: 'Size 4', maxWidth: '1280px' },
   ];
 
   return (
-    <Flex flexDirection="column" gap={4}>
-      {sizes.map(({ size, maxWidth }) => (
-        <Box key={size} backgroundColor={2} p={4}>
+    <Flex direction="column" gap={4}>
+      {sizes.map(({ size, label, maxWidth }) => (
+        <Box key={size} backgroundColor="2" p={4}>
           <Container size={size}>
-            <Box p={4} backgroundColor={1} borderRadius="lg">
+            <Box p={4} backgroundColor="1" borderRadius="lg">
               <Text weight="semibold">
-                {size} Container ({maxWidth})
+                {label} ({maxWidth})
               </Text>
             </Box>
           </Container>
         </Box>
       ))}
+    </Flex>
+  );
+}`}
+/>
+
+## Alignment
+
+Use the `align` prop to control horizontal alignment of the container.
+
+<LiveExample
+  code={`import { Container, Box, Text, Flex } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex direction="column" gap={4}>
+      <Box backgroundColor="2" p={4}>
+        <Container size="2" align="left">
+          <Box p={4} backgroundColor="1" borderRadius="lg">
+            <Text weight="semibold">Left Aligned</Text>
+          </Box>
+        </Container>
+      </Box>
+      
+      <Box backgroundColor="2" p={4}>
+        <Container size="2" align="center">
+          <Box p={4} backgroundColor="1" borderRadius="lg">
+            <Text weight="semibold">Center Aligned (default)</Text>
+          </Box>
+        </Container>
+      </Box>
+      
+      <Box backgroundColor="2" p={4}>
+        <Container size="2" align="right">
+          <Box p={4} backgroundColor="1" borderRadius="lg">
+            <Text weight="semibold">Right Aligned</Text>
+          </Box>
+        </Container>
+      </Box>
     </Flex>
   );
 }`}
@@ -79,16 +118,18 @@ Containers are perfect for creating centered page layouts.
 
 export default function App() {
   return (
-    <Container size="md">
+    <Container size="2">
       {/* Hero Section */}
-      <Box py={8} textAlign="center">
-        <Text as="h1" size="4xl" weight="bold" mb={4}>
+      <Box py={8}>
+        <Text as="h1" size="4xl" weight="bold" align="center">
           Welcome to Our App
         </Text>
-        <Text size="lg" color="secondary" mb={6}>
+        <Box marginBottom={4} />
+        <Text size="lg" color="secondary" align="center">
           Build amazing experiences with our design system
         </Text>
-        <Flex gap={3} justifyContent="center">
+        <Box marginBottom={6} />
+        <Flex gap={3} justify="center">
           <Button variant="solid">Get Started</Button>
           <Button variant="outline">Learn More</Button>
         </Flex>
@@ -96,18 +137,21 @@ export default function App() {
 
       {/* Content Section */}
       <Box py={8}>
-        <Text as="h2" size="2xl" weight="bold" mb={4}>
+        <Text as="h2" size="2xl" weight="bold">
           Features
         </Text>
-        <Flex flexDirection="column" gap={4}>
-          <Box p={4} backgroundColor={2} borderRadius="lg">
-            <Text weight="semibold" mb={2}>Responsive Design</Text>
+        <Box marginBottom={4} />
+        <Flex direction="column" gap={4}>
+          <Box p={4} backgroundColor="2" borderRadius="lg">
+            <Text weight="semibold">Responsive Design</Text>
+            <Box marginBottom={2} />
             <Text size="sm" color="secondary">
               Automatically adjusts to different screen sizes
             </Text>
           </Box>
-          <Box p={4} backgroundColor={2} borderRadius="lg">
-            <Text weight="semibold" mb={2}>Consistent Spacing</Text>
+          <Box p={4} backgroundColor="2" borderRadius="lg">
+            <Text weight="semibold">Consistent Spacing</Text>
+            <Box marginBottom={2} />
             <Text size="sm" color="secondary">
               Maintains proper padding across all breakpoints
             </Text>
@@ -115,42 +159,6 @@ export default function App() {
         </Flex>
       </Box>
     </Container>
-  );
-}`}
-/>
-
-## Fluid Container
-
-Use the `fluid` prop to remove the max-width constraint while keeping the padding.
-
-<LiveExample
-  code={`import { Container, Box, Text } from '@beauginbey/vanilla-components';
-
-export default function App() {
-  return (
-    <Box>
-      <Box backgroundColor={2} p={4} mb={4}>
-        <Container>
-          <Box p={4} backgroundColor={1} borderRadius="lg">
-            <Text weight="semibold">Normal Container</Text>
-            <Text size="sm" color="secondary">
-              Has a maximum width constraint
-            </Text>
-          </Box>
-        </Container>
-      </Box>
-
-      <Box backgroundColor={3} p={4}>
-        <Container fluid>
-          <Box p={4} backgroundColor={1} borderRadius="lg">
-            <Text weight="semibold">Fluid Container</Text>
-            <Text size="sm" color="secondary">
-              No maximum width - expands to fill available space
-            </Text>
-          </Box>
-        </Container>
-      </Box>
-    </Box>
   );
 }`}
 />
@@ -164,28 +172,31 @@ Containers can be nested for complex layouts.
 
 export default function App() {
   return (
-    <Box backgroundColor={2} py={6}>
-      <Container size="xl">
-        <Text as="h1" size="3xl" weight="bold" mb={6} textAlign="center">
+    <Box backgroundColor="2" py={6}>
+      <Container size="4">
+        <Text as="h1" size="3xl" weight="bold" align="center">
           Dashboard
         </Text>
+        <Box marginBottom={6} />
         
-        <Flex gap={4} flexDirection={{ mobile: 'column', tablet: 'row' }}>
-          <Box flex={1}>
-            <Container size="sm" fluid>
-              <Box p={4} backgroundColor={1} borderRadius="lg">
-                <Text weight="semibold" mb={2}>Sidebar</Text>
+        <Flex gap={4} direction={{ mobile: 'column', tablet: 'row' }}>
+          <Box>
+            <Container size="1">
+              <Box p={4} backgroundColor="1" borderRadius="lg">
+                <Text weight="semibold">Sidebar</Text>
+                <Box marginBottom={2} />
                 <Text size="sm" color="secondary">
-                  Nested container with fluid width
+                  Nested container with smaller size
                 </Text>
               </Box>
             </Container>
           </Box>
           
-          <Box flex={2}>
-            <Container size="md" fluid>
-              <Box p={4} backgroundColor={1} borderRadius="lg">
-                <Text weight="semibold" mb={2}>Main Content</Text>
+          <Box>
+            <Container size="2">
+              <Box p={4} backgroundColor="1" borderRadius="lg">
+                <Text weight="semibold">Main Content</Text>
+                <Box marginBottom={2} />
                 <Text size="sm" color="secondary">
                   Another nested container for the main content area
                 </Text>
@@ -205,7 +216,13 @@ export default function App() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'lg'` | Maximum width size |
-| `fluid` | `boolean` | `false` | Remove max-width constraint |
+| `size` | `'1' \| '2' \| '3' \| '4'` | `'4'` | Maximum width size |
+| `align` | `'left' \| 'center' \| 'right'` | `'center'` | Horizontal alignment |
+
+### Size Reference
+- `1`: 640px max-width
+- `2`: 768px max-width  
+- `3`: 1024px max-width
+- `4`: 1280px max-width
 
 The default responsive padding adjusts based on screen size for optimal reading experience.

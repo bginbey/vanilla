@@ -13,28 +13,28 @@ export default function App() {
   const [indeterminate, setIndeterminate] = useState(false);
   
   return (
-    <Box display="flex" flexDirection="column" gap={3}>
-      <Box display="flex" alignItems="center" gap={2}>
+    <Box display="flex" flexDirection="column" gap="3">
+      <Box display="flex" alignItems="center" gap="2">
         <Checkbox id="cb1" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
         <Text as="label" htmlFor="cb1">Controlled checkbox</Text>
       </Box>
       
-      <Box display="flex" alignItems="center" gap={2}>
+      <Box display="flex" alignItems="center" gap="2">
         <Checkbox id="cb2" defaultChecked />
         <Text as="label" htmlFor="cb2">Default checked</Text>
       </Box>
       
-      <Box display="flex" alignItems="center" gap={2}>
+      <Box display="flex" alignItems="center" gap="2">
         <Checkbox id="cb3" indeterminate />
         <Text as="label" htmlFor="cb3">Indeterminate state</Text>
       </Box>
       
-      <Box display="flex" alignItems="center" gap={2}>
+      <Box display="flex" alignItems="center" gap="2">
         <Checkbox id="cb4" disabled />
         <Text as="label" htmlFor="cb4" color="tertiary">Disabled checkbox</Text>
       </Box>
       
-      <Box display="flex" alignItems="center" gap={2}>
+      <Box display="flex" alignItems="center" gap="2">
         <Checkbox id="cb5" disabled checked />
         <Text as="label" htmlFor="cb5" color="tertiary">Disabled checked</Text>
       </Box>
@@ -87,8 +87,8 @@ export default function App() {
   };
   
   return (
-    <Box display="flex" flexDirection="column" gap={3}>
-      <Box display="flex" alignItems="center" gap={2}>
+    <Box display="flex" flexDirection="column" gap="3">
+      <Box display="flex" alignItems="center" gap="2">
         <Checkbox
           ref={parentRef}
           id="parent"
@@ -100,9 +100,9 @@ export default function App() {
         </Text>
       </Box>
       
-      <Box pl={6} display="flex" flexDirection="column" gap={2}>
+      <Box pl="6" display="flex" flexDirection="column" gap="2">
         {items.map(item => (
-          <Box key={item.id} display="flex" alignItems="center" gap={2}>
+          <Box key={item.id} display="flex" alignItems="center" gap="2">
             <Checkbox
               id={item.id}
               checked={item.checked}
@@ -140,9 +140,9 @@ export default function App() {
   };
   
   return (
-    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
-      <Box display="flex" flexDirection="column" gap={3}>
-        <Box display="flex" alignItems="center" gap={2}>
+    <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap="4">
+      <Box display="flex" flexDirection="column" gap="3">
+        <Box display="flex" alignItems="center" gap="2">
           <Checkbox 
             id="terms"
             checked={formData.terms}
@@ -154,7 +154,7 @@ export default function App() {
           </Text>
         </Box>
         
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box display="flex" alignItems="center" gap="2">
           <Checkbox 
             id="newsletter"
             checked={formData.newsletter}
@@ -165,7 +165,7 @@ export default function App() {
           </Text>
         </Box>
         
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box display="flex" alignItems="center" gap="2">
           <Checkbox 
             id="notifications"
             checked={formData.notifications}
@@ -194,10 +194,11 @@ Always provide labels for checkboxes:
 
 export default function App() {
   return (
-    <Box display="flex" flexDirection="column" gap={4}>
+    <Box display="flex" flexDirection="column" gap="4">
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>With visible label</Text>
-        <Box display="flex" alignItems="center" gap={2}>
+        <Text size="sm" weight="semibold">With visible label</Text>
+        <Box marginBottom={2} />
+        <Box display="flex" alignItems="center" gap="2">
           <Checkbox id="visible" />
           <Text as="label" htmlFor="visible">
             This is a visible label
@@ -206,19 +207,22 @@ export default function App() {
       </Box>
       
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>With aria-label</Text>
+        <Text size="sm" weight="semibold">With aria-label</Text>
+        <Box marginBottom={2} />
         <Checkbox aria-label="Hidden label for screen readers" />
-        <Text size="sm" color="secondary" mt={1}>
+        <Box marginTop={1} />
+        <Text size="sm" color="secondary">
           Uses aria-label for accessibility
         </Text>
       </Box>
       
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>With description</Text>
-        <Box display="flex" alignItems="start" gap={2}>
-          <Checkbox id="described" aria-describedby="desc" mt={1} />
+        <Text size="sm" weight="semibold">With description</Text>
+        <Box marginBottom={2} />
+        <Box display="flex" alignItems="flex-start" gap="2">
+          <Checkbox id="described" aria-describedby="desc" />
           <Box>
-            <Text as="label" htmlFor="described" display="block">
+            <Text as="label" htmlFor="described" style={{ display: 'block' }}>
               Enable feature
             </Text>
             <Text id="desc" size="sm" color="secondary">

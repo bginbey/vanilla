@@ -9,7 +9,7 @@ interface LiveExampleProps {
 }
 
 const defaultDependencies = {
-  '@beauginbey/vanilla-components': '1.3.0',
+  '@beauginbey/vanilla-components': '1.3.1',
   '@beauginbey/vanilla-tokens': '1.1.1',
   'react': '18.2.0',
   'react-dom': '18.2.0',
@@ -36,19 +36,21 @@ export function LiveExample({
     '/App.tsx': code.trim(),
     '/index.tsx': `import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { theme, Box } from '@beauginbey/vanilla-components';
+import { theme, Box, RadixTheme } from '@beauginbey/vanilla-components';
 import App from './App';
 
 // Apply theme class to root element
 document.documentElement.className = theme;
 ${isDark ? `document.documentElement.classList.add('dark');` : ''}
 
-// Add wrapper with padding
+// Add wrapper with padding and theme context
 function AppWrapper() {
   return (
-    <Box p={4}>
-      <App />
-    </Box>
+    <RadixTheme>
+      <Box p="4">
+        <App />
+      </Box>
+    </RadixTheme>
   );
 }
 
@@ -97,7 +99,7 @@ if (container) {
             editorHeight: 400,
             externalResources: [
               'https://unpkg.com/@beauginbey/vanilla-colors@0.1.0/dist/index.css',
-              'https://unpkg.com/@beauginbey/vanilla-components@1.3.0/dist/index.css'
+              'https://unpkg.com/@beauginbey/vanilla-components@1.3.1/dist/index.css'
             ],
           }}
           customSetup={{

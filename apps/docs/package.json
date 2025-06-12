@@ -1,9 +1,10 @@
 {
   "name": "@beauginbey/vanilla-docs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "description": "Documentation site for Vanilla Design System",
   "scripts": {
+    "predev": "node scripts/ensure-components-built.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

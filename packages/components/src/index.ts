@@ -32,8 +32,8 @@ export type {
   PolymorphicRef 
 } from './utils/polymorphic';
 
-// Import colors CSS for CSS variables
-import '@beauginbey/vanilla-colors/css';
+// Colors CSS should be imported by the consuming app, not the component library
+// import '@beauginbey/vanilla-colors/css';
 
 // Global styles are bundled automatically
 import './styles/global.css';

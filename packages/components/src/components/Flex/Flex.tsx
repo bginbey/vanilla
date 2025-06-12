@@ -88,7 +88,7 @@ const mapJustify = (value: JustifyContent): BoxProps<'div'>['justifyContent'] =>
   return justifyMap[value];
 };
 
-export const Flex = React.forwardRef<HTMLElement, FlexOwnProps & { as?: React.ElementType }>(
+export const Flex = React.forwardRef<HTMLElement, FlexProps>(
   ({ 
     direction = 'row', 
     align, 

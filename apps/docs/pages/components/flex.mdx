@@ -20,13 +20,13 @@ The `Flex` component defaults to `display: flex` and accepts all flexbox-related
 export default function App() {
   return (
     <Flex gap={4}>
-      <Box p={3} backgroundColor={3} borderRadius="md">
+      <Box p={3} backgroundColor="3" borderRadius="md">
         <Text>Item 1</Text>
       </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
+      <Box p={3} backgroundColor="3" borderRadius="md">
         <Text>Item 2</Text>
       </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
+      <Box p={3} backgroundColor="3" borderRadius="md">
         <Text>Item 3</Text>
       </Box>
     </Flex>
@@ -36,21 +36,21 @@ export default function App() {
 
 ## Direction
 
-Control the flex direction with the `flexDirection` prop.
+Control the flex direction with the `direction` prop.
 
 <LiveExample
   code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
 
 export default function App() {
   return (
-    <Flex flexDirection="column" gap={3}>
-      <Box p={3} backgroundColor={3} borderRadius="md">
+    <Flex direction="column" gap={3}>
+      <Box p={3} backgroundColor="3" borderRadius="md">
         <Text>Item 1</Text>
       </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
+      <Box p={3} backgroundColor="3" borderRadius="md">
         <Text>Item 2</Text>
       </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
+      <Box p={3} backgroundColor="3" borderRadius="md">
         <Text>Item 3</Text>
       </Box>
     </Flex>
@@ -60,50 +60,78 @@ export default function App() {
 
 ## Alignment
 
-Use `alignItems` and `justifyContent` to control alignment.
+Use `align` and `justify` to control alignment.
 
 <LiveExample
   code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
 
 export default function App() {
   return (
-    <Flex 
-      alignItems="center" 
-      justifyContent="space-between"
-      p={4}
-      backgroundColor={2}
-      borderRadius="lg"
-      style={{ height: '120px' }}
-    >
-      <Box p={3} backgroundColor={4} borderRadius="md">
-        <Text>Start</Text>
-      </Box>
-      <Box p={3} backgroundColor={4} borderRadius="md">
-        <Text>Center</Text>
-      </Box>
-      <Box p={3} backgroundColor={4} borderRadius="md">
-        <Text>End</Text>
-      </Box>
-    </Flex>
+    <Box>
+      <Text weight="semibold">justify="between" align="center"</Text>
+      <Box marginBottom={2} />
+      <Flex 
+        align="center" 
+        justify="between"
+        p={4}
+        backgroundColor="2"
+        borderRadius="lg"
+        style={{ height: '120px' }}
+      >
+        <Box p={3} backgroundColor="4" borderRadius="md">
+          <Text>Start</Text>
+        </Box>
+        <Box p={3} backgroundColor="4" borderRadius="md">
+          <Text>Center</Text>
+        </Box>
+        <Box p={3} backgroundColor="4" borderRadius="md">
+          <Text>End</Text>
+        </Box>
+      </Flex>
+      
+      <Box marginBottom={4} />
+      
+      <Text weight="semibold">justify="center" align="end"</Text>
+      <Box marginBottom={2} />
+      <Flex 
+        align="end" 
+        justify="center"
+        gap={3}
+        p={4}
+        backgroundColor="2"
+        borderRadius="lg"
+        style={{ height: '120px' }}
+      >
+        <Box p={2} backgroundColor="4" borderRadius="md" style={{ height: '40px' }}>
+          <Text size="sm">Small</Text>
+        </Box>
+        <Box p={3} backgroundColor="4" borderRadius="md" style={{ height: '60px' }}>
+          <Text>Medium</Text>
+        </Box>
+        <Box p={4} backgroundColor="4" borderRadius="md" style={{ height: '80px' }}>
+          <Text size="lg">Large</Text>
+        </Box>
+      </Flex>
+    </Box>
   );
 }`}
 />
 
 ## Wrapping
 
-Control flex wrapping with the `flexWrap` prop.
+Control flex wrapping with the `wrap` prop.
 
 <LiveExample
   code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
 
 export default function App() {
   return (
-    <Flex flexWrap="wrap" gap={3}>
+    <Flex wrap="wrap" gap={3}>
       {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
         <Box 
           key={i}
           p={3} 
-          backgroundColor={3} 
+          backgroundColor="3" 
           borderRadius="md"
           style={{ minWidth: '100px' }}
         >
@@ -111,6 +139,57 @@ export default function App() {
         </Box>
       ))}
     </Flex>
+  );
+}`}
+/>
+
+## Gap Utilities
+
+Use `gap`, `gapX`, and `gapY` for precise spacing control.
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box>
+      <Text weight="semibold">Uniform gap</Text>
+      <Box marginBottom={2} />
+      <Flex gap={4}>
+        <Box p={3} backgroundColor="3" borderRadius="md">
+          <Text>Item 1</Text>
+        </Box>
+        <Box p={3} backgroundColor="3" borderRadius="md">
+          <Text>Item 2</Text>
+        </Box>
+        <Box p={3} backgroundColor="3" borderRadius="md">
+          <Text>Item 3</Text>
+        </Box>
+      </Flex>
+      
+      <Box marginBottom={4} />
+      
+      <Text weight="semibold">Different X and Y gaps</Text>
+      <Box marginBottom={2} />
+      <Flex direction="column" gapY={2}>
+        <Flex gapX={6}>
+          <Box p={3} backgroundColor="3" borderRadius="md">
+            <Text>Row 1 - Item 1</Text>
+          </Box>
+          <Box p={3} backgroundColor="3" borderRadius="md">
+            <Text>Row 1 - Item 2</Text>
+          </Box>
+        </Flex>
+        <Flex gapX={6}>
+          <Box p={3} backgroundColor="3" borderRadius="md">
+            <Text>Row 2 - Item 1</Text>
+          </Box>
+          <Box p={3} backgroundColor="3" borderRadius="md">
+            <Text>Row 2 - Item 2</Text>
+          </Box>
+        </Flex>
+      </Flex>
+    </Box>
   );
 }`}
 />
@@ -125,19 +204,111 @@ All flex properties support responsive values.
 export default function App() {
   return (
     <Flex 
-      flexDirection={{ mobile: 'column', tablet: 'row' }}
+      direction={{ mobile: 'column', tablet: 'row' }}
       gap={{ mobile: 2, tablet: 4 }}
-      alignItems={{ mobile: 'stretch', tablet: 'center' }}
+      align={{ mobile: 'stretch', tablet: 'center' }}
     >
-      <Box p={3} backgroundColor={3} borderRadius="md" style={{ flex: 1 }}>
+      <Box p={3} backgroundColor="3" borderRadius="md" style={{ flex: 1 }}>
         <Text>Responsive Item 1</Text>
       </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md" style={{ flex: 1 }}>
+      <Box p={3} backgroundColor="3" borderRadius="md" style={{ flex: 1 }}>
         <Text>Responsive Item 2</Text>
       </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md" style={{ flex: 1 }}>
+      <Box p={3} backgroundColor="3" borderRadius="md" style={{ flex: 1 }}>
         <Text>Responsive Item 3</Text>
       </Box>
+    </Flex>
+  );
+}`}
+/>
+
+## Common Patterns
+
+### Navigation Bar
+
+<LiveExample
+  code={`import { Flex, Box, Text, Button } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex 
+      justify="between" 
+      align="center"
+      p={4}
+      backgroundColor="2"
+      borderRadius="lg"
+    >
+      <Text size="lg" weight="bold">Logo</Text>
+      
+      <Flex gap={4} align="center">
+        <Text>Home</Text>
+        <Text>About</Text>
+        <Text>Services</Text>
+        <Text>Contact</Text>
+      </Flex>
+      
+      <Button size="sm">Sign In</Button>
+    </Flex>
+  );
+}`}
+/>
+
+### Card Layout
+
+<LiveExample
+  code={`import { Flex, Box, Text } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  const cards = [
+    { title: 'Card 1', description: 'First card description' },
+    { title: 'Card 2', description: 'Second card description' },
+    { title: 'Card 3', description: 'Third card description' },
+  ];
+
+  return (
+    <Flex gap={4} wrap="wrap">
+      {cards.map((card, index) => (
+        <Box 
+          key={index}
+          p={4} 
+          backgroundColor="2" 
+          borderRadius="lg"
+          style={{ flex: '1 1 300px' }}
+        >
+          <Text size="lg" weight="semibold">{card.title}</Text>
+          <Box marginBottom={2} />
+          <Text color="secondary">{card.description}</Text>
+        </Box>
+      ))}
+    </Flex>
+  );
+}`}
+/>
+
+### Centered Content
+
+<LiveExample
+  code={`import { Flex, Box, Text, Button } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Flex 
+      direction="column"
+      align="center" 
+      justify="center"
+      p={8}
+      backgroundColor="2"
+      borderRadius="lg"
+      style={{ minHeight: '300px' }}
+    >
+      <Text as="h2" size="2xl" weight="bold">Welcome Back</Text>
+      <Box marginBottom={2} />
+      <Text color="secondary">Sign in to continue to your account</Text>
+      <Box marginBottom={4} />
+      <Flex gap={3}>
+        <Button variant="solid">Sign In</Button>
+        <Button variant="outline">Create Account</Button>
+      </Flex>
     </Flex>
   );
 }`}
@@ -147,15 +318,31 @@ export default function App() {
 
 `Flex` accepts all `Box` props plus the following flex-specific props:
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `flexDirection` | `'row' \| 'column' \| 'row-reverse' \| 'column-reverse'` | Sets the flex direction |
-| `flexWrap` | `'nowrap' \| 'wrap' \| 'wrap-reverse'` | Controls flex wrapping |
-| `justifyContent` | `'flex-start' \| 'flex-end' \| 'center' \| 'space-between' \| 'space-around' \| 'space-evenly'` | Aligns items along the main axis |
-| `alignItems` | `'flex-start' \| 'flex-end' \| 'center' \| 'baseline' \| 'stretch'` | Aligns items along the cross axis |
-| `alignContent` | `'flex-start' \| 'flex-end' \| 'center' \| 'space-between' \| 'space-around' \| 'space-evenly' \| 'stretch'` | Aligns flex lines |
-| `gap` | `number` | Sets gap between items |
-| `columnGap` | `number` | Sets horizontal gap |
-| `rowGap` | `number` | Sets vertical gap |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `'row' \| 'column' \| 'row-reverse' \| 'column-reverse'` | `'row'` | Sets the flex direction |
+| `wrap` | `'nowrap' \| 'wrap' \| 'wrap-reverse'` | `'nowrap'` | Controls flex wrapping |
+| `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | - | Aligns items along the main axis |
+| `align` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | - | Aligns items along the cross axis |
+| `gap` | `number` | - | Sets gap between items |
+| `gapX` | `number` | - | Sets horizontal gap |
+| `gapY` | `number` | - | Sets vertical gap |
 
 All props support responsive values.
+
+### Alignment Values
+
+- **justify** (main axis):
+  - `start`: flex-start
+  - `center`: center
+  - `end`: flex-end
+  - `between`: space-between
+  - `around`: space-around
+  - `evenly`: space-evenly
+
+- **align** (cross axis):
+  - `start`: flex-start
+  - `center`: center
+  - `end`: flex-end
+  - `stretch`: stretch
+  - `baseline`: baseline

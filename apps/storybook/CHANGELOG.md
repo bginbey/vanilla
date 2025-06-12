@@ -1,5 +1,13 @@
 # @beauginbey/vanilla-storybook
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @beauginbey/vanilla-components@1.3.1
+
 ## 0.0.5
 
 ### Patch Changes

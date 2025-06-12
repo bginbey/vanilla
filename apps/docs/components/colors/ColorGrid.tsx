@@ -54,7 +54,7 @@ export function ColorGrid() {
             Neutrals
           </Text>
         </Box>
-        <Flex flexDirection="column" gap={4}>
+        <Flex direction="column" gap={4}>
           {grayScales.map((colorData, index) => (
             <ColorScale
               key={`gray-${index}`}
@@ -73,7 +73,7 @@ export function ColorGrid() {
             Colors
           </Text>
         </Box>
-        <Flex flexDirection="column" gap={4}>
+        <Flex direction="column" gap={4}>
           {colorScales.map((colorData, index) => (
             <ColorScale
               key={`${colorData.name}-${index}`}
@@ -92,7 +92,7 @@ export function ColorGrid() {
             Overlays
           </Text>
         </Box>
-        <Flex flexDirection="column" gap={4}>
+        <Flex direction="column" gap={4}>
           <ColorScale
             name="Black"
             scale={{
@@ -129,7 +129,7 @@ export function ColorGrid() {
             }}
             isAlpha={true}
           />
-        </Box>
+        </Flex>
       </Box>
     </Box>
   );

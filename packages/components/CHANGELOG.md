@@ -1,5 +1,17 @@
 # @beauginbey/vanilla-components
 
+## 1.3.1
+
+### Patch Changes
+
+- Fix module resolution and add missing layout components to npm package
+
+  - Add layout components (Flex, Grid, Container, Section) that were missing from npm
+  - Add RadixTheme and ThemeProvider components for advanced theming
+  - Fix theme export to be properly accessible from the package
+  - Ensure all CSS files are included in the npm package
+  - Fix component prop names in documentation (mb → marginBottom, flexDirection → direction, etc.)
+
 ## 1.3.0
 
 ### Minor Changes

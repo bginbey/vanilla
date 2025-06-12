@@ -15,16 +15,17 @@ import { Section } from '@beauginbey/vanilla-components';
 The `Section` component provides semantic HTML5 `<section>` elements with built-in spacing.
 
 <LiveExample
-  code={`import { Section, Container, Text } from '@beauginbey/vanilla-components';
+  code={`import { Section, Container, Text, Box } from '@beauginbey/vanilla-components';
 
 export default function App() {
   return (
     <div>
       <Section>
         <Container>
-          <Text as="h2" size="2xl" weight="bold" mb={3}>
+          <Text as="h2" size="2xl" weight="bold">
             About Us
           </Text>
+          <Box marginBottom={3} />
           <Text color="secondary">
             This is a section with default padding. Sections help organize 
             content into meaningful groups while maintaining consistent spacing.
@@ -32,11 +33,12 @@ export default function App() {
         </Container>
       </Section>
 
-      <Section backgroundColor={2}>
+      <Section backgroundColor="2">
         <Container>
-          <Text as="h2" size="2xl" weight="bold" mb={3}>
+          <Text as="h2" size="2xl" weight="bold">
             Our Services
           </Text>
+          <Box marginBottom={3} />
           <Text color="secondary">
             Sections can have different background colors to create visual separation.
           </Text>
@@ -49,28 +51,33 @@ export default function App() {
 
 ## Size Variants
 
-Sections come with different padding sizes: `sm`, `md`, `lg`, and `xl`.
+Sections come with different padding sizes: `1`, `2`, `3`, and `4`.
 
 <LiveExample
   code={`import { Section, Container, Text, Box } from '@beauginbey/vanilla-components';
 
 export default function App() {
-  const sizes = ['sm', 'md', 'lg', 'xl'];
+  const sizes = [
+    { size: '1', label: 'Small' },
+    { size: '2', label: 'Medium' },
+    { size: '3', label: 'Large' },
+    { size: '4', label: 'Extra Large' }
+  ];
 
   return (
     <Box>
-      {sizes.map((size, index) => (
+      {sizes.map((item, index) => (
         <Section 
-          key={size} 
-          size={size}
+          key={item.size} 
+          size={item.size}
           backgroundColor={index % 2 === 0 ? 1 : 2}
         >
           <Container>
             <Text weight="semibold">
-              {size} Section
+              {item.label} Section (size {item.size})
             </Text>
             <Text size="sm" color="secondary">
-              This section has {size} padding
+              This section has size {item.size} padding
             </Text>
           </Container>
         </Section>
@@ -91,16 +98,18 @@ export default function App() {
   return (
     <div>
       {/* Hero Section */}
-      <Section size="xl" backgroundColor={2}>
+      <Section size="4" backgroundColor="2">
         <Container>
-          <Box textAlign="center">
-            <Text as="h1" size="4xl" weight="bold" mb={4}>
+          <Box>
+            <Text as="h1" size="4xl" weight="bold" align="center">
               Build Better Products
             </Text>
-            <Text size="lg" color="secondary" mb={6}>
+            <Box marginBottom={4} />
+            <Text size="lg" color="secondary" align="center">
               Create amazing user experiences with our comprehensive design system
             </Text>
-            <Flex gap={3} justifyContent="center">
+            <Box marginBottom={6} />
+            <Flex gap={3} justify="center">
               <Button variant="solid" size="lg">Get Started</Button>
               <Button variant="outline" size="lg">View Examples</Button>
             </Flex>
@@ -111,25 +120,29 @@ export default function App() {
       {/* Features Section */}
       <Section>
         <Container>
-          <Text as="h2" size="3xl" weight="bold" mb={6} textAlign="center">
+          <Text as="h2" size="3xl" weight="bold" align="center">
             Key Features
           </Text>
-          <Grid columns={{ mobile: 1, tablet: 3 }} gap={4}>
-            <Box p={6} backgroundColor={2} borderRadius="lg" textAlign="center">
-              <Text size="lg" weight="semibold" mb={2}>Fast</Text>
-              <Text size="sm" color="secondary">
+          <Box mb={6} />
+          <Grid columns={{ mobile: '1', tablet: '3' }} gap={4}>
+            <Box p={6} backgroundColor="2" borderRadius="lg">
+              <Text size="lg" weight="semibold" align="center">Fast</Text>
+              <Box marginBottom={2} />
+              <Text size="sm" color="secondary" align="center">
                 Lightning-fast performance with zero runtime CSS
               </Text>
             </Box>
-            <Box p={6} backgroundColor={2} borderRadius="lg" textAlign="center">
-              <Text size="lg" weight="semibold" mb={2}>Accessible</Text>
-              <Text size="sm" color="secondary">
+            <Box p={6} backgroundColor="2" borderRadius="lg">
+              <Text size="lg" weight="semibold" align="center">Accessible</Text>
+              <Box marginBottom={2} />
+              <Text size="sm" color="secondary" align="center">
                 Built with accessibility in mind from the ground up
               </Text>
             </Box>
-            <Box p={6} backgroundColor={2} borderRadius="lg" textAlign="center">
-              <Text size="lg" weight="semibold" mb={2}>Responsive</Text>
-              <Text size="sm" color="secondary">
+            <Box p={6} backgroundColor="2" borderRadius="lg">
+              <Text size="lg" weight="semibold" align="center">Responsive</Text>
+              <Box marginBottom={2} />
+              <Text size="sm" color="secondary" align="center">
                 Mobile-first design that works on any device
               </Text>
             </Box>
@@ -138,18 +151,22 @@ export default function App() {
       </Section>
 
       {/* CTA Section */}
-      <Section size="lg" backgroundColor={9} style={{ color: 'white' }}>
+      <Section size="3" backgroundColor="9" style={{ color: 'white' }}>
         <Container>
-          <Box textAlign="center">
-            <Text as="h2" size="3xl" weight="bold" mb={4}>
+          <Box>
+            <Text as="h2" size="3xl" weight="bold" align="center">
               Ready to Get Started?
             </Text>
-            <Text size="lg" mb={6} style={{ opacity: 0.9 }}>
+            <Box marginBottom={4} />
+            <Text size="lg" align="center" style={{ opacity: 0.9 }}>
               Join thousands of developers building with our design system
             </Text>
-            <Button variant="solid" size="lg" style={{ backgroundColor: 'white', color: 'var(--gray-12)' }}>
-              Start Building
-            </Button>
+            <Box marginBottom={6} />
+            <Flex justify="center">
+              <Button variant="solid" size="lg" style={{ backgroundColor: 'white', color: 'var(--gray-12)' }}>
+                Start Building
+              </Button>
+            </Flex>
           </Box>
         </Container>
       </Section>
@@ -180,10 +197,11 @@ export default function App() {
           key={section.title}
           backgroundColor={index % 2 === 0 ? 1 : 2}
         >
-          <Container size="md">
-            <Text as="h2" size="2xl" weight="bold" mb={3}>
+          <Container size="2">
+            <Text as="h2" size="2xl" weight="bold">
               {section.title}
             </Text>
+            <Box marginBottom={3} />
             <Text color="secondary">
               {section.content}
             </Text>
@@ -205,12 +223,13 @@ Override default spacing with custom padding values.
 export default function App() {
   return (
     <Box>
-      <Section py={12} backgroundColor={2}>
+      <Section py={12} backgroundColor="2">
         <Container>
-          <Text as="h2" size="3xl" weight="bold" mb={3} textAlign="center">
+          <Text as="h2" size="3xl" weight="bold" align="center">
             Custom Vertical Padding
           </Text>
-          <Text color="secondary" textAlign="center">
+          <Box marginBottom={3} />
+          <Text color="secondary" align="center">
             This section has extra vertical padding (py={12})
           </Text>
         </Container>
@@ -218,11 +237,42 @@ export default function App() {
 
       <Section px={8} py={6}>
         <Container>
-          <Text as="h2" size="2xl" weight="bold" mb={3}>
+          <Text as="h2" size="2xl" weight="bold">
             Custom Horizontal Padding
           </Text>
+          <Box marginBottom={3} />
           <Text color="secondary">
             This section has custom horizontal and vertical padding
+          </Text>
+        </Container>
+      </Section>
+    </Box>
+  );
+}`}
+/>
+
+## Responsive Sizes
+
+Use responsive size values for different screen sizes.
+
+<LiveExample
+  code={`import { Section, Container, Text, Box } from '@beauginbey/vanilla-components';
+
+export default function App() {
+  return (
+    <Box>
+      <Section 
+        size={{ mobile: '1', tablet: '2', desktop: '4' }}
+        backgroundColor="2"
+      >
+        <Container>
+          <Text as="h2" size="2xl" weight="bold">
+            Responsive Section
+          </Text>
+          <Box marginBottom={3} />
+          <Text color="secondary">
+            This section has different padding on mobile (small), 
+            tablet (medium), and desktop (extra large).
           </Text>
         </Container>
       </Section>
@@ -237,7 +287,13 @@ export default function App() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Predefined padding size |
+| `size` | `'1' \| '2' \| '3' \| '4'` | `'3'` | Predefined padding size |
 | `as` | `React.ElementType` | `'section'` | HTML element to render |
+
+### Size Reference
+- `1`: Small padding (16px / 1rem)
+- `2`: Medium padding (32px / 2rem)
+- `3`: Large padding (48px / 3rem) - Default
+- `4`: Extra large padding (64px / 4rem)
 
 The component renders as a semantic HTML5 `<section>` element by default, which helps with document structure and accessibility.

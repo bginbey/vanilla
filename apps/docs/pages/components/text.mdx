@@ -97,7 +97,8 @@ export default function App() {
   return (
     <Box display="flex" flexDirection="column" gap={3}>
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>Semantic Colors</Text>
+        <Text size="sm" weight="semibold">Semantic Colors</Text>
+        <Box marginBottom={2} />
         <Box display="flex" flexDirection="column" gap={1}>
           <Text color="primary">Primary text color</Text>
           <Text color="secondary">Secondary text color</Text>
@@ -110,7 +111,7 @@ export default function App() {
         </Box>
       </Box>
       
-      <Box backgroundColor="primary" p={3} borderRadius="md">
+      <Box backgroundColor="9" p={3} borderRadius="md">
         <Text color="inverse">Inverse text for dark backgrounds</Text>
       </Box>
     </Box>
@@ -126,15 +127,15 @@ export default function App() {
 export default function App() {
   return (
     <Box display="flex" flexDirection="column" gap={3}>
-      <Box p={3} backgroundColor="secondary" borderRadius="md">
+      <Box p={3} backgroundColor="2" borderRadius="md">
         <Text align="left">Left aligned text (default)</Text>
       </Box>
       
-      <Box p={3} backgroundColor="secondary" borderRadius="md">
+      <Box p={3} backgroundColor="2" borderRadius="md">
         <Text align="center">Center aligned text</Text>
       </Box>
       
-      <Box p={3} backgroundColor="secondary" borderRadius="md">
+      <Box p={3} backgroundColor="2" borderRadius="md">
         <Text align="right">Right aligned text</Text>
       </Box>
     </Box>
@@ -154,7 +155,7 @@ export default function App() {
         This is a very long text that will be truncated with an ellipsis when it exceeds the container width. The full text is hidden but can be revealed with a tooltip if needed.
       </Text>
       
-      <Box p={3} backgroundColor="secondary" borderRadius="md">
+      <Box p={3} backgroundColor="2" borderRadius="md">
         <Text truncate weight="semibold">
           Another example of truncated text in a constrained container that demonstrates the ellipsis behavior
         </Text>

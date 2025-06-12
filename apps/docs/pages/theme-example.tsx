@@ -1,4 +1,4 @@
-import { Button, Box, Text } from '@beauginbey/vanilla-components';
+import { Button, Box, Text, Flex } from '@beauginbey/vanilla-components';
 import { useEffect, useState } from 'react';
 
 function ThemeControls() {
@@ -23,7 +23,7 @@ function ThemeControls() {
   };
   
   return (
-    <Box as="div" display="flex" gap={4} p={4}>
+    <Flex gap={4} p={4}>
       <Button
         variant="solid"
         onClick={toggleTheme}
@@ -31,7 +31,7 @@ function ThemeControls() {
       >
         {isDark ? 'Light' : 'Dark'} Mode
       </Button>
-    </Box>
+    </Flex>
   );
 }
 
@@ -49,11 +49,11 @@ function DemoContent() {
         </Box>
       </Box>
       
-      <Box display="flex" gap={4} flexDirection={{ mobile: 'column', tablet: 'row' }}>
+      <Flex gap={4} direction={{ mobile: 'column', tablet: 'row' }}>
         <Button variant="solid">Primary Button</Button>
         <Button variant="outline">Secondary Button</Button>
         <Button variant="ghost">Ghost Button</Button>
-      </Box>
+      </Flex>
       
       <Box mt={8} p={6} backgroundColor={3} borderRadius="lg" boxShadow="base">
         <Box mb={4}>
@@ -66,7 +66,7 @@ function DemoContent() {
         </Text>
       </Box>
       
-      <Box mt={8} display="flex" gap={4}>
+      <Flex mt={8} gap={4}>
         <Box p={4} backgroundColor={2} borderRadius="md">
           <Text size="sm" weight="semibold">Label Text</Text>
         </Box>
@@ -75,7 +75,7 @@ function DemoContent() {
             Code: <Text as="span" size="sm" color="secondary">npm install @beauginbey/vanilla-components</Text>
           </Text>
         </Box>
-      </Box>
+      </Flex>
     </Box>
   );
 }

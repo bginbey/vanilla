@@ -276,7 +276,8 @@ export default function App() {
   return (
     <Box display="flex" flexDirection="column" gap={4}>
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>Normal State</Text>
+        <Text size="sm" weight="semibold">Normal State</Text>
+        <Box marginBottom={2} />
         <FormField 
           label="Field Label" 
           helperText="This is helper text"
@@ -286,7 +287,8 @@ export default function App() {
       </Box>
       
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>Required Field</Text>
+        <Text size="sm" weight="semibold">Required Field</Text>
+        <Box marginBottom={2} />
         <FormField 
           label="Required Field" 
           required
@@ -297,7 +299,8 @@ export default function App() {
       </Box>
       
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>Error State</Text>
+        <Text size="sm" weight="semibold">Error State</Text>
+        <Box marginBottom={2} />
         <FormField 
           label="Field with Error" 
           error
@@ -308,7 +311,8 @@ export default function App() {
       </Box>
       
       <Box>
-        <Text size="sm" weight="semibold" mb={2}>Disabled State</Text>
+        <Text size="sm" weight="semibold">Disabled State</Text>
+        <Box marginBottom={2} />
         <FormField 
           label="Disabled Field" 
           disabled
@@ -377,7 +381,7 @@ export default function App() {
     <Box as="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={4}>
       <Text size="xl" weight="semibold">Registration Form</Text>
       
-      <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3}>
+      <Box display="grid" gridTemplateColumns="2" gap={3}>
         <FormField 
           label="First Name" 
           required
@@ -420,7 +424,7 @@ export default function App() {
         />
       </FormField>
       
-      <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3}>
+      <Box display="grid" gridTemplateColumns="2" gap={3}>
         <FormField 
           label="Phone Number"
           helperText="Optional"
@@ -452,7 +456,7 @@ export default function App() {
         </FormField>
       </Box>
       
-      <Box display="grid" gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3}>
+      <Box display="grid" gridTemplateColumns="2" gap={3}>
         <FormField label="Company">
           <Input 
             value={formData.company}
