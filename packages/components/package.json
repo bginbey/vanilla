@@ -11,13 +11,24 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles.css": "./dist/index.css"
+    "./styles.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css",
+      "default": "./dist/index.css"
+    }
   },
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "*.css",
+    "**/*.css.ts",
+    "**/*.css.js"
+  ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node scripts/validate-build.js",
+    "build:only": "tsup",
+    "validate": "node scripts/validate-build.js",
     "dev": "tsup --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",

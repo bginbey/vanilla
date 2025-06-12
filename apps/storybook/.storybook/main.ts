@@ -17,9 +17,19 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  staticDirs: ['../public'],
   viteFinal: async (config) => {
     return mergeConfig(config, {
       plugins: [vanillaExtractPlugin()],
+      server: {
+        fs: {
+          allow: ['../../..'],
+        },
+      },
+      optimizeDeps: {
+        include: ['@beauginbey/vanilla-components', '@beauginbey/vanilla-tokens', '@beauginbey/vanilla-colors'],
+        exclude: ['@vanilla-extract/css'],
+      },
     });
   },
 };
