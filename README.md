@@ -2,6 +2,8 @@
 
 A modern, accessible, and performant design system built with React, TypeScript, and vanilla-extract.
 
+📚 **[View Documentation](https://bginbey.github.io/vanilla/)**
+
 ## Features
 
 - 🎨 **Design Tokens** - Consistent design language powered by Style Dictionary
