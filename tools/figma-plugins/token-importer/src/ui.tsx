@@ -71,14 +71,42 @@ function App() {
           orangeDark: vanillaColors.orangeDark,
           purpleDark: vanillaColors.purpleDark,
         },
-        // Semantic mappings (simplified example)
+        // Semantic mappings matching the component library
         semantic: {
+          // Background colors
           'background-primary': { light: 'Primitive/gray/1', dark: 'Primitive/gray/1' },
           'background-secondary': { light: 'Primitive/gray/2', dark: 'Primitive/gray/2' },
+          
+          // Surface colors
+          'surface': { light: 'Primitive/gray/3', dark: 'Primitive/gray/3' },
+          'surface-hover': { light: 'Primitive/gray/4', dark: 'Primitive/gray/4' },
+          'surface-active': { light: 'Primitive/gray/5', dark: 'Primitive/gray/5' },
+          
+          // Text colors
           'text-primary': { light: 'Primitive/gray/12', dark: 'Primitive/gray/12' },
           'text-secondary': { light: 'Primitive/gray/11', dark: 'Primitive/gray/11' },
+          'text-tertiary': { light: 'Primitive/gray/10', dark: 'Primitive/gray/10' },
+          'text-disabled': { light: 'Primitive/gray/8', dark: 'Primitive/gray/8' },
+          
+          // Border colors
           'border-default': { light: 'Primitive/gray/6', dark: 'Primitive/gray/6' },
-          'accent-primary': { light: 'Primitive/blue/9', dark: 'Primitive/blue/9' },
+          'border-hover': { light: 'Primitive/gray/7', dark: 'Primitive/gray/7' },
+          
+          // Accent colors (using blue as default)
+          'accent-base': { light: 'Primitive/blue/9', dark: 'Primitive/blue/9' },
+          'accent-hover': { light: 'Primitive/blue/10', dark: 'Primitive/blue/10' },
+          'accent-active': { light: 'Primitive/blue/11', dark: 'Primitive/blue/11' },
+          'accent-surface': { light: 'Primitive/blue/3', dark: 'Primitive/blue/3' },
+          'accent-surface-hover': { light: 'Primitive/blue/4', dark: 'Primitive/blue/4' },
+          'accent-border': { light: 'Primitive/blue/7', dark: 'Primitive/blue/7' },
+          'accent-border-hover': { light: 'Primitive/blue/8', dark: 'Primitive/blue/8' },
+          'accent-text-low': { light: 'Primitive/blue/11', dark: 'Primitive/blue/11' },
+          
+          // Error colors
+          'error-base': { light: 'Primitive/red/9', dark: 'Primitive/red/9' },
+          
+          // Special colors
+          'accent-text': { light: '#FFFFFF', dark: '#FFFFFF' }, // White text on solid buttons
         }
       };
     }
@@ -88,7 +116,7 @@ function App() {
     }
 
     if (selectedTokens.typography) {
-      tokens.typography = typographyTokens;
+      tokens.typography = typographyTokens.font;
     }
 
     if (selectedTokens.shadows) {

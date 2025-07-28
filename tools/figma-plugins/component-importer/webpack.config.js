@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 
 module.exports = (env, argv) => ({
   mode: argv.mode === 'production' ? 'production' : 'development',
@@ -8,7 +9,7 @@ module.exports = (env, argv) => ({
     code: './src/code.ts',
     ui: './src/ui.tsx'
   },
-  target: ['web', 'es5'],
+  target: 'web',
   module: {
     rules: [
       {
@@ -19,23 +20,24 @@ module.exports = (env, argv) => ({
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.json$/,
+        type: 'json'
       }
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx']
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
+    alias: {
+      '@components': path.resolve(__dirname, '../../../packages/components'),
+      '@tokens': path.resolve(__dirname, '../../../packages/tokens')
+    }
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    environment: {
-      arrowFunction: false,
-      const: false,
-      destructuring: false,
-      forOf: false,
-      module: false
-    }
+    clean: true
   },
   optimization: {
     concatenateModules: false,
@@ -45,7 +47,10 @@ module.exports = (env, argv) => ({
     new HtmlWebpackPlugin({
       template: './src/ui.html',
       filename: 'ui.html',
-      chunks: ['ui']
-    })
+      chunks: ['ui'],
+      inject: 'body',
+      scriptLoading: 'blocking'
+    }),
+    new HtmlInlineScriptPlugin()
   ]
 });

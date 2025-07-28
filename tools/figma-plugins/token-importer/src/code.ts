@@ -33,6 +33,16 @@ async function importTokens(tokenConfig: any) {
   const collections: any = {};
   
   try {
+    // Test API access first
+    try {
+      const testCollections = await figma.variables.getLocalVariableCollectionsAsync();
+      console.log(`API test successful, found ${testCollections.length} existing collections`);
+    } catch (apiError) {
+      console.error('Failed to access Figma API:', apiError);
+      figma.notify('Unable to access Figma Variables API. Please check your connection and try again.', { error: true });
+      throw new Error('Unable to access Figma Variables API');
+    }
+    
     console.log('Creating Colors collection...');
     collections.colors = await getOrCreateCollection('Colors');
     console.log('Creating Spacing collection...');
@@ -178,22 +188,36 @@ async function importColorTokens(collection: VariableCollection, colors: any) {
     // Map semantic to primitive variables
     if (typeof tokenValue === 'object' && tokenValue !== null && 'light' in tokenValue) {
       // Set light mode
-      const lightPrimitive = await findPrimitiveVariable(collection, (tokenValue as any).light);
-      if (lightPrimitive) {
-        variable.setValueForMode(lightMode.modeId, {
-          type: 'VARIABLE_ALIAS',
-          id: lightPrimitive.id
-        });
+      const lightValue = (tokenValue as any).light;
+      if (lightValue.startsWith('#')) {
+        // Direct hex color
+        variable.setValueForMode(lightMode.modeId, hexToRgb(lightValue));
+      } else {
+        // Variable alias
+        const lightPrimitive = await findPrimitiveVariable(collection, lightValue);
+        if (lightPrimitive) {
+          variable.setValueForMode(lightMode.modeId, {
+            type: 'VARIABLE_ALIAS',
+            id: lightPrimitive.id
+          });
+        }
       }
       
       // Set dark mode
       if (darkMode && (tokenValue as any).dark) {
-        const darkPrimitive = await findPrimitiveVariable(collection, (tokenValue as any).dark);
-        if (darkPrimitive) {
-          variable.setValueForMode(darkMode.modeId, {
-            type: 'VARIABLE_ALIAS',
-            id: darkPrimitive.id
-          });
+        const darkValue = (tokenValue as any).dark;
+        if (darkValue.startsWith('#')) {
+          // Direct hex color
+          variable.setValueForMode(darkMode.modeId, hexToRgb(darkValue));
+        } else {
+          // Variable alias
+          const darkPrimitive = await findPrimitiveVariable(collection, darkValue);
+          if (darkPrimitive) {
+            variable.setValueForMode(darkMode.modeId, {
+              type: 'VARIABLE_ALIAS',
+              id: darkPrimitive.id
+            });
+          }
         }
       }
     }
@@ -244,9 +268,11 @@ async function importSpacingTokens(collection: VariableCollection, spacing: any)
 }
 
 async function importTypographyTokens(collection: VariableCollection, typography: any) {
+  console.log('Importing typography tokens:', typography);
+  
   // Font sizes
-  if (typography.fontSize) {
-    for (const [key, value] of Object.entries(typography.fontSize)) {
+  if (typography.size) {
+    for (const [key, value] of Object.entries(typography.size)) {
       const variable = await getOrCreateVariable(
         collection,
         `Size/${key}`,
@@ -257,10 +283,23 @@ async function importTypographyTokens(collection: VariableCollection, typography
         ? (value as any).value 
         : value;
       
-      let numValue = parseFloat(tokenValue as string);
+      let numValue = 0;
+      
+      // Convert rem to pixels (assuming 16px base font size)
+      if (typeof tokenValue === 'string') {
+        if (tokenValue.endsWith('rem')) {
+          numValue = parseFloat(tokenValue) * 16;
+        } else if (tokenValue.endsWith('px')) {
+          numValue = parseFloat(tokenValue);
+        } else {
+          numValue = parseFloat(tokenValue);
+        }
+      } else if (typeof tokenValue === 'number') {
+        numValue = tokenValue;
+      }
       
       // Validate the number
-      if (isNaN(numValue)) {
+      if (isNaN(numValue) || numValue <= 0) {
         console.error(`Invalid font size value for ${key}: ${tokenValue}`);
         numValue = 16; // Default font size
       }
@@ -270,8 +309,8 @@ async function importTypographyTokens(collection: VariableCollection, typography
   }
 
   // Font weights
-  if (typography.fontWeight) {
-    for (const [key, value] of Object.entries(typography.fontWeight)) {
+  if (typography.weight) {
+    for (const [key, value] of Object.entries(typography.weight)) {
       const variable = await getOrCreateVariable(
         collection,
         `Weight/${key}`,
@@ -318,6 +357,55 @@ async function importTypographyTokens(collection: VariableCollection, typography
       variable.setValueForMode(collection.defaultModeId, numValue);
     }
   }
+
+  // Font families
+  if (typography.family) {
+    for (const [key, value] of Object.entries(typography.family)) {
+      const variable = await getOrCreateVariable(
+        collection,
+        `Family/${key}`,
+        'STRING'
+      );
+      // Extract value from token object
+      const tokenValue = typeof value === 'object' && (value as any).value 
+        ? (value as any).value 
+        : value;
+      
+      variable.setValueForMode(collection.defaultModeId, tokenValue as string);
+    }
+  }
+
+  // Letter spacing
+  if (typography.letterSpacing) {
+    for (const [key, value] of Object.entries(typography.letterSpacing)) {
+      const variable = await getOrCreateVariable(
+        collection,
+        `LetterSpacing/${key}`,
+        'FLOAT'
+      );
+      // Extract value from token object
+      const tokenValue = typeof value === 'object' && (value as any).value 
+        ? (value as any).value 
+        : value;
+      
+      // Convert em to pixels (approximate)
+      let numValue = 0;
+      if (typeof tokenValue === 'string' && tokenValue.endsWith('em')) {
+        // Convert em to pixels (assuming 16px base)
+        numValue = parseFloat(tokenValue) * 16;
+      } else {
+        numValue = parseFloat(tokenValue as string);
+      }
+      
+      // Validate the number
+      if (isNaN(numValue)) {
+        console.error(`Invalid letter spacing value for ${key}: ${tokenValue}`);
+        numValue = 0;
+      }
+      
+      variable.setValueForMode(collection.defaultModeId, numValue);
+    }
+  }
 }
 
 async function importShadowTokens(collection: VariableCollection, shadows: any) {
@@ -349,7 +437,20 @@ async function importRadiusTokens(collection: VariableCollection, radii: any) {
       ? (value as any).value 
       : value;
     
-    let numValue = parseFloat(tokenValue as string);
+    let numValue = 0;
+    
+    // Convert rem to pixels (assuming 16px base)
+    if (typeof tokenValue === 'string') {
+      if (tokenValue.endsWith('rem')) {
+        numValue = parseFloat(tokenValue) * 16;
+      } else if (tokenValue.endsWith('px')) {
+        numValue = parseFloat(tokenValue);
+      } else {
+        numValue = parseFloat(tokenValue);
+      }
+    } else if (typeof tokenValue === 'number') {
+      numValue = tokenValue;
+    }
     
     // Validate the number
     if (isNaN(numValue)) {
@@ -357,6 +458,7 @@ async function importRadiusTokens(collection: VariableCollection, radii: any) {
       numValue = 0;
     }
     
+    console.log(`Radius ${key}: ${tokenValue} -> ${numValue}px`);
     variable.setValueForMode(collection.defaultModeId, numValue);
   }
 }
@@ -428,6 +530,9 @@ async function getOrCreateVariable(
       }
     }
     
+    // Add a small delay to avoid API rate limiting
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
     // Create new variable
     console.log(`Creating new variable: ${name} of type ${resolvedType}`);
     const newVariable = figma.variables.createVariable(name, collection, resolvedType);
@@ -435,6 +540,19 @@ async function getOrCreateVariable(
     return newVariable;
   } catch (error) {
     console.error(`Error creating variable ${name}:`, error);
+    // If it's a network error, try once more after a delay
+    if (error instanceof Error && error.message.includes('connection')) {
+      console.log(`Retrying variable creation for ${name} after network error...`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      try {
+        const newVariable = figma.variables.createVariable(name, collection, resolvedType);
+        console.log(`Created variable on retry: ${name}`);
+        return newVariable;
+      } catch (retryError) {
+        console.error(`Retry failed for ${name}:`, retryError);
+        throw retryError;
+      }
+    }
     throw error;
   }
 }
