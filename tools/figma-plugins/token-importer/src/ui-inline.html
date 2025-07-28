@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      console.log('Testing inline execution');
+      
+      // Simple test without React
+      var root = document.getElementById('root');
+      if (root) {
+        root.innerHTML = '<h2>Vanilla Token Importer</h2><p>If you see this, scripts are working!</p>';
+        console.log('Content added to root');
+      }
+    </script>
+  </body>
+</html>
