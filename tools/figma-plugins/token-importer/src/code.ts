@@ -406,6 +406,24 @@ async function importTypographyTokens(collection: VariableCollection, typography
       variable.setValueForMode(collection.defaultModeId, numValue);
     }
   }
+  
+  // Create composite size tokens for component importer
+  const sizeConfigs = {
+    'sm': { fontSize: 14, lineHeight: 1.5 },  // 0.875rem * 16 = 14px
+    'md': { fontSize: 16, lineHeight: 1.5 },  // 1rem * 16 = 16px  
+    'lg': { fontSize: 18, lineHeight: 1.5 }   // 1.125rem * 16 = 18px
+  };
+  
+  for (const [sizeName, config] of Object.entries(sizeConfigs)) {
+    const variable = await getOrCreateVariable(
+      collection,
+      `Size/${sizeName}`,
+      'FLOAT'
+    );
+    // For now, we'll store font size as the main value
+    // Component importer can use this as a reference
+    variable.setValueForMode(collection.defaultModeId, config.fontSize);
+  }
 }
 
 async function importShadowTokens(collection: VariableCollection, shadows: any) {
@@ -501,6 +519,23 @@ async function importAnimationTokens(collection: VariableCollection, animation: 
       const variable = await getOrCreateVariable(
         collection,
         `Easing/${key}`,
+        'STRING'
+      );
+      // Extract value from token object
+      const tokenValue = typeof value === 'object' && (value as any).value 
+        ? (value as any).value 
+        : value;
+      
+      variable.setValueForMode(collection.defaultModeId, tokenValue as string);
+    }
+  }
+  
+  // Transition properties
+  if (animation.transition && animation.transition.property) {
+    for (const [key, value] of Object.entries(animation.transition.property)) {
+      const variable = await getOrCreateVariable(
+        collection,
+        `Transition/${key}`,
         'STRING'
       );
       // Extract value from token object

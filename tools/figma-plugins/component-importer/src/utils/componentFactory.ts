@@ -242,7 +242,7 @@ export class ComponentFactory {
           break;
           
         case 'vector':
-          childNode = this.createChevronVector();
+          childNode = await this.createChevronVector();
           break;
       }
       
@@ -261,8 +261,17 @@ export class ComponentFactory {
       
       // Apply properties
       for (const [key, value] of Object.entries(child.properties)) {
-        if (key in childNode) {
-          (childNode as any)[key] = value;
+        // Handle width and height separately using resize method
+        if ((key === 'width' || key === 'height') && 'resize' in childNode) {
+          const width = child.properties.width || childNode.width;
+          const height = child.properties.height || childNode.height;
+          childNode.resize(width as number, height as number);
+        } else if (key in childNode && key !== 'width' && key !== 'height') {
+          try {
+            (childNode as any)[key] = value;
+          } catch (error) {
+            console.error(`Error setting property ${key} on ${child.name}:`, error);
+          }
         }
       }
       
@@ -389,9 +398,11 @@ export class ComponentFactory {
     }
   }
   
-  private createChevronVector(): VectorNode {
+  private async createChevronVector(): Promise<VectorNode> {
     const vector = figma.createVector();
-    vector.vectorNetwork = {
+    
+    // Use setVectorNetworkAsync for the vector network
+    await vector.setVectorNetworkAsync({
       vertices: [
         { x: 0, y: 0.3 },
         { x: 0.5, y: 0.7 },
@@ -401,7 +412,8 @@ export class ComponentFactory {
         { start: 0, end: 1 },
         { start: 1, end: 2 }
       ]
-    };
+    });
+    
     vector.resize(12, 8);
     vector.strokes = [{ type: 'SOLID', color: { r: 0.4, g: 0.4, b: 0.4 } }];
     vector.strokeWeight = 2;

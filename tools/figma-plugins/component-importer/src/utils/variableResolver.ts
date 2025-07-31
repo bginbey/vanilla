@@ -53,6 +53,8 @@ export class VariableResolver {
     variablePath: string,
     collectionName: string
   ): Promise<boolean> {
+    console.log(`Attempting to bind property "${property}" with variable "${variablePath}" from collection "${collectionName}"`);
+    
     const variable = await this.resolveVariable(variablePath, collectionName);
     if (!variable) {
       console.error(`Failed to resolve variable: ${collectionName}/${variablePath}`);
@@ -131,15 +133,37 @@ export class VariableResolver {
         case 'paddingTop':
         case 'paddingBottom':
           if (property in node) {
-            node.setBoundVariable(property as any, variable);
-            console.log(`Bound ${property} to ${variablePath}`);
+            // Get the numeric value from the variable
+            const collection = this.collections.get(collectionName);
+            if (collection) {
+              const value = variable.valuesByMode[collection.defaultModeId];
+              if (typeof value === 'number') {
+                // Cast to a node type that has padding properties
+                const autoLayoutNode = node as FrameNode | ComponentNode | InstanceNode;
+                if (property in autoLayoutNode) {
+                  (autoLayoutNode as any)[property] = value;
+                  console.log(`Set ${property} to ${value}`);
+                }
+              }
+            }
           }
           break;
           
         case 'itemSpacing':
           if ('itemSpacing' in node) {
-            node.setBoundVariable('itemSpacing', variable);
-            console.log(`Bound itemSpacing to ${variablePath}`);
+            // Get the numeric value from the variable
+            const collection = this.collections.get(collectionName);
+            if (collection) {
+              const value = variable.valuesByMode[collection.defaultModeId];
+              if (typeof value === 'number') {
+                // Cast to a node type that has itemSpacing
+                const autoLayoutNode = node as FrameNode | ComponentNode | InstanceNode;
+                if ('itemSpacing' in autoLayoutNode) {
+                  autoLayoutNode.itemSpacing = value;
+                  console.log(`Set itemSpacing to ${value}`);
+                }
+              }
+            }
           }
           break;
           
