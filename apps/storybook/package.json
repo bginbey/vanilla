@@ -4,9 +4,11 @@
   "private": true,
   "description": "Storybook documentation for Vanilla Design System",
   "scripts": {
-    "copy-css": "node scripts/copy-css.js",
-    "dev": "pnpm copy-css && storybook dev -p 6006",
-    "build": "pnpm copy-css && storybook build",
+    "dev": "storybook dev -p 6006",
+    "dev:clean": "rm -rf node_modules/.cache ../../node_modules/.vite-storybook && storybook dev -p 6006",
+    "dev:force": "storybook dev -p 6006 --force",
+    "build": "storybook build",
+    "clean": "rm -rf node_modules/.cache ../../node_modules/.vite-storybook storybook-static",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx"
   },
   "dependencies": {

@@ -1,5 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { globalStyle } from '@vanilla-extract/css';
 import { vars } from '../../styles/theme.css';
+import { ACCENT_COLORS } from '../../constants/colors';
 
 export const selectStyles = {
   wrapper: recipe({
@@ -38,7 +40,7 @@ export const selectStyles = {
       },
       
       ':focus-visible': {
-        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`,
+        boxShadow: '0 0 0 2px var(--select-focus-ring, var(--color-focus-ring))',
       },
       
       ':disabled': {
@@ -62,7 +64,7 @@ export const selectStyles = {
           },
           
           ':focus-visible': {
-            borderColor: vars.color.blue[8],
+            borderColor: 'var(--select-border-focus, var(--color-border-focus))',
           },
         },
         
@@ -79,7 +81,7 @@ export const selectStyles = {
           
           ':focus-visible': {
             backgroundColor: vars.color.gray[1],
-            borderColor: vars.color.blue[8],
+            borderColor: 'var(--select-border-focus, var(--color-border-focus))',
           },
         },
         
@@ -155,4 +157,18 @@ export const iconStyles = recipe({
   defaultVariants: {
     disabled: false,
   },
+});
+
+/**
+ * Color override styles using data attributes
+ * Each accent color gets its own set of CSS custom properties
+ * when the data-accent-color attribute is set
+ */
+ACCENT_COLORS.forEach((color) => {
+  globalStyle(`[data-accent-color="${color}"] select`, {
+    vars: {
+      '--select-border-focus': `var(--${color}-8)`,
+      '--select-focus-ring': `var(--${color}-8)`,
+    }
+  });
 });

@@ -1,11 +1,14 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 import { inputStyles } from './Input.css';
+import type { AccentColor } from '../../constants/colors';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   variant?: 'outline' | 'filled' | 'unstyled';
   error?: boolean;
   fullWidth?: boolean;
+  /** Override the theme accent color for this specific input */
+  color?: AccentColor;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -17,6 +20,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       fullWidth = false,
       type = 'text',
       disabled,
+      color,
       ...props
     },
     ref
@@ -35,6 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className
         )}
         disabled={disabled}
+        data-accent-color={color}
         {...props}
       />
     );

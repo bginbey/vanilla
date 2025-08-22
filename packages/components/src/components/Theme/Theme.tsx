@@ -2,9 +2,12 @@ import React, { ReactNode, useLayoutEffect } from 'react';
 import { clsx } from 'clsx';
 import { theme } from './Theme.css';
 import { theme as baseTheme } from '../../styles/theme.css';
+import type { AccentColor, GrayColor } from '../../constants/colors';
 
-export type AccentColor = 'blue' | 'green' | 'red' | 'yellow' | 'orange' | 'purple';
-export type GrayColor = 'gray'; // Can be expanded later with slate, sand, etc.
+// Re-export for backwards compatibility
+export type { AccentColor, GrayColor } from '../../constants/colors';
+// Add 'auto' option for gray color in Theme
+export type ThemeGrayColor = GrayColor | 'auto';
 export type Appearance = 'light' | 'dark' | 'inherit';
 export type PanelBackground = 'solid' | 'translucent';
 export type Scaling = '90%' | '95%' | '100%' | '105%' | '110%';
@@ -19,9 +22,9 @@ export interface ThemeProps {
   accentColor?: AccentColor;
   /**
    * The gray scale to use for neutral colors
-   * @default 'gray'
+   * @default 'auto' - automatically pairs with accent color
    */
-  grayColor?: GrayColor;
+  grayColor?: ThemeGrayColor;
   /**
    * The color scheme appearance
    * @default 'inherit'
@@ -74,10 +77,41 @@ const radiusFactors: Record<Radius, number> = {
   full: 9999,
 };
 
+// Automatic gray pairing based on accent color
+function getMatchingGrayColor(accentColor: AccentColor): GrayColor {
+  // Blue-tinted grays
+  if (['blue', 'sky', 'cyan', 'indigo'].includes(accentColor)) {
+    return 'slate';
+  }
+  
+  // Purple-tinted grays
+  if (['purple', 'violet', 'plum', 'pink'].includes(accentColor)) {
+    return 'mauve';
+  }
+  
+  // Green-tinted grays
+  if (['green', 'grass', 'jade', 'mint'].includes(accentColor)) {
+    return 'sage';
+  }
+  
+  // Yellow/warm-tinted grays
+  if (['yellow', 'amber', 'orange', 'brown'].includes(accentColor)) {
+    return 'sand';
+  }
+  
+  // Yellow-green tinted grays
+  if (['lime', 'teal', 'olive'].includes(accentColor)) {
+    return 'olive';
+  }
+  
+  // For remaining colors (red, ruby, crimson, tomato, gold, bronze, iris)
+  return 'gray';
+}
+
 export function Theme({
   children,
   accentColor = 'blue',
-  grayColor = 'gray',
+  grayColor = 'auto',
   appearance = 'inherit',
   panelBackground = 'solid',
   scaling = '100%',
@@ -86,20 +120,75 @@ export function Theme({
   className,
   asChild = false,
 }: ThemeProps) {
+  // Resolve gray color (auto-pair or explicit)
+  const resolvedGrayColor = grayColor === 'auto' 
+    ? getMatchingGrayColor(accentColor) 
+    : grayColor;
+  
   // Apply theme attributes for CSS selectors
   const themeProps = {
     'data-accent-color': accentColor,
-    'data-gray-color': grayColor,
+    'data-gray-color': resolvedGrayColor,
     'data-panel-background': panelBackground,
     'data-scaling': scaling.replace('%', ''),
     'data-radius': radius,
     'data-high-contrast': highContrast ? '' : undefined,
   };
 
-  // Set CSS variables for scaling and radius
+  // Set CSS variables for scaling, radius, and dynamic color mapping
   const style = {
     '--scaling-factor': scalingFactors[scaling],
     '--radius-factor': radiusFactors[radius],
+    // Map accent color
+    '--accent-1': `var(--${accentColor}-1)`,
+    '--accent-2': `var(--${accentColor}-2)`,
+    '--accent-3': `var(--${accentColor}-3)`,
+    '--accent-4': `var(--${accentColor}-4)`,
+    '--accent-5': `var(--${accentColor}-5)`,
+    '--accent-6': `var(--${accentColor}-6)`,
+    '--accent-7': `var(--${accentColor}-7)`,
+    '--accent-8': `var(--${accentColor}-8)`,
+    '--accent-9': `var(--${accentColor}-9)`,
+    '--accent-10': `var(--${accentColor}-10)`,
+    '--accent-11': `var(--${accentColor}-11)`,
+    '--accent-12': `var(--${accentColor}-12)`,
+    '--accent-a1': `var(--${accentColor}-a1)`,
+    '--accent-a2': `var(--${accentColor}-a2)`,
+    '--accent-a3': `var(--${accentColor}-a3)`,
+    '--accent-a4': `var(--${accentColor}-a4)`,
+    '--accent-a5': `var(--${accentColor}-a5)`,
+    '--accent-a6': `var(--${accentColor}-a6)`,
+    '--accent-a7': `var(--${accentColor}-a7)`,
+    '--accent-a8': `var(--${accentColor}-a8)`,
+    '--accent-a9': `var(--${accentColor}-a9)`,
+    '--accent-a10': `var(--${accentColor}-a10)`,
+    '--accent-a11': `var(--${accentColor}-a11)`,
+    '--accent-a12': `var(--${accentColor}-a12)`,
+    // Map gray color
+    '--gray-1': `var(--${resolvedGrayColor}-1)`,
+    '--gray-2': `var(--${resolvedGrayColor}-2)`,
+    '--gray-3': `var(--${resolvedGrayColor}-3)`,
+    '--gray-4': `var(--${resolvedGrayColor}-4)`,
+    '--gray-5': `var(--${resolvedGrayColor}-5)`,
+    '--gray-6': `var(--${resolvedGrayColor}-6)`,
+    '--gray-7': `var(--${resolvedGrayColor}-7)`,
+    '--gray-8': `var(--${resolvedGrayColor}-8)`,
+    '--gray-9': `var(--${resolvedGrayColor}-9)`,
+    '--gray-10': `var(--${resolvedGrayColor}-10)`,
+    '--gray-11': `var(--${resolvedGrayColor}-11)`,
+    '--gray-12': `var(--${resolvedGrayColor}-12)`,
+    '--gray-a1': `var(--${resolvedGrayColor}-a1)`,
+    '--gray-a2': `var(--${resolvedGrayColor}-a2)`,
+    '--gray-a3': `var(--${resolvedGrayColor}-a3)`,
+    '--gray-a4': `var(--${resolvedGrayColor}-a4)`,
+    '--gray-a5': `var(--${resolvedGrayColor}-a5)`,
+    '--gray-a6': `var(--${resolvedGrayColor}-a6)`,
+    '--gray-a7': `var(--${resolvedGrayColor}-a7)`,
+    '--gray-a8': `var(--${resolvedGrayColor}-a8)`,
+    '--gray-a9': `var(--${resolvedGrayColor}-a9)`,
+    '--gray-a10': `var(--${resolvedGrayColor}-a10)`,
+    '--gray-a11': `var(--${resolvedGrayColor}-a11)`,
+    '--gray-a12': `var(--${resolvedGrayColor}-a12)`,
   } as React.CSSProperties;
 
   // Handle appearance changes

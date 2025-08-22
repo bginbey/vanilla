@@ -1,11 +1,14 @@
 import { forwardRef, SelectHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 import { selectStyles, iconStyles } from './Select.css';
+import type { AccentColor } from '../../constants/colors';
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   variant?: 'outline' | 'filled' | 'unstyled';
   error?: boolean;
   fullWidth?: boolean;
+  /** Override the theme accent color for this specific select */
+  color?: AccentColor;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -17,12 +20,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       fullWidth = false,
       disabled,
       children,
+      color,
       ...props
     },
     ref
   ) => {
     return (
-      <div className={clsx(selectStyles.wrapper({ fullWidth }))}>
+      <div className={clsx(selectStyles.wrapper({ fullWidth }))} data-accent-color={color}>
         <select
           ref={ref}
           className={clsx(

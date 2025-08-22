@@ -1,5 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { globalStyle } from '@vanilla-extract/css';
 import { vars } from '../../styles/theme.css';
+import { ACCENT_COLORS } from '../../constants/colors';
 
 export const inputStyles = recipe({
   base: {
@@ -22,7 +24,7 @@ export const inputStyles = recipe({
     },
     
     ':focus-visible': {
-      boxShadow: `0 0 0 2px ${vars.color.blue[8]}`, // Focus ring
+      boxShadow: '0 0 0 2px var(--input-focus-ring, var(--color-focus-ring))', // Focus ring with override support
     },
     
     ':disabled': {
@@ -45,7 +47,7 @@ export const inputStyles = recipe({
         },
         
         ':focus-visible': {
-          borderColor: vars.color.blue[8], // Focus border
+          borderColor: 'var(--input-border-focus, var(--color-border-focus))', // Focus border
         },
       },
       
@@ -61,7 +63,7 @@ export const inputStyles = recipe({
         
         ':focus-visible': {
           backgroundColor: vars.color.gray[1], // App background
-          borderColor: vars.color.blue[8], // Focus border
+          borderColor: 'var(--input-border-focus, var(--color-border-focus))', // Focus border
         },
       },
       
@@ -112,4 +114,18 @@ export const inputStyles = recipe({
     fullWidth: false,
     disabled: false,
   },
+});
+
+/**
+ * Color override styles using data attributes
+ * Each accent color gets its own set of CSS custom properties
+ * when the data-accent-color attribute is set
+ */
+ACCENT_COLORS.forEach((color) => {
+  globalStyle(`input[data-accent-color="${color}"]`, {
+    vars: {
+      '--input-border-focus': `var(--${color}-8)`,
+      '--input-focus-ring': `var(--${color}-8)`,
+    }
+  });
 });

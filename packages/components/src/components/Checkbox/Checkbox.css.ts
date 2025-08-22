@@ -1,6 +1,7 @@
-import { style } from '@vanilla-extract/css';
+import { style, globalStyle } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '../../styles/theme.css';
+import { ACCENT_COLORS } from '../../constants/colors';
 
 export const checkboxStyles = recipe({
   base: {
@@ -51,27 +52,27 @@ export const iconStyles = recipe({
     
     selectors: {
       [`${inputStyles}:hover:not(:disabled) + &`]: {
-        borderColor: vars.color.blue[8], // Hover border
+        borderColor: 'var(--checkbox-border-hover, var(--color-border-hover))', // Hover border
       },
       
       [`${inputStyles}:focus-visible + &`]: {
-        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`, // Focus ring
+        boxShadow: '0 0 0 2px var(--checkbox-focus-ring, var(--color-focus-ring))', // Focus ring
       },
       
       [`${inputStyles}:checked + &`]: {
-        backgroundColor: vars.color.blue[9], // Solid color
-        borderColor: vars.color.blue[9],
+        backgroundColor: 'var(--checkbox-accent-base, var(--color-accent-base))', // Solid color
+        borderColor: 'var(--checkbox-accent-base, var(--color-accent-base))',
         color: 'white', // White on solid
       },
       
       [`${inputStyles}:checked:hover:not(:disabled) + &`]: {
-        backgroundColor: vars.color.blue[10], // Hover solid
-        borderColor: vars.color.blue[10],
+        backgroundColor: 'var(--checkbox-accent-hover, var(--color-accent-hover))', // Hover solid
+        borderColor: 'var(--checkbox-accent-hover, var(--color-accent-hover))',
       },
       
       [`${inputStyles}:indeterminate + &`]: {
-        backgroundColor: vars.color.blue[9], // Solid color
-        borderColor: vars.color.blue[9],
+        backgroundColor: 'var(--checkbox-accent-base, var(--color-accent-base))', // Solid color
+        borderColor: 'var(--checkbox-accent-base, var(--color-accent-base))',
         color: 'white',
       },
     },
@@ -156,4 +157,20 @@ export const labelStyles = recipe({
   defaultVariants: {
     disabled: false,
   },
+});
+
+/**
+ * Color override styles using data attributes
+ * Each accent color gets its own set of CSS custom properties
+ * when the data-accent-color attribute is set
+ */
+ACCENT_COLORS.forEach((color) => {
+  globalStyle(`[data-accent-color="${color}"]`, {
+    vars: {
+      '--checkbox-accent-base': `var(--${color}-9)`,
+      '--checkbox-accent-hover': `var(--${color}-10)`,
+      '--checkbox-border-hover': `var(--${color}-8)`,
+      '--checkbox-focus-ring': `var(--${color}-8)`,
+    }
+  });
 });

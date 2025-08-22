@@ -351,6 +351,166 @@ const themes = {
    - Build all packages: `pnpm build`
    - Publish to npm: `npm publish` in each package directory
 
+# Comprehensive Component Refactor Plan
+
+## Overview
+Refactor all components to follow the standards established by Button and documented in PATTERNS.md. This ensures consistency, maintainability, and predictable developer experience across the entire component library.
+
+## Standards to Apply (from Button & PATTERNS.md)
+
+### 1. Type Organization
+- Export component-specific types (e.g., `ButtonVariant`, `ButtonSize`)
+- Use types from `constants/colors.ts` for colors
+- Create descriptive interfaces for props
+- Use consistent naming: `ComponentNameProps`, `ComponentNameVariant`, etc.
+
+### 2. CSS Architecture (Three-Layer Pattern)
+- Layer 1: Base recipe with semantic CSS variables
+- Layer 2: Style variants for sub-elements
+- Layer 3: Data attribute overrides for customization
+- Add explanatory comment at top of CSS files
+
+### 3. Color Override Pattern
+- Add `color?: AccentColor` prop where applicable
+- Apply via `data-accent-color={color}`
+- Define component-scoped CSS variables
+- Use globalStyle for color overrides
+
+### 4. Consistent Props API
+- `variant`: Visual style options
+- `size`: Component sizing
+- `fullWidth`: Take full container width
+- `color`: Override accent color (where applicable)
+- `className` & `style`: Always supported
+
+## Components to Refactor
+
+### Phase 1: Interactive Components (Need color overrides)
+
+#### 1. **IconButton** (High Priority)
+- [ ] Add `color?: AccentColor` prop
+- [ ] Extract types: `IconButtonVariant`, `IconButtonSize`
+- [ ] Add data-attribute color overrides
+- [ ] Update CSS to use semantic variables
+- [ ] Add pattern comment to CSS file
+
+#### 2. **Switch** (High Priority)
+- [ ] Add `color?: AccentColor` prop
+- [ ] Extract type: `SwitchSize`
+- [ ] Implement color overrides for track and thumb
+- [ ] Update CSS structure to three-layer pattern
+- [ ] Use semantic CSS variables
+
+#### 3. **Radio** (High Priority)
+- [ ] Add `color?: AccentColor` prop
+- [ ] Implement color overrides for checked state
+- [ ] Add size variants (sm, md, lg) to match other inputs
+- [ ] Update CSS to match Checkbox pattern
+
+### Phase 2: Typography & Content Components
+
+#### 4. **Text** (Medium Priority)
+- [ ] Refactor color prop to use AccentColor for brand colors
+- [ ] Keep semantic colors (primary, secondary, etc.) as-is
+- [ ] Extract types: `TextSize`, `TextWeight`, `TextColor`
+- [ ] Consider if truncate should be part of variant
+
+#### 5. **FormField** (Medium Priority)
+- [ ] Add `color?: AccentColor` prop for error states
+- [ ] Ensure consistent error styling across form components
+- [ ] Update to use semantic CSS variables
+
+### Phase 3: Layout Components (May not need color overrides)
+
+#### 6. **Box** (Low Priority)
+- [ ] Review Sprinkles system for consistency
+- [ ] Ensure CSS variables are used throughout
+- [ ] Document any special patterns
+
+#### 7. **Container, Flex, Grid, Section** (Low Priority)
+- [ ] Ensure consistent spacing variables
+- [ ] Review responsive props pattern
+- [ ] Document layout-specific patterns
+
+### Phase 4: Utility Components
+
+#### 8. **Icon** (Low Priority)
+- [ ] Review if color prop should use AccentColor
+- [ ] Ensure consistent sizing system
+- [ ] Update IconProvider if needed
+
+#### 9. **Theme & ThemeProvider** (Already Done)
+- [x] Already uses types from constants/colors.ts
+- [ ] Review for any additional consistency updates
+
+## Implementation Order
+
+### Interactive Components First
+1. **IconButton** - Most similar to Button, good starting point
+2. **Switch** - Establish pattern for toggle controls
+3. **Radio** - Complete the form control set
+
+### Typography & Content
+4. **Text** - Central typography component
+5. **FormField** - Unifies form component patterns
+
+### Layout & Structure
+6. **Box** - Review Sprinkles system
+7. **Container, Flex, Grid, Section** - Ensure consistency
+
+### Utilities
+8. **Icon** - Review color system
+9. **Final review** - Ensure all components align
+
+## Checklist for Each Component
+
+- [ ] Import types from `constants/colors.ts`
+- [ ] Export component-specific types
+- [ ] Add `color` prop where applicable
+- [ ] Implement data-attribute pattern
+- [ ] Update CSS to three-layer pattern
+- [ ] Add pattern comment to CSS file
+- [ ] Use semantic CSS variables
+- [ ] Test color overrides work
+- [ ] Update component stories
+- [ ] Ensure TypeScript types are exported
+
+## Testing Plan
+
+1. **Visual Testing**
+   - Each component with different color overrides
+   - Focus states with custom colors
+   - Hover states with custom colors
+   - Disabled states remain consistent
+
+2. **API Testing**
+   - Props work as expected
+   - TypeScript autocomplete works
+   - No type errors
+
+3. **Build Testing**
+   - Run `pnpm build` after each component
+   - Verify CSS is generated correctly
+   - Check bundle size doesn't increase significantly
+
+## Success Criteria
+
+- All interactive components support `color` prop
+- CSS follows three-layer pattern consistently
+- Types are centralized and reused
+- Developer can predict API without documentation
+- All components feel like part of the same system
+
+## Implementation Notes
+
+- Start with IconButton as it's most similar to Button
+- Switch and Radio will establish pattern for form controls
+- Keep changes focused on consistency, not new features
+- Document any decisions that deviate from the pattern
+- Run Storybook throughout to test changes immediately
+
+This plan provides a clear, methodical approach to bringing all components up to the standard set by Button, ensuring the entire library feels cohesive and professional.
+
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.

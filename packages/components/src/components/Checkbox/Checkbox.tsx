@@ -1,12 +1,15 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 import { checkboxStyles, inputStyles, iconStyles, labelStyles } from './Checkbox.css';
+import type { AccentColor } from '../../constants/colors';
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   variant?: 'default' | 'rounded';
   error?: boolean;
   label?: string;
   indeterminate?: boolean;
+  /** Override the theme accent color for this specific checkbox */
+  color?: AccentColor;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -19,6 +22,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       disabled,
       id,
+      color,
       ...props
     },
     ref
@@ -26,7 +30,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const checkboxId = id || (label ? `checkbox-${Math.random().toString(36).substr(2, 9)}` : undefined);
 
     const checkbox = (
-      <div className={clsx(checkboxStyles({ variant }))}>
+      <div className={clsx(checkboxStyles({ variant }))} data-accent-color={color}>
         <input
           ref={ref}
           type="checkbox"

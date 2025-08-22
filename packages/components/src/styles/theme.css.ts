@@ -18,9 +18,21 @@ const colorScaleContract = () => ({
 
 export const vars = createThemeContract({
   color: {
-    // Core scales
+    // Neutral scales
     gray: colorScaleContract(),
     grayA: colorScaleContract(),
+    mauve: colorScaleContract(),
+    mauveA: colorScaleContract(),
+    slate: colorScaleContract(),
+    slateA: colorScaleContract(),
+    sage: colorScaleContract(),
+    sageA: colorScaleContract(),
+    olive: colorScaleContract(),
+    oliveA: colorScaleContract(),
+    sand: colorScaleContract(),
+    sandA: colorScaleContract(),
+    
+    // Core scales (existing)
     blue: colorScaleContract(),
     blueA: colorScaleContract(),
     green: colorScaleContract(),
@@ -33,6 +45,48 @@ export const vars = createThemeContract({
     orangeA: colorScaleContract(),
     purple: colorScaleContract(),
     purpleA: colorScaleContract(),
+    
+    // Warm scales
+    gold: colorScaleContract(),
+    goldA: colorScaleContract(),
+    bronze: colorScaleContract(),
+    bronzeA: colorScaleContract(),
+    brown: colorScaleContract(),
+    brownA: colorScaleContract(),
+    amber: colorScaleContract(),
+    amberA: colorScaleContract(),
+    tomato: colorScaleContract(),
+    tomatoA: colorScaleContract(),
+    ruby: colorScaleContract(),
+    rubyA: colorScaleContract(),
+    crimson: colorScaleContract(),
+    crimsonA: colorScaleContract(),
+    
+    // Cool scales
+    pink: colorScaleContract(),
+    pinkA: colorScaleContract(),
+    plum: colorScaleContract(),
+    plumA: colorScaleContract(),
+    violet: colorScaleContract(),
+    violetA: colorScaleContract(),
+    iris: colorScaleContract(),
+    irisA: colorScaleContract(),
+    indigo: colorScaleContract(),
+    indigoA: colorScaleContract(),
+    cyan: colorScaleContract(),
+    cyanA: colorScaleContract(),
+    teal: colorScaleContract(),
+    tealA: colorScaleContract(),
+    jade: colorScaleContract(),
+    jadeA: colorScaleContract(),
+    grass: colorScaleContract(),
+    grassA: colorScaleContract(),
+    lime: colorScaleContract(),
+    limeA: colorScaleContract(),
+    mint: colorScaleContract(),
+    mintA: colorScaleContract(),
+    sky: colorScaleContract(),
+    skyA: colorScaleContract(),
     
     // Overlay scales
     blackA: colorScaleContract(),
@@ -154,9 +208,21 @@ const createColorScale = (name: string) => ({
 // Single theme that uses CSS variables
 export const theme = createTheme(vars, {
   color: {
-    // Map to CSS variables from colors package
+    // Neutral scales
     gray: createColorScale('gray'),
     grayA: createColorScale('gray-a'),
+    mauve: createColorScale('mauve'),
+    mauveA: createColorScale('mauve-a'),
+    slate: createColorScale('slate'),
+    slateA: createColorScale('slate-a'),
+    sage: createColorScale('sage'),
+    sageA: createColorScale('sage-a'),
+    olive: createColorScale('olive'),
+    oliveA: createColorScale('olive-a'),
+    sand: createColorScale('sand'),
+    sandA: createColorScale('sand-a'),
+    
+    // Core scales
     blue: createColorScale('blue'),
     blueA: createColorScale('blue-a'),
     green: createColorScale('green'),
@@ -169,6 +235,50 @@ export const theme = createTheme(vars, {
     orangeA: createColorScale('orange-a'),
     purple: createColorScale('purple'),
     purpleA: createColorScale('purple-a'),
+    
+    // Warm scales
+    gold: createColorScale('gold'),
+    goldA: createColorScale('gold-a'),
+    bronze: createColorScale('bronze'),
+    bronzeA: createColorScale('bronze-a'),
+    brown: createColorScale('brown'),
+    brownA: createColorScale('brown-a'),
+    amber: createColorScale('amber'),
+    amberA: createColorScale('amber-a'),
+    tomato: createColorScale('tomato'),
+    tomatoA: createColorScale('tomato-a'),
+    ruby: createColorScale('ruby'),
+    rubyA: createColorScale('ruby-a'),
+    crimson: createColorScale('crimson'),
+    crimsonA: createColorScale('crimson-a'),
+    
+    // Cool scales
+    pink: createColorScale('pink'),
+    pinkA: createColorScale('pink-a'),
+    plum: createColorScale('plum'),
+    plumA: createColorScale('plum-a'),
+    violet: createColorScale('violet'),
+    violetA: createColorScale('violet-a'),
+    iris: createColorScale('iris'),
+    irisA: createColorScale('iris-a'),
+    indigo: createColorScale('indigo'),
+    indigoA: createColorScale('indigo-a'),
+    cyan: createColorScale('cyan'),
+    cyanA: createColorScale('cyan-a'),
+    teal: createColorScale('teal'),
+    tealA: createColorScale('teal-a'),
+    jade: createColorScale('jade'),
+    jadeA: createColorScale('jade-a'),
+    grass: createColorScale('grass'),
+    grassA: createColorScale('grass-a'),
+    lime: createColorScale('lime'),
+    limeA: createColorScale('lime-a'),
+    mint: createColorScale('mint'),
+    mintA: createColorScale('mint-a'),
+    sky: createColorScale('sky'),
+    skyA: createColorScale('sky-a'),
+    
+    // Overlay scales
     blackA: createColorScale('black-a'),
     whiteA: createColorScale('white-a'),
   },

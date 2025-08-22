@@ -3,16 +3,37 @@ import { clsx } from 'clsx';
 import { button, buttonIcon } from './Button.css';
 import { Icon } from '../Icon';
 import type { IconProps } from '../Icon';
+import type { AccentColor } from '../../constants/colors';
+
+// Export types for reuse
+export type ButtonVariant = 'solid' | 'outline' | 'ghost';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+// Constants
+const ICON_SIZE_MAP: Record<ButtonSize, IconProps['size']> = {
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+} as const;
 
 // Define the button-specific props
 export interface ButtonOwnProps {
-  variant?: 'solid' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  /** Visual style variant of the button */
+  variant?: ButtonVariant;
+  /** Size of the button affecting padding and font size */
+  size?: ButtonSize;
+  /** Whether the button should take the full width of its container */
   fullWidth?: boolean;
+  /** Render as a different element or component */
   as?: ElementType;
+  /** Icon to display on the left side of the button text */
   leftIcon?: IconProps['icon'];
+  /** Icon to display on the right side of the button text */
   rightIcon?: IconProps['icon'];
+  /** Additional props to pass to icon components */
   iconProps?: Omit<IconProps, 'icon'>;
+  /** Override the theme accent color for this specific button */
+  color?: AccentColor;
 }
 
 // Create a type that combines button props with element props
@@ -39,25 +60,23 @@ export const Button: ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps
       leftIcon,
       rightIcon,
       iconProps,
+      color,
       children,
+      style,
       ...props
     },
     ref
   ) {
     const Component = as || 'button';
-    
-    // Icon size mapping based on button size
-    const iconSize = {
-      sm: 'sm',
-      md: 'md',
-      lg: 'lg',
-    }[size] as IconProps['size'];
+    const iconSize = ICON_SIZE_MAP[size];
 
     return (
       <Component
         ref={ref}
         className={clsx(button({ variant, size, fullWidth }), className)}
         {...props}
+        style={style}
+        data-accent-color={color}
       >
         {leftIcon && (
           <Icon
