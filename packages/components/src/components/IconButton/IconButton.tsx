@@ -3,6 +3,18 @@ import { clsx } from 'clsx';
 import { iconButton } from './IconButton.css';
 import { Icon } from '../Icon';
 import type { IconProps } from '../Icon';
+import type { AccentColor } from '../../constants/colors';
+
+// Export types for reuse
+export type IconButtonVariant = 'solid' | 'outline' | 'ghost';
+export type IconButtonSize = 'sm' | 'md' | 'lg';
+
+// Constants
+const ICON_SIZE_MAP: Record<IconButtonSize, IconProps['size']> = {
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+} as const;
 
 export interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /**
@@ -14,13 +26,13 @@ export interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLBut
    * Visual style variant
    * @default 'solid'
    */
-  variant?: 'solid' | 'outline' | 'ghost';
+  variant?: IconButtonVariant;
   
   /**
    * Size of the button
    * @default 'md'
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: IconButtonSize;
   
   /**
    * Accessible label for the button (required)
@@ -31,6 +43,11 @@ export interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLBut
    * Additional icon props
    */
   iconProps?: Omit<IconProps, 'icon'>;
+  
+  /**
+   * Override the theme accent color for this specific button
+   */
+  color?: AccentColor;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -40,19 +57,18 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     size = 'md', 
     className,
     iconProps,
+    color,
+    style,
     ...props 
   }, ref) => {
-    // Icon size mapping based on button size
-    const iconSize = {
-      sm: 'sm',
-      md: 'md',
-      lg: 'lg',
-    }[size] as IconProps['size'];
+    const iconSize = ICON_SIZE_MAP[size];
 
     return (
       <button
         ref={ref}
         className={clsx(iconButton({ variant, size }), className)}
+        style={style}
+        data-accent-color={color}
         {...props}
       >
         <Icon

@@ -1,0 +1,63 @@
+/* Dark mode styles for Storybook Docs */
+.dark .docs-story,
+.dark .sbdocs-preview {
+  background-color: var(--color-background, #111111);
+  color: var(--color-text, #eeeeee);
+}
+
+.dark .sbdocs,
+.dark .sbdocs-content,
+.dark .sbdocs-wrapper {
+  background-color: var(--color-background, #111111);
+  color: var(--color-text, #eeeeee);
+}
+
+/* Style the controls table in dark mode */
+.dark .docblock-argstable-wrapper {
+  background-color: var(--color-surface, #191919);
+}
+
+.dark .docblock-argstable td,
+.dark .docblock-argstable th {
+  color: var(--color-text, #eeeeee);
+  border-color: var(--color-border, #3a3a3a);
+}
+
+.dark .docblock-argstable-body tr {
+  border-color: var(--color-border, #3a3a3a);
+}
+
+/* Style code blocks in dark mode */
+.dark .docblock-code-toggle,
+.dark .docblock-source {
+  background-color: var(--color-surface, #191919);
+  color: var(--color-text, #eeeeee);
+}
+
+/* Style the "Show code" button */
+.dark button[aria-label="Show code"],
+.dark button[aria-label="Hide code"] {
+  background-color: var(--color-surface, #191919);
+  color: var(--color-text, #eeeeee);
+  border-color: var(--color-border, #3a3a3a);
+}
+
+.dark button[aria-label="Show code"]:hover,
+.dark button[aria-label="Hide code"]:hover {
+  background-color: var(--color-surface-raised, #222222);
+}
+
+/* Ensure text in controls is visible */
+.dark input[type="text"],
+.dark select,
+.dark textarea {
+  background-color: var(--color-surface, #191919);
+  color: var(--color-text, #eeeeee);
+  border-color: var(--color-border, #3a3a3a);
+}
+
+/* Story canvas background */
+.dark .sb-story,
+.dark .sb-show-main {
+  background-color: var(--color-background, #111111);
+}

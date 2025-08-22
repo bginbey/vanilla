@@ -60,7 +60,7 @@ export default function IconExample() {
           <Icon icon={IconHome} />
           <Icon icon={IconSearch} size="lg" />
           <Icon icon={IconHeart} color="error" />
-          <Icon icon={IconSettings} size="xl" color={9} />
+          <Icon icon={IconSettings} size="xl" color="tertiary" />
         </Flex>
       </Box>
 

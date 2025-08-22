@@ -1,11 +1,20 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 import { switchStyles, inputStyles, trackStyles, thumbStyles, labelStyles } from './Switch.css';
+import type { AccentColor } from '../../constants/colors';
+
+// Export types for reuse
+export type SwitchSize = 'sm' | 'md' | 'lg';
 
 export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
-  size?: 'sm' | 'md' | 'lg';
+  /** Size of the switch */
+  size?: SwitchSize;
+  /** Whether the switch has an error state */
   error?: boolean;
+  /** Label text for the switch */
   label?: string;
+  /** Override the theme accent color for this specific switch */
+  color?: AccentColor;
 }
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
@@ -17,6 +26,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       label,
       disabled,
       id,
+      color,
+      style,
       ...props
     },
     ref
@@ -24,7 +35,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     const switchId = id || (label ? `switch-${Math.random().toString(36).substr(2, 9)}` : undefined);
 
     const switchElement = (
-      <div className={clsx(switchStyles({ size }))}>
+      <div className={clsx(switchStyles({ size }))} data-accent-color={color} style={style}>
         <input
           ref={ref}
           type="checkbox"

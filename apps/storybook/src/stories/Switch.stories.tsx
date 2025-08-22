@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Switch } from '@beauginbey/vanilla-components';
+import type { AccentColor } from '@beauginbey/vanilla-components';
 
 const meta = {
   title: 'Components/Switch',
@@ -13,6 +14,15 @@ const meta = {
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
+    },
+    color: {
+      control: 'select',
+      options: [
+        'blue', 'green', 'red', 'yellow', 'orange', 'purple',
+        'gold', 'bronze', 'brown', 'amber', 'tomato', 'ruby', 'crimson',
+        'pink', 'plum', 'violet', 'iris', 'indigo', 'cyan', 'teal',
+        'jade', 'grass', 'lime', 'mint', 'sky'
+      ],
     },
     error: {
       control: { type: 'boolean' },
@@ -197,4 +207,33 @@ export const WithError: Story = {
       </p>
     </div>
   ),
+};
+
+export const ColorVariants: Story = {
+  render: () => {
+    const colors: AccentColor[] = ['blue', 'green', 'red', 'amber', 'violet', 'teal', 'crimson', 'jade'];
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <h3 style={{ margin: 0, fontSize: 18 }}>Accent Colors</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, maxWidth: 500 }}>
+          {colors.map(color => (
+            <Switch
+              key={color}
+              label={color.charAt(0).toUpperCase() + color.slice(1)}
+              color={color}
+              defaultChecked
+            />
+          ))}
+        </div>
+        
+        <h3 style={{ margin: '20px 0 0 0', fontSize: 18 }}>Different Sizes with Colors</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <Switch size="sm" label="Small Purple" color="purple" defaultChecked />
+          <Switch size="md" label="Medium Orange" color="orange" defaultChecked />
+          <Switch size="lg" label="Large Mint" color="mint" defaultChecked />
+        </div>
+      </div>
+    );
+  },
 };

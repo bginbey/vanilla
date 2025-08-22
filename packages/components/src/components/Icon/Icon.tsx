@@ -13,8 +13,7 @@ export type IconColor =
   | 'error'
   | 'warning'
   | 'success'
-  | 'info'
-  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  | 'info';
 
 export interface IconProps {
   /**
@@ -83,7 +82,7 @@ export const Icon = forwardRef<HTMLSpanElement, IconProps>(
     const finalClassName = clsx(config.className, className);
     // Determine if size is a preset or custom
     const isPresetSize = typeof finalSize === 'string' && finalSize in iconSizes;
-    const isPresetColor = typeof finalColor === 'string' || typeof finalColor === 'number';
+    const isPresetColor = typeof finalColor === 'string';
     
     // Calculate pixel size for the icon component
     const iconPixelSize = (() => {

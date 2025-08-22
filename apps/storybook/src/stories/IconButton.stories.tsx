@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { IconButton, Box, Text } from '@beauginbey/vanilla-components';
+import type { AccentColor } from '@beauginbey/vanilla-components';
 import React from 'react';
 
 // Mock icons
@@ -74,6 +75,15 @@ const meta: Meta<typeof IconButton> = {
       control: { type: 'radio' },
       options: ['sm', 'md', 'lg'],
     },
+    color: {
+      control: 'select',
+      options: [
+        'blue', 'green', 'red', 'yellow', 'orange', 'purple',
+        'gold', 'bronze', 'brown', 'amber', 'tomato', 'ruby', 'crimson',
+        'pink', 'plum', 'violet', 'iris', 'indigo', 'cyan', 'teal',
+        'jade', 'grass', 'lime', 'mint', 'sky'
+      ],
+    },
     disabled: {
       control: 'boolean',
     },
@@ -143,6 +153,55 @@ export const ThemeToggle: Story = {
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             onClick={() => setIsDark(!isDark)}
           />
+        </Box>
+      </Box>
+    );
+  },
+};
+
+export const ColorVariants: Story = {
+  render: () => {
+    const colors: AccentColor[] = ['blue', 'green', 'red', 'amber', 'violet', 'teal'];
+    
+    return (
+      <Box>
+        <Text as="h3" style={{ marginBottom: '1rem' }}>Solid Variant</Text>
+        <Box display="flex" gap={3} style={{ marginBottom: '2rem' }}>
+          {colors.map(color => (
+            <IconButton
+              key={`solid-${color}`}
+              icon={IconHeart}
+              variant="solid"
+              color={color}
+              aria-label={`${color} heart`}
+            />
+          ))}
+        </Box>
+        
+        <Text as="h3" style={{ marginBottom: '1rem' }}>Outline Variant</Text>
+        <Box display="flex" gap={3} style={{ marginBottom: '2rem' }}>
+          {colors.map(color => (
+            <IconButton
+              key={`outline-${color}`}
+              icon={IconSettings}
+              variant="outline"
+              color={color}
+              aria-label={`${color} settings`}
+            />
+          ))}
+        </Box>
+        
+        <Text as="h3" style={{ marginBottom: '1rem' }}>Ghost Variant</Text>
+        <Box display="flex" gap={3}>
+          {colors.map(color => (
+            <IconButton
+              key={`ghost-${color}`}
+              icon={IconSearch}
+              variant="ghost"
+              color={color}
+              aria-label={`${color} search`}
+            />
+          ))}
         </Box>
       </Box>
     );

@@ -60,7 +60,7 @@ const meta: Meta<typeof Icon> = {
     },
     color: {
       control: { type: 'select' },
-      options: ['inherit', 'current', 'primary', 'secondary', 'tertiary', 'error', 'warning', 'success', 'info', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      options: ['inherit', 'current', 'primary', 'secondary', 'tertiary', 'error', 'warning', 'success', 'info'],
       description: 'Color of the icon',
     },
     stroke: {
@@ -109,12 +109,41 @@ export const Colors: Story = {
   ),
 };
 
-export const ColorScale: Story = {
+export const SemanticColors: Story = {
   render: () => (
-    <Box display="flex" gap={2} alignItems="center">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((step) => (
-        <Icon key={step} icon={IconHeart} color={step as any} />
-      ))}
+    <Box display="flex" gap={3} alignItems="center" flexDirection="column">
+      <Box display="flex" gap={3} alignItems="center">
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconHome} color="primary" size="lg" />
+          <Text size="sm">primary</Text>
+        </Box>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconHome} color="secondary" size="lg" />
+          <Text size="sm">secondary</Text>
+        </Box>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconHome} color="tertiary" size="lg" />
+          <Text size="sm">tertiary</Text>
+        </Box>
+      </Box>
+      <Box display="flex" gap={3} alignItems="center">
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconHeart} color="error" size="lg" />
+          <Text size="sm">error</Text>
+        </Box>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconSettings} color="warning" size="lg" />
+          <Text size="sm">warning</Text>
+        </Box>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconSearch} color="success" size="lg" />
+          <Text size="sm">success</Text>
+        </Box>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+          <Icon icon={IconHome} color="info" size="lg" />
+          <Text size="sm">info</Text>
+        </Box>
+      </Box>
     </Box>
   ),
 };

@@ -1,6 +1,24 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+import { globalStyle } from '@vanilla-extract/css';
 import { vars } from '../../styles/theme.css';
+import { ACCENT_COLORS } from '../../constants/colors';
+
+/**
+ * Switch Component Styles - Following the Three-Layer Pattern:
+ * 
+ * 1. BASE RECIPE: Defines core styles and variants using semantic CSS variables
+ *    - Variables follow pattern: var(--switch-[semantic]-[state], var(--fallback))
+ *    - This allows theme defaults while enabling overrides
+ * 
+ * 2. STYLE VARIANTS: Additional styles for track and thumb elements
+ * 
+ * 3. DATA ATTRIBUTE OVERRIDES: Color customization via data-accent-color
+ *    - Uses globalStyle to set component-scoped CSS variables
+ *    - Enables per-instance color overrides without runtime styles
+ * 
+ * This pattern ensures consistency while maintaining the toggle-specific behavior.
+ */
 
 const sizeConfig = {
   sm: {
@@ -71,29 +89,29 @@ export const trackStyles = recipe({
   base: {
     position: 'absolute',
     inset: 0,
-    backgroundColor: vars.color.gray[4],
+    backgroundColor: 'var(--color-surface-hover)',
     borderRadius: vars.radius.full,
-    border: `2px solid ${vars.color.gray[7]}`,
+    border: `2px solid var(--color-border)`,
     transition: `${vars.transition.property.common} ${vars.duration.normal} ${vars.easing.easeInOut}`,
     overflow: 'hidden',
     
     selectors: {
       [`${inputStyles}:hover:not(:disabled) + &`]: {
-        borderColor: vars.color.gray[8],
+        borderColor: 'var(--color-border-hover)',
       },
       
       [`${inputStyles}:focus-visible + &`]: {
-        boxShadow: `0 0 0 2px ${vars.color.blue[8]}`,
+        boxShadow: `0 0 0 2px var(--switch-focus-ring, var(--color-focus-ring))`,
       },
       
       [`${inputStyles}:checked + &`]: {
-        backgroundColor: vars.color.blue[9],
-        borderColor: vars.color.blue[9],
+        backgroundColor: `var(--switch-accent-base, var(--color-accent-base))`,
+        borderColor: `var(--switch-accent-base, var(--color-accent-base))`,
       },
       
       [`${inputStyles}:checked:hover:not(:disabled) + &`]: {
-        backgroundColor: vars.color.blue[10],
-        borderColor: vars.color.blue[10],
+        backgroundColor: `var(--switch-accent-hover, var(--color-accent-hover))`,
+        borderColor: `var(--switch-accent-hover, var(--color-accent-hover))`,
       },
     },
   },
@@ -134,7 +152,7 @@ export const trackStyles = recipe({
         
         selectors: {
           [`${inputStyles}:disabled + &`]: {
-            backgroundColor: vars.color.gray[3],
+            backgroundColor: 'var(--color-surface)',
           },
         },
       },
@@ -152,7 +170,7 @@ export const trackStyles = recipe({
 export const thumbStyles = recipe({
   base: {
     position: 'absolute',
-    backgroundColor: vars.color.gray[1],
+    backgroundColor: 'white',
     borderRadius: vars.radius.full,
     boxShadow: vars.shadow.sm,
     transition: `transform ${vars.duration.normal} ${vars.easing.easeInOut}`,
@@ -234,4 +252,20 @@ export const labelStyles = recipe({
   defaultVariants: {
     disabled: false,
   },
+});
+
+/**
+ * Color override styles using data attributes
+ * Each accent color gets its own set of CSS custom properties
+ * when the data-accent-color attribute is set on Switch
+ */
+ACCENT_COLORS.forEach((color) => {
+  globalStyle(`[data-accent-color="${color}"]`, {
+    vars: {
+      '--switch-accent-base': `var(--${color}-9)`,
+      '--switch-accent-hover': `var(--${color}-10)`,
+      '--switch-accent-active': `var(--${color}-11)`,
+      '--switch-focus-ring': `var(--${color}-8)`,
+    }
+  });
 });

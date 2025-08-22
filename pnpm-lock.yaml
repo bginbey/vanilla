@@ -154,6 +154,9 @@ importers:
       '@storybook/blocks':
         specifier: ^7.6.10
         version: 7.6.20(@types/react-dom@18.3.7)(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/manager-api':
+        specifier: ^7.6.10
+        version: 7.6.20(react-dom@18.3.1)(react@18.3.1)
       '@storybook/react':
         specifier: ^7.6.10
         version: 7.6.20(react-dom@18.3.1)(react@18.3.1)(typescript@5.8.3)
@@ -163,6 +166,9 @@ importers:
       '@storybook/test':
         specifier: ^7.6.10
         version: 7.6.20
+      '@storybook/theming':
+        specifier: ^7.6.10
+        version: 7.6.20(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: ^18.2.48
         version: 18.3.23

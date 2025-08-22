@@ -68,17 +68,4 @@ export const iconColors = styleVariants({
   info: {
     color: vars.color.blue[9],
   },
-  // Color scale values
-  1: { color: vars.color.gray[1] },
-  2: { color: vars.color.gray[2] },
-  3: { color: vars.color.gray[3] },
-  4: { color: vars.color.gray[4] },
-  5: { color: vars.color.gray[5] },
-  6: { color: vars.color.gray[6] },
-  7: { color: vars.color.gray[7] },
-  8: { color: vars.color.gray[8] },
-  9: { color: vars.color.gray[9] },
-  10: { color: vars.color.gray[10] },
-  11: { color: vars.color.gray[11] },
-  12: { color: vars.color.gray[12] },
 });
