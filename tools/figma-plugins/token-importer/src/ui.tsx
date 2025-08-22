@@ -93,6 +93,7 @@ function App() {
           'border-hover': { light: 'Primitive/gray/7', dark: 'Primitive/gray/7' },
           
           // Accent colors (using blue as default)
+          'accent-primary': { light: 'Primitive/blue/9', dark: 'Primitive/blue/9' },
           'accent-base': { light: 'Primitive/blue/9', dark: 'Primitive/blue/9' },
           'accent-hover': { light: 'Primitive/blue/10', dark: 'Primitive/blue/10' },
           'accent-active': { light: 'Primitive/blue/11', dark: 'Primitive/blue/11' },
