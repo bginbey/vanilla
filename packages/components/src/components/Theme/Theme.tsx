@@ -136,7 +136,7 @@ export function Theme({
   };
 
   // Set CSS variables for scaling, radius, and dynamic color mapping
-  const style = {
+  const style: React.CSSProperties = {
     '--scaling-factor': scalingFactors[scaling],
     '--radius-factor': radiusFactors[radius],
     // Map accent color
@@ -164,32 +164,38 @@ export function Theme({
     '--accent-a10': `var(--${accentColor}-a10)`,
     '--accent-a11': `var(--${accentColor}-a11)`,
     '--accent-a12': `var(--${accentColor}-a12)`,
-    // Map gray color
-    '--gray-1': `var(--${resolvedGrayColor}-1)`,
-    '--gray-2': `var(--${resolvedGrayColor}-2)`,
-    '--gray-3': `var(--${resolvedGrayColor}-3)`,
-    '--gray-4': `var(--${resolvedGrayColor}-4)`,
-    '--gray-5': `var(--${resolvedGrayColor}-5)`,
-    '--gray-6': `var(--${resolvedGrayColor}-6)`,
-    '--gray-7': `var(--${resolvedGrayColor}-7)`,
-    '--gray-8': `var(--${resolvedGrayColor}-8)`,
-    '--gray-9': `var(--${resolvedGrayColor}-9)`,
-    '--gray-10': `var(--${resolvedGrayColor}-10)`,
-    '--gray-11': `var(--${resolvedGrayColor}-11)`,
-    '--gray-12': `var(--${resolvedGrayColor}-12)`,
-    '--gray-a1': `var(--${resolvedGrayColor}-a1)`,
-    '--gray-a2': `var(--${resolvedGrayColor}-a2)`,
-    '--gray-a3': `var(--${resolvedGrayColor}-a3)`,
-    '--gray-a4': `var(--${resolvedGrayColor}-a4)`,
-    '--gray-a5': `var(--${resolvedGrayColor}-a5)`,
-    '--gray-a6': `var(--${resolvedGrayColor}-a6)`,
-    '--gray-a7': `var(--${resolvedGrayColor}-a7)`,
-    '--gray-a8': `var(--${resolvedGrayColor}-a8)`,
-    '--gray-a9': `var(--${resolvedGrayColor}-a9)`,
-    '--gray-a10': `var(--${resolvedGrayColor}-a10)`,
-    '--gray-a11': `var(--${resolvedGrayColor}-a11)`,
-    '--gray-a12': `var(--${resolvedGrayColor}-a12)`,
   } as React.CSSProperties;
+  
+  // Only remap gray color if it's different from base 'gray'
+  // This prevents circular references like --gray-1: var(--gray-1)
+  if (resolvedGrayColor !== 'gray') {
+    Object.assign(style, {
+      '--gray-1': `var(--${resolvedGrayColor}-1)`,
+      '--gray-2': `var(--${resolvedGrayColor}-2)`,
+      '--gray-3': `var(--${resolvedGrayColor}-3)`,
+      '--gray-4': `var(--${resolvedGrayColor}-4)`,
+      '--gray-5': `var(--${resolvedGrayColor}-5)`,
+      '--gray-6': `var(--${resolvedGrayColor}-6)`,
+      '--gray-7': `var(--${resolvedGrayColor}-7)`,
+      '--gray-8': `var(--${resolvedGrayColor}-8)`,
+      '--gray-9': `var(--${resolvedGrayColor}-9)`,
+      '--gray-10': `var(--${resolvedGrayColor}-10)`,
+      '--gray-11': `var(--${resolvedGrayColor}-11)`,
+      '--gray-12': `var(--${resolvedGrayColor}-12)`,
+      '--gray-a1': `var(--${resolvedGrayColor}-a1)`,
+      '--gray-a2': `var(--${resolvedGrayColor}-a2)`,
+      '--gray-a3': `var(--${resolvedGrayColor}-a3)`,
+      '--gray-a4': `var(--${resolvedGrayColor}-a4)`,
+      '--gray-a5': `var(--${resolvedGrayColor}-a5)`,
+      '--gray-a6': `var(--${resolvedGrayColor}-a6)`,
+      '--gray-a7': `var(--${resolvedGrayColor}-a7)`,
+      '--gray-a8': `var(--${resolvedGrayColor}-a8)`,
+      '--gray-a9': `var(--${resolvedGrayColor}-a9)`,
+      '--gray-a10': `var(--${resolvedGrayColor}-a10)`,
+      '--gray-a11': `var(--${resolvedGrayColor}-a11)`,
+      '--gray-a12': `var(--${resolvedGrayColor}-a12)`,
+    });
+  }
 
   // Handle appearance changes
   useLayoutEffect(() => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '@beauginbey/vanilla-components';
+import { Checkbox, Theme } from '@beauginbey/vanilla-components';
+import type { AccentColor } from '@beauginbey/vanilla-components';
 
 const meta = {
   title: 'Components/Checkbox',
@@ -213,4 +214,50 @@ export const WithError: Story = {
       </p>
     </div>
   ),
+};
+
+export const ColorVariants: Story = {
+  render: (args) => {
+    const accentColors: AccentColor[] = [
+      'blue', 'green', 'red', 'yellow', 'orange',
+      'purple', 'gold', 'bronze', 'brown', 'amber',
+      'tomato', 'ruby', 'crimson', 'pink', 'plum',
+      'violet', 'iris', 'indigo', 'cyan', 'teal',
+      'jade', 'grass', 'lime', 'mint', 'sky'
+    ];
+    
+    return (
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(5, 1fr)', 
+        gap: '1rem',
+        padding: '1rem'
+      }}>
+        {accentColors.map(color => (
+          <Theme key={color} accentColor={color} asChild>
+            <div style={{ 
+              padding: '1rem', 
+              borderRadius: '8px',
+              backgroundColor: 'var(--color-panel)',
+              border: '1px solid var(--color-border)'
+            }}>
+              <h4 style={{ 
+                margin: '0 0 0.75rem 0',
+                color: 'var(--color-text)',
+                fontSize: '14px',
+                fontWeight: '600'
+              }}>
+                {color}
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <Checkbox label="Unchecked" />
+                <Checkbox label="Checked" defaultChecked />
+                <Checkbox label="Indeterminate" indeterminate defaultChecked />
+              </div>
+            </div>
+          </Theme>
+        ))}
+      </div>
+    );
+  }
 };

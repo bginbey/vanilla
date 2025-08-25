@@ -221,7 +221,16 @@ export const labelStyles = recipe({
  * Each accent color gets its own set of CSS custom properties
  * when the data-accent-color attribute is set on Radio
  */
+
+// Colors that need dark dots for contrast on light backgrounds
+const LIGHT_COLORS = ['yellow', 'amber', 'lime', 'mint', 'sky'] as const;
+
 ACCENT_COLORS.forEach((color) => {
+  // Determine appropriate dot color based on the accent color
+  const needsDarkDot = LIGHT_COLORS.includes(color as any);
+  // Use black-a-12 for light colors - always dark regardless of theme
+  const dotColor = needsDarkDot ? 'var(--black-a-12)' : 'white';
+  
   globalStyle(`[data-accent-color="${color}"]`, {
     vars: {
       '--radio-accent-base': `var(--${color}-9)`,
@@ -231,7 +240,7 @@ ACCENT_COLORS.forEach((color) => {
       '--radio-border': `var(--${color}-7)`,
       '--radio-border-hover': `var(--${color}-8)`,
       '--radio-focus-ring': `var(--${color}-8)`,
-      '--radio-dot-color': 'white',
+      '--radio-dot-color': dotColor,
     }
   });
 });

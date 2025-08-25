@@ -62,7 +62,7 @@ export const iconStyles = recipe({
       [`${inputStyles}:checked + &`]: {
         backgroundColor: 'var(--checkbox-accent-base, var(--color-accent-base))', // Solid color
         borderColor: 'var(--checkbox-accent-base, var(--color-accent-base))',
-        color: 'white', // White on solid
+        color: 'var(--checkbox-checkmark-color, white)', // Use dynamic checkmark color
       },
       
       [`${inputStyles}:checked:hover:not(:disabled) + &`]: {
@@ -73,7 +73,7 @@ export const iconStyles = recipe({
       [`${inputStyles}:indeterminate + &`]: {
         backgroundColor: 'var(--checkbox-accent-base, var(--color-accent-base))', // Solid color
         borderColor: 'var(--checkbox-accent-base, var(--color-accent-base))',
-        color: 'white',
+        color: 'var(--checkbox-checkmark-color, white)', // Use dynamic checkmark color
       },
     },
   },
@@ -164,13 +164,23 @@ export const labelStyles = recipe({
  * Each accent color gets its own set of CSS custom properties
  * when the data-accent-color attribute is set
  */
+
+// Colors that need dark checkmarks for contrast on light backgrounds
+const LIGHT_COLORS = ['yellow', 'amber', 'lime', 'mint', 'sky'] as const;
+
 ACCENT_COLORS.forEach((color) => {
+  // Determine appropriate checkmark color based on the accent color
+  const needsDarkCheckmark = LIGHT_COLORS.includes(color as any);
+  // Use black-a-12 for light colors - always dark regardless of theme
+  const checkmarkColor = needsDarkCheckmark ? 'var(--black-a-12)' : 'white';
+  
   globalStyle(`[data-accent-color="${color}"]`, {
     vars: {
       '--checkbox-accent-base': `var(--${color}-9)`,
       '--checkbox-accent-hover': `var(--${color}-10)`,
       '--checkbox-border-hover': `var(--${color}-8)`,
       '--checkbox-focus-ring': `var(--${color}-8)`,
+      '--checkbox-checkmark-color': checkmarkColor,
     }
   });
 });

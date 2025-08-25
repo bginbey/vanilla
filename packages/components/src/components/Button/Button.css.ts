@@ -158,18 +158,28 @@ export const buttonIcon = styleVariants({
  * Each accent color gets its own set of CSS custom properties
  * when the data-accent-color attribute is set
  */
+
+// Colors that need dark text for contrast on light backgrounds
+const LIGHT_COLORS = ['yellow', 'amber', 'lime', 'mint', 'sky'] as const;
+
 ACCENT_COLORS.forEach((color) => {
+  // Determine appropriate text color based on the accent color
+  const needsDarkText = LIGHT_COLORS.includes(color as any);
+  // Use black-a-12 for light colors - always dark regardless of theme
+  const textColor = needsDarkText ? 'var(--black-a-12)' : 'white';
+  
   globalStyle(`[data-accent-color="${color}"]`, {
     vars: {
       '--button-accent-base': `var(--${color}-9)`,
       '--button-accent-hover': `var(--${color}-10)`,
       '--button-accent-active': `var(--${color}-11)`,
-      '--button-accent-text': 'white',
+      '--button-accent-text': textColor,
       '--button-accent-surface': `var(--${color}-3)`,
       '--button-accent-surface-hover': `var(--${color}-4)`,
       '--button-accent-surface-active': `var(--${color}-5)`,
       '--button-border-focus': `var(--${color}-8)`,
       '--button-focus-ring': `var(--${color}-8)`,
+      '--accent-contrast': textColor, // Set the accent-contrast variable too
     }
   });
 });

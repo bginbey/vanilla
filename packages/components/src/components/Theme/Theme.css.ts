@@ -35,7 +35,7 @@ export const theme = style({
       '--color-accent-base': 'var(--accent-9)',
       '--color-accent-hover': 'var(--accent-10)',
       '--color-accent-active': 'var(--accent-11)',
-      '--color-accent-text': 'white',
+      '--color-accent-text': 'var(--accent-contrast)',
       
       // Accent surface colors
       '--color-accent-surface': 'var(--accent-3)',
