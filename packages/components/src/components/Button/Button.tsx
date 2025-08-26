@@ -5,9 +5,27 @@ import { Icon } from '../Icon';
 import type { IconProps } from '../Icon';
 import type { AccentColor } from '../../constants/colors';
 
-// Export types for reuse
-export type ButtonVariant = 'solid' | 'outline' | 'ghost';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+/**
+ * Available button style variants
+ */
+export type ButtonVariant = 
+  /** Filled background, high emphasis */ 
+  | 'solid' 
+  /** Border only, medium emphasis */
+  | 'outline' 
+  /** No background or border, low emphasis */
+  | 'ghost';
+
+/**
+ * Available button sizes
+ */
+export type ButtonSize = 
+  /** Small - compact size for dense UIs */
+  | 'sm' 
+  /** Medium - default size for most use cases */
+  | 'md' 
+  /** Large - increased touch target for mobile or prominent actions */
+  | 'lg';
 
 // Constants
 const ICON_SIZE_MAP: Record<ButtonSize, IconProps['size']> = {
@@ -16,23 +34,57 @@ const ICON_SIZE_MAP: Record<ButtonSize, IconProps['size']> = {
   lg: 'lg',
 } as const;
 
-// Define the button-specific props
+/**
+ * Props for the Button component
+ */
 export interface ButtonOwnProps {
-  /** Visual style variant of the button */
+  /**
+   * Visual style variant of the button
+   * @default 'solid'
+   */
   variant?: ButtonVariant;
-  /** Size of the button affecting padding and font size */
+  
+  /**
+   * Size of the button affecting padding and font size
+   * @default 'md'
+   */
   size?: ButtonSize;
-  /** Whether the button should take the full width of its container */
+  
+  /**
+   * Whether the button should take the full width of its container
+   * @default false
+   */
   fullWidth?: boolean;
-  /** Render as a different element or component */
+  
+  /**
+   * Render as a different element or component
+   * @default 'button'
+   * @example 'a' for links, CustomLink for routing
+   */
   as?: ElementType;
-  /** Icon to display on the left side of the button text */
+  
+  /**
+   * Icon to display on the left side of the button text
+   * @example IconPlus, IconArrowLeft
+   */
   leftIcon?: IconProps['icon'];
-  /** Icon to display on the right side of the button text */
+  
+  /**
+   * Icon to display on the right side of the button text
+   * @example IconArrowRight, IconExternalLink
+   */
   rightIcon?: IconProps['icon'];
-  /** Additional props to pass to icon components */
+  
+  /**
+   * Additional props to pass to icon components
+   */
   iconProps?: Omit<IconProps, 'icon'>;
-  /** Override the theme accent color for this specific button */
+  
+  /**
+   * Override the theme accent color for this specific button
+   * @default Uses theme accent color
+   * @see {@link AccentColor} for available colors
+   */
   color?: AccentColor;
 }
 
@@ -48,7 +100,53 @@ export interface ButtonComponent {
   displayName?: string;
 }
 
-// Implementation with explicit typing
+/**
+ * Button - Interactive element for triggering actions
+ * 
+ * @description
+ * A flexible button component that supports multiple visual styles, sizes,
+ * and can be rendered as different HTML elements or custom components via
+ * the polymorphic `as` prop. Buttons are the primary way users interact
+ * with your application.
+ * 
+ * @example
+ * ```tsx
+ * // Basic button
+ * <Button onClick={handleClick}>
+ *   Click me
+ * </Button>
+ * ```
+ * 
+ * @example
+ * ```tsx
+ * // Button with icon and custom color
+ * <Button
+ *   variant="outline"
+ *   size="lg"
+ *   leftIcon={IconPlus}
+ *   color="green"
+ * >
+ *   Add Item
+ * </Button>
+ * ```
+ * 
+ * @example
+ * ```tsx
+ * // Button as a link
+ * <Button as="a" href="/learn-more">
+ *   Learn More
+ * </Button>
+ * ```
+ * 
+ * @remarks
+ * - Use solid variant for primary actions
+ * - Use outline variant for secondary actions
+ * - Use ghost variant for tertiary actions
+ * - Ensure proper contrast ratios for accessibility
+ * 
+ * @see {@link IconButton} For icon-only buttons
+ * @see {@link https://www.w3.org/WAI/ARIA/apg/patterns/button/} ARIA Button Pattern
+ */
 export const Button: ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(
     {

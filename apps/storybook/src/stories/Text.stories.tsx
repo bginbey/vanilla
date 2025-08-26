@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Text, Box } from '@beauginbey/vanilla-components';
+import { Text } from '@beauginbey/vanilla-components';
+import type { AccentColor } from '@beauginbey/vanilla-components';
 
 const meta = {
   title: 'Components/Text',
   component: Text,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
@@ -15,11 +16,17 @@ const meta = {
     },
     weight: {
       control: 'select',
-      options: ['normal', 'medium', 'semibold', 'bold'],
+      options: ['regular', 'medium', 'semibold', 'bold'],
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'inverse', 'brand', 'success', 'warning', 'error', 'info'],
+      options: [
+        'primary', 'secondary', 'tertiary', 'inverse',
+        'blue', 'green', 'red', 'yellow', 'orange', 'purple',
+        'gold', 'bronze', 'brown', 'amber', 'tomato', 'ruby', 'crimson',
+        'pink', 'plum', 'violet', 'iris', 'indigo', 'cyan', 'teal',
+        'jade', 'grass', 'lime', 'mint', 'sky'
+      ],
     },
     align: {
       control: 'select',
@@ -44,102 +51,63 @@ export const Default: Story = {
   },
 };
 
-export const Sizes: Story = {
-  render: () => (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <Text size="xs">Extra Small Text (xs)</Text>
-      <Text size="sm">Small Text (sm)</Text>
-      <Text size="base">Base Text (base)</Text>
-      <Text size="lg">Large Text (lg)</Text>
-      <Text size="xl">Extra Large Text (xl)</Text>
-      <Text size="2xl">2X Large Text (2xl)</Text>
-      <Text size="3xl">3X Large Text (3xl)</Text>
-      <Text size="4xl">4X Large Text (4xl)</Text>
-      <Text size="5xl">5X Large Text (5xl)</Text>
-    </Box>
-  ),
+export const Props: Story = {
+  args: {
+    children: 'Interactive playground - adjust controls to see text variations',
+    size: 'base',
+    weight: 'regular',
+    color: 'primary',
+    align: 'left',
+    truncate: false,
+    as: 'p',
+  },
 };
 
-export const Weights: Story = {
+export const Sizes: Story = {
   render: () => (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <Text weight="normal">Normal weight text</Text>
-      <Text weight="medium">Medium weight text</Text>
-      <Text weight="semibold">Semibold weight text</Text>
-      <Text weight="bold">Bold weight text</Text>
-    </Box>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
+      <Text size="xs">Extra small text (xs)</Text>
+      <Text size="sm">Small text (sm)</Text>
+      <Text size="base">Base text (base)</Text>
+      <Text size="lg">Large text (lg)</Text>
+      <Text size="xl">Extra large text (xl)</Text>
+      <Text size="2xl">2X large text (2xl)</Text>
+      <Text size="3xl">3X large text (3xl)</Text>
+      <Text size="4xl">4X large text (4xl)</Text>
+      <Text size="5xl">5X large text (5xl)</Text>
+    </div>
   ),
 };
 
 export const Colors: Story = {
-  render: () => (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <Text color="primary">Primary color text</Text>
-      <Text color="secondary">Secondary color text</Text>
-      <Text color="tertiary">Tertiary color text</Text>
-      <Box backgroundColor={9} p={2}>
-        <Text color="inverse">Inverse color text</Text>
-      </Box>
-      <Text color="brand">Brand color text</Text>
-      <Text color="success">Success color text</Text>
-      <Text color="warning">Warning color text</Text>
-      <Text color="error">Error color text</Text>
-      <Text color="info">Info color text</Text>
-    </Box>
-  ),
-};
-
-export const Headings: Story = {
-  render: () => (
-    <Box display="flex" flexDirection="column" gap={3}>
-      <Text as="h1" size="5xl" weight="bold">
-        Heading 1
-      </Text>
-      <Text as="h2" size="4xl" weight="bold">
-        Heading 2
-      </Text>
-      <Text as="h3" size="3xl" weight="semibold">
-        Heading 3
-      </Text>
-      <Text as="h4" size="2xl" weight="semibold">
-        Heading 4
-      </Text>
-      <Text as="h5" size="xl" weight="medium">
-        Heading 5
-      </Text>
-      <Text as="h6" size="lg" weight="medium">
-        Heading 6
-      </Text>
-    </Box>
-  ),
-};
-
-export const Truncation: Story = {
-  args: {
-    truncate: true,
-    children: 'This is a very long text that should be truncated when it exceeds the container width. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ width: '300px' }}>
-        <Story />
+  render: () => {
+    const semanticColors = ['primary', 'secondary', 'tertiary'] as const;
+    const accentColors: AccentColor[] = ['blue', 'green', 'red', 'amber', 'violet', 'teal'];
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div>
+          <Text weight="semibold" style={{ marginBottom: 12 }}>Semantic Colors</Text>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {semanticColors.map(color => (
+              <Text key={color} color={color}>
+                {color.charAt(0).toUpperCase() + color.slice(1)} text color
+              </Text>
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <Text weight="semibold" style={{ marginBottom: 12 }}>Accent Colors</Text>
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            {accentColors.map(color => (
+              <Text key={color} color={color}>
+                {color}
+              </Text>
+            ))}
+          </div>
+        </div>
       </div>
-    ),
-  ],
-};
-
-export const Alignment: Story = {
-  render: () => (
-    <Box display="flex" flexDirection="column" gap={3}>
-      <Box backgroundColor={2} p={3} borderRadius="md">
-        <Text align="left">Left aligned text</Text>
-      </Box>
-      <Box backgroundColor={2} p={3} borderRadius="md">
-        <Text align="center">Center aligned text</Text>
-      </Box>
-      <Box backgroundColor={2} p={3} borderRadius="md">
-        <Text align="right">Right aligned text</Text>
-      </Box>
-    </Box>
-  ),
+    );
+  },
 };

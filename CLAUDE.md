@@ -351,6 +351,67 @@ const themes = {
    - Build all packages: `pnpm build`
    - Publish to npm: `npm publish` in each package directory
 
+# Recent Updates - January 25, 2025
+
+## Component Refactoring Completed
+
+### ✅ Checkbox Component Enhanced
+- Added size variants (`sm`, `md`, `lg`) matching other form controls
+- Exported `CheckboxSize` and `CheckboxVariant` types for consistency
+- Updated CSS with proper size configurations and checkmark scaling
+- Added Storybook story showcasing size variants
+- Note: Had to use `@ts-ignore` for vanilla-extract recipe type issues
+
+### ✅ Input Component CSS Refactored
+- Implemented full three-layer CSS pattern with semantic variables
+- Added comprehensive documentation comments explaining the pattern
+- Updated all style values to use CSS custom properties for theming
+- Enhanced color override support via data attributes
+- All focus states now properly use theme colors
+
+### ✅ FormField Component Updates
+- Initially added `color` prop for themed error states (later removed)
+- Discovered themed errors are bad UX - errors should always be red
+- Removed color theming for error messages
+- Error text now consistently uses `vars.color.red[11]`
+- Added comprehensive MDX documentation in Storybook explaining purpose
+
+### ✅ Text Component Color System Updated
+- Refactored to support both semantic colors and AccentColor
+- Semantic colors (primary, secondary, tertiary, inverse) remain unchanged
+- Brand colors now use AccentColor type for consistency
+- Exported types: `TextSize`, `TextWeight`, `TextAlign`, `TextColor`, `SemanticTextColor`
+- Implemented hybrid approach: semantic for hierarchy, accent for branding
+- Added data-attribute support for accent colors
+
+### ✅ Storybook Stories Added
+- **Input ColorVariants**: Shows all 25 accent colors for focus states
+- **Text AccentColors**: Demonstrates all accent colors for branded text
+- **FormField.mdx**: Comprehensive documentation explaining the component's purpose
+- Removed ThemedErrors story (bad pattern)
+
+## Key Decisions Made
+
+1. **Error States Are Sacred**: Errors should always use red color for consistency and clarity. Theme colors are for branding, not for error states.
+
+2. **Three-Layer CSS Pattern**: Successfully applied to Input component:
+   - Layer 1: Base styles with semantic variables
+   - Layer 2: Variants (outline, filled, unstyled)
+   - Layer 3: Data attribute overrides for theming
+
+3. **Type Exports**: All components now export their types for better DX
+
+4. **FormField Purpose Clarified**: It's a wrapper that provides:
+   - Consistent form layout
+   - Automatic accessibility attributes
+   - Label and error message handling
+   - Not for theming errors
+
+## Build Status
+- All packages build successfully
+- Storybook builds and displays new stories
+- TypeScript compilation passes (with necessary workarounds)
+
 # Comprehensive Component Refactor Plan
 
 ## Overview
@@ -409,16 +470,17 @@ Refactor all components to follow the standards established by Button and docume
 
 ### Phase 2: Typography & Content Components
 
-#### 4. **Text** (Medium Priority)
-- [ ] Refactor color prop to use AccentColor for brand colors
-- [ ] Keep semantic colors (primary, secondary, etc.) as-is
-- [ ] Extract types: `TextSize`, `TextWeight`, `TextColor`
-- [ ] Consider if truncate should be part of variant
+#### 4. **Text** (Medium Priority) ✅ COMPLETED
+- [x] Refactor color prop to use AccentColor for brand colors
+- [x] Keep semantic colors (primary, secondary, etc.) as-is
+- [x] Extract types: `TextSize`, `TextWeight`, `TextColor`
+- [x] Consider if truncate should be part of variant (kept as prop)
 
-#### 5. **FormField** (Medium Priority)
-- [ ] Add `color?: AccentColor` prop for error states
-- [ ] Ensure consistent error styling across form components
-- [ ] Update to use semantic CSS variables
+#### 5. **FormField** (Medium Priority) ✅ COMPLETED
+- [x] ~~Add `color?: AccentColor` prop for error states~~ (Removed - bad UX pattern)
+- [x] Ensure consistent error styling across form components
+- [x] Update to use semantic CSS variables
+- [x] Added comprehensive MDX documentation
 
 ### Phase 3: Layout Components (May not need color overrides)
 
@@ -461,6 +523,13 @@ Refactor all components to follow the standards established by Button and docume
 ### Utilities
 8. **Icon** - Review color system
 9. **Final review** - Ensure all components align
+
+## Components Already Following Pattern
+- ✅ **Button** - The gold standard implementation
+- ✅ **Checkbox** - Now has size variants and proper type exports
+- ✅ **Input** - CSS refactored to three-layer pattern
+- ✅ **Text** - Supports both semantic and accent colors
+- ✅ **FormField** - Wrapper with consistent error handling
 
 ## Checklist for Each Component
 

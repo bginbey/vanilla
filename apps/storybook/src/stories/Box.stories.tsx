@@ -21,9 +21,33 @@ const meta = {
       control: 'select',
       options: [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24],
     },
+    m: {
+      control: 'select',
+      options: [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24],
+    },
     backgroundColor: {
       control: 'select',
-      options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'transparent', 'blue9', 'green9', 'red9'],
+      options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'transparent'],
+    },
+    borderRadius: {
+      control: 'select',
+      options: ['none', 'sm', 'md', 'lg', 'xl', 'full'],
+    },
+    gap: {
+      control: 'select',
+      options: [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24],
+    },
+    flexDirection: {
+      control: 'select',
+      options: ['row', 'column', 'row-reverse', 'column-reverse'],
+    },
+    justifyContent: {
+      control: 'select',
+      options: ['start', 'center', 'end', 'space-between', 'space-around', 'space-evenly'],
+    },
+    alignItems: {
+      control: 'select',
+      options: ['start', 'center', 'end', 'stretch', 'baseline'],
     },
   },
 } satisfies Meta<typeof Box>;
@@ -33,71 +57,29 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    children: 'Box component with Sprinkles',
     p: 4,
     backgroundColor: 2,
     borderRadius: 'md',
-    children: 'This is a Box component',
   },
 };
 
-export const FlexLayout: Story = {
+export const Props: Story = {
   args: {
+    children: (
+      <>
+        <Text>Interactive playground</Text>
+        <Text size="sm" color="secondary">Adjust the controls to explore Box capabilities</Text>
+      </>
+    ),
+    as: 'div',
     display: 'flex',
-    gap: 4,
-    p: 4,
-    backgroundColor: 2,
-    borderRadius: 'lg',
-  },
-  render: (args) => (
-    <Box {...args}>
-      <Box p={3} backgroundColor={3} borderRadius="md">
-        <Text>Item 1</Text>
-      </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
-        <Text>Item 2</Text>
-      </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
-        <Text>Item 3</Text>
-      </Box>
-    </Box>
-  ),
-};
-
-export const AsSection: Story = {
-  args: {
-    as: 'section',
+    flexDirection: 'column',
+    gap: 2,
     p: 6,
     backgroundColor: 3,
-    borderRadius: 'xl',
-  },
-  render: (args) => (
-    <Box {...args}>
-      <Text as="h2" size="2xl" weight="bold" mb={3}>
-        Section Title
-      </Text>
-      <Text color="secondary">
-        This Box is rendered as a semantic section element.
-      </Text>
-    </Box>
-  ),
-};
-
-export const Responsive: Story = {
-  args: {
-    p: { mobile: 2, tablet: 4, desktop: 6 },
-    display: { mobile: 'block', tablet: 'flex' },
-    gap: { tablet: 4 },
-    backgroundColor: 2,
     borderRadius: 'lg',
+    border: '1px solid',
+    borderColor: 'default',
   },
-  render: (args) => (
-    <Box {...args}>
-      <Box p={3} backgroundColor={3} borderRadius="md">
-        <Text>Responsive Item 1</Text>
-      </Box>
-      <Box p={3} backgroundColor={3} borderRadius="md">
-        <Text>Responsive Item 2</Text>
-      </Box>
-    </Box>
-  ),
 };

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { IconButton, Box, Text } from '@beauginbey/vanilla-components';
+import { IconButton } from '@beauginbey/vanilla-components';
 import type { AccentColor } from '@beauginbey/vanilla-components';
 import React from 'react';
 
@@ -29,32 +29,6 @@ const IconHeart = (props: any) => {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-    </svg>
-  );
-};
-
-const IconSun = (props: any) => {
-  const { stroke = 2, ...rest } = props;
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
-      <circle cx="12" cy="12" r="5" />
-      <line x1="12" y1="1" x2="12" y2="3" />
-      <line x1="12" y1="21" x2="12" y2="23" />
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-      <line x1="1" y1="12" x2="3" y2="12" />
-      <line x1="21" y1="12" x2="23" y2="12" />
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-    </svg>
-  );
-};
-
-const IconMoon = (props: any) => {
-  const { stroke = 2, ...rest } = props;
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} {...rest}>
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
 };
@@ -103,107 +77,95 @@ export const Default: Story = {
   },
 };
 
+export const Props: Story = {
+  args: {
+    icon: IconSettings,
+    'aria-label': 'Settings',
+    variant: 'solid',
+    size: 'md',
+    disabled: false,
+  },
+};
+
 export const Variants: Story = {
   render: () => (
-    <Box display="flex" gap={3}>
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
       <IconButton icon={IconSearch} variant="solid" aria-label="Search" />
       <IconButton icon={IconSettings} variant="outline" aria-label="Settings" />
       <IconButton icon={IconHeart} variant="ghost" aria-label="Favorite" />
-    </Box>
+    </div>
   ),
 };
 
 export const Sizes: Story = {
   render: () => (
-    <Box display="flex" gap={3} alignItems="center">
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
       <IconButton icon={IconSearch} size="sm" aria-label="Search" />
       <IconButton icon={IconSearch} size="md" aria-label="Search" />
       <IconButton icon={IconSearch} size="lg" aria-label="Search" />
-    </Box>
+    </div>
   ),
 };
 
 export const States: Story = {
   render: () => (
-    <Box display="flex" gap={3}>
-      <IconButton icon={IconSettings} aria-label="Settings" />
-      <IconButton icon={IconSettings} disabled aria-label="Settings" />
-    </Box>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <IconButton icon={IconSettings} variant="solid" aria-label="Settings" />
+        <IconButton icon={IconSettings} variant="solid" disabled aria-label="Settings" />
+      </div>
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <IconButton icon={IconSettings} variant="outline" aria-label="Settings" />
+        <IconButton icon={IconSettings} variant="outline" disabled aria-label="Settings" />
+      </div>
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <IconButton icon={IconSettings} variant="ghost" aria-label="Settings" />
+        <IconButton icon={IconSettings} variant="ghost" disabled aria-label="Settings" />
+      </div>
+    </div>
   ),
 };
 
-export const ThemeToggle: Story = {
-  render: () => {
-    const [isDark, setIsDark] = React.useState(false);
-    
-    return (
-      <Box 
-        p={6} 
-        backgroundColor={isDark ? 10 : 2} 
-        borderRadius="lg"
-        minWidth="200px"
-      >
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Text color={isDark ? 'inverse' : 'primary'}>
-            {isDark ? 'Dark' : 'Light'} Mode
-          </Text>
-          <IconButton
-            icon={isDark ? IconSun : IconMoon}
-            variant="ghost"
-            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            onClick={() => setIsDark(!isDark)}
-          />
-        </Box>
-      </Box>
-    );
-  },
-};
-
-export const ColorVariants: Story = {
+export const Colors: Story = {
   render: () => {
     const colors: AccentColor[] = ['blue', 'green', 'red', 'amber', 'violet', 'teal'];
     
     return (
-      <Box>
-        <Text as="h3" style={{ marginBottom: '1rem' }}>Solid Variant</Text>
-        <Box display="flex" gap={3} style={{ marginBottom: '2rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           {colors.map(color => (
             <IconButton
-              key={`solid-${color}`}
+              key={color}
               icon={IconHeart}
               variant="solid"
               color={color}
               aria-label={`${color} heart`}
             />
           ))}
-        </Box>
-        
-        <Text as="h3" style={{ marginBottom: '1rem' }}>Outline Variant</Text>
-        <Box display="flex" gap={3} style={{ marginBottom: '2rem' }}>
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           {colors.map(color => (
             <IconButton
-              key={`outline-${color}`}
+              key={color}
               icon={IconSettings}
               variant="outline"
               color={color}
               aria-label={`${color} settings`}
             />
           ))}
-        </Box>
-        
-        <Text as="h3" style={{ marginBottom: '1rem' }}>Ghost Variant</Text>
-        <Box display="flex" gap={3}>
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           {colors.map(color => (
             <IconButton
-              key={`ghost-${color}`}
+              key={color}
               icon={IconSearch}
               variant="ghost"
               color={color}
               aria-label={`${color} search`}
             />
           ))}
-        </Box>
-      </Box>
+        </div>
+      </div>
     );
   },
 };

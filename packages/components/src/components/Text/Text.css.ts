@@ -1,5 +1,23 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { globalStyle } from '@vanilla-extract/css';
 import { vars } from '../../styles/theme.css';
+import { ACCENT_COLORS } from '../../constants/colors';
+
+/**
+ * Text Component Styles - Following the Three-Layer Pattern:
+ * 
+ * 1. BASE RECIPE: Core typography styles and semantic color variants
+ *    - Semantic colors (primary, secondary, etc.) remain as recipe variants
+ *    - These provide consistent text hierarchy
+ * 
+ * 2. STYLE VARIANTS: Size, weight, alignment, and truncation options
+ * 
+ * 3. DATA ATTRIBUTE OVERRIDES: Accent color support via data-accent-color
+ *    - Enables themed text colors while maintaining semantic options
+ *    - Uses CSS variables for runtime theming
+ * 
+ * This hybrid approach allows both semantic text hierarchy and brand theming.
+ */
 
 export const text = recipe({
   base: {
@@ -62,11 +80,6 @@ export const text = recipe({
       secondary: { color: vars.color.gray[11] }, // Low-contrast text
       tertiary: { color: vars.color.gray[10] }, // Lower contrast
       inverse: { color: 'white' }, // For dark backgrounds
-      brand: { color: vars.color.blue[11] }, // Low-contrast brand
-      success: { color: vars.color.green[11] }, // Low-contrast success
-      warning: { color: vars.color.yellow[11] }, // Low-contrast warning
-      error: { color: vars.color.red[11] }, // Low-contrast error
-      info: { color: vars.color.blue[11] }, // Low-contrast info
     },
     align: {
       left: { textAlign: 'left' },
@@ -108,4 +121,14 @@ export const text = recipe({
     weight: 'normal',
     color: 'primary',
   },
+});
+
+/**
+ * Layer 3: Accent color support via data attributes
+ * Each accent color applies themed text color
+ */
+ACCENT_COLORS.forEach((color) => {
+  globalStyle(`[data-accent-color="${color}"]`, {
+    color: `var(--${color}-11) !important`, // Use !important to override recipe color
+  });
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Select } from '@beauginbey/vanilla-components';
+import type { AccentColor } from '@beauginbey/vanilla-components';
 
 const meta = {
   title: 'Components/Select',
@@ -23,6 +24,15 @@ const meta = {
     fullWidth: {
       control: { type: 'boolean' },
     },
+    color: {
+      control: 'select',
+      options: [
+        'blue', 'green', 'red', 'yellow', 'orange', 'purple',
+        'gold', 'bronze', 'brown', 'amber', 'tomato', 'ruby', 'crimson',
+        'pink', 'plum', 'violet', 'iris', 'indigo', 'cyan', 'teal',
+        'jade', 'grass', 'lime', 'mint', 'sky'
+      ],
+    },
   },
 } satisfies Meta<typeof Select>;
 
@@ -42,20 +52,37 @@ export const Default: Story = {
   },
 };
 
+export const Props: Story = {
+  args: {
+    variant: 'outline',
+    error: false,
+    disabled: false,
+    fullWidth: false,
+    children: (
+      <>
+        <option value="">Interactive playground</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </>
+    ),
+  },
+};
+
 export const Variants: Story = {
-  render: (args) => (
+  render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 300 }}>
-      <Select {...args} variant="outline">
+      <Select variant="outline">
         <option value="">Outline variant</option>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
       </Select>
-      <Select {...args} variant="filled">
+      <Select variant="filled">
         <option value="">Filled variant</option>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
       </Select>
-      <Select {...args} variant="unstyled">
+      <Select variant="unstyled">
         <option value="">Unstyled variant</option>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
@@ -65,136 +92,49 @@ export const Variants: Story = {
 };
 
 export const States: Story = {
-  render: (args) => (
+  render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 300 }}>
-      <Select {...args}>
+      <Select>
         <option value="">Normal select</option>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
       </Select>
-      <Select {...args} error>
+      <Select error>
         <option value="">Error select</option>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
       </Select>
-      <Select {...args} disabled>
+      <Select disabled>
         <option value="">Disabled select</option>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
       </Select>
+      <Select defaultValue="1">
+        <option value="">Select an option</option>
+        <option value="1">Selected option</option>
+        <option value="2">Option 2</option>
+      </Select>
     </div>
   ),
 };
 
-export const FullWidth: Story = {
-  args: {
-    fullWidth: true,
-    children: (
-      <>
-        <option value="">Full width select</option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-      </>
-    ),
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ width: '100%', maxWidth: 400 }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-export const WithGroups: Story = {
-  args: {
-    children: (
-      <>
-        <option value="">Select a country</option>
-        <optgroup label="North America">
-          <option value="us">United States</option>
-          <option value="ca">Canada</option>
-          <option value="mx">Mexico</option>
-        </optgroup>
-        <optgroup label="Europe">
-          <option value="uk">United Kingdom</option>
-          <option value="fr">France</option>
-          <option value="de">Germany</option>
-          <option value="it">Italy</option>
-        </optgroup>
-        <optgroup label="Asia">
-          <option value="jp">Japan</option>
-          <option value="cn">China</option>
-          <option value="kr">South Korea</option>
-        </optgroup>
-      </>
-    ),
-  },
-};
-
-export const Controlled: Story = {
-  render: function Render(args) {
-    const [value, setValue] = React.useState('');
+export const Colors: Story = {
+  render: () => {
+    const colors: AccentColor[] = ['blue', 'green', 'red', 'amber', 'violet', 'teal'];
     
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 300 }}>
-        <Select
-          {...args}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        >
-          <option value="">Select a fruit</option>
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
-          <option value="grape">Grape</option>
-        </Select>
-        <p style={{ margin: 0, fontSize: 14, color: '#666' }}>
-          Selected value: {value || '(none)'}
-        </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div style={{ fontWeight: 500, marginBottom: 8 }}>Focus colors (click to focus)</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, maxWidth: 600 }}>
+          {colors.map(color => (
+            <Select key={color} color={color} variant="outline">
+              <option value="">{color}</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+            </Select>
+          ))}
+        </div>
       </div>
     );
   },
-};
-
-export const WithLabel: Story = {
-  render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <label htmlFor="labeled-select" style={{ fontSize: 14, fontWeight: 500 }}>
-        Choose your country
-      </label>
-      <Select {...args} id="labeled-select">
-        <option value="">Select a country</option>
-        <option value="us">United States</option>
-        <option value="uk">United Kingdom</option>
-        <option value="ca">Canada</option>
-      </Select>
-    </div>
-  ),
-};
-
-export const ErrorWithMessage: Story = {
-  render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <label htmlFor="error-select" style={{ fontSize: 14, fontWeight: 500 }}>
-        Select your role
-      </label>
-      <Select
-        {...args}
-        id="error-select"
-        error
-        aria-describedby="error-message"
-        defaultValue=""
-      >
-        <option value="" disabled>Please select a role</option>
-        <option value="developer">Developer</option>
-        <option value="designer">Designer</option>
-        <option value="manager">Manager</option>
-      </Select>
-      <p id="error-message" style={{ margin: 0, fontSize: 12, color: '#dc2626' }}>
-        Please select a valid role
-      </p>
-    </div>
-  ),
 };

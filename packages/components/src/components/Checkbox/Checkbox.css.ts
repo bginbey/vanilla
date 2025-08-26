@@ -3,14 +3,44 @@ import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '../../styles/theme.css';
 import { ACCENT_COLORS } from '../../constants/colors';
 
+/**
+ * Checkbox Component Styles - Following the Three-Layer Pattern:
+ * 
+ * 1. BASE RECIPE: Defines core styles and variants using semantic CSS variables
+ *    - Variables follow pattern: var(--checkbox-[semantic]-[state], var(--fallback))
+ *    - This allows theme defaults while enabling overrides
+ * 
+ * 2. STYLE VARIANTS: Additional styles for icon element
+ * 
+ * 3. DATA ATTRIBUTE OVERRIDES: Color customization via data-accent-color
+ *    - Uses globalStyle to set component-scoped CSS variables
+ *    - Enables per-instance color overrides without runtime styles
+ * 
+ * This pattern ensures consistency with other form components while maintaining
+ * checkbox-specific behavior and contrast-aware checkmarks.
+ */
+
+const sizeConfig = {
+  sm: {
+    size: '16px',
+    checkmarkScale: 0.75,
+  },
+  md: {
+    size: '20px',
+    checkmarkScale: 1,
+  },
+  lg: {
+    size: '24px',
+    checkmarkScale: 1.2,
+  },
+};
+
 export const checkboxStyles = recipe({
   base: {
     position: 'relative',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '20px',
-    height: '20px',
     flexShrink: 0,
   },
   variants: {
@@ -18,9 +48,24 @@ export const checkboxStyles = recipe({
       default: {},
       rounded: {},
     },
+    size: {
+      sm: {
+        width: sizeConfig.sm.size,
+        height: sizeConfig.sm.size,
+      },
+      md: {
+        width: sizeConfig.md.size,
+        height: sizeConfig.md.size,
+      },
+      lg: {
+        width: sizeConfig.lg.size,
+        height: sizeConfig.lg.size,
+      },
+    },
   },
   defaultVariants: {
     variant: 'default',
+    size: 'md',
   },
 });
 
@@ -88,6 +133,30 @@ export const iconStyles = recipe({
       },
     },
     
+    size: {
+      sm: {
+        '& svg': {
+          width: '10px',
+          height: '8px',
+          transform: `scale(${sizeConfig.sm.checkmarkScale})`,
+        },
+      },
+      md: {
+        '& svg': {
+          width: '10px',
+          height: '8px',
+          transform: `scale(${sizeConfig.md.checkmarkScale})`,
+        },
+      },
+      lg: {
+        '& svg': {
+          width: '10px',
+          height: '8px',
+          transform: `scale(${sizeConfig.lg.checkmarkScale})`,
+        },
+      },
+    },
+    
     error: {
       true: {
         borderColor: vars.color.red[7], // Error border
@@ -127,6 +196,7 @@ export const iconStyles = recipe({
   
   defaultVariants: {
     variant: 'default',
+    size: 'md',
     error: false,
     disabled: false,
   },
