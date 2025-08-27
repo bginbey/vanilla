@@ -1,146 +1,142 @@
 # Vanilla Design System - Next Steps
 
-## Current Status (as of conversation end)
+## Current Status (August 2025)
 
-### Completed Work
-1. **Figma Plugins**
-   - ✅ Token Importer: Fixed typography structure, added semantic colors, rem→px conversion
-   - ✅ Component Importer: Full implementation with Button variants, proper sizing, grid layout
-   - ✅ Documentation: Comprehensive specs and troubleshooting guides
-   - ✅ Committed and pushed to GitHub
+### Recently Completed
+1. **JSDoc Documentation**
+   - ✅ All components now have comprehensive JSDoc with examples
+   - ✅ Component-specific types are exported for all components
+   - ✅ Storybook autodocs enabled for automatic documentation
+   - ✅ Created JSDOC_TEMPLATE.md as reference guide
 
-2. **Existing Components**
+2. **Storybook Standardization**
+   - ✅ Reduced story count by ~60% while maintaining coverage
+   - ✅ Standardized story patterns: Default, Props, Variants, Sizes, States, Colors
+   - ✅ Created STORYBOOK_PATTERNS.md documenting the approach
+   - ✅ All stories now have clear, single purposes
+
+3. **Theme System Improvements**
+   - ✅ Fixed color contrast issues for all 25 accent colors
+   - ✅ Resolved gray scale circular reference bug
+   - ✅ Added proper contrast handling for light colors in dark mode
+   - ✅ All interactive components support theme colors
+
+4. **Existing Components**
    - Form: Input, Select, Checkbox, Radio, Switch, FormField
    - Layout: Box, Flex, Grid, Container, Section
    - Core: Button, Text, Icon, IconButton
    - Theme: Theme, ThemeProvider
+   - All with proper JSDoc, type exports, and standardized stories
 
-3. **Published Versions**
+5. **Published Versions**
    - @beauginbey/vanilla-components: 1.4.0
    - @beauginbey/vanilla-tokens: 1.1.0
-   - @beauginbey/vanilla-colors: (check current version)
 
 ## Recommended Next Steps (Priority Order)
 
-### 1. **Expand Theme System** (Priority: High) 🆕
-Extend the current theming capabilities to support:
-- **Brand Color**: Allow custom brand/primary color that affects all accent colors
-- **Link Color**: Dedicated link color that can differ from accent color
-- **Neutral Color**: Customizable gray scale for backgrounds and borders
-- **Font Family**: Support for custom font stacks (sans-serif, serif, mono)
-- **Font Scale**: Adjustable base font size and type scale
-
-Implementation approach:
-- Extend Theme component props to accept these customizations
-- Generate CSS variables dynamically based on selections
-- Ensure all components use these theme tokens
-- Add color contrast validation for accessibility
-
-### 2. **Complete Phase 2: Layout Components** (Priority: High)
-We already have some layout components (Box, Flex, Grid, Container) but are missing:
-- **Stack**: Vertical spacing component with consistent gap handling
-- **Inline**: Horizontal spacing component for inline elements
-- **Divider**: Visual separator component
-
-### 3. **Add Phase 2: Feedback Components** (Priority: High)
+### 1. **Feedback Components** (Priority: High)
 These are essential for user feedback and currently missing:
-- **Alert/Banner**: For displaying important messages
-- **Toast/Notification**: For temporary notifications
-- **Spinner/Loading**: Loading indicators
-- **Progress**: Progress bars and circular progress
+- **Alert/Banner**: For displaying important messages with proper ARIA roles
+- **Toast/Notification**: For temporary notifications with auto-dismiss
+- **Spinner/Loading**: Loading indicators with proper accessibility
+- **Progress**: Progress bars (linear and circular) with ARIA attributes
 - **Skeleton**: Loading placeholder components
 
-### 4. **Phase 3: Overlay Components** (Priority: Medium)
+### 2. **Layout Components** (Priority: High)
+Complete the layout system:
+- **Stack**: Vertical spacing component with consistent gap handling
+- **Inline**: Horizontal spacing component for inline elements
+- **Divider**: Visual separator component with proper semantics
+
+### 3. **Overlay Components** (Priority: High)
 Critical for modern UIs:
-- **Modal/Dialog**: For overlays and dialogs
-- **Popover**: For contextual information
-- **Tooltip**: For hover hints
-- **Dropdown Menu**: For action menus
+- **Modal/Dialog**: For overlays with focus management
+- **Popover**: For contextual information with positioning
+- **Tooltip**: For hover hints with keyboard support
+- **Dropdown Menu**: For action menus with keyboard navigation
 
-### 5. **Phase 3: Navigation Components** (Priority: Medium)
-- **Tabs**: Tab navigation component
-- **Breadcrumb**: Navigation breadcrumbs
-- **Pagination**: Page navigation
+### 4. **Navigation Components** (Priority: Medium)
+- **Tabs**: Tab navigation with ARIA attributes
+- **Breadcrumb**: Navigation breadcrumbs with proper semantics
+- **Pagination**: Page navigation with keyboard support
+- **Navigation Menu**: Responsive navigation component
 
-### 6. **Phase 3: Data Display Components** (Priority: Medium)
+### 5. **Data Display Components** (Priority: Medium)
 - **Card**: Content container with various layouts
 - **Avatar**: User/profile images with fallbacks
 - **Badge**: Status indicators and counts
+- **Table**: Data table with sorting and filtering
 
-### 7. **Improve Documentation** (Priority: High)
-- Add more comprehensive examples in Storybook
-- Create usage guidelines for each component
-- Add accessibility documentation
-- Document component composition patterns
-
-### 8. **Testing Infrastructure** (Priority: High)
-- Increase test coverage (currently seems limited)
+### 6. **Testing & Quality** (Priority: High)
+- Increase test coverage across all components
 - Add visual regression tests with Chromatic
 - Add accessibility tests with jest-axe
-- Performance benchmarks
+- Performance benchmarks and bundle size tracking
 
-### 9. **Package Updates**
-- Consider publishing new versions with recent fixes
-- Update changelog with all recent improvements
-- Ensure all packages are in sync
+### 7. **Developer Experience** (Priority: Medium)
+- CLI tool for component scaffolding
+- Enhanced Figma plugin features  
+- Theme creation wizard
+- Component playground improvements
 
-## Suggested Starting Point for Tomorrow
+## Suggested Starting Point
 
-**Option A: Theme System Expansion**
-1. Start by extending the Theme component to accept brand, link, neutral, and font props
-2. Implement color scale generation from brand color
-3. Update CSS variable generation
-4. Test with existing components
+**Option A: Alert Component** (Recommended)
+1. Design Alert API (variants: info, success, warning, error)
+2. Implement with proper ARIA roles and live regions
+3. Add dismissible option with animation
+4. Create comprehensive JSDoc and stories
 
 **Option B: Stack & Inline Components**
 1. Create Stack component for vertical layouts
-2. Create Inline component for horizontal layouts
-3. Use the established patterns from Box/Flex
-4. Add to Storybook with examples
+2. Create Inline component for horizontal layouts  
+3. Use established patterns from Box/Flex
+4. Add responsive gap support
 
-**Option C: Alert Component**
-1. Design Alert API (variants, icons, dismissible)
-2. Implement with proper accessibility
-3. Add animation tokens for enter/exit
-4. Document usage patterns
+**Option C: Modal Component**
+1. Design Modal API with focus management
+2. Implement portal rendering
+3. Add backdrop and animations
+4. Ensure keyboard navigation and ESC to close
 
 ## Technical Considerations
 
-1. **Theme Expansion Details**:
-   - Need to generate 12-step scales from single brand color
-   - Ensure WCAG AA contrast ratios
-   - Consider using culori for color manipulation
-   - Update all semantic tokens to use new scales
+1. **Component Development**:
+   - Follow JSDoc template for documentation
+   - Follow Storybook patterns (Default, Props, Variants, etc.)
+   - Export all component-specific types
+   - Use three-layer CSS pattern
+   - Ensure proper accessibility
 
-2. **Component Patterns**:
-   - Follow existing patterns for props and styling
-   - Use vanilla-extract recipes for variants
-   - Ensure all components are polymorphic where appropriate
-   - Add proper TypeScript types
+2. **New Component Checklist**:
+   - Comprehensive JSDoc with examples
+   - Type exports for all variants/sizes
+   - Proper ARIA attributes and roles
+   - Keyboard navigation support
+   - Animation with motion preferences
+   - Dark mode support
+   - Standardized Storybook stories
 
-3. **Testing Strategy**:
-   - Unit tests for logic
-   - Visual tests for UI states
-   - Accessibility tests for WCAG compliance
-   - Performance tests for bundle size
-
-## Questions to Consider
-
-1. Should the theme system support multiple brand colors (primary, secondary, tertiary)?
-2. Do we want to support CSS-in-JS theme objects or just CSS variables?
-3. Should Stack/Inline components support responsive gap values?
-4. What animation library should we use for overlay components?
-5. How should toast notifications be managed (context, portal, state)?
+3. **Testing Requirements**:
+   - Unit tests for all logic
+   - Accessibility tests
+   - Visual regression tests
+   - Bundle size checks
 
 ## Resources
 
-- Existing components: `/packages/components/src/components/`
-- Theme implementation: `/packages/components/src/components/Theme/`
-- Design tokens: `/packages/tokens/`
-- Storybook: `/apps/storybook/`
-- Documentation: `/apps/docs/`
+- **Patterns & Templates**:
+  - Component patterns: `/packages/components/PATTERNS.md`
+  - JSDoc template: `/packages/components/JSDOC_TEMPLATE.md`
+  - Storybook patterns: `/STORYBOOK_PATTERNS.md`
+  
+- **Code Locations**:
+  - Components: `/packages/components/src/components/`
+  - Design tokens: `/packages/tokens/`
+  - Storybook stories: `/apps/storybook/src/stories/`
+  - Documentation: `/apps/docs/`
 
 ---
 
-Last worked on: Figma plugin implementation
-Next suggested focus: Theme system expansion or Stack/Inline components
+**Last Update**: August 2025 - JSDoc standardization and Storybook simplification
+**Next Focus**: Feedback components (Alert, Toast, Spinner) or Layout components (Stack, Inline)

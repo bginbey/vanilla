@@ -127,7 +127,7 @@ pnpm release         # Build and publish packages
 - Storybook: ^7.6.10
 - Nextra: ^2.13.2
 - Jest: ^29.7.0
-- @beauginbey/vanilla-components: 1.1.1 (latest npm)
+- @beauginbey/vanilla-components: 1.4.0 (latest npm)
 - @beauginbey/vanilla-tokens: 1.1.0 (latest npm)
 
 ## Key Design Decisions
@@ -190,111 +190,67 @@ import '@beauginbey/vanilla-components/styles.css';
 ```
 See `packages/components/IMPORTS.md` for detailed import guidelines.
 
-## Recent Updates & Fixes
+## Recent Updates
 
-### January 2025
-- **Fixed Sandpack errors** in documentation site by:
-  - Adding TypeScript type definitions to dependencies
-  - Updating React imports for proper JSX runtime support
-  - Including tsconfig.json in Sandpack files
-  - Removing unsupported compilerOptions from customSetup
-- **Published npm updates**:
-  - @beauginbey/vanilla-components@1.1.1: Fixed Button svg background hover state
-  - @beauginbey/vanilla-tokens@1.1.0: Added animation tokens and enhanced shadows
-- **Resolved git sync issues** between local and GitHub repositories
+### August 2025
+- **JSDoc Documentation Standardization**:
+  - Created JSDOC_TEMPLATE.md with comprehensive documentation patterns
+  - Added JSDoc to all components with descriptions, examples, and type exports
+  - Enabled Storybook autodocs for automatic documentation generation
+  - All component-specific types are now properly exported
 
-## Roadmap & Suggested Next Steps
+- **Storybook Story Simplification**:
+  - Created STORYBOOK_PATTERNS.md documenting standardized story structure
+  - Reduced story count by ~60% while maintaining full coverage
+  - Standardized to: Default, Props, Variants, Sizes, States, and Colors stories
+  - Each story now has a single, clear purpose
 
-### Phase 1: Enhanced Styling & Theming (Priority: High)
-1. **Minimal Default Styling**
-   - ✓ Add subtle default styles to components (refined borders, shadows, hover states)
-   - ✓ Implement focus-visible styles for better accessibility
-   - ✓ Add smooth transitions for interactive states
-   
-2. **Theme System**
-   - ✓ Create a dark theme variant
-   - ✓ Add theme switching functionality
-   - ✓ Implement CSS custom properties for runtime theming
-   - ✓ Create theme provider component
+- **Theme System Fixes**:
+  - Fixed color contrast issues for light accent colors in dark mode
+  - Resolved circular reference bug in base gray scale
+  - Added proper text/icon contrast using semantic --black-a-12 variable
+  - All 25 accent colors now have proper contrast in both light and dark modes
 
-3. **Animation Tokens**
-   - ✓ Add duration tokens (fast, normal, slow)
-   - ✓ Create easing function tokens
-   - ✓ Implement motion preferences (prefers-reduced-motion)
+### Previous Updates
+- **Component Library**: Full set of form, layout, and interactive components
+- **Theme System**: Comprehensive theming with 25 accent colors and dark mode support
+- **Figma Plugins**: Token and Component importers for design-to-code workflow
+- **Published Versions**: 
+  - @beauginbey/vanilla-components@1.4.0
+  - @beauginbey/vanilla-tokens@1.1.0
 
-### Phase 2: Component Expansion (Priority: High)
-1. **Form Components**
-   - ✓ Input (text, number, email, etc.)
-   - ✓ Select
-   - ✓ Checkbox
-   - ✓ Radio
-   - ✓ Switch/Toggle
-   - ✓ Form field wrapper with labels and error states
+## Next Steps
 
-2. **Layout Components**
-   - Stack (vertical spacing)
-   - Inline (horizontal spacing)
-   - Grid
-   - Container (max-width wrapper)
-   - Divider
+### Priority 1: Missing Core Components
+1. **Feedback Components** (Essential for user feedback)
+   - Alert/Banner for important messages
+   - Toast/Notification for temporary notifications
+   - Spinner/Loading indicators
+   - Progress bars (linear and circular)
+   - Skeleton loaders
 
-3. **Feedback Components**
-   - Alert/Banner
-   - Toast/Notification
-   - Spinner/Loading
-   - Progress (bar and circular)
-   - Skeleton loader
+2. **Layout Components** (Complete the set)
+   - Stack for vertical spacing
+   - Inline for horizontal spacing  
+   - Divider for visual separation
 
-### Phase 3: Advanced Components (Priority: Medium)
-1. **Overlay Components**
-   - Modal/Dialog
-   - Popover
-   - Tooltip
-   - Dropdown menu
+3. **Overlay Components** (Critical for modern UIs)
+   - Modal/Dialog for overlays
+   - Popover for contextual information
+   - Tooltip for hover hints
+   - Dropdown Menu for actions
 
-2. **Navigation Components**
-   - Tabs
-   - Breadcrumb
-   - Pagination
-   - Navigation menu
+### Priority 2: Documentation & Testing
+- Increase test coverage across all components
+- Add visual regression tests with Chromatic
+- Create more comprehensive usage examples
+- Add accessibility documentation
 
-3. **Data Display**
-   - Card
-   - Table (with sorting/filtering)
-   - Avatar
-   - Badge
-
-### Phase 4: Developer Experience (Priority: Medium)
-1. **CLI Tool**
-   - Component scaffolding
-   - Token generation
-   - Theme creation wizard
-
-2. **Figma Integration**
-   - Design token sync
-   - Component documentation
-   - Auto-generated Figma components
-
-3. **Testing & Quality**
-   - Visual regression tests with Chromatic
-   - Accessibility testing automation
-   - Performance benchmarks
-
-### Phase 5: Advanced Features (Priority: Low)
-1. **Advanced Theming**
-   - Component-level theme overrides
-   - Dynamic color generation
-   - Contrast checking utilities
-
-2. **Documentation Enhancements**
-   - Interactive theme builder
-   - Component playground improvements
-   - Usage analytics
-
-3. **Framework Support**
-   - Vue adapter
-   - Web Components build
-   - React Native components
+### Priority 3: Advanced Features
+- CLI tool for component scaffolding
+- Enhanced Figma plugin features
+- Framework adapters (Vue, Web Components)
+- Performance monitoring and optimization
 
 ## Implementation Notes
 
@@ -322,266 +278,39 @@ const themes = {
 };
 ```
 
-## Contributing Guidelines Summary (from CONTRIBUTING.md)
+## Code Standards & Patterns
 
-### Key Workflow Requirements:
+### Component Standards
+- **JSDoc Documentation**: All components have comprehensive JSDoc with descriptions, examples, and type exports
+- **Storybook Stories**: Follow standardized pattern (Default, Props, Variants, Sizes, States, Colors)
+- **Type Exports**: All component-specific types are exported for developer use
+- **Three-Layer CSS Pattern**: Base styles → Variants → Data attribute overrides
+- **Accessibility**: WCAG compliant with proper ARIA attributes
+- **Polymorphic Components**: Support `as` prop for flexible rendering
+
+### Development Guidelines
 1. **Before Making Changes**:
    - Fork from `main` branch
    - Run `pnpm install` and `pnpm build`
    - Use Node.js >= 18.0.0 and pnpm >= 8.0.0
 
 2. **When Developing**:
-   - Add tests for new code
-   - Update documentation for API changes
-   - Run `pnpm lint` and `pnpm format`
-   - Run `pnpm type-check` for TypeScript
-   - Create changesets with `pnpm changeset`
-
-3. **Code Standards**:
-   - Follow accessibility guidelines (WCAG compliant)
-   - Use semantic HTML and proper ARIA attributes
+   - Follow JSDoc template in `packages/components/JSDOC_TEMPLATE.md`
+   - Follow Storybook patterns in `STORYBOOK_PATTERNS.md`
    - Use design tokens for all styling values
-   - Maintain strict TypeScript typing (no `any`)
-   - Write unit tests for all logic
-   - Follow Conventional Commits for messages
+   - Add tests for new functionality
+   - Run `pnpm lint`, `pnpm format`, and `pnpm type-check`
 
-4. **Publishing Process**:
+3. **Publishing Process**:
    - Create changeset: `pnpm changeset`
    - Version packages: `pnpm changeset version`
    - Build all packages: `pnpm build`
    - Publish to npm: `npm publish` in each package directory
 
-# Recent Updates - January 25, 2025
+## Important Patterns & References
 
-## Component Refactoring Completed
-
-### ✅ Checkbox Component Enhanced
-- Added size variants (`sm`, `md`, `lg`) matching other form controls
-- Exported `CheckboxSize` and `CheckboxVariant` types for consistency
-- Updated CSS with proper size configurations and checkmark scaling
-- Added Storybook story showcasing size variants
-- Note: Had to use `@ts-ignore` for vanilla-extract recipe type issues
-
-### ✅ Input Component CSS Refactored
-- Implemented full three-layer CSS pattern with semantic variables
-- Added comprehensive documentation comments explaining the pattern
-- Updated all style values to use CSS custom properties for theming
-- Enhanced color override support via data attributes
-- All focus states now properly use theme colors
-
-### ✅ FormField Component Updates
-- Initially added `color` prop for themed error states (later removed)
-- Discovered themed errors are bad UX - errors should always be red
-- Removed color theming for error messages
-- Error text now consistently uses `vars.color.red[11]`
-- Added comprehensive MDX documentation in Storybook explaining purpose
-
-### ✅ Text Component Color System Updated
-- Refactored to support both semantic colors and AccentColor
-- Semantic colors (primary, secondary, tertiary, inverse) remain unchanged
-- Brand colors now use AccentColor type for consistency
-- Exported types: `TextSize`, `TextWeight`, `TextAlign`, `TextColor`, `SemanticTextColor`
-- Implemented hybrid approach: semantic for hierarchy, accent for branding
-- Added data-attribute support for accent colors
-
-### ✅ Storybook Stories Added
-- **Input ColorVariants**: Shows all 25 accent colors for focus states
-- **Text AccentColors**: Demonstrates all accent colors for branded text
-- **FormField.mdx**: Comprehensive documentation explaining the component's purpose
-- Removed ThemedErrors story (bad pattern)
-
-## Key Decisions Made
-
-1. **Error States Are Sacred**: Errors should always use red color for consistency and clarity. Theme colors are for branding, not for error states.
-
-2. **Three-Layer CSS Pattern**: Successfully applied to Input component:
-   - Layer 1: Base styles with semantic variables
-   - Layer 2: Variants (outline, filled, unstyled)
-   - Layer 3: Data attribute overrides for theming
-
-3. **Type Exports**: All components now export their types for better DX
-
-4. **FormField Purpose Clarified**: It's a wrapper that provides:
-   - Consistent form layout
-   - Automatic accessibility attributes
-   - Label and error message handling
-   - Not for theming errors
-
-## Build Status
-- All packages build successfully
-- Storybook builds and displays new stories
-- TypeScript compilation passes (with necessary workarounds)
-
-# Comprehensive Component Refactor Plan
-
-## Overview
-Refactor all components to follow the standards established by Button and documented in PATTERNS.md. This ensures consistency, maintainability, and predictable developer experience across the entire component library.
-
-## Standards to Apply (from Button & PATTERNS.md)
-
-### 1. Type Organization
-- Export component-specific types (e.g., `ButtonVariant`, `ButtonSize`)
-- Use types from `constants/colors.ts` for colors
-- Create descriptive interfaces for props
-- Use consistent naming: `ComponentNameProps`, `ComponentNameVariant`, etc.
-
-### 2. CSS Architecture (Three-Layer Pattern)
-- Layer 1: Base recipe with semantic CSS variables
-- Layer 2: Style variants for sub-elements
-- Layer 3: Data attribute overrides for customization
-- Add explanatory comment at top of CSS files
-
-### 3. Color Override Pattern
-- Add `color?: AccentColor` prop where applicable
-- Apply via `data-accent-color={color}`
-- Define component-scoped CSS variables
-- Use globalStyle for color overrides
-
-### 4. Consistent Props API
-- `variant`: Visual style options
-- `size`: Component sizing
-- `fullWidth`: Take full container width
-- `color`: Override accent color (where applicable)
-- `className` & `style`: Always supported
-
-## Components to Refactor
-
-### Phase 1: Interactive Components (Need color overrides)
-
-#### 1. **IconButton** (High Priority)
-- [ ] Add `color?: AccentColor` prop
-- [ ] Extract types: `IconButtonVariant`, `IconButtonSize`
-- [ ] Add data-attribute color overrides
-- [ ] Update CSS to use semantic variables
-- [ ] Add pattern comment to CSS file
-
-#### 2. **Switch** (High Priority)
-- [ ] Add `color?: AccentColor` prop
-- [ ] Extract type: `SwitchSize`
-- [ ] Implement color overrides for track and thumb
-- [ ] Update CSS structure to three-layer pattern
-- [ ] Use semantic CSS variables
-
-#### 3. **Radio** (High Priority)
-- [ ] Add `color?: AccentColor` prop
-- [ ] Implement color overrides for checked state
-- [ ] Add size variants (sm, md, lg) to match other inputs
-- [ ] Update CSS to match Checkbox pattern
-
-### Phase 2: Typography & Content Components
-
-#### 4. **Text** (Medium Priority) ✅ COMPLETED
-- [x] Refactor color prop to use AccentColor for brand colors
-- [x] Keep semantic colors (primary, secondary, etc.) as-is
-- [x] Extract types: `TextSize`, `TextWeight`, `TextColor`
-- [x] Consider if truncate should be part of variant (kept as prop)
-
-#### 5. **FormField** (Medium Priority) ✅ COMPLETED
-- [x] ~~Add `color?: AccentColor` prop for error states~~ (Removed - bad UX pattern)
-- [x] Ensure consistent error styling across form components
-- [x] Update to use semantic CSS variables
-- [x] Added comprehensive MDX documentation
-
-### Phase 3: Layout Components (May not need color overrides)
-
-#### 6. **Box** (Low Priority)
-- [ ] Review Sprinkles system for consistency
-- [ ] Ensure CSS variables are used throughout
-- [ ] Document any special patterns
-
-#### 7. **Container, Flex, Grid, Section** (Low Priority)
-- [ ] Ensure consistent spacing variables
-- [ ] Review responsive props pattern
-- [ ] Document layout-specific patterns
-
-### Phase 4: Utility Components
-
-#### 8. **Icon** (Low Priority)
-- [ ] Review if color prop should use AccentColor
-- [ ] Ensure consistent sizing system
-- [ ] Update IconProvider if needed
-
-#### 9. **Theme & ThemeProvider** (Already Done)
-- [x] Already uses types from constants/colors.ts
-- [ ] Review for any additional consistency updates
-
-## Implementation Order
-
-### Interactive Components First
-1. **IconButton** - Most similar to Button, good starting point
-2. **Switch** - Establish pattern for toggle controls
-3. **Radio** - Complete the form control set
-
-### Typography & Content
-4. **Text** - Central typography component
-5. **FormField** - Unifies form component patterns
-
-### Layout & Structure
-6. **Box** - Review Sprinkles system
-7. **Container, Flex, Grid, Section** - Ensure consistency
-
-### Utilities
-8. **Icon** - Review color system
-9. **Final review** - Ensure all components align
-
-## Components Already Following Pattern
-- ✅ **Button** - The gold standard implementation
-- ✅ **Checkbox** - Now has size variants and proper type exports
-- ✅ **Input** - CSS refactored to three-layer pattern
-- ✅ **Text** - Supports both semantic and accent colors
-- ✅ **FormField** - Wrapper with consistent error handling
-
-## Checklist for Each Component
-
-- [ ] Import types from `constants/colors.ts`
-- [ ] Export component-specific types
-- [ ] Add `color` prop where applicable
-- [ ] Implement data-attribute pattern
-- [ ] Update CSS to three-layer pattern
-- [ ] Add pattern comment to CSS file
-- [ ] Use semantic CSS variables
-- [ ] Test color overrides work
-- [ ] Update component stories
-- [ ] Ensure TypeScript types are exported
-
-## Testing Plan
-
-1. **Visual Testing**
-   - Each component with different color overrides
-   - Focus states with custom colors
-   - Hover states with custom colors
-   - Disabled states remain consistent
-
-2. **API Testing**
-   - Props work as expected
-   - TypeScript autocomplete works
-   - No type errors
-
-3. **Build Testing**
-   - Run `pnpm build` after each component
-   - Verify CSS is generated correctly
-   - Check bundle size doesn't increase significantly
-
-## Success Criteria
-
-- All interactive components support `color` prop
-- CSS follows three-layer pattern consistently
-- Types are centralized and reused
-- Developer can predict API without documentation
-- All components feel like part of the same system
-
-## Implementation Notes
-
-- Start with IconButton as it's most similar to Button
-- Switch and Radio will establish pattern for form controls
-- Keep changes focused on consistency, not new features
-- Document any decisions that deviate from the pattern
-- Run Storybook throughout to test changes immediately
-
-This plan provides a clear, methodical approach to bringing all components up to the standard set by Button, ensuring the entire library feels cohesive and professional.
-
-# important-instruction-reminders
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+- **Component Patterns**: See `packages/components/PATTERNS.md`
+- **JSDoc Template**: See `packages/components/JSDOC_TEMPLATE.md` 
+- **Storybook Patterns**: See `STORYBOOK_PATTERNS.md`
+- **Theme Documentation**: See `packages/components/THEME.md`
+- **Import Guidelines**: See `packages/components/IMPORTS.md`

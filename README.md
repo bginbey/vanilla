@@ -11,9 +11,11 @@ A modern, accessible, and performant design system built with React, TypeScript,
 - ♿ **Accessibility** - WCAG compliant components with proper ARIA attributes
 - 📦 **Tree-shakeable** - Import only what you need
 - 🔧 **Customizable** - Extend and theme components to match your brand
-- 📝 **TypeScript** - Full type safety and IntelliSense support
+- 📝 **TypeScript** - Full type safety and IntelliSense support with exported types
 - 🎯 **Polymorphic** - Components can render as any HTML element
 - 📱 **Responsive** - Mobile-first responsive design utilities
+- 🌙 **Dark Mode** - Built-in light and dark themes with 25 accent colors
+- 📚 **Documentation** - Comprehensive JSDoc and Storybook autodocs
 
 ## Packages
 
@@ -90,19 +92,19 @@ yarn add @beauginbey/vanilla-components @beauginbey/vanilla-tokens
 Import and use components:
 
 ```tsx
-import { Button, Box, Text } from '@beauginbey/vanilla-components';
-import { lightTheme } from '@beauginbey/vanilla-components';
+import { Button, Box, Text, Theme } from '@beauginbey/vanilla-components';
+import '@beauginbey/vanilla-components/styles.css';
 
 function App() {
   return (
-    <div className={lightTheme}>
+    <Theme accentColor="blue" appearance="light">
       <Box p={4}>
         <Text as="h1" size="2xl" weight="bold">
           Hello Vanilla!
         </Text>
         <Button variant="solid">Get Started</Button>
       </Box>
-    </div>
+    </Theme>
   );
 }
 ```
@@ -160,8 +162,8 @@ Components are built with:
 ## Published Packages
 
 The following packages are published to npm:
-- [@beauginbey/vanilla-components@1.0.0](https://www.npmjs.com/package/@beauginbey/vanilla-components)
-- [@beauginbey/vanilla-tokens@1.0.0](https://www.npmjs.com/package/@beauginbey/vanilla-tokens)
+- [@beauginbey/vanilla-components@1.4.0](https://www.npmjs.com/package/@beauginbey/vanilla-components)
+- [@beauginbey/vanilla-tokens@1.1.0](https://www.npmjs.com/package/@beauginbey/vanilla-tokens)
 
 ## Roadmap
 
@@ -188,23 +190,23 @@ The following packages are published to npm:
 ### 📦 Phase 2: Essential Components
 **Goal:** Build the most commonly needed UI components
 
-- [ ] **Form Components**
-  - Input, Textarea, Select
-  - Checkbox, Radio, Switch
-  - Form validation states
-  - Field wrapper with labels
+- [x] **Form Components**
+  - Input, Select ✅
+  - Checkbox, Radio, Switch ✅
+  - Form validation states ✅
+  - Field wrapper with labels ✅
   
-- [ ] **Layout Components**
-  - Stack (vertical spacing)
-  - Inline (horizontal spacing)
-  - Grid system
-  - Container component
+- [x] **Layout Components (Partial)**
+  - Box, Flex, Grid ✅
+  - Container, Section ✅
+  - Stack (vertical spacing) ⏳
+  - Inline (horizontal spacing) ⏳
 
 - [ ] **Feedback Components**
-  - Alert/Banner
-  - Toast notifications
-  - Loading spinners
-  - Progress indicators
+  - Alert/Banner ⏳
+  - Toast notifications ⏳
+  - Loading spinners ⏳
+  - Progress indicators ⏳
 
 ### 🚀 Phase 3: Advanced Components
 **Goal:** Add complex interactive components
